@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
+        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/splash_icon.png",
+        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-mdpi/splash_icon.png"
+    },
+    {
+        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/main_logo.png",
+        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-mdpi/main_logo.png"
+    }
+]
