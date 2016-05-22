@@ -1,13 +1,13 @@
-[![Stories in Ready](https://badge.waffle.io/Nano-Nimbus/ios-cleanse-1.svg?label=ready&title=Ready)](http://waffle.io/home-run/subtle-cosmic-moose) 
+[![Stories in Ready](https://badge.waffle.io/Nano-Nimbus/android-cleanse-1.svg?label=ready&title=Ready)](http://waffle.io/nano-nimbus/android-cleanse-1) 
 
-##~/run (HOME RUN)
-##An application for planning a baseball fan's dream vacation.
+##Nano Nimbus (Cleanse App)
+##An iOS Mobile Application for helping people out complete body cleanses.
 --------
 ###Git flow and branching scheme
 1. **Always** branch from ``develop``.
 2. Branch naming scheme is defined as such:
     - ``<issue number>-brief-description``
-    - For example, [issue #1 is to create a README file](https://waffle.io/Nano-Nimbus/ios-cleanse-1/cards/56fa022814437c0e00ba6c1e), so my branch name is ``1-readme``.
+    - For example, [issue #1 is to create a README file](https://waffle.io/Nano-Nimbus/android-cleanse-1/cards/56fa022814437c0e00ba6c1e), so my branch name is ``1-readme``.
 3. Include a '#' followed by the issue number in every commit.
     - For example, commits to this branch will look like this: ``[#1] Added stuff to readme.``
 4. Never work on a branch without an associated issue. If you don't see the issue on waffle, create one.
