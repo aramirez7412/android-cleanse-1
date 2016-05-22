@@ -1,7 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/Nano-Nimbus/android-cleanse-1.svg?label=ready&title=Ready)](http://waffle.io/nano-nimbus/android-cleanse-1) 
 
 ##Nano Nimbus (Cleanse App)
-##An iOS Mobile Application for helping people out complete body cleanses.
+##An Android Mobile Application for helping people out complete body cleanses.
 --------
 ###Git flow and branching scheme
 1. **Always** branch from ``develop``.
