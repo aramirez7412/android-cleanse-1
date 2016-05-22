@@ -1,4 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/Nano-Nimbus/android-cleanse-1.svg?label=ready&title=Ready)](http://waffle.io/nano-nimbus/android-cleanse-1) 
+[![Build Status](https://travis-ci.org/Nano-Nimbus/android-cleanse-1.svg?branch=master)](https://travis-ci.org/Nano-Nimbus/android-cleanse-1)
 
 ##Nano Nimbus (Cleanse App)
 ##An Android Mobile Application for helping people out complete body cleanses.
