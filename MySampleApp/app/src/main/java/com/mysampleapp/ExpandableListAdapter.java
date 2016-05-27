@@ -2,6 +2,7 @@ package com.mysampleapp;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return childTitles.get(headerTitles.get(groupPosition)).get(childPosition);
+
+        return childTitles.get(headerTitles.get(groupPosition)).get(0);
+        //return childTitles.get(headerTitles.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -81,14 +84,25 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         String title = (String) this.getChild(groupPosition, childPosition);
-        if(convertView == null){
-            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.meal_expandable_list_child, null);
-        }
+        //int id = (int) this.getChild(groupPosition, childPosition).getClass();
 
-        TextView textView = (TextView) convertView.findViewById(R.id.mealListChildItem);
-        textView.setTypeface(null, Typeface.NORMAL);
-        textView.setText(title);
+
+        //if(convertView == null){
+        System.out.println(title);
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if(title == "meal")
+            convertView = layoutInflater.inflate(R.layout.recipe_box, null);
+        else
+            convertView = layoutInflater.inflate(R.layout.meal_cell_sample, null);
+
+        //}
+
+
+        //TextView textView = (TextView) convertView.findViewById(R.id.recipeTitle);
+        //textView.setTypeface(null, Typeface.NORMAL);
+        //textView.setText(title);
 
         return convertView;
     }
@@ -97,7 +111,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-
 
 
 

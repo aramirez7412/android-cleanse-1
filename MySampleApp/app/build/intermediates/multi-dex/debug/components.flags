@@ -1,5 +1,5 @@
--injars /Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar
--outjars /Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/multi-dex/debug/componentClasses.jar
+-injars /Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar
+-outjars /Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/multi-dex/debug/componentClasses.jar
 
 -libraryjars /Users/mattcorrente/Library/Android/sdk/build-tools/23.0.1/lib/shrinkedAndroid.jar
 
@@ -9,7 +9,7 @@
 -dontusemixedcaseclassnames
 -dontpreverify
 -dontwarn
--printconfiguration /Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/multi-dex/debug/components.flags
+-printconfiguration /Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/multi-dex/debug/components.flags
 
 
 -keep class com.mysampleapp.Application {

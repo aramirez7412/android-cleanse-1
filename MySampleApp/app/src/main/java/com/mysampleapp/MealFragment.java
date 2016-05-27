@@ -50,10 +50,8 @@ public class MealFragment extends Fragment {
 
 
     //declare variables to store all layouts
-    ViewGroup addMealLayout;
-    ViewGroup addCaloriesLayout;
+
     ViewGroup dailyCalorieListLayout;
-    ViewGroup scrollableDaysLayout;
     boolean onIntroLayout = true;
 
 
@@ -61,7 +59,7 @@ public class MealFragment extends Fragment {
     String mealName;
 
 
-    TextView mealNameTextField;
+
 
     TextView childMealElement;
 
@@ -71,15 +69,13 @@ public class MealFragment extends Fragment {
     //used to override back button
     ViewGroup previousLayout;
     ViewGroup currentLayout;
+    ViewGroup mealCell;
 
 
     //--------------------------------------------
     DailyCalorieList sundayList;
-    int sundayCalories;
-    DailyCalorieList mondayList;
-    int mondayCalories;
 
-    String dayOfWeek;
+
 
 
     //to detect swipes
@@ -96,11 +92,6 @@ public class MealFragment extends Fragment {
     ExpandableListView expandableListView;
 
 
-   //used for meal type spinner
-    String[] mealTypes = {"Breakfast", "Lunch", "Dinner", "Snack"};
-    ArrayAdapter<String> mealSpinnerAdapter;
-    Spinner mealTypeSpinner;
-    String mealType;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -150,9 +141,6 @@ public class MealFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
-        addMealLayout = (ViewGroup) view.findViewById(R.id.addMealLayout);
-        scrollableDaysLayout = (ViewGroup) view.findViewById(R.id.scrollableDaysLayout);
-        mealNameTextField = (TextView) view.findViewById(R.id.mealTextField);
         dailyCalorieListLayout = (ViewGroup) view.findViewById(R.id.mealListLayout);
         expandableListView = (ExpandableListView) view.findViewById(R.id.dailyMealListView);
         mealListHeader = (TextView) view.findViewById(R.id.mealListHeader);
@@ -161,10 +149,6 @@ public class MealFragment extends Fragment {
         final SwipeDetector swipeDetector = new SwipeDetector();
 
 
-
-
-        //for testin
-        childMealElement = (TextView) view.findViewById(R.id.mealListChildItem);
 
 
         //swipe to delete functionality
@@ -191,11 +175,21 @@ public class MealFragment extends Fragment {
 
         //--------------------------------------------
             sundayList = new DailyCalorieList(view.getContext());
-            mondayList = new DailyCalorieList(view.getContext());
+
+        mealListHeader.setText("Day 1");
 
 
-            sundayCalories = 0;
-            mondayCalories = 0;
+        sundayList.add("Breakfast", "meal" );
+        sundayList.add("Dinner", "meal" );
+
+
+
+
+
+        mealCell = (ViewGroup) view.findViewById(R.id.shake_cell);
+        sundayList.add("Snack", "shake" );
+        sundayList.add("Lunch", "shake" );
+
         //--------------------------------------------
 
 
@@ -219,224 +213,90 @@ public class MealFragment extends Fragment {
 
 
 
-        for(int i = 0; i < 4; i++)
-            expandableListView.expandGroup(i);
+  //      for(int i = 0; i < 4; i++)
+//            expandableListView.expandGroup(i);
 
-        expandableListView.setOnTouchListener(swipeDetector);
+//        expandableListView.setOnTouchListener(swipeDetector);
+//
+//        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+//            @Override
+//            public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
+//
+//
+//                if(swipeDetector.swipeDetected()){
+//
+//                    ViewFlipper showDeleteFlipper = (ViewFlipper) v.findViewById(R.id.showDeleteFlipper);
+//
+//                    Button deleteButton = (Button) v.findViewById(R.id.testDeleteButton);
+//
+//                    deleteButton.setOnClickListener(new OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//
+//                            switch(dayOfWeek){
+//                                case "Sunday":
+//                                    sundayList.delete(groupPosition, childPosition);
+//                                    sundayList.getAdapter().notifyDataSetChanged();
+//                                    break;
+//                                case "Monday":
+//                                    mondayList.delete(groupPosition, childPosition);
+//                                    mondayList.getAdapter().notifyDataSetChanged();
+//                                    break;
+//                                default:
+//                                    System.out.println("nothing");
+//                            }
+//
+//
+//                        }
+//                    });
+//
+//
+//                    Animation anim;
+//
+//
+//                    switch(swipeDetector.getAction()){
+//
+//                        case RL:
+//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_left);
+//                            showDeleteFlipper.setInAnimation(anim);
+//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_out_right);
+//                            showDeleteFlipper.setOutAnimation(anim);
+//
+//                            showDeleteFlipper.setDisplayedChild(1);
+//
+//                            break;
+//                        case LR:
+//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_right);
+//                            showDeleteFlipper.setInAnimation(anim);
+//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_out_left);
+//                            showDeleteFlipper.setOutAnimation(anim);
+//
+//                            showDeleteFlipper.setDisplayedChild(0);
+//
+//                            break;
+//                        default:
+//                            showDeleteFlipper.setDisplayedChild(0);
+//                            break;
+//                    }
+//
+//
+//                }
+//
+//                return false;
+//            }
+//        });
 
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
-
-
-                if(swipeDetector.swipeDetected()){
-
-                    ViewFlipper showDeleteFlipper = (ViewFlipper) v.findViewById(R.id.showDeleteFlipper);
-
-                    Button deleteButton = (Button) v.findViewById(R.id.testDeleteButton);
-
-                    deleteButton.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            switch(dayOfWeek){
-                                case "Sunday":
-                                    sundayList.delete(groupPosition, childPosition);
-                                    sundayList.getAdapter().notifyDataSetChanged();
-                                    break;
-                                case "Monday":
-                                    mondayList.delete(groupPosition, childPosition);
-                                    mondayList.getAdapter().notifyDataSetChanged();
-                                    break;
-                                default:
-                                    System.out.println("nothing");
-                            }
-
-
-                        }
-                    });
-
-
-                    Animation anim;
-
-
-                    switch(swipeDetector.getAction()){
-
-                        case RL:
-                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_left);
-                            showDeleteFlipper.setInAnimation(anim);
-                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_out_right);
-                            showDeleteFlipper.setOutAnimation(anim);
-
-                            showDeleteFlipper.setDisplayedChild(1);
-
-                            break;
-                        case LR:
-                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_right);
-                            showDeleteFlipper.setInAnimation(anim);
-                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_out_left);
-                            showDeleteFlipper.setOutAnimation(anim);
-
-                            showDeleteFlipper.setDisplayedChild(0);
-
-                            break;
-                        default:
-                            showDeleteFlipper.setDisplayedChild(0);
-                            break;
-                    }
-
-
-                }
-
-                return false;
-            }
-        });
 
 
 
-        //setup the meal type spinner
-        mealSpinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, mealTypes);
-        mealTypeSpinner = (Spinner) view.findViewById(R.id.mealSpinnerWidget);
-        mealTypeSpinner.setAdapter(mealSpinnerAdapter);
 
 
         //set intro layout to be the first visible view
         //dailyCalorieListLayout.setVisibility(View.VISIBLE);
-        scrollableDaysLayout.setVisibility(VISIBLE);
-
-
-        //---------------------------------------------------------------------------------------------
-        //set each button for the scrollable listView
-        final TextView sundayButton = (TextView) view.findViewById(R.id.sundayTextButton);
-        sundayButton.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        //scrollableDaysButtons.setTextColor(Color.GRAY);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                       // scrollableDaysButtons.setTextColor(Color.LTGRAY);
-                        previousLayout = scrollableDaysLayout;
-                        currentLayout = dailyCalorieListLayout;
-                        onIntroLayout = false;
-
-
-                        expandableListView.setAdapter(sundayList.getAdapter());
-                        for(int i = 0; i < 4; i++)
-                           expandableListView.expandGroup(i);
-                        dayOfWeek = "Sunday";
-
-                        mealListHeader.setText(dayOfWeek + "\'s Meals");
-
-
-                        switchLayout(previousLayout, currentLayout);
-
-                        break;
-                }
-
-
-                return false;
-            }
-
-
-        });
-
-        final TextView mondayButton = (TextView) view.findViewById(R.id.mondayTextButton);
-        mondayButton.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        //scrollableDaysButtons.setTextColor(Color.GRAY);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // scrollableDaysButtons.setTextColor(Color.LTGRAY);
-                        previousLayout = scrollableDaysLayout;
-                        currentLayout = dailyCalorieListLayout;
-                        onIntroLayout = false;
-
-                        expandableListView.setAdapter(mondayList.getAdapter());
-                        for(int i = 0; i < mondayList.getAdapter().getGroupCount(); i++) {
-                            expandableListView.expandGroup(i);
-                        }
-                        System.out.println(mondayList.getAdapter().getGroupCount());
-                        dayOfWeek = "Monday";
-
-                        mealListHeader.setText(dayOfWeek + "\'s Meals");
-
-                        switchLayout(previousLayout, currentLayout);
-//                        previousLayout.setVisibility(INVISIBLE);
-//                        currentLayout.setX(1000f);
-//                        currentLayout.setVisibility(VISIBLE);
-//                        currentLayout.animate().translationXBy(-1000f);
-                        break;
-                }
-
-
-                return false;
-            }
-
-
-        });
-
-        //--------------------------------------------------------------------------------------------
-
-
-        Button addMealFromListButton = (Button) view.findViewById(R.id.addMealFromListButton);
-        addMealFromListButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                previousLayout = dailyCalorieListLayout;
-                currentLayout = addMealLayout;
-                onIntroLayout = false;
-
-                switchLayout(previousLayout, currentLayout);
-
-            }
-        });
+        dailyCalorieListLayout.setVisibility(VISIBLE);
 
 
 
-        final Button submitMealButton = (Button) view.findViewById(R.id.submitMealButton);
-        submitMealButton.setOnClickListener(new OnClickListener()
-        {
-                @Override
-                public void onClick(View v)
-                {
-
-                    switchLayout(previousLayout, currentLayout);
-
-                    mealName = mealNameTextField.getText().toString();
-
-
-                    mealType = mealTypeSpinner.getSelectedItem().toString();
-
-
-                    switch(dayOfWeek){
-                        case "Sunday":
-                            sundayList.add(mealType, mealName);
-                            sundayList.getAdapter().notifyDataSetChanged();
-                            break;
-                        case "Monday":
-                            mondayList.add(mealType, mealName);
-                            mondayList.getAdapter().notifyDataSetChanged();
-                            break;
-                        default:
-                            System.out.println("nothing");
-                    }
-
-
-
-                    switchLayout(addMealLayout, dailyCalorieListLayout);
-
-                    mealNameTextField.setText("");
-                    previousLayout = scrollableDaysLayout;
-                    currentLayout = dailyCalorieListLayout;
-
-
-                 }
-            });
 
 
         return view;
@@ -472,56 +332,36 @@ public class MealFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mealNameTextField.setOnKeyListener(new OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    mealNameTextField.clearFocus();
-
-                }
-                return false;
-            }
-        });
-
-
-
-
-        mealNameTextField.clearFocus();
-
-
-
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-
-          getView().setOnKeyListener(new OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    if(currentLayout == scrollableDaysLayout) {
-                        Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
-                        getActivity().onBackPressed();
-                    }
-                    else {
-                        switchLayout(currentLayout, previousLayout);
-
-
-                        if(currentLayout == addMealLayout){
-                            currentLayout = dailyCalorieListLayout;
-                            previousLayout = scrollableDaysLayout;
-                        }
-                        else if(currentLayout == dailyCalorieListLayout){
-                            onIntroLayout = true;
-                            currentLayout = scrollableDaysLayout;
-                            previousLayout = scrollableDaysLayout;
-                        }
-
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+//        mealNameTextField.setOnKeyListener(new OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    mealNameTextField.clearFocus();
+//
+//                }
+//                return false;
+//            }
+//        });
+//
+//
+//
+//
+//        mealNameTextField.clearFocus();
+//
+//
+//
+//        getView().setFocusableInTouchMode(true);
+//        getView().requestFocus();
+//
+//          getView().setOnKeyListener(new OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                }
+//                return false;
+//            }
+//        });
 
     }
 

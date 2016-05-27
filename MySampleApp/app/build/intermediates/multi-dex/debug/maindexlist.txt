@@ -333,8 +333,8 @@ android/support/v4/media/RatingCompatApi21.class
 com/amazonaws/services/securitytoken/AWSSecurityTokenServiceClient.class
 android/support/v4/media/MediaMetadataCompat$BitmapKey.class
 com/amazonaws/regions/RegionMetadataParser.class
-com/amazonaws/mobileconnectors/cognito/CognitoSyncManager.class
 com/amazonaws/mobileconnectors/s3/transfermanager/PauseStatus.class
+com/amazonaws/mobileconnectors/cognito/CognitoSyncManager.class
 android/support/v4/util/MapCollections.class
 android/support/v4/graphics/drawable/DrawableCompat.class
 com/amazonaws/handlers/RequestHandler.class
