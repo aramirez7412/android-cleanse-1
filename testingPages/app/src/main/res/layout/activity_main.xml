@@ -5,10 +5,27 @@
     android:id="@+id/testId">
 
 
-    <include layout="@layout/meal_cell"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/mealListDayHeader"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:paddingLeft="25dp"
+        android:gravity="center"
+        android:background="#4C442D"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:paddingBottom="25dp" />
 
-    <include layout="@layout/meal_cell"/>
-
-    <include layout="@layout/meal_cell"/>
-
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/testListView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/mealListDayHeader" />
 </RelativeLayout>

@@ -115,15 +115,15 @@ public class DailyCalorieList {
 
     DailyCalorieList(Context context){
         //inintialize expandable list headings
-        mealListHeadings.add("BREAKFAST");
-        mealListHeadings.add("LUNCH");
-        mealListHeadings.add("DINNER");
-        mealListHeadings.add("SNACKS");
-
-        childList.put(mealListHeadings.get(0), breakfastList);
-        childList.put(mealListHeadings.get(1), lunchList);
-        childList.put(mealListHeadings.get(2), dinnerList);
-        childList.put(mealListHeadings.get(3), snackList);
+//        mealListHeadings.add("BREAKFAST");
+//        mealListHeadings.add("LUNCH");
+//        mealListHeadings.add("DINNER");
+//        mealListHeadings.add("SNACKS");
+//
+//        childList.put(mealListHeadings.get(0), breakfastList);
+//        childList.put(mealListHeadings.get(1), lunchList);
+//        childList.put(mealListHeadings.get(2), dinnerList);
+//        childList.put(mealListHeadings.get(3), snackList);
 
 
 
@@ -131,24 +131,30 @@ public class DailyCalorieList {
 
     }
 
-    public void add(String mealType, String mealCell) {
+//    public void add(String mealType, String mealCell) {
+//
+//        switch (mealType) {
+//
+//            case "Breakfast":
+//                breakfastList.add(mealCell);
+//                break;
+//
+//            case "Lunch":
+//                lunchList.add(mealCell);
+//                break;
+//            case "Dinner":
+//                dinnerList.add(mealCell);
+//                break;
+//            case "Snack":
+//                snackList.add(mealCell);
+//                break;
+//        }
+//    }
 
-        switch (mealType) {
+    public void add(){
+        mealListHeadings.add("BREAKFAST");
 
-            case "Breakfast":
-                breakfastList.add(mealCell);
-                break;
-
-            case "Lunch":
-                lunchList.add(mealCell);
-                break;
-            case "Dinner":
-                dinnerList.add(mealCell);
-                break;
-            case "Snack":
-                snackList.add(mealCell);
-                break;
-        }
+        childList.put(mealListHeadings.get(0), breakfastList);
     }
 
     public void delete(int group, int child){
