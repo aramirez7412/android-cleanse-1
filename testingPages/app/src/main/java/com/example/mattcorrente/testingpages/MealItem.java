@@ -12,9 +12,11 @@ public class MealItem {
     int servings;
     String ingredients;
     String directions;
+    boolean completed;
 
     MealItem() {
         imageUrl = "@mipmap/sample_food";
+        completed = false;
     }
 
     String getType(){
@@ -68,6 +70,14 @@ public class MealItem {
 
     void setType(String temp){
         type = temp;
+    }
+
+    boolean isCompleted(){
+        return completed;
+    }
+
+    void complete() {
+        completed = true;
     }
 
 

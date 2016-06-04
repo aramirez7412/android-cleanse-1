@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -12,19 +13,31 @@ import java.util.Vector;
 public class MealPlan {
 
 
-    MealPlan(JSONArray mealAr) throws JSONException {
+    MealPlan(JSONObject planObject) throws JSONException {
 
-        mealPlan = new Vector<Vector<MealItem>>();
+        mealPlan = new ArrayList<ArrayList<MealItem>>();
 
-        Vector<MealItem> dayPlan = new Vector<>();
+        System.out.println(planObject.length() + "---asdfljdslfjdslfjlasdjflkasdjfldsjflsd");
 
-        for (int i = 0; i < mealAr.length(); i++) {
-            MealItem mealItem = new MealItem();
-            JSONArray tempAr;
-            String tempString = "";
-            JSONObject mealObject  = mealAr.getJSONObject(i);
+        //loop through each day
+        for(int k = 0; k < planObject.length(); k++) {
 
-            mealItem.setType(mealObject.getString("type"));
+            System.out.println("we gotta k of " + k);
+            ArrayList<MealItem> dayPlan = new ArrayList<>();
+            JSONArray mealAr = null;
+            try {
+                mealAr = planObject.getJSONArray(Integer.toString(k));
+            } catch (JSONException e) {
+                System.out.println("fuckkkkkkk");            }
+
+            //loop through every meal per day
+            for (int i = 0; i < mealAr.length(); i++) {
+                MealItem mealItem = new MealItem();
+                JSONArray tempAr;
+                String tempString = "";
+                JSONObject mealObject = mealAr.getJSONObject(i);
+
+                mealItem.setType(mealObject.getString("type"));
 
                 mealItem.setHeader(mealObject.getString("cellHeader"));
                 mealItem.setTitle(mealObject.getString("mealTitle"));
@@ -50,11 +63,16 @@ public class MealPlan {
                 mealItem.setDirections(tempString);
                 //---------------------------------------------------
 
-            dayPlan.add(mealItem);
+                dayPlan.add(mealItem);
             }
 
-        mealPlan.add(dayPlan);
+            mealPlan.add(k, dayPlan);
+        }
 
+    }
+
+    void setCompleted(int day, int meal){
+        mealPlan.get(day).get(meal).complete();
     }
 
     int getDays(){
@@ -69,5 +87,11 @@ public class MealPlan {
         return mealPlan.get(day).get(meal);
     }
 
-    Vector<Vector<MealItem>> mealPlan;
+    ArrayList<MealItem> getListForDay(int day){
+      //  ArrayList<MealItem> ar//= mealPlan.elementAt(day)
+        return mealPlan.get(day);
+    }
+
+
+    ArrayList<ArrayList<MealItem>> mealPlan;
 }
