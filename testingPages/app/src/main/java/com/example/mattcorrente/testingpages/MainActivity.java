@@ -12,9 +12,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ViewAnimator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -24,15 +27,30 @@ public class MainActivity extends AppCompatActivity {
 
 
     ListView testList;
+    ListView testList2;
     ViewGroup addMe;
 
     ArrayList<MealItem> list;
+    ArrayList<MealItem> list2;
     MealPlan mealPlan;
     TextView tv;
+    TextView tv2;
     int day;
     int daysInPlan;
     ViewGroup dayListView;
+    ViewGroup dayListView2;
+    MealItemAdapter adapter;
+    MealItemAdapter adapter2;
+    int listViewNum;
 
+
+
+
+    ViewGroup currentListView;
+    TextView currenttv;
+    MealItemAdapter currentAdapter;
+
+    ViewAnimator viewAnimator;
 
     String temp = "{\n" +
             "    \"mealPlan\": { \n" +
@@ -131,8 +149,13 @@ public class MainActivity extends AppCompatActivity {
 
         //will need to dynamically change with day
         tv = ((TextView) findViewById(R.id.mealListDayHeader));
+        tv2 = ((TextView) findViewById(R.id.mealListDayHeader2));
 
         dayListView = (ViewGroup) findViewById(R.id.testId);
+        dayListView2 = (ViewGroup) findViewById(R.id.testId);
+
+
+        viewAnimator = (ViewAnimator) findViewById(R.id.myViewAnimator);
 
 
         try {
@@ -150,15 +173,41 @@ public class MainActivity extends AppCompatActivity {
             list = new ArrayList<MealItem>();
 
 
+            //setup the first layout to be displayed
+            //---------
             testList = (ListView) findViewById(R.id.testListView);
             addMe = (ViewGroup) findViewById(R.id.recipeItem);
-
-
-            final MealItemAdapter adapter = new MealItemAdapter(this, R.layout.meal_tracker_recipe_item, list);
+            adapter = new MealItemAdapter(this, R.layout.meal_tracker_recipe_item, list);
             testList.setAdapter(adapter);
             adapter.addAll(mealPlan.getListForDay(day));
+            //----------
 
-            tv.setText("Day " + (day + 1));
+
+            //setup secondary layout, used when animating between daily meal plans
+            //----------
+            list = mealPlan.getListForDay(day);
+            list2 = new ArrayList<MealItem>();
+            testList2 = (ListView) findViewById(R.id.testListView2);
+            adapter2 = new MealItemAdapter(this, R.layout.meal_tracker_recipe_item, list2);
+            testList2.setAdapter(adapter2);
+            //----------
+
+
+            //initialize all animation variables
+            final Animation outRight = AnimationUtils.loadAnimation(
+                    getApplicationContext(), R.anim.slide_out_right);
+            final Animation inLeft = AnimationUtils.loadAnimation(
+                    getApplicationContext(), R.anim.slide_in_left);
+            final  Animation inRight = AnimationUtils.loadAnimation(
+                    getApplicationContext(), R.anim.slide_in_right);
+            final  Animation outLeft = AnimationUtils.loadAnimation(
+                    getApplicationContext(), R.anim.slide_out_left);
+
+            //initialize all current- variables to currently displayed views
+            currentAdapter = adapter;
+            currenttv = tv;
+            listViewNum = 1;
+            currenttv.setText("Day " + (day + 1));
 
 
             dayListView.setOnTouchListener(swipeDetector);
@@ -169,36 +218,56 @@ public class MainActivity extends AppCompatActivity {
                     if (swipeDetector.swipeDetected()) {
 
                         //figure out how to use correct libraries to support all animations
-                        Animation anim;
+
 
                         switch (swipeDetector.getAction()) {
+
                             //if right to left swipe then swipe then switch displayed plan to the next day
                             case RL:
+
                                 //check if next day exists, if so proceed displaying next day
                                 if (day < daysInPlan - 1) {
 
-                                    day++;
-                                    tv.setText("Day " + (day + 1));
+                                    viewAnimator.setInAnimation(inRight);
+                                    viewAnimator.setOutAnimation(outLeft);
 
-                                    adapter.clear();
-                                    adapter.addAll(mealPlan.getListForDay(day));
-                                    adapter.notifyDataSetChanged();
+                                    switchListView();
+
+                                    day++;
+                                    currenttv.setText("Day " + (day + 1));
+                                    currentAdapter.clear();
+                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                    currentAdapter.notifyDataSetChanged();
+
+                                    viewAnimator.showNext();
+
                                 }
                                 break;
+
                             //if left to right swipe then switch displayed plan to previous day
                             case LR:
+
                                 //check if previous day exists, if so proceed displaying previous day
                                 if (day > 0) {
-                                    day--;
-                                    tv.setText("Day " + (day + 1));
 
-                                    adapter.clear();
-                                    adapter.addAll(mealPlan.getListForDay(day));
-                                    adapter.notifyDataSetChanged();
+                                    viewAnimator.setInAnimation(inLeft);
+                                    viewAnimator.setOutAnimation(outRight);
+
+                                    switchListView();
+
+                                    day--;
+
+                                    currenttv.setText("Day " + (day + 1));
+                                    currentAdapter.clear();
+                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                    currentAdapter.notifyDataSetChanged();
+
+                                    viewAnimator.showPrevious();
+
                                 }
                                 break;
                             default:
-                                //
+                                //do nothing
                                 break;
                         }//end switch
                     }//end if swipe detected
@@ -211,8 +280,25 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+
     }
 
+    //this method is used to switch all current- variables to the other layout (used for animation purposes)
+    void switchListView(){
+        if(listViewNum == 1){
+            listViewNum =2;
+            currentAdapter = adapter2;
+            currentListView =  dayListView2;
+            currenttv = tv2;
+        }
+        else{
+            listViewNum = 1;
+            currentAdapter = adapter;
+            currentListView = dayListView;
+            currenttv = tv;
+        }
+    }
 
 
     class MealItemAdapter extends ArrayAdapter<MealItem> {
@@ -306,6 +392,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
 
+                    ///this must be fixed so all items close when switching days
                     if(day != tempDay && recipeHeader.getVisibility() == View.VISIBLE){
                         hideMealItem(recipeHeader);
                     }
@@ -328,8 +415,6 @@ public class MainActivity extends AppCompatActivity {
                 mealItemView.setVisibility(View.GONE);
 
         }
-
-
 
 
 

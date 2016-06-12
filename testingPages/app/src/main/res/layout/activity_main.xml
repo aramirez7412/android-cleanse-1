@@ -8,27 +8,78 @@
     >
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/mealListDayHeader"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"
-        android:textAlignment="center"
-        android:paddingLeft="25dp"
-        android:gravity="center"
-        android:background="#4C442D"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffff"
-        android:paddingBottom="25dp" />
-
-    <ListView
+    <ViewAnimator
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/testListView"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/mealListDayHeader" />
+        android:layout_height="wrap_content"
+        android:id="@+id/myViewAnimator">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/layout1"
+            android:background="#AFC6C9"
+            android:animateLayoutChanges="true" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/mealListDayHeader"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:paddingLeft="25dp"
+                android:gravity="center"
+                android:background="#4C442D"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffff"
+                android:paddingBottom="25dp" />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/testListView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/mealListDayHeader" />
+        </RelativeLayout>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/layout2"
+            android:background="#AFC6C9"
+            android:animateLayoutChanges="true" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/mealListDayHeader2"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:paddingLeft="25dp"
+                android:gravity="center"
+                android:background="#4C442D"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffff"
+                android:paddingBottom="25dp" />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/testListView2"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/mealListDayHeader2"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp" />
+        </RelativeLayout>
+    </ViewAnimator>
+
 </RelativeLayout>
