@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     MealPlan mealPlan;
     TextView tv;
     TextView tv2;
+    TextView menuArrow;
+    TextView menuArrow2;
     int day;
     int daysInPlan;
     ViewGroup dayListView;
@@ -45,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    TextView upArrow;
 
-    ViewGroup currentListView;
+
+
+    ViewGroup topMenu;
+
+
     TextView currenttv;
     MealItemAdapter currentAdapter;
 
@@ -154,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         dayListView = (ViewGroup) findViewById(R.id.testId);
         dayListView2 = (ViewGroup) findViewById(R.id.testId);
 
-
         viewAnimator = (ViewAnimator) findViewById(R.id.myViewAnimator);
 
 
@@ -171,6 +177,91 @@ public class MainActivity extends AppCompatActivity {
 
             //list = mealPlan.getListForDay(day);
             list = new ArrayList<MealItem>();
+
+            //setup top menu
+            topMenu = (ViewGroup) findViewById(R.id.mealTrackerTopMenu);
+            menuArrow = (TextView) findViewById(R.id.menuArrow);
+            menuArrow2 = (TextView) findViewById(R.id.menuArrow2);
+            menuArrow.bringToFront();
+            menuArrow2.bringToFront();
+            upArrow = (TextView) findViewById(R.id.upMenuButton);
+
+
+
+            final Animation mSlideInTop = AnimationUtils.loadAnimation(this, R.anim.slide_in_top);
+            mSlideInTop.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    topMenu.setVisibility(View.VISIBLE);
+                    upArrow.requestFocusFromTouch();
+                    topMenu.bringToFront();
+                   // topMenu.requestFocus();
+                    //findViewById(R.id.testId).requestFocus();
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            final Animation mSlideOutTop = AnimationUtils.loadAnimation(this, R.anim.slide_out_top);
+
+            mSlideOutTop.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    topMenu.setVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            menuArrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    topMenu.startAnimation(mSlideInTop);
+
+                    topMenu.bringToFront();
+                   // topMenu.requestFocus();
+
+                    System.out.println("twas clicked");
+                }
+            });
+
+            menuArrow2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    topMenu.startAnimation(mSlideInTop);
+
+                    topMenu.bringToFront();
+                   // topMenu.requestFocus();
+
+                    System.out.println("twas clicked");
+                }
+            });
+
+            upArrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    topMenu.startAnimation(mSlideOutTop);
+                    System.out.println("up Clicked");
+                    //viewAnimator.requestFocus();
+                }
+            });
+
+
 
 
             //setup the first layout to be displayed
@@ -211,6 +302,20 @@ public class MainActivity extends AppCompatActivity {
 
 
             dayListView.setOnTouchListener(swipeDetector);
+
+            topMenu.setOnTouchListener(swipeDetector);
+            topMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(swipeDetector.swipeDetected()){
+                        if(swipeDetector.getAction() == SwipeDetector.Action.BT){
+
+                            topMenu.startAnimation(mSlideOutTop);
+                        }
+                    }
+                }
+            });
+
 
             dayListView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -266,6 +371,15 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                                 break;
+                            case TB:
+
+                                topMenu.startAnimation(mSlideInTop);
+
+
+
+                                break;
+
+
                             default:
                                 //do nothing
                                 break;
@@ -282,6 +396,35 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //sets up the actions that are connected to "take quiz?" prompt
+        //-------------------------------------------------------------------------
+        final DialogInterface.OnClickListener takeQuizDialogListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        System.out.println("yes");
+                        dialog.dismiss();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        System.out.println("no");
+                        dialog.dismiss();
+                        break;
+                }//end switch
+            }
+        };//end listener
+
+        //this sets up a yes/no selection box to make sure users want to complete a meal
+        final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(MainActivity.this);
+        takeQuizBuilder.setMessage("You currently have no meal plans available!\nWould you like to take a quiz to see which one is best for you?\n(if you select no, quiz can be located on pull down menu above)").setPositiveButton("YES", takeQuizDialogListener)
+                .setNegativeButton("NO", takeQuizDialogListener);
+
+        takeQuizBuilder.show();
+        //-------------------------------------------------------------------------
+
+
+
     }
 
     //this method is used to switch all current- variables to the other layout (used for animation purposes)
@@ -289,13 +432,11 @@ public class MainActivity extends AppCompatActivity {
         if(listViewNum == 1){
             listViewNum =2;
             currentAdapter = adapter2;
-            currentListView =  dayListView2;
             currenttv = tv2;
         }
         else{
             listViewNum = 1;
             currentAdapter = adapter;
-            currentListView = dayListView;
             currenttv = tv;
         }
     }
@@ -346,6 +487,9 @@ public class MainActivity extends AppCompatActivity {
                     //if not then set up listener to handle the completion of a meal and set color to blue
                     else {
 
+
+
+
                         //sets up the actions that are connected to meal completion confirmation dialog
                         final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
@@ -367,6 +511,8 @@ public class MainActivity extends AppCompatActivity {
                         final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
                         builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
                                 .setNegativeButton("NO", dialogClickListener);
+
+
 
 
                         recipeHeader.setBackgroundColor(Color.parseColor("#628799"));
@@ -401,6 +547,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
+
 
             return v;
         }
