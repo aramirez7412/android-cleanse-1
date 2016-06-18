@@ -1,10 +1,13 @@
 package com.mysampleapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
@@ -17,12 +20,19 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
 import android.widget.ViewFlipper;
 
 import com.mysampleapp.demo.DemoFragmentBase;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
@@ -49,49 +59,129 @@ public class MealFragment extends Fragment {
     View view;
 
 
-    //declare variables to store all layouts
+    //used for both displaying one day of plan, all elements marked 2
+    //are used to animate swiping through days of plan
+    ListView testList;
+    ListView testList2;
+    ArrayList<MealItem> list;
+    ArrayList<MealItem> list2;
+    TextView menuArrow;
+    TextView menuArrow2;
+    ViewGroup dayListView;
+    ViewGroup dayListView2;
+    MealItemAdapter adapter;
+    MealItemAdapter adapter2;
 
-    ViewGroup dailyCalorieListLayout;
-    boolean onIntroLayout = true;
+    ViewGroup addMe;
+    MealPlan mealPlan;
+    TextView tv;
+    TextView tv2;
 
+    int day;
+    int daysInPlan;
 
+    int listViewNum;
 
-    String mealName;
+    TextView upArrow;
 
+    ViewGroup topMenu;
+    ViewGroup topMenuPage1;
+    ViewGroup topMenuPage2;
+    Button viewPlansButton;
+    TextView currenttv;
+    MealItemAdapter currentAdapter;
 
-
-
-    TextView childMealElement;
-
-    TextView mealListHeader;
-
-
-    //used to override back button
-    ViewGroup previousLayout;
-    ViewGroup currentLayout;
-    ViewGroup mealCell;
-
-
-    //--------------------------------------------
-    DailyCalorieList sundayList;
-
-
-
-
-    //to detect swipes
-    GestureDetectorCompat mDetector;
-
-
-    //--------------------------------------------
-
+    ViewAnimator viewAnimator;
 
 
 
+    String temp = "{\n" +
+            "    \"mealPlan\": { \n" +
+            "     \"0\": [\t\n" +
+            "        {\n" +
+            "           \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"Breakfast\",\n" +
+            "           \"mealTitle\": \"Beef Stew\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 4,\n" +
+            "           \"ingredients\": [\"cheese\", \"eggs\"],\n" +
+            "           \"directions\": [\"milk cow\", \"bake potatoes\", \"code\"]\n" +
+            "        },\t \n" +
+            "        {\n" +
+            "          \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"Lunch\",\n" +
+            "           \"mealTitle\": \"Tamales\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 3,\n" +
+            "           \"ingredients\": [\"chicken\", \"nuggets\"],\n" +
+            "           \"directions\": [\"go to mcDons\", \"give them money\"]\n" +
+            "        },\t \n" +
+            "        {\n" +
+            "          \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"Dinner\",\n" +
+            "           \"mealTitle\": \"Burgers\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 900,\n" +
+            "           \"ingredients\": [\"1000 packages of hot dogs\"],\n" +
+            "           \"directions\": [\"grill those bad boys\", \"eat til you puke\"]\n" +
+            "        }\n" +
+            "   ],\n" +
+            "   \"1\": [\t\n" +
+            "        {\n" +
+            "           \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"Breakfast\",\n" +
+            "           \"mealTitle\": \"Tacos\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 4,\n" +
+            "           \"ingredients\": [\"cheese\", \"eggs\"],\n" +
+            "           \"directions\": [\"milk cow\", \"bake potatoes\", \"code\"]\n" +
+            "        },\t \n" +
+            "        {\n" +
+            "          \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"Lunch\",\n" +
+            "           \"mealTitle\": \"Garbage\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 3,\n" +
+            "           \"ingredients\": [\"chicken\", \"nuggets\"],\n" +
+            "           \"directions\": [\"go to mcDons\", \"give them money\"]\n" +
+            "        },\t \n" +
+            "        {\n" +
+            "          \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"Dinner\",\n" +
+            "           \"mealTitle\": \"Salad\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 900,\n" +
+            "           \"ingredients\": [\"1000 packages of hot dogs\"],\n" +
+            "           \"directions\": [\"grill those bad boys\", \"eat til you puke\"]\n" +
+            "        }\n" +
+            "      ],\n" +
+            "   \"2\": [\t\n" +
+            "        {\n" +
+            "           \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"nothing\",\n" +
+            "           \"mealTitle\": \"Candy\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 4,\n" +
+            "           \"ingredients\": [\"cheese\", \"eggs\"],\n" +
+            "           \"directions\": [\"milk cow\", \"bake potatoes\", \"code\"]\n" +
+            "        },\t \n" +
+            "        {\n" +
+            "          \"type\":\"recipe\",\n" +
+            "           \"cellHeader\": \"iForgot\",\n" +
+            "           \"mealTitle\": \"Crab Cakes\",\n" +
+            "           \"images\": \"@mipmap/sample_food\",\n" +
+            "           \"servings\": 3,\n" +
+            "           \"ingredients\": [\"chicken\", \"nuggets\"],\n" +
+            "           \"directions\": [\"go to mcDons\", \"give them money\"]\n" +
+            "        }\n" +
+            "   ]\n" +
+            "}\n" +
+            "  \n" +
+            "}";
 
-    //variables used for dailyMealList
-    ExpandableListView expandableListView;
 
-
+    //detects swipes while using this fragment
+    final SwipeDetector swipeDetector = new SwipeDetector();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -141,162 +231,295 @@ public class MealFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
-        dailyCalorieListLayout = (ViewGroup) view.findViewById(R.id.mealListLayout);
-        expandableListView = (ExpandableListView) view.findViewById(R.id.dailyMealListView);
-        mealListHeader = (TextView) view.findViewById(R.id.mealListHeader);
+        //will need to dynamically change with day
+        tv = ((TextView) view.findViewById(R.id.mealListDayHeader));
+        tv2 = ((TextView) view.findViewById(R.id.mealListDayHeader2));
+
+        dayListView = (ViewGroup) view.findViewById(R.id.testId);
+        dayListView2 = (ViewGroup) view.findViewById(R.id.testId);
+
+        viewAnimator = (ViewAnimator) view.findViewById(R.id.myViewAnimator);
 
 
-        final SwipeDetector swipeDetector = new SwipeDetector();
+        try {
+
+            //initialize the jsonObject
+            JSONObject jsonObject = new JSONObject(temp);
 
 
+            //parse the object and create a meal plan
+            mealPlan = new MealPlan(jsonObject.getJSONObject("mealPlan"));
+            daysInPlan = mealPlan.getDays();
+            day = 0;
 
+            //list = mealPlan.getListForDay(day);
+            list = new ArrayList<MealItem>();
 
-        //swipe to delete functionality
-        mDetector = new GestureDetectorCompat(view.getContext(), new MyGestureListener());
+            //setup top menu
+            topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
+            topMenuPage1 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage1);
+            topMenuPage2 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage2);
+            menuArrow = (TextView) view.findViewById(R.id.menuArrow);
+            menuArrow2 = (TextView) view.findViewById(R.id.menuArrow2);
+            menuArrow.bringToFront();
+            menuArrow2.bringToFront();
+            upArrow = (TextView) view.findViewById(R.id.upMenuButton);
+            viewPlansButton = (Button) view.findViewById(R.id.viewOtherPlansButton);
 
+            final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
 
-        expandableListView.setOnTouchListener(new OnTouchListener() {
+            final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
+
+            mQuickFadeOut.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    System.out.println(v.toString());
-                         mDetector.onTouchEvent(event);
-                    return false;
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    topMenuPage1.setVisibility(view.GONE);
+                    topMenuPage2.startAnimation(mQuickFadeIn);
+                    topMenuPage2.setVisibility(view.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
                 }
             });
 
-//        childElementView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                )
-//            }
-//
-//            });
-
-        //--------------------------------------------
-            sundayList = new DailyCalorieList(view.getContext());
-
-        mealListHeader.setText("Day 1");
-
-
-        sundayList.add("Breakfast", "meal" );
-        sundayList.add("Dinner", "meal" );
 
 
 
 
 
-        mealCell = (ViewGroup) view.findViewById(R.id.shake_cell);
-        sundayList.add("Snack", "shake" );
-        sundayList.add("Lunch", "shake" );
+            viewPlansButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   topMenuPage1.startAnimation(mQuickFadeOut);
 
-        //--------------------------------------------
-
-
-
-        //used to override back button
-        previousLayout = dailyCalorieListLayout;
+                }
+            });
 
 
-//        //inintialize expandable list headings
-//        mealListHeadings.add("BREAKFAST");
-//        mealListHeadings.add("LUNCH");
-//        mealListHeadings.add("DINNER");
-//        mealListHeadings.add("SNACKS");
-//
-//        childList.put(mealListHeadings.get(0), breakfastList);
-//        childList.put(mealListHeadings.get(1), lunchList);
-//        childList.put(mealListHeadings.get(2), dinnerList);
-//        childList.put(mealListHeadings.get(3), snackList);
-//        ExpandableListAdapter adapter = new ExpandableListAdapter(view.getContext(), mealListHeadings, childList );
-        expandableListView.setAdapter(sundayList.getAdapter());
+            final Animation mSlideInTop = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_in_top);
+            mSlideInTop.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    topMenuPage1.setVisibility(View.VISIBLE);
+                    topMenuPage2.setVisibility(View.GONE);
+                    topMenu.setVisibility(View.VISIBLE);
+                    upArrow.requestFocusFromTouch();
+                    topMenu.bringToFront();
+                    // topMenu.requestFocus();
+                    //findViewById(R.id.testId).requestFocus();
+                }
 
+                @Override
+                public void onAnimationEnd(Animation animation) {
 
+                }
 
-  //      for(int i = 0; i < 4; i++)
-//            expandableListView.expandGroup(i);
+                @Override
+                public void onAnimationRepeat(Animation animation) {
 
-//        expandableListView.setOnTouchListener(swipeDetector);
-//
-//        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//            @Override
-//            public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
-//
-//
-//                if(swipeDetector.swipeDetected()){
-//
-//                    ViewFlipper showDeleteFlipper = (ViewFlipper) v.findViewById(R.id.showDeleteFlipper);
-//
-//                    Button deleteButton = (Button) v.findViewById(R.id.testDeleteButton);
-//
-//                    deleteButton.setOnClickListener(new OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//
-//                            switch(dayOfWeek){
-//                                case "Sunday":
-//                                    sundayList.delete(groupPosition, childPosition);
-//                                    sundayList.getAdapter().notifyDataSetChanged();
-//                                    break;
-//                                case "Monday":
-//                                    mondayList.delete(groupPosition, childPosition);
-//                                    mondayList.getAdapter().notifyDataSetChanged();
-//                                    break;
-//                                default:
-//                                    System.out.println("nothing");
-//                            }
-//
-//
-//                        }
-//                    });
-//
-//
-//                    Animation anim;
-//
-//
-//                    switch(swipeDetector.getAction()){
-//
-//                        case RL:
-//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_left);
-//                            showDeleteFlipper.setInAnimation(anim);
-//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_out_right);
-//                            showDeleteFlipper.setOutAnimation(anim);
-//
-//                            showDeleteFlipper.setDisplayedChild(1);
-//
-//                            break;
-//                        case LR:
-//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_right);
-//                            showDeleteFlipper.setInAnimation(anim);
-//                            anim = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_out_left);
-//                            showDeleteFlipper.setOutAnimation(anim);
-//
-//                            showDeleteFlipper.setDisplayedChild(0);
-//
-//                            break;
-//                        default:
-//                            showDeleteFlipper.setDisplayedChild(0);
-//                            break;
-//                    }
-//
-//
-//                }
-//
-//                return false;
-//            }
-//        });
+                }
+            });
+            final Animation mSlideOutTop = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_out_top);
+
+            mSlideOutTop.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    topMenu.setVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            menuArrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    topMenu.startAnimation(mSlideInTop);
+
+                    topMenu.bringToFront();
+                    //topMenuPage1.bringToFront();
+                    // topMenu.requestFocus();
+
+                    System.out.println("twas clicked");
+                }
+            });
+
+            menuArrow2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    topMenu.startAnimation(mSlideInTop);
+
+                    topMenu.bringToFront();
+
+                    // topMenu.requestFocus();
+
+                    System.out.println("twas clicked");
+                }
+            });
+
+            upArrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    topMenu.startAnimation(mSlideOutTop);
+                    System.out.println("up Clicked");
+                    //viewAnimator.requestFocus();
+                }
+            });
 
 
 
 
+            //setup the first layout to be displayed
+            //---------
+            testList = (ListView) view.findViewById(R.id.testListView);
+            addMe = (ViewGroup) view.findViewById(R.id.recipeItem);
+            adapter = new MealItemAdapter(this.getContext(), R.layout.meal_tracker_recipe_item, list);
+            testList.setAdapter(adapter);
+            adapter.addAll(mealPlan.getListForDay(day));
+            //----------
 
 
-        //set intro layout to be the first visible view
-        //dailyCalorieListLayout.setVisibility(View.VISIBLE);
-        dailyCalorieListLayout.setVisibility(VISIBLE);
+            //setup secondary layout, used when animating between daily meal plans
+            //----------
+            list = mealPlan.getListForDay(day);
+            list2 = new ArrayList<MealItem>();
+            testList2 = (ListView) view.findViewById(R.id.testListView2);
+            adapter2 = new MealItemAdapter(this.getContext(), R.layout.meal_tracker_recipe_item, list2);
+            testList2.setAdapter(adapter2);
+            //----------
+
+
+            //initialize all animation variables
+            final Animation outRight = AnimationUtils.loadAnimation(
+                    this.getContext(), R.anim.slide_out_right_mt);
+            final Animation inLeft = AnimationUtils.loadAnimation(
+                    this.getContext(), R.anim.slide_in_left_mt);
+            final  Animation inRight = AnimationUtils.loadAnimation(
+                    this.getContext(), R.anim.slide_in_right_mt);
+            final  Animation outLeft = AnimationUtils.loadAnimation(
+                    this.getContext(), R.anim.slide_out_left_mt);
+
+            //initialize all current- variables to currently displayed views
+            currentAdapter = adapter;
+            currenttv = tv;
+            listViewNum = 1;
+            currenttv.setText("Day " + (day + 1));
+
+
+            //set swipe detector for dayListView
+            dayListView.setOnTouchListener(swipeDetector);
+
+            //set swiping left or right to trigger switching days of plan
+            dayListView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (swipeDetector.swipeDetected()) {
+
+                        //figure out how to use correct libraries to support all animations
+
+
+                        switch (swipeDetector.getAction()) {
+
+                            //if right to left swipe then swipe then switch displayed plan to the next day
+                            case RL:
+
+                                //check if next day exists, if so proceed displaying next day
+                                if (day < daysInPlan - 1) {
+
+                                    viewAnimator.setInAnimation(inRight);
+                                    viewAnimator.setOutAnimation(outLeft);
+
+                                    switchListView();
+
+                                    day++;
+                                    currenttv.setText("Day " + (day + 1));
+                                    currentAdapter.clear();
+                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                    currentAdapter.notifyDataSetChanged();
+
+                                    viewAnimator.showNext();
+
+                                }
+                                break;
+
+                            //if left to right swipe then switch displayed plan to previous day
+                            case LR:
+
+                                //check if previous day exists, if so proceed displaying previous day
+                                if (day > 0) {
+
+                                    viewAnimator.setInAnimation(inLeft);
+                                    viewAnimator.setOutAnimation(outRight);
+
+                                    switchListView();
+
+                                    day--;
+
+                                    currenttv.setText("Day " + (day + 1));
+                                    currentAdapter.clear();
+                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                    currentAdapter.notifyDataSetChanged();
+
+                                    viewAnimator.showPrevious();
+
+                                }
+                                break;
+                            default:
+                                //do nothing
+                                break;
+                        }//end switch
+                    }//end if swipe detected
+                }//end on click
+
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
 
+        //sets up the actions that are connected to "take quiz?" prompt
+        //-------------------------------------------------------------------------
+        final DialogInterface.OnClickListener takeQuizDialogListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        System.out.println("yes");
+                        dialog.dismiss();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        System.out.println("no");
+                        dialog.dismiss();
+                        break;
+                }//end switch
+            }
+        };//end listener
+
+        //this sets up a yes/no selection box to make sure users want to complete a meal
+        final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(this.getContext());
+        takeQuizBuilder.setMessage("You currently have no meal plans available!\nWould you like to take a quiz to see which one is best for you?\n(if you select no, quiz can be located on pull down menu above)").setPositiveButton("YES", takeQuizDialogListener)
+                .setNegativeButton("NO", takeQuizDialogListener);
+
+        takeQuizBuilder.show();
+        //-------------------------------------------------------------------------
 
 
         return view;
@@ -306,6 +529,20 @@ public class MealFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    //this method is used to switch all current- variables to the other layout (used for animation purposes)
+    void switchListView(){
+        if(listViewNum == 1){
+            listViewNum =2;
+            currentAdapter = adapter2;
+            currenttv = tv2;
+        }
+        else{
+            listViewNum = 1;
+            currentAdapter = adapter;
+            currenttv = tv;
         }
     }
 
@@ -366,12 +603,169 @@ public class MealFragment extends Fragment {
     }
 
 
-    void switchLayout(ViewGroup v1, ViewGroup v2){
+    void switchLayout(ViewGroup v1, ViewGroup v2) {
         v1.setVisibility(INVISIBLE);
         v2.setX(1000f);
         v2.setVisibility(VISIBLE);
         v2.animate().translationXBy(-1000f);
+
     }
+
+
+
+
+        class MealItemAdapter extends ArrayAdapter<MealItem> {
+
+
+            private ArrayList<MealItem> items;
+
+            public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items) {
+                super(context, textViewResourceId, items);
+                this.items = items;
+            }
+
+
+            @Override
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                View v = convertView;
+                if (v == null) {
+                    LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = vi.inflate(R.layout.meal_tracker_recipe_item, null);
+                }
+
+                MealItem o = items.get(position);
+
+                if (o != null) {
+
+                    TextView recipeTitle = (TextView) v.findViewById(R.id.recipeTitle);
+                    TextView recipeServingsHeader = (TextView) v.findViewById(R.id.recipeServingsHeader);
+                    TextView ingredients = (TextView) v.findViewById(R.id.ingredients);
+                    TextView directionsContent = (TextView) v.findViewById(R.id.directionsContent);
+                    TextView recipeHeader = (TextView) v.findViewById(R.id.recipeHeader);
+
+
+                    if (recipeTitle != null) {
+                        recipeTitle.setText(o.getTitle());
+                        recipeServingsHeader.setText("Ingredients (Serves " + o.getServings() + ")");
+                        ingredients.setText(o.getIngredients());
+                        directionsContent.setText(o.getDirections());
+                        recipeHeader.setText(o.getHeader());
+
+                        //check if meal to be added is completed, if so then it will not need a long click listener and will
+                        //need to set the header to grey
+                        if (o.isCompleted()) {
+                            mealComplete(recipeHeader);
+                        }
+                        //if not then set up listener to handle the completion of a meal and set color to blue
+                        else {
+
+
+
+
+                            //sets up the actions that are connected to meal completion confirmation dialog
+                            final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which) {
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            mealComplete(currentSelection);
+
+                                            mealPlan.setCompleted(day, position);
+                                            break;
+
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            break;
+                                    }//end switch
+                                }
+                            };//end listener
+
+                            //this sets up a yes/no selection box to make sure users want to complete a meal
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+                            builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
+                                    .setNegativeButton("NO", dialogClickListener);
+
+
+
+
+                            recipeHeader.setBackgroundColor(Color.parseColor("#628799"));
+
+
+                            //this listen allows users to expand/collapse a meal
+                            recipeHeader.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    tempDay = day; //used to see if new day when displaying list, so it will close all open items
+                                    hideAndShowMealItem(v);
+                                }
+                            });
+
+                            //this listener allows users to complete meal
+                            recipeHeader.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    currentSelection = v;
+                                    builder.show();
+                                    return true;
+                                }
+                            });
+                        }
+
+                        ///this must be fixed so all items close when switching days
+                        if(day != tempDay && recipeHeader.getVisibility() == View.VISIBLE){
+                            hideMealItem(recipeHeader);
+                        }
+
+                    }
+
+
+                }
+
+
+                return v;
+            }
+
+
+            void hideMealItem(View v) {
+
+                View parentView = (View) v.getParent();
+                View mealItemView = parentView.findViewById(R.id.verticalList);
+
+                if (mealItemView.getVisibility() == View.VISIBLE)
+                    mealItemView.setVisibility(View.GONE);
+
+            }
+
+            void hideAndShowMealItem(View v) {
+
+                View parentView = (View) v.getParent();
+
+                View mealItemView = parentView.findViewById(R.id.verticalList);
+
+                if (mealItemView.getVisibility() == View.VISIBLE)
+                    mealItemView.setVisibility(View.GONE);
+                else
+                    mealItemView.setVisibility(View.VISIBLE);
+
+            }
+
+            void mealComplete(View v) {
+                v.setBackgroundColor(Color.GRAY);
+                v.setOnLongClickListener(null);
+            }
+
+
+
+            private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
+            private int tempDay; //used to check if all items need to be reset to closed
+        }
+
+
+
+
+
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -391,25 +785,6 @@ public class MealFragment extends Fragment {
 
 }
 
-
-class MyGestureListener extends GestureDetector.SimpleOnGestureListener{
-
-    @Override
-    public boolean onFling(MotionEvent event1, MotionEvent event2,
-                           float velocityX, float velocityY) {
-
-        System.out.println("just flang");
-        return true;
-    }
-
-    @Override
-    public boolean onDown(MotionEvent event) {
-        return true;
-    }
-
-
-
-}
 
 
 class SwipeDetector implements OnTouchListener {

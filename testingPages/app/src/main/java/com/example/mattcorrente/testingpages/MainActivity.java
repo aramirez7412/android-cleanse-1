@@ -26,34 +26,32 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
+    //used for both displaying one day of plan, all elements marked 2
+    //are used to animate swiping through days of plan
     ListView testList;
     ListView testList2;
-    ViewGroup addMe;
-
     ArrayList<MealItem> list;
     ArrayList<MealItem> list2;
-    MealPlan mealPlan;
-    TextView tv;
-    TextView tv2;
     TextView menuArrow;
     TextView menuArrow2;
-    int day;
-    int daysInPlan;
     ViewGroup dayListView;
     ViewGroup dayListView2;
     MealItemAdapter adapter;
     MealItemAdapter adapter2;
+
+    ViewGroup addMe;
+    MealPlan mealPlan;
+    TextView tv;
+    TextView tv2;
+
+    int day;
+    int daysInPlan;
+
     int listViewNum;
-
-
 
     TextView upArrow;
 
-
-
     ViewGroup topMenu;
-
-
     TextView currenttv;
     MealItemAdapter currentAdapter;
 
@@ -182,19 +180,26 @@ public class MainActivity extends AppCompatActivity {
             topMenu = (ViewGroup) findViewById(R.id.mealTrackerTopMenu);
             menuArrow = (TextView) findViewById(R.id.menuArrow);
             menuArrow2 = (TextView) findViewById(R.id.menuArrow2);
-            menuArrow.bringToFront();
-            menuArrow2.bringToFront();
+            //menuArrow.bringToFront();
+            //menuArrow2.bringToFront();
             upArrow = (TextView) findViewById(R.id.upMenuButton);
 
+topMenu.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        System.out.println("da fuz is goin on over here");
+    }
+});
 
-
-            final Animation mSlideInTop = AnimationUtils.loadAnimation(this, R.anim.slide_in_top);
+            final Animation mSlideInTop = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_top);
             mSlideInTop.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
                     topMenu.setVisibility(View.VISIBLE);
-                    upArrow.requestFocusFromTouch();
-                    topMenu.bringToFront();
+
+              //      topMenu.bringToFront();
+              //      topMenu.requestFocusFromTouch();
+
                    // topMenu.requestFocus();
                     //findViewById(R.id.testId).requestFocus();
                 }
@@ -209,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-            final Animation mSlideOutTop = AnimationUtils.loadAnimation(this, R.anim.slide_out_top);
+            final Animation mSlideOutTop = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_top);
 
             mSlideOutTop.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -228,35 +233,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            menuArrow.setOnClickListener(new View.OnClickListener() {
+
+            View.OnClickListener showTopMenu = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    topMenu.setVisibility(View.VISIBLE);
                     topMenu.startAnimation(mSlideInTop);
-
-                    topMenu.bringToFront();
-                   // topMenu.requestFocus();
-
-                    System.out.println("twas clicked");
+                    //topMenu.requestFocus();
+                    System.out.println("down clicked");
                 }
-            });
+            };
 
-            menuArrow2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    topMenu.startAnimation(mSlideInTop);
+            menuArrow.setOnClickListener(showTopMenu);
 
-                    topMenu.bringToFront();
-                   // topMenu.requestFocus();
-
-                    System.out.println("twas clicked");
-                }
-            });
+            menuArrow2.setOnClickListener(showTopMenu);
 
             upArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     topMenu.startAnimation(mSlideOutTop);
                     System.out.println("up Clicked");
+
+
                     //viewAnimator.requestFocus();
                 }
             });
@@ -290,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
             final Animation inLeft = AnimationUtils.loadAnimation(
                     getApplicationContext(), R.anim.slide_in_left);
             final  Animation inRight = AnimationUtils.loadAnimation(
-                    getApplicationContext(), R.anim.slide_in_right);
+                    getApplicationContext(), R.anim.slide_in_right_mt);
             final  Animation outLeft = AnimationUtils.loadAnimation(
                     getApplicationContext(), R.anim.slide_out_left);
 
@@ -301,22 +299,10 @@ public class MainActivity extends AppCompatActivity {
             currenttv.setText("Day " + (day + 1));
 
 
+            //set swipe detector for dayListView
             dayListView.setOnTouchListener(swipeDetector);
 
-            topMenu.setOnTouchListener(swipeDetector);
-            topMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(swipeDetector.swipeDetected()){
-                        if(swipeDetector.getAction() == SwipeDetector.Action.BT){
-
-                            topMenu.startAnimation(mSlideOutTop);
-                        }
-                    }
-                }
-            });
-
-
+            //set swiping left or right to trigger switching days of plan
             dayListView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -371,15 +357,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                                 break;
-                            case TB:
-
-                                topMenu.startAnimation(mSlideInTop);
-
-
-
-                                break;
-
-
                             default:
                                 //do nothing
                                 break;
@@ -388,7 +365,6 @@ public class MainActivity extends AppCompatActivity {
                 }//end on click
 
             });
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -422,8 +398,6 @@ public class MainActivity extends AppCompatActivity {
 
         takeQuizBuilder.show();
         //-------------------------------------------------------------------------
-
-
 
     }
 
@@ -563,8 +537,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
-
         void hideAndShowMealItem(View v) {
 
             View parentView = (View) v.getParent();
@@ -582,7 +554,6 @@ public class MainActivity extends AppCompatActivity {
             v.setBackgroundColor(Color.GRAY);
             v.setOnLongClickListener(null);
         }
-
 
 
 

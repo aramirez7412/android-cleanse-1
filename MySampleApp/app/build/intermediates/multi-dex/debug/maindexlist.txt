@@ -14,8 +14,8 @@ android/support/v4/widget/CursorAdapter.class
 com/facebook/share/model/ShareMedia$Builder.class
 com/amazonaws/services/s3/internal/SSEResultBase.class
 android/support/v4/widget/SimpleCursorAdapter.class
-com/amazonaws/DefaultRequest.class
 com/amazonaws/services/cognitosync/AmazonCognitoSyncClient.class
+com/amazonaws/DefaultRequest.class
 android/support/v4/view/MenuCompat.class
 android/support/v4/view/ViewCompat$JbMr1ViewCompatImpl.class
 android/support/v4/media/session/MediaControllerCompat.class
@@ -103,8 +103,8 @@ com/amazonaws/AmazonWebServiceClient.class
 android/support/annotation/InterpolatorRes.class
 com/amazonaws/services/s3/model/ProgressEvent.class
 android/support/v4/view/ViewCompat$LollipopViewCompatImpl.class
-com/amazonaws/http/JsonResponseHandler.class
 com/amazonaws/services/s3/model/ProgressListener.class
+com/amazonaws/http/JsonResponseHandler.class
 com/amazonaws/mobileconnectors/s3/transfermanager/Download.class
 com/amazonaws/http/AmazonHttpClient.class
 com/mysampleapp/R$layout.class
@@ -249,8 +249,8 @@ android/support/v4/app/FragmentManagerImpl$2.class
 android/support/v4/widget/ResourceCursorAdapter.class
 android/support/annotation/Size.class
 android/support/v4/widget/MaterialProgressDrawable$1.class
-com/amazonaws/RequestClientOptions.class
 com/amazonaws/services/s3/internal/ProgressReportingInputStream.class
+com/amazonaws/RequestClientOptions.class
 android/support/v7/app/ActionBar$DisplayOptions.class
 com/amazonaws/mobileconnectors/s3/transfermanager/Copy.class
 com/amazonaws/mobileconnectors/s3/transfermanager/model/CopyResult.class
