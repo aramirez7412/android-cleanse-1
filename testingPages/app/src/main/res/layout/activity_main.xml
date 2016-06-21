@@ -1,96 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/testId"
-    android:background="#AFC6C9"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:showIn="@layout/day_plan_layout">
+    android:background="#AFC6C9"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top_menu"/>
 
 
     <ViewAnimator
+        android:id="@+id/myViewAnimator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/myViewAnimator"
-        android:visibility="visible"
-        android:clickable="false"
-        android:touchscreenBlocksFocus="false"
-        android:contextClickable="false">
+        android:visibility="visible">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
+            android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/layout1"
+            android:animateLayoutChanges="true"
             android:background="#AFC6C9"
-            android:animateLayoutChanges="true">
+            android:orientation="vertical">
 
             <ListView
+                android:id="@+id/testListView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/testListView"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/mealListDayHeader" />
 
             <TextView
+                android:id="@+id/mealListDayHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/mealListDayHeader"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:textSize="40sp"
-                android:textAlignment="center"
-                android:paddingLeft="25dp"
-                android:gravity="center"
                 android:background="#4C442D"
+                android:gravity="center"
+                android:paddingBottom="25dp"
+                android:paddingLeft="25dp"
+                android:text=""
+                android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ffffff"
-                android:paddingBottom="25dp" />
+                android:textSize="40sp" />
 
             <TextView
+                android:id="@+id/menuArrow"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="V"
-                android:id="@+id/menuArrow"
                 android:layout_alignBottom="@+id/mealListDayHeader"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:text="V"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
+            android:id="@+id/layout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/layout2"
+            android:animateLayoutChanges="true"
             android:background="#AFC6C9"
-            android:animateLayoutChanges="true">
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/mealListDayHeader2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/mealListDayHeader2"
-                android:textSize="40sp"
-                android:textAlignment="center"
-                android:paddingLeft="25dp"
-                android:gravity="center"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:background="#4C442D"
+                android:gravity="center"
+                android:paddingBottom="25dp"
+                android:paddingLeft="25dp"
+                android:text=""
+                android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ffffff"
-                android:paddingBottom="25dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:textSize="40sp" />
 
             <ListView
+                android:id="@+id/testListView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/testListView2"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/mealListDayHeader2"
@@ -98,110 +100,18 @@
                 android:layout_marginRight="1dp" />
 
             <TextView
+                android:id="@+id/menuArrow2"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="V"
-                android:id="@+id/menuArrow2"
                 android:layout_above="@+id/testListView2"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:text="V"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
     </ViewAnimator>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4C442D"
-        android:id="@+id/mealTrackerTopMenu"
-        android:visibility="invisible"
-        android:layout_alignParentTop="true"
-        android:contextClickable="false"
-        android:touchscreenBlocksFocus="false"
-        android:focusable="false"
-        android:clickable="true">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:clickable="false"
-            android:id="@+id/actualTopMenu">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Meal Plan"
-                android:textSize="50sp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@color/material_grey_600"
-                android:clickable="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="1dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Meal Plan"
-                android:textSize="50sp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@color/material_grey_600"
-                android:id="@+id/textView4"
-                android:clickable="true"
-                android:layout_marginBottom="1dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Meal Plan"
-                android:textSize="50sp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@color/material_grey_600"
-                android:id="@+id/textView5"
-                android:clickable="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Not sure?"
-                android:id="@+id/textView3"
-                android:layout_above="@+id/takeQuizButton"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Take the Quiz!"
-                android:id="@+id/takeQuizButton"
-                android:layout_above="@+id/upMenuButton"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:clickable="false" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="^"
-                android:id="@+id/upMenuButton"
-                android:textSize="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:translationZ="1dp"
-                android:clickable="false" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>

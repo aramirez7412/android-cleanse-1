@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:background="#4C442D"
         android:id="@+id/mealTrackerTopMenu"
-        android:visibility="gone"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:clickable="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -23,7 +23,7 @@
             android:id="@+id/mealTrackerTopMenuPage1"
             android:textAlignment="center"
             android:touchscreenBlocksFocus="false"
-            android:visibility="gone">
+            android:visibility="invisible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mealTrackerTopMenuPage2"
-            android:visibility="gone">
+            android:visibility="invisible">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,20 +121,22 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="^"
-                android:id="@+id/upMenuButton"
-                android:textSize="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:translationZ="1dp" />
-
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="^"
+            android:id="@+id/upMenuButton"
+            android:textSize="25dp"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:translationZ="1dp"
+            android:layout_alignParentRight="false"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_below="@+id/mealTrackerTopMenuPage2" />
 
     </RelativeLayout>
 

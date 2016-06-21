@@ -266,6 +266,9 @@ public class MealFragment extends Fragment {
             upArrow = (TextView) view.findViewById(R.id.upMenuButton);
             viewPlansButton = (Button) view.findViewById(R.id.viewOtherPlansButton);
 
+
+
+
             final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
 
             final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
@@ -303,83 +306,53 @@ public class MealFragment extends Fragment {
             });
 
 
-            final Animation mSlideInTop = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_in_top);
-            mSlideInTop.setAnimationListener(new Animation.AnimationListener() {
+
+
+            topMenu.setY(-1000);
+            topMenu.setVisibility(INVISIBLE);
+            topMenu.bringToFront();
+
+
+
+            final View.OnClickListener showTopMenu = new View.OnClickListener() {
                 @Override
-                public void onAnimationStart(Animation animation) {
-                    topMenuPage1.setVisibility(View.VISIBLE);
-                    topMenuPage2.setVisibility(View.GONE);
+                public void onClick(View v) {
+
                     topMenu.setVisibility(View.VISIBLE);
-                    upArrow.requestFocusFromTouch();
-                    topMenu.bringToFront();
-                    // topMenu.requestFocus();
-                    //findViewById(R.id.testId).requestFocus();
+                    topMenuPage2.setVisibility(View.INVISIBLE);
+                    topMenuPage1.setVisibility(View.VISIBLE);
+                    topMenu.animate().translationY(0).setDuration(600).start();
+                    //topMenu.setVisibility(View.VISIBLE);
+                    //topMenu.startAnimation(mSlideInTop);
+
+                    //System.out.println("down clicked");
                 }
+            };
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
+            menuArrow.setOnClickListener(showTopMenu);
 
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            final Animation mSlideOutTop = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_out_top);
-
-            mSlideOutTop.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    topMenu.setVisibility(View.INVISIBLE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-            menuArrow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    topMenu.startAnimation(mSlideInTop);
-
-                    topMenu.bringToFront();
-                    //topMenuPage1.bringToFront();
-                    // topMenu.requestFocus();
-
-                    System.out.println("twas clicked");
-                }
-            });
-
-            menuArrow2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    topMenu.startAnimation(mSlideInTop);
-
-                    topMenu.bringToFront();
-
-                    // topMenu.requestFocus();
-
-                    System.out.println("twas clicked");
-                }
-            });
+            menuArrow2.setOnClickListener(showTopMenu);
 
             upArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    topMenu.startAnimation(mSlideOutTop);
-                    System.out.println("up Clicked");
+                    //topMenu.startAnimation(mSlideOutTop);
+                    //System.out.println("up Clicked");
+
+                    topMenu.animate().translationY(-1000).setDuration(600).start();
+                    topMenu.animate().translationY(-1000).setDuration(600).start();
+                    //topMenu.setTranslationX(3);
+
+                    topMenu.setVisibility(View.INVISIBLE);
+
                     //viewAnimator.requestFocus();
                 }
             });
+
+
+
+
+
 
 
 

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
@@ -177,70 +179,73 @@ public class MainActivity extends AppCompatActivity {
             list = new ArrayList<MealItem>();
 
             //setup top menu
-            topMenu = (ViewGroup) findViewById(R.id.mealTrackerTopMenu);
+            topMenu = (ViewGroup) findViewById(R.id.actualTopMenu);
             menuArrow = (TextView) findViewById(R.id.menuArrow);
             menuArrow2 = (TextView) findViewById(R.id.menuArrow2);
             //menuArrow.bringToFront();
             //menuArrow2.bringToFront();
             upArrow = (TextView) findViewById(R.id.upMenuButton);
 
-topMenu.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        System.out.println("da fuz is goin on over here");
-    }
-});
 
-            final Animation mSlideInTop = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_top);
-            mSlideInTop.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                    topMenu.setVisibility(View.VISIBLE);
+            topMenu.bringToFront();
 
-              //      topMenu.bringToFront();
-              //      topMenu.requestFocusFromTouch();
+//            final Animation mSlideInTop = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_top);
+//            mSlideInTop.setAnimationListener(new Animation.AnimationListener() {
+//                @Override
+//                public void onAnimationStart(Animation animation) {
+//                    topMenu.setVisibility(View.VISIBLE);
+//
+//
+//              //      topMenu.requestFocusFromTouch();
+//
+//                   // topMenu.requestFocus();
+//                    //findViewById(R.id.testId).requestFocus();
+//                }
+//
+//                @Override
+//                public void onAnimationEnd(Animation animation) {
+//
+//                }
+//
+//                @Override
+//                public void onAnimationRepeat(Animation animation) {
+//
+//                }
+//            });
+//            final Animation mSlideOutTop = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_top);
+//
+//            mSlideOutTop.setAnimationListener(new Animation.AnimationListener() {
+//                @Override
+//                public void onAnimationStart(Animation animation) {
+//
+//                }
+//
+//                @Override
+//                public void onAnimationEnd(Animation animation) {
+//                    topMenu.setVisibility(View.INVISIBLE);
+//                }
+//
+//                @Override
+//                public void onAnimationRepeat(Animation animation) {
+//
+//                }
+//            });
 
-                   // topMenu.requestFocus();
-                    //findViewById(R.id.testId).requestFocus();
-                }
+            topMenu.setY(-1000);
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            final Animation mSlideOutTop = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_top);
-
-            mSlideOutTop.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    topMenu.setVisibility(View.INVISIBLE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
 
 
             View.OnClickListener showTopMenu = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    System.out.println("fuckye");
                     topMenu.setVisibility(View.VISIBLE);
-                    topMenu.startAnimation(mSlideInTop);
-                    //topMenu.requestFocus();
-                    System.out.println("down clicked");
+                    topMenu.animate().translationY(0).setDuration(600).start();
+                    //topMenu.setVisibility(View.VISIBLE);
+                    //topMenu.startAnimation(mSlideInTop);
+
+                    //System.out.println("down clicked");
                 }
             };
 
@@ -251,9 +256,14 @@ topMenu.setOnClickListener(new View.OnClickListener() {
             upArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    topMenu.startAnimation(mSlideOutTop);
-                    System.out.println("up Clicked");
+                    //topMenu.startAnimation(mSlideOutTop);
+                    //System.out.println("up Clicked");
 
+                    System.out.println("fuckNo");
+                    topMenu.animate().translationY(-1000).setDuration(600).start();
+                    //topMenu.setTranslationX(3);
+
+                    topMenu.setVisibility(View.INVISIBLE);
 
                     //viewAnimator.requestFocus();
                 }
@@ -363,6 +373,7 @@ topMenu.setOnClickListener(new View.OnClickListener() {
                         }//end switch
                     }//end if swipe detected
                 }//end on click
+
 
             });
 
