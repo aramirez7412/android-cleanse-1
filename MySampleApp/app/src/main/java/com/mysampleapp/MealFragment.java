@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -394,72 +397,98 @@ public class MealFragment extends Fragment {
             currenttv.setText("Day " + (day + 1));
 
 
-            //set swipe detector for dayListView
-            dayListView.setOnTouchListener(swipeDetector);
+            Button takeQuiz = (Button) view.findViewById(R.id.takeQuizButton);
 
-            //set swiping left or right to trigger switching days of plan
-            dayListView.setOnClickListener(new View.OnClickListener() {
+            takeQuiz.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (swipeDetector.swipeDetected()) {
-
-                        //figure out how to use correct libraries to support all animations
-
-
-                        switch (swipeDetector.getAction()) {
-
-                            //if right to left swipe then swipe then switch displayed plan to the next day
-                            case RL:
-
-                                //check if next day exists, if so proceed displaying next day
-                                if (day < daysInPlan - 1) {
-
-                                    viewAnimator.setInAnimation(inRight);
-                                    viewAnimator.setOutAnimation(outLeft);
-
-                                    switchListView();
-
-                                    day++;
-                                    currenttv.setText("Day " + (day + 1));
-                                    currentAdapter.clear();
-                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                    currentAdapter.notifyDataSetChanged();
-
-                                    viewAnimator.showNext();
-
-                                }
-                                break;
-
-                            //if left to right swipe then switch displayed plan to previous day
-                            case LR:
-
-                                //check if previous day exists, if so proceed displaying previous day
-                                if (day > 0) {
-
-                                    viewAnimator.setInAnimation(inLeft);
-                                    viewAnimator.setOutAnimation(outRight);
-
-                                    switchListView();
-
-                                    day--;
-
-                                    currenttv.setText("Day " + (day + 1));
-                                    currentAdapter.clear();
-                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                    currentAdapter.notifyDataSetChanged();
-
-                                    viewAnimator.showPrevious();
-
-                                }
-                                break;
-                            default:
-                                //do nothing
-                                break;
-                        }//end switch
-                    }//end if swipe detected
-                }//end on click
-
+                    startQuiz();
+                }
             });
+
+
+
+            //set swipe detector for dayListView
+            tv.setOnTouchListener(swipeDetector);
+            tv2.setOnTouchListener(swipeDetector);
+
+            View.OnClickListener switchDay = new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+
+                        System.out.println("testin dammit");
+
+                        if (swipeDetector.swipeDetected()) {
+
+                            //figure out how to use correct libraries to support all animations
+
+
+                            switch (swipeDetector.getAction()) {
+
+                                //if right to left swipe then swipe then switch displayed plan to the next day
+                                case RL:
+
+                                    //check if next day exists, if so proceed displaying next day
+                                    if (day < daysInPlan - 1) {
+
+                                        viewAnimator.setInAnimation(inRight);
+                                        viewAnimator.setOutAnimation(outLeft);
+
+                                        switchListView();
+
+                                        day++;
+                                        currenttv.setText("Day " + (day + 1));
+                                        currentAdapter.clear();
+                                        currentAdapter.addAll(mealPlan.getListForDay(day));
+                                        currentAdapter.notifyDataSetChanged();
+
+                                        viewAnimator.showNext();
+
+                                    }
+                                    break;
+
+                                //if left to right swipe then switch displayed plan to previous day
+                                case LR:
+
+                                    //check if previous day exists, if so proceed displaying previous day
+                                    if (day > 0) {
+
+                                        viewAnimator.setInAnimation(inLeft);
+                                        viewAnimator.setOutAnimation(outRight);
+
+                                        switchListView();
+
+                                        day--;
+
+                                        currenttv.setText("Day " + (day + 1));
+                                        currentAdapter.clear();
+                                        currentAdapter.addAll(mealPlan.getListForDay(day));
+                                        currentAdapter.notifyDataSetChanged();
+
+                                        viewAnimator.showPrevious();
+
+                                    }
+                                    break;
+                                case TB:
+    //put in function cuz this is used twice
+                                    topMenu.setVisibility(View.VISIBLE);
+                                    topMenuPage2.setVisibility(View.INVISIBLE);
+                                    topMenuPage1.setVisibility(View.VISIBLE);
+                                    topMenu.animate().translationY(0).setDuration(600).start();
+
+                                    break;
+                                default:
+                                    //do nothing
+                                    break;
+                            }//end switch
+                        }//end if swipe detected
+                    }//end on click
+
+            };
+
+
+            tv.setOnClickListener(switchDay);
+            tv2.setOnClickListener(switchDay);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -475,6 +504,7 @@ public class MealFragment extends Fragment {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         System.out.println("yes");
+                        startQuiz();
                         dialog.dismiss();
                         break;
 
@@ -575,6 +605,10 @@ public class MealFragment extends Fragment {
 
     }
 
+    void startQuiz() {
+
+        ((MainActivity)getActivity()).switchFragment();
+    }
 
     void switchLayout(ViewGroup v1, ViewGroup v2) {
         v1.setVisibility(INVISIBLE);
@@ -725,6 +759,8 @@ public class MealFragment extends Fragment {
                 v.setBackgroundColor(Color.GRAY);
                 v.setOnLongClickListener(null);
             }
+
+
 
 
 

@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@mipmap/sample_food"
+                android:src="@drawable/sample_food"
                 android:id="@+id/sampleImageView" />
         </ViewFlipper>
 

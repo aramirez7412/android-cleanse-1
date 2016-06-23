@@ -55,7 +55,7 @@
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
     <color name="instructions_list_border_color">#FFDDDDDD</color>
-    <color name="main_background">#E5E3BA</color>
+    <color name="main_background">#AFC6C9</color>
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
     <color name="material_blue_grey_950">#ff21272b</color>
