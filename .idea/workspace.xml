@@ -2,14 +2,100 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5256a973-0ac7-4efe-ae26-8e0168978fe6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/multi-dex/debug/componentClasses.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/multi-dex/debug/components.flags" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/multi-dex/debug/maindexlist.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/multi-dex/debug/manifest_keep.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/transforms/mergeJavaRes/debug/jars/2/1f/main.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MySampleApp/app/build/outputs/apk/app-debug.apk" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/MySampleApp/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/android/support/v7/appcompat/R.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/android/support/v7/appcompat/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/AWSMobileClient$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/AWSMobileClient$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/AWSMobileClient$Builder.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/AWSMobileClient$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/AWSMobileClient.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/AWSMobileClient.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$1$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$1$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$3.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$AWSRefreshingCognitoIdentityProvider.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$AWSRefreshingCognitoIdentityProvider.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$SignInResultsAdapter.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager$SignInResultsAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/IdentityManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider$3.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/FacebookSignInProvider.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter$3.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager$SignInResultsAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/SignInManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/Utils.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/amazonaws/mobile/user/signin/Utils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/facebook/R.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/facebook/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/Application.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/Application.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/DailyCalorieList.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/DailyCalorieList.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/ExpandableListAdapter.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/ExpandableListAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MainActivity.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$2$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$2$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$3.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$4.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$5.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$6.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$7.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$8.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$9.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/MealFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$3.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$4.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$5.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$6.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$7.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/QuizFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/R.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity$SignInResultsHandler$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity$SignInResultsHandler$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity$SignInResultsHandler.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity$SignInResultsHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SignInActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$2$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$2$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$SignInResultsHandler$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$SignInResultsHandler$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$SignInResultsHandler.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity$SignInResultsHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SplashActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SwipeDetector$Action.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SwipeDetector$Action.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SwipeDetector.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/SwipeDetector.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/WaterFragment$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/WaterFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/WaterFragment$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/WaterFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/WaterFragment.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/WaterFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoConfiguration.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoConfiguration.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoInstructionFragment$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoInstructionFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoInstructionFragment$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoInstructionFragment$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoInstructionFragment.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/DemoInstructionFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment$DemoListAdapter.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment$DemoListAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment$ViewHolder.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/HomeDemoFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/IdentityDemoFragment$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/IdentityDemoFragment$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/IdentityDemoFragment.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/demo/IdentityDemoFragment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer$1.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer$2.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer$3.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer.class" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/classes/debug/com/mysampleapp/navigation/NavigationDrawer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/res/resources-debug-androidTest.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.idea/gradle.xml" afterPath="$PROJECT_DIR$/MySampleApp/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.idea/libraries/appcompat_v7_23_1_0.xml" afterPath="$PROJECT_DIR$/MySampleApp/.idea/libraries/appcompat_v7_23_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.idea/libraries/multidex_1_0_1.xml" afterPath="$PROJECT_DIR$/MySampleApp/.idea/libraries/multidex_1_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.idea/libraries/support_v4_23_1_0.xml" afterPath="$PROJECT_DIR$/MySampleApp/.idea/libraries/support_v4_23_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.idea/misc.xml" afterPath="$PROJECT_DIR$/MySampleApp/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/.idea/workspace.xml" afterPath="$PROJECT_DIR$/MySampleApp/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/app.iml" afterPath="$PROJECT_DIR$/MySampleApp/app/app.iml" />
@@ -150,14 +236,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/blame/res/debug/single/mipmap-xhdpi-v4.json" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/blame/res/debug/single/mipmap-xhdpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/blame/res/debug/single/mipmap-xxhdpi-v4.json" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/blame/res/debug/single/mipmap-xxhdpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/blame/res/debug/single/mipmap-xxxhdpi-v4.json" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/blame/res/debug/single/mipmap-xxxhdpi-v4.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugAndroidTestAssets/merger.xml" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugAndroidTestAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/MySampleApp/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/MySampleApp/app/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/build.gradle" afterPath="$PROJECT_DIR$/MySampleApp/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/MySampleApp/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/local.properties" afterPath="$PROJECT_DIR$/MySampleApp/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MySampleApp/app/src/main/java/com/mysampleapp/MainActivity.java" afterPath="$PROJECT_DIR$/MySampleApp/app/src/main/java/com/mysampleapp/MainActivity.java" />
     </list>
     <ignored path="android-cleanse-1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -176,6 +255,50 @@
   <component name="FavoritesManager">
     <favorites_list name="android-cleanse-1" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MySampleApp/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gradle.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MySampleApp/gradle.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="local.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MySampleApp/local.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MySampleApp/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14195584">
+              <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -184,11 +307,18 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/MySampleApp/app/build.gradle" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="19" />
+    <option name="x" value="720" />
     <option name="y" value="23" />
-    <option name="width" value="922" />
-    <option name="height" value="825" />
+    <option name="width" value="720" />
+    <option name="height" value="805" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -283,7 +413,119 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generated" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value=".gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2.10" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_app_compileDebugJavaWithJavac" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2.10" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_app_compileDebugJavaWithJavac" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localClassSetAnalysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2.10" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="taskArtifacts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -327,6 +569,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-cleanse-1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="copyright" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -340,7 +600,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/MySampleApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="Application" factoryName="Application">
@@ -429,6 +689,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5256a973-0ac7-4efe-ae26-8e0168978fe6" name="Default" comment="" />
@@ -439,8 +702,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="19" y="23" width="922" height="825" extended-state="0" />
-    <editor active="false" />
+    <frame x="720" y="23" width="720" height="805" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -451,12 +714,21 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -464,5 +736,39 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/MySampleApp/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MySampleApp/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MySampleApp/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MySampleApp/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14195584">
+          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

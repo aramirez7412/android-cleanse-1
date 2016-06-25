@@ -56,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button   signOutButton;
 
+    /*****
+     *
+     *
+     *
+     *
+     *
+     */
+    //ApiClientFactory factory
+
     /**
      * Initializes the Toolbar for use with the activity.
      */

@@ -1,17 +1,5 @@
 [
     {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/splash_icon.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/splash_icon.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_launcher.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/button_facebook.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/button_facebook.png"
-    },
-    {
         "merged": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/button_facebook_pressed.png",
         "source": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/src/main/res/mipmap-xxxhdpi/button_facebook_pressed.png"
     },
@@ -20,32 +8,12 @@
         "source": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/src/main/res/mipmap-xxxhdpi/user.png"
     },
     {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/user.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/user.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/button_facebook_pressed.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/button_facebook_pressed.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/icon_home.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/icon_home.png"
-    },
-    {
         "merged": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/splash_icon.png",
         "source": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/src/main/res/mipmap-xxxhdpi/splash_icon.png"
     },
     {
         "merged": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/button_facebook.png",
         "source": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/src/main/res/mipmap-xxxhdpi/button_facebook.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/user_data_storage.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/user_data_storage.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/user_identity.png",
-        "source": "/Users/mattcorrente/AndroidStudioProjects/FitnessTracker-aws-my-sample-app-android/MySampleApp/app/src/main/res/mipmap-xxxhdpi/user_identity.png"
     },
     {
         "merged": "/Users/anthonyramirez/Nanonimbus/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/user_data_storage.png",
