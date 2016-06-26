@@ -1,113 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/testId"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="#AFC6C9"
-    android:animateLayoutChanges="true">
+    android:orientation="vertical">
+
 
 
     <ViewAnimator
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/myViewAnimator"
-        android:visibility="visible"
-        android:clickable="true">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/layout1"
-            android:background="#AFC6C9"
-            android:animateLayoutChanges="true"
-            android:clickable="true">
+        <include layout="@layout/day_layout"
+            android:id="@+id/layout1" />
 
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/testListView"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/mealListDayHeader" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/mealListDayHeader"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="40sp"
-                android:textAlignment="center"
-                android:paddingLeft="25dp"
-                android:gravity="center"
-                android:background="#4C442D"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff"
-                android:paddingBottom="25dp" />
-
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="V"
-                android:id="@+id/menuArrow"
-                android:layout_alignBottom="@+id/mealListDayHeader"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/layout2"
-            android:background="#AFC6C9"
-            android:animateLayoutChanges="true"
-            android:clickable="true">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/mealListDayHeader2"
-                android:textSize="40sp"
-                android:textAlignment="center"
-                android:paddingLeft="25dp"
-                android:gravity="center"
-                android:background="#4C442D"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff"
-                android:paddingBottom="25dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/testListView2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/mealListDayHeader2"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp" />
-
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="V"
-                android:id="@+id/menuArrow2"
-                android:layout_above="@+id/testListView2"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
+        <include layout="@layout/day_layout"
+            android:id="@+id/layout2" />
 
     </ViewAnimator>
+
+    <include layout="@layout/recipe_box"
+        android:id="@+id/recipeBoxView" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -115,7 +37,8 @@
         android:background="#4C442D"
         android:id="@+id/mealTrackerTopMenu"
         android:layout_alignParentTop="true"
-        android:clickable="true">
+        android:clickable="true"
+        android:visibility="invisible">
 
         <LinearLayout
             android:orientation="vertical"

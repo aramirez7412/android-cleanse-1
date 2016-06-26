@@ -61,7 +61,6 @@ public class MealFragment extends Fragment {
 
     View view;
 
-
     //used for both displaying one day of plan, all elements marked 2
     //are used to animate swiping through days of plan
     ListView testList;
@@ -87,16 +86,23 @@ public class MealFragment extends Fragment {
 
     TextView upArrow;
 
+    View recipeBox;
+
+    ViewGroup mealCell;
     ViewGroup topMenu;
-    ViewGroup topMenuPage1;
-    ViewGroup topMenuPage2;
-    Button viewPlansButton;
     TextView currenttv;
     MealItemAdapter currentAdapter;
 
     ViewAnimator viewAnimator;
 
 
+    Button takeQuizButton;
+
+
+    TextView recipeTitle;
+    TextView ingredientHeader;
+    TextView recipeIngredientsContent;
+    TextView recipeDirectionsContent;
 
     String temp = "{\n" +
             "    \"mealPlan\": { \n" +
@@ -182,6 +188,11 @@ public class MealFragment extends Fragment {
             "  \n" +
             "}";
 
+    ViewGroup topMenuPage1;
+    ViewGroup topMenuPage2;
+    Button viewPlansButton;
+
+
 
     //detects swipes while using this fragment
     final SwipeDetector swipeDetector = new SwipeDetector();
@@ -234,14 +245,29 @@ public class MealFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
-        //will need to dynamically change with day
-        tv = ((TextView) view.findViewById(R.id.mealListDayHeader));
-        tv2 = ((TextView) view.findViewById(R.id.mealListDayHeader2));
+        ViewGroup layout1 = (ViewGroup) view.findViewById(R.id.layout1);
+        ViewGroup layout2 = (ViewGroup) view.findViewById(R.id.layout2);
 
-        dayListView = (ViewGroup) view.findViewById(R.id.testId);
-        dayListView2 = (ViewGroup) view.findViewById(R.id.testId);
+        //will need to dynamically change with day
+        tv = ((TextView) layout1.findViewById(R.id.mealListDayHeader));
+        tv2 = ((TextView) layout2.findViewById(R.id.mealListDayHeader));
+
+        dayListView = (ViewGroup) layout1.findViewById(R.id.testId);
+        dayListView2 = (ViewGroup) layout2.findViewById(R.id.testId);
 
         viewAnimator = (ViewAnimator) view.findViewById(R.id.myViewAnimator);
+
+        mealCell = (ViewGroup) view.findViewById(R.id.meal_cell_view);
+
+        recipeBox = view.findViewById(R.id.recipeBoxView);
+        recipeBox.setX(1500);
+        recipeBox.setAlpha(0);
+
+
+        recipeTitle = (TextView) recipeBox.findViewById(R.id.recipeTitle);
+        ingredientHeader = (TextView) recipeBox.findViewById(R.id.ingredientHeader);
+        recipeIngredientsContent = (TextView) recipeBox.findViewById(R.id.recipeIngredientsContent);
+        recipeDirectionsContent = (TextView) recipeBox.findViewById(R.id.recipeDirectionsContent);
 
 
         try {
@@ -255,19 +281,19 @@ public class MealFragment extends Fragment {
             daysInPlan = mealPlan.getDays();
             day = 0;
 
-            //list = mealPlan.getListForDay(day);
             list = new ArrayList<MealItem>();
 
             //setup top menu
             topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
             topMenuPage1 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage1);
             topMenuPage2 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage2);
-            menuArrow = (TextView) view.findViewById(R.id.menuArrow);
-            menuArrow2 = (TextView) view.findViewById(R.id.menuArrow2);
-            menuArrow.bringToFront();
-            menuArrow2.bringToFront();
-            upArrow = (TextView) view.findViewById(R.id.upMenuButton);
             viewPlansButton = (Button) view.findViewById(R.id.viewOtherPlansButton);
+            takeQuizButton = (Button) view.findViewById(R.id.takeQuizButton);
+
+            topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
+            menuArrow = (TextView) layout1.findViewById(R.id.menuArrow);
+            menuArrow2 = (TextView) layout2.findViewById(R.id.menuArrow);
+            upArrow = (TextView) view.findViewById(R.id.upMenuButton);
 
 
 
@@ -297,13 +323,10 @@ public class MealFragment extends Fragment {
 
 
 
-
-
-
             viewPlansButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   topMenuPage1.startAnimation(mQuickFadeOut);
+                    topMenuPage1.startAnimation(mQuickFadeOut);
 
                 }
             });
@@ -325,10 +348,7 @@ public class MealFragment extends Fragment {
                     topMenuPage2.setVisibility(View.INVISIBLE);
                     topMenuPage1.setVisibility(View.VISIBLE);
                     topMenu.animate().translationY(0).setDuration(600).start();
-                    //topMenu.setVisibility(View.VISIBLE);
-                    //topMenu.startAnimation(mSlideInTop);
 
-                    //System.out.println("down clicked");
                 }
             };
 
@@ -339,16 +359,9 @@ public class MealFragment extends Fragment {
             upArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //topMenu.startAnimation(mSlideOutTop);
-                    //System.out.println("up Clicked");
-
                     topMenu.animate().translationY(-1000).setDuration(600).start();
                     topMenu.animate().translationY(-1000).setDuration(600).start();
-                    //topMenu.setTranslationX(3);
-
                     topMenu.setVisibility(View.INVISIBLE);
-
-                    //viewAnimator.requestFocus();
                 }
             });
 
@@ -356,15 +369,11 @@ public class MealFragment extends Fragment {
 
 
 
-
-
-
-
             //setup the first layout to be displayed
             //---------
-            testList = (ListView) view.findViewById(R.id.testListView);
+            testList = (ListView) layout1.findViewById(R.id.testListView);
             addMe = (ViewGroup) view.findViewById(R.id.recipeItem);
-            adapter = new MealItemAdapter(this.getContext(), R.layout.meal_tracker_recipe_item, list);
+            adapter = new MealItemAdapter(getContext(), R.layout.meal_tracker_recipe_item, list);
             testList.setAdapter(adapter);
             adapter.addAll(mealPlan.getListForDay(day));
             //----------
@@ -374,21 +383,23 @@ public class MealFragment extends Fragment {
             //----------
             list = mealPlan.getListForDay(day);
             list2 = new ArrayList<MealItem>();
-            testList2 = (ListView) view.findViewById(R.id.testListView2);
-            adapter2 = new MealItemAdapter(this.getContext(), R.layout.meal_tracker_recipe_item, list2);
+            testList2 = (ListView) layout2.findViewById(R.id.testListView);
+            adapter2 = new MealItemAdapter(getContext(), R.layout.meal_tracker_recipe_item, list2);
             testList2.setAdapter(adapter2);
             //----------
 
 
+
+
             //initialize all animation variables
             final Animation outRight = AnimationUtils.loadAnimation(
-                    this.getContext(), R.anim.slide_out_right_mt);
+                    getContext(), R.anim.slide_out_right);
             final Animation inLeft = AnimationUtils.loadAnimation(
-                    this.getContext(), R.anim.slide_in_left_mt);
+                    getContext(), R.anim.slide_in_left);
             final  Animation inRight = AnimationUtils.loadAnimation(
-                    this.getContext(), R.anim.slide_in_right_mt);
+                    getContext(), R.anim.slide_in_right_mt);
             final  Animation outLeft = AnimationUtils.loadAnimation(
-                    this.getContext(), R.anim.slide_out_left_mt);
+                    getContext(), R.anim.slide_out_left);
 
             //initialize all current- variables to currently displayed views
             currentAdapter = adapter;
@@ -397,15 +408,20 @@ public class MealFragment extends Fragment {
             currenttv.setText("Day " + (day + 1));
 
 
-            Button takeQuiz = (Button) view.findViewById(R.id.takeQuizButton);
+            ViewGroup rl = (ViewGroup) view.findViewById(R.id.recipeBoxLinear);
 
-            takeQuiz.setOnClickListener(new OnClickListener() {
+            rl.setOnTouchListener(swipeDetector);
+
+            rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startQuiz();
+                    if(swipeDetector.swipeDetected()){
+                        if(swipeDetector.getAction() == SwipeDetector.Action.LR){
+                            recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
+                        }
+                    }//end if swipe detected
                 }
             });
-
 
 
             //set swipe detector for dayListView
@@ -413,76 +429,73 @@ public class MealFragment extends Fragment {
             tv2.setOnTouchListener(swipeDetector);
 
             View.OnClickListener switchDay = new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
 
-                        System.out.println("testin dammit");
+                    System.out.println("testin dammit");
 
-                        if (swipeDetector.swipeDetected()) {
+                    if (swipeDetector.swipeDetected()) {
 
-                            //figure out how to use correct libraries to support all animations
+                        //figure out how to use correct libraries to support all animations
 
 
-                            switch (swipeDetector.getAction()) {
+                        switch (swipeDetector.getAction()) {
 
-                                //if right to left swipe then swipe then switch displayed plan to the next day
-                                case RL:
+                            //if right to left swipe then swipe then switch displayed plan to the next day
+                            case RL:
 
-                                    //check if next day exists, if so proceed displaying next day
-                                    if (day < daysInPlan - 1) {
+                                //check if next day exists, if so proceed displaying next day
+                                if (day < daysInPlan - 1) {
 
-                                        viewAnimator.setInAnimation(inRight);
-                                        viewAnimator.setOutAnimation(outLeft);
+                                    viewAnimator.setInAnimation(inRight);
+                                    viewAnimator.setOutAnimation(outLeft);
 
-                                        switchListView();
+                                    switchListView();
 
-                                        day++;
-                                        currenttv.setText("Day " + (day + 1));
-                                        currentAdapter.clear();
-                                        currentAdapter.addAll(mealPlan.getListForDay(day));
-                                        currentAdapter.notifyDataSetChanged();
+                                    day++;
+                                    currenttv.setText("Day " + (day + 1));
+                                    currentAdapter.clear();
+                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                    currentAdapter.notifyDataSetChanged();
 
-                                        viewAnimator.showNext();
+                                    viewAnimator.showNext();
 
-                                    }
-                                    break;
+                                }
+                                break;
 
-                                //if left to right swipe then switch displayed plan to previous day
-                                case LR:
+                            //if left to right swipe then switch displayed plan to previous day
+                            case LR:
 
-                                    //check if previous day exists, if so proceed displaying previous day
-                                    if (day > 0) {
+                                //check if previous day exists, if so proceed displaying previous day
+                                if (day > 0) {
 
-                                        viewAnimator.setInAnimation(inLeft);
-                                        viewAnimator.setOutAnimation(outRight);
+                                    viewAnimator.setInAnimation(inLeft);
+                                    viewAnimator.setOutAnimation(outRight);
 
-                                        switchListView();
+                                    switchListView();
 
-                                        day--;
+                                    day--;
 
-                                        currenttv.setText("Day " + (day + 1));
-                                        currentAdapter.clear();
-                                        currentAdapter.addAll(mealPlan.getListForDay(day));
-                                        currentAdapter.notifyDataSetChanged();
+                                    currenttv.setText("Day " + (day + 1));
+                                    currentAdapter.clear();
+                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                    currentAdapter.notifyDataSetChanged();
 
-                                        viewAnimator.showPrevious();
+                                    viewAnimator.showPrevious();
 
-                                    }
-                                    break;
-                                case TB:
-    //put in function cuz this is used twice
-                                    topMenu.setVisibility(View.VISIBLE);
-                                    topMenuPage2.setVisibility(View.INVISIBLE);
-                                    topMenuPage1.setVisibility(View.VISIBLE);
-                                    topMenu.animate().translationY(0).setDuration(600).start();
+                                }
+                                break;
+                            case TB:
+                                //put in function cuz this is used twice
 
-                                    break;
-                                default:
-                                    //do nothing
-                                    break;
-                            }//end switch
-                        }//end if swipe detected
-                    }//end on click
+
+                                break;
+                            default:
+                                //do nothing
+                                break;
+                        }//end switch
+                    }//end if swipe detected
+                }//end on click
 
             };
 
@@ -517,13 +530,20 @@ public class MealFragment extends Fragment {
         };//end listener
 
         //this sets up a yes/no selection box to make sure users want to complete a meal
-        final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(this.getContext());
+        final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(getContext());
         takeQuizBuilder.setMessage("You currently have no meal plans available!\nWould you like to take a quiz to see which one is best for you?\n(if you select no, quiz can be located on pull down menu above)").setPositiveButton("YES", takeQuizDialogListener)
                 .setNegativeButton("NO", takeQuizDialogListener);
 
         takeQuizBuilder.show();
         //-------------------------------------------------------------------------
 
+
+        takeQuizButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startQuiz();
+            }
+        });
 
         return view;
     }
@@ -621,152 +641,119 @@ public class MealFragment extends Fragment {
 
 
 
-        class MealItemAdapter extends ArrayAdapter<MealItem> {
+    class MealItemAdapter extends ArrayAdapter<MealItem> {
 
+        private ArrayList<MealItem> items;
 
-            private ArrayList<MealItem> items;
-
-            public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items) {
-                super(context, textViewResourceId, items);
-                this.items = items;
-            }
-
-
-            @Override
-            public View getView(final int position, View convertView, ViewGroup parent) {
-                View v = convertView;
-                if (v == null) {
-                    LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = vi.inflate(R.layout.meal_tracker_recipe_item, null);
-                }
-
-                MealItem o = items.get(position);
-
-                if (o != null) {
-
-                    TextView recipeTitle = (TextView) v.findViewById(R.id.recipeTitle);
-                    TextView recipeServingsHeader = (TextView) v.findViewById(R.id.recipeServingsHeader);
-                    TextView ingredients = (TextView) v.findViewById(R.id.ingredients);
-                    TextView directionsContent = (TextView) v.findViewById(R.id.directionsContent);
-                    TextView recipeHeader = (TextView) v.findViewById(R.id.recipeHeader);
-
-
-                    if (recipeTitle != null) {
-                        recipeTitle.setText(o.getTitle());
-                        recipeServingsHeader.setText("Ingredients (Serves " + o.getServings() + ")");
-                        ingredients.setText(o.getIngredients());
-                        directionsContent.setText(o.getDirections());
-                        recipeHeader.setText(o.getHeader());
-
-                        //check if meal to be added is completed, if so then it will not need a long click listener and will
-                        //need to set the header to grey
-                        if (o.isCompleted()) {
-                            mealComplete(recipeHeader);
-                        }
-                        //if not then set up listener to handle the completion of a meal and set color to blue
-                        else {
-
-
-
-
-                            //sets up the actions that are connected to meal completion confirmation dialog
-                            final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    switch (which) {
-                                        case DialogInterface.BUTTON_POSITIVE:
-                                            mealComplete(currentSelection);
-
-                                            mealPlan.setCompleted(day, position);
-                                            break;
-
-                                        case DialogInterface.BUTTON_NEGATIVE:
-                                            break;
-                                    }//end switch
-                                }
-                            };//end listener
-
-                            //this sets up a yes/no selection box to make sure users want to complete a meal
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-                            builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
-                                    .setNegativeButton("NO", dialogClickListener);
-
-
-
-
-                            recipeHeader.setBackgroundColor(Color.parseColor("#628799"));
-
-
-                            //this listen allows users to expand/collapse a meal
-                            recipeHeader.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    tempDay = day; //used to see if new day when displaying list, so it will close all open items
-                                    hideAndShowMealItem(v);
-                                }
-                            });
-
-                            //this listener allows users to complete meal
-                            recipeHeader.setOnLongClickListener(new View.OnLongClickListener() {
-                                @Override
-                                public boolean onLongClick(View v) {
-                                    currentSelection = v;
-                                    builder.show();
-                                    return true;
-                                }
-                            });
-                        }
-
-                        ///this must be fixed so all items close when switching days
-                        if(day != tempDay && recipeHeader.getVisibility() == View.VISIBLE){
-                            hideMealItem(recipeHeader);
-                        }
-
-                    }
-
-
-                }
-
-
-                return v;
-            }
-
-
-            void hideMealItem(View v) {
-
-                View parentView = (View) v.getParent();
-                View mealItemView = parentView.findViewById(R.id.verticalList);
-
-                if (mealItemView.getVisibility() == View.VISIBLE)
-                    mealItemView.setVisibility(View.GONE);
-
-            }
-
-            void hideAndShowMealItem(View v) {
-
-                View parentView = (View) v.getParent();
-
-                View mealItemView = parentView.findViewById(R.id.verticalList);
-
-                if (mealItemView.getVisibility() == View.VISIBLE)
-                    mealItemView.setVisibility(View.GONE);
-                else
-                    mealItemView.setVisibility(View.VISIBLE);
-
-            }
-
-            void mealComplete(View v) {
-                v.setBackgroundColor(Color.GRAY);
-                v.setOnLongClickListener(null);
-            }
-
-
-
-
-
-            private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
-            private int tempDay; //used to check if all items need to be reset to closed
+        public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items) {
+            super(context, textViewResourceId, items);
+            this.items = items;
         }
+
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            View v = convertView;
+            if (v == null) {
+                LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                v = vi.inflate(R.layout.meal_cell, null);
+            }
+
+            final MealItem o = items.get(position);
+
+            if (o != null) {
+
+                TextView recipeTitle = (TextView) v.findViewById(R.id.mealName);
+                TextView recipeHeader = (TextView) v.findViewById(R.id.mealHeader);
+
+
+                if (recipeTitle != null) {
+                    recipeTitle.setText(o.getTitle());
+
+                    recipeHeader.setText(o.getHeader());
+
+                    //check if meal to be added is completed, if so then it will not need a long click listener and will
+                    //need to set the header to grey
+                    if (o.isCompleted()) {
+                        mealComplete(v);
+                    }
+                    //if not then set up listener to handle the completion of a meal and set color to blue
+                    else {
+
+                        //sets up the actions that are connected to meal completion confirmation dialog
+                        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        mealComplete(currentSelection);
+
+                                        mealPlan.setCompleted(day, position);
+                                        break;
+
+                                    case DialogInterface.BUTTON_NEGATIVE:
+                                        break;
+                                }//end switch
+                            }
+                        };//end listener
+
+                        //this sets up a yes/no selection box to make sure users want to complete a meal
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+                        builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
+                                .setNegativeButton("NO", dialogClickListener);
+
+
+                        v.setBackgroundColor(Color.parseColor("#AFC6C9"));
+
+
+                        //this listen allows users to expand/collapse a meal
+                        v.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //tempDay = day; //used to see if new day when displaying list, so it will close all open items
+                                hideAndShowMealItem(o);
+                                //recipeBox.setVisibility(View.VISIBLE);
+                            }
+                        });
+
+                        //this listener allows users to complete meal
+                        v.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                currentSelection = v;
+                                builder.show();
+                                return true;
+                            }
+                        });
+                    }//end else
+
+
+                }//if (recipeTitle != null) {
+
+            }//end if (o != null) {
+
+            return v;
+        }
+
+
+        void hideAndShowMealItem(MealItem o) {
+            recipeTitle.setText(o.getTitle());
+            ingredientHeader.setText("Ingredients (Serves " + o.getServings() + ")");
+            recipeIngredientsContent.setText(o.getIngredients());
+            recipeDirectionsContent.setText(o.getDirections());
+            recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
+        }
+
+        void mealComplete(View v) {
+            v.setBackgroundColor(Color.GRAY);
+            v.setOnLongClickListener(null);
+        }
+
+        private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
+        private int tempDay; //used to check if all items need to be reset to closed
+    }
+
+
 
 
 

@@ -72,6 +72,10 @@
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
+        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/day_layout.xml",
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/day_layout.xml"
+    },
+    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/res/layout/abc_screen_simple.xml"
     },
