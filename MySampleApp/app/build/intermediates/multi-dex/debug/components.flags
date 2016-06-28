@@ -8,7 +8,8 @@
 -dontobfuscate
 -dontusemixedcaseclassnames
 -dontpreverify
--dontwarn
+-dontnote **,com.android.tools.fd.**,android.support.multidex.MultiDexExtractor
+-dontwarn **
 -printconfiguration /Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/multi-dex/debug/components.flags
 
 
@@ -38,6 +39,11 @@
 }
 
 -keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.fd.** {
     <fields>;
     <methods>;
 }

@@ -1,78 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:textAlignment="center"
-    android:background="#AFC6C9">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:columnCount="4"
+    android:rowCount="3"
+    android:useDefaultMargins="true">
 
-    <!-- TODO: Update blank fragment layout -->
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:id="@+id/waveLoadingView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:wlv_borderColor="@color/com_facebook_blue"
+        app:wlv_borderWidth="3dp"
+        app:wlv_progressValue="80"
+        app:wlv_shapeType="square"
+        app:wlv_round_rectangle="true"
+        app:wlv_triangle_direction="north"
+        app:wlv_titleCenter=""
+        app:wlv_titleCenterColor="@color/com_facebook_blue"
+        app:wlv_titleCenterSize="24sp"
+        app:wlv_waveAmplitude="70"
+        app:wlv_waveColor="@color/com_facebook_blue"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:alpha=".4" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/imageView2"
-        android:src="@drawable/fiji_bottle2"
-        android:alpha=".2"
-        android:adjustViewBounds="false"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/addWaterButton"
-        android:layout_alignEnd="@+id/addWaterButton" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="How Much Water Have You Drank Today?"
-        android:id="@+id/textView6"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="83dp"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        android:layout_alignParentStart="false"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="false"
-        android:gravity="center"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:cropToPadding="false"
+        android:alpha=".4"
+        android:src="@drawable/fiji_bottle"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drink 8 Ounces"
+        android:id="@+id/drinkWaterButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Amount Drank:"
-        android:id="@+id/amountDrankTextView"
+        android:text="You are xxx ounces from completing your goal!"
+        android:id="@+id/ounceTextView"
         android:textSize="25sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD"
-        android:id="@+id/addWaterButton"
-        android:layout_marginBottom="93dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/amountDrankTextEdit"
-        android:layout_alignEnd="@+id/amountDrankTextEdit" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/amountDrankTextEdit"
-        android:layout_above="@+id/addWaterButton"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SUBTRACT"
-        android:id="@+id/subtractWaterButton"
-        android:layout_alignTop="@+id/addWaterButton"
-        android:layout_alignLeft="@+id/amountDrankTextEdit"
-        android:layout_alignStart="@+id/amountDrankTextEdit" />
+        android:gravity="center_horizontal"
+        android:layout_above="@+id/drinkWaterButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="45dp" />
 
 </RelativeLayout>

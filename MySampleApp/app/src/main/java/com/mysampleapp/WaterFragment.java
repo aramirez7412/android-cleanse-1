@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import me.itangqi.waveloadingview.WaveLoadingView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,11 +30,10 @@ public class WaterFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     View view;
-    int totalOunces;
-    TextView amountDrankTextView;
-    EditText amountDrankTextEdit;
-    Button addOunces;
-    Button subtractOunces;
+    Button drinkWaterButton;
+    WaveLoadingView waveView;
+    int ounces;
+    TextView ounceTextView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,57 +78,36 @@ public class WaterFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_water, container, false);
 
-        totalOunces = 0;
-        amountDrankTextView = (TextView) view.findViewById(R.id.amountDrankTextView);
-        amountDrankTextEdit = (EditText) view.findViewById(R.id.amountDrankTextEdit);
-        amountDrankTextView.setText("Amount Drank: " + totalOunces + " oz.");
-        addOunces = (Button) view.findViewById(R.id.addWaterButton);
-        subtractOunces = (Button) view.findViewById(R.id.subtractWaterButton);
-
-        addOunces.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
 
-                int oz = 0;
+            drinkWaterButton = (Button) view.findViewById(R.id.drinkWaterButton);
+            waveView = (WaveLoadingView) view.findViewById(R.id.waveLoadingView);
+            ounceTextView = (TextView) view.findViewById(R.id.ounceTextView);
+            ounces = 64;
 
-                if(amountDrankTextEdit.getText().length() >= 1)
-                    oz = Integer.parseInt(amountDrankTextEdit.getText().toString());
-                if(oz >= 1){
-                    totalOunces += oz;
-                    amountDrankTextView.setText("Amount Drank: " + totalOunces + " oz.");
+            ounceTextView.setText("You are " + ounces + " ounces away from completing your daily goal!");
+
+            drinkWaterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    waveView.setProgressValue(waveView.getProgressValue()-13);
+
+                    ounces-=8;
+
+                    if(ounces <= 0) {
+
+                        ounceTextView.setText("Congratulations! You have met your daily water goal!");
+                    }
+                    else{
+                        ounceTextView.setText("You are " + ounces + " ounces away from completing your daily goal!");
+                    }
+
+
                 }
-                else{
-                    Toast.makeText(view.getContext(),"Please enter a number greater than 0",Toast.LENGTH_LONG).show();
-                }
-                amountDrankTextEdit.clearComposingText();
+            });
 
-            }
-        });
 
-        subtractOunces.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int oz = 0;
-                if(amountDrankTextEdit.getText().length() >= 1)
-                    oz = Integer.parseInt(amountDrankTextEdit.getText().toString());
-                if(oz >= 1){
-                    totalOunces -= oz;
-
-                    if(totalOunces < 0)
-                        totalOunces = 0;
-
-                    amountDrankTextView.setText("Amount Drank: " + totalOunces + " oz.");
-                }
-                else{
-                    Toast.makeText(view.getContext(),"Please enter a number greater than 0",Toast.LENGTH_LONG).show();
-                }
-                amountDrankTextEdit.clearComposingText();
-
-            }
-        });
 
 
         return view;
