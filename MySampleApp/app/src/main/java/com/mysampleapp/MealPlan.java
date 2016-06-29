@@ -12,20 +12,23 @@ import java.util.ArrayList;
 public class MealPlan {
 
 
-    MealPlan(JSONObject planObject) throws JSONException {
+    MealPlan(JSONObject jsonObject) throws JSONException {
 
         mealPlan = new ArrayList<ArrayList<MealItem>>();
 
-        System.out.println(planObject.length() + "---asdfljdslfjdslfjlasdjflkasdjfldsjflsd");
+
+        JSONArray planAr = jsonObject.getJSONArray("days");
+
+        System.out.println(planAr.length() + "---asdfljdslfjdslfjlasdjflkasdjfldsjflsd");
 
         //loop through each day
-        for(int k = 0; k < planObject.length(); k++) {
+        for(int k = 0; k < planAr.length(); k++) {
 
             System.out.println("we gotta k of " + k);
             ArrayList<MealItem> dayPlan = new ArrayList<>();
             JSONArray mealAr = null;
             try {
-                mealAr = planObject.getJSONArray(Integer.toString(k));
+                mealAr = planAr.getJSONObject(k).getJSONArray("meals");
             } catch (JSONException e) {
                 System.out.println("fuckkkkkkk");            }
 
@@ -36,31 +39,31 @@ public class MealPlan {
                 String tempString = "";
                 JSONObject mealObject = mealAr.getJSONObject(i);
 
-                mealItem.setType(mealObject.getString("type"));
+               // mealItem.setType(mealObject.getString("type"));
 
-                mealItem.setHeader(mealObject.getString("cellHeader"));
-                mealItem.setTitle(mealObject.getString("mealTitle"));
+                mealItem.setHeader(mealObject.getString("time"));
+                mealItem.setTitle(mealObject.getString("meal"));
                 //set images
                 //------------
                 //------------
-                mealItem.setServings(mealObject.getInt("servings"));
-                //set ingredients
-                //---------------------------------------------------
-                tempAr = mealObject.getJSONArray("ingredients");
-                for (int j = 0; j < tempAr.length(); j++) {
-                    tempString += "•" + tempAr.getString(j) + "\n";
-                }
-                mealItem.setIngredients(tempString);
-                //---------------------------------------------------
-                //set directions
-                //---------------------------------------------------
-                tempString = "";
-                tempAr = mealObject.getJSONArray("directions");
-                for (int j = 0; j < tempAr.length(); j++) {
-                    tempString += (j + 1) + ": " + tempAr.getString(j) + "\n";
-                }
-                mealItem.setDirections(tempString);
-                //---------------------------------------------------
+//                mealItem.setServings(mealObject.getInt("servings"));
+//                //set ingredients
+//                //---------------------------------------------------
+//                tempAr = mealObject.getJSONArray("ingredients");
+//                for (int j = 0; j < tempAr.length(); j++) {
+//                    tempString += "•" + tempAr.getString(j) + "\n";
+//                }
+//                mealItem.setIngredients(tempString);
+//                //---------------------------------------------------
+//                //set directions
+//                //---------------------------------------------------
+//                tempString = "";
+//                tempAr = mealObject.getJSONArray("directions");
+//                for (int j = 0; j < tempAr.length(); j++) {
+//                    tempString += (j + 1) + ": " + tempAr.getString(j) + "\n";
+//                }
+//                mealItem.setDirections(tempString);
+//                //---------------------------------------------------
 
                 dayPlan.add(mealItem);
             }

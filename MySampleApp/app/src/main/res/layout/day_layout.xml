@@ -11,7 +11,6 @@
         android:layout_centerHorizontal="true"
         android:background="#4C442D"
         android:gravity="center"
-        android:paddingBottom="25dp"
         android:paddingLeft="25dp"
         android:text=""
         android:textAlignment="center"
@@ -22,14 +21,14 @@
     <TextView
         android:id="@+id/menuArrow"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/mealListDayHeader"
         android:layout_centerHorizontal="true"
         android:text="V"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="#4C442D"
         android:textAlignment="center"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:background="#4C442D" />
 
     <ListView
         android:id="@+id/testListView"

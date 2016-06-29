@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You are currently on Day x of Day x of the &lt;---> Meal Plan!"
+                android:text="You are currently on Day 1 of 3 on the &lt;---> Meal Plan!"
                 android:id="@+id/dayOutOfDaysTextView"
                 android:textSize="40sp"
                 android:textAlignment="center"
