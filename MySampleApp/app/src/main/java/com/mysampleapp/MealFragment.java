@@ -340,9 +340,11 @@ public class MealFragment extends Fragment {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    topMenuPage1.setVisibility(view.GONE);
-                    topMenuPage2.startAnimation(mQuickFadeIn);
-                    topMenuPage2.setVisibility(view.VISIBLE);
+
+                        topMenuPage1.setVisibility(view.GONE);
+                        topMenuPage2.startAnimation(mQuickFadeIn);
+                        topMenuPage2.setVisibility(view.VISIBLE);
+
                 }
 
                 @Override
@@ -389,7 +391,6 @@ public class MealFragment extends Fragment {
             upArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    topMenu.animate().translationY(-1000).setDuration(600).start();
                     topMenu.animate().translationY(-1000).setDuration(600).start();
                     topMenu.setVisibility(View.INVISIBLE);
                 }
@@ -635,9 +636,9 @@ public class MealFragment extends Fragment {
 //
 //
 //        mealNameTextField.clearFocus();
-//
-//
-//
+
+
+
 //        getView().setFocusableInTouchMode(true);
 //        getView().requestFocus();
 //
@@ -646,10 +647,78 @@ public class MealFragment extends Fragment {
 //            public boolean onKey(View v, int keyCode, KeyEvent event) {
 //                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 //
+//                   //if(recipeBox.getX()==1500) {
+//                     //  recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
+//                    //   return true;
+//                  // }
+//
+//
 //                }
 //                return false;
 //            }
 //        });
+
+        final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
+
+        final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
+
+        mQuickFadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                    topMenuPage2.setVisibility(view.INVISIBLE);
+                    topMenuPage1.startAnimation(mQuickFadeIn);
+                    topMenuPage1.setVisibility(view.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+
+                    System.out.println(recipeBox.getX());
+                    if(topMenuPage2.getVisibility() == View.VISIBLE) {
+                        topMenuPage2.startAnimation(mQuickFadeOut);
+                    }
+                    else if(topMenu.getVisibility() == View.VISIBLE){
+                        topMenu.animate().translationY(-1000).setDuration(600).start();
+                        topMenu.setVisibility(View.INVISIBLE);
+                    }
+                    else if(recipeBox.getX() == 0) {
+                        recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
+                        getActivity().onBackPressed();
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
 
     }
 
