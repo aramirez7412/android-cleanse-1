@@ -52,6 +52,7 @@ public class QuizFragment extends Fragment {
     ViewGroup detoxPlanWebViewLayout;
     String[] detoxPlanLinks;
     String linkToLoad;
+    String planName;
 
 
 
@@ -201,9 +202,11 @@ public class QuizFragment extends Fragment {
         recommendQuizTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                webView.loadUrl(linkToLoad);
-                switchLayout(quizEndLayout, detoxPlanWebViewLayout);
-                counter++;
+
+                ((MainActivity)getActivity()).switchToPurchaseFragment(planName);
+                //webView.loadUrl(linkToLoad);
+                //switchLayout(quizEndLayout, detoxPlanWebViewLayout);
+               // counter++;
             }
         });
 
@@ -323,7 +326,9 @@ public class QuizFragment extends Fragment {
 
             }
 
-            recommendQuizTextView.setText("Based on your quiz answers the best suited plan for you is the " + temp + " Detox Plan!\n" +
+            planName = temp;
+
+            recommendQuizTextView.setText("Based on your quiz answers the best suited plan for you is the " + planName + " Detox Plan!\n" +
                     "Click here for more details.");
 
               switchLayout(quizQuestionsLayout, quizEndLayout);

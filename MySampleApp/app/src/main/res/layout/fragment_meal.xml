@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today you have completed x out of x meals! Great Job!"
+                android:text="You have completed x out of x meals today! Great Job!"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/mealOutOfMealTextView" />
 
@@ -88,18 +88,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mealTrackerTopMenuPage2"
-            android:visibility="invisible">
+            android:visibility="visible">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Meal Plan"
+                android:text="Meal Plan Test"
                 android:textSize="50sp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:background="@color/material_grey_600"
                 android:clickable="true"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="1dp" />
+                android:layout_marginBottom="1dp"
+                android:id="@+id/purchasePlanTextView1" />
 
             <TextView
                 android:layout_width="match_parent"

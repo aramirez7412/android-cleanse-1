@@ -1,11 +1,11 @@
 [
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_list_menu_item_layout.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_layout.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_menu_layout.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_menu_layout.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/fragment_demo_instruction.xml",
@@ -13,19 +13,19 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_template_media.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_media.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_activity_chooser_view_list_item.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_alert_dialog_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_media_action.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_action.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/activity_splash.xml",
@@ -33,19 +33,19 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_template_big_media.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_select_dialog_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_select_dialog_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_popup_menu_item_layout.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_template_part_time.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_time.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/list_item_demo_button_icon_text.xml",
@@ -53,11 +53,11 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_bar_title_item.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_title_item.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_dialog_title_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_dialog_title_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_large.xml",
@@ -68,8 +68,12 @@
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/slide_in_left.xml"
     },
     {
+        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/fragment_purchase_plan.xml",
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/fragment_purchase_plan.xml"
+    },
+    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/day_layout.xml",
@@ -77,7 +81,7 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_screen_simple.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_simple.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_small.xml",
@@ -85,11 +89,11 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_list_menu_item_icon.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_icon.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/select_dialog_singlechoice_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/activity_sign_in.xml",
@@ -97,7 +101,7 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/com_facebook_login_fragment.xml",
@@ -121,11 +125,11 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_list_menu_item_checkbox.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_screen_content_include.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_content_include.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_small.xml",
@@ -133,11 +137,11 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_lines.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_template_lines.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_lines.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/select_dialog_item_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_item_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/fragment_demo_identity.xml",
@@ -145,15 +149,15 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/support_simple_spinner_dropdown_item.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_search_view.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_search_view.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_template_big_media_narrow.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media_narrow.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
@@ -165,7 +169,7 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/select_dialog_multichoice_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_multichoice_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/meal_cell_sample.xml",
@@ -181,11 +185,11 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_expanded_menu_layout.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_expanded_menu_layout.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_mode_close_item_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/fragment_meal.xml",
@@ -197,7 +201,7 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_bar_up_container.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/meal_cell_image_only_layout.xml",
@@ -205,7 +209,7 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_template_part_chronometer.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/scrollable_days_menu_fragment.xml",
@@ -221,7 +225,7 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_screen_toolbar.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_toolbar.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/slide_in_right.xml",
@@ -229,15 +233,15 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_alert_dialog_button_bar_material.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_list_menu_item_radio.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_radio.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/list_item_icon_text_with_subtitle.xml",
@@ -249,19 +253,19 @@
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_mode_bar.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_mode_bar.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_action_menu_item_layout.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_menu_item_layout.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/notification_media_cancel_action.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_cancel_action.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/layout/abc_activity_chooser_view.xml"
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/nav_drawer_item.xml",

@@ -113,7 +113,11 @@ public class MealFragment extends Fragment {
     TextView recipeIngredientsContent;
     TextView recipeDirectionsContent;
 
-    String temp = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":2,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"1/2 Cup Berries & 1/2 Cup Min. Cucumbers & Radishes\",\"time\":\"snack\"},{\"meal\":\"Chicken & Broccoli Bowl*\",\"time\":\"dinner\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":3,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1 Sliced Apple with 1/2 cup Min. Jicama\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Turkey Soup* (Freeze Leftovers For Future Use)\",\"time\":\"dinner\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snacks\"]},{\"day\":4,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Leftover Chili*\",\"time\":\"lunch\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":5,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":6,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":7,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":8,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Leftover Turkey Soup*\",\"time\":\"dinner\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":9,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"1/4 Cup Raw Almonds\",\"time\":\"snack\"},{\"meal\":\"Brown Rice Fusilli*\",\"time\":\"dinner\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snack\"]},{\"day\":10,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1/2 Avocado & 1/2 Cup Min. Sliced Peppers\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"2 Tablespoon Raw Almond Butter & 1/2 Cup Min. Celery\",\"time\":\"snack\"},{\"meal\":\"Shrimp & Asparagus Stiry Fry*\",\"time\":\"dinner\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
+
+    TextView purchasePlanTextView1;
+
+
+    String temp3 = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
 
     String temp2 = "{\n" +
             "    \"mealPlan\": { \n" +
@@ -256,6 +260,25 @@ public class MealFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
+
+        //just used for testing to determine if plan was purchased or not
+        if(((MainActivity)getActivity()).getPlanInt() == 0){
+            setCurrentPlan(temp3);
+        }
+        else{
+            setCurrentPlan(((MainActivity)getActivity()).getJSONPlan());
+        }
+
+        purchasePlanTextView1 = (TextView) view.findViewById(R.id.purchasePlanTextView1);
+
+        purchasePlanTextView1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToPurchaseFragment("My Meal Plan");
+            }
+        });
+
+
         ViewGroup layout1 = (ViewGroup) view.findViewById(R.id.layout1);
         ViewGroup layout2 = (ViewGroup) view.findViewById(R.id.layout2);
 
@@ -281,16 +304,9 @@ public class MealFragment extends Fragment {
         recipeDirectionsContent = (TextView) recipeBox.findViewById(R.id.recipeDirectionsContent);
 
 
-        try {
 
-            //initialize the jsonObject
-            JSONArray jsonArray = new JSONArray(temp);
 
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-            System.out.println("before the parse");
-            //parse the object and create a meal plan
-            mealPlan = new MealPlan(jsonObject);
             daysInPlan = mealPlan.getDays();
             day = 0;
             System.out.println("post the parse");
@@ -517,9 +533,7 @@ public class MealFragment extends Fragment {
             tv.setOnClickListener(switchDay);
             tv2.setOnClickListener(switchDay);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
 
 
 
@@ -641,7 +655,11 @@ public class MealFragment extends Fragment {
 
     void startQuiz() {
 
-        ((MainActivity)getActivity()).switchFragment();
+        ((MainActivity)getActivity()).switchToQuizFragment();
+    }
+
+    void switchToPurchaseFragment(String planInfo){
+        ((MainActivity)getActivity()).switchToPurchaseFragment(planInfo);
     }
 
     void switchLayout(ViewGroup v1, ViewGroup v2) {
@@ -652,6 +670,28 @@ public class MealFragment extends Fragment {
 
     }
 
+    void setCurrentPlan(String JSONPlan) {
+
+
+        try {
+
+            //initialize the jsonObject
+            JSONArray jsonArray = null;
+            jsonArray = new JSONArray(JSONPlan);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            System.out.println("before the parse");
+            //parse the object and create a meal plan
+            mealPlan = new MealPlan(jsonObject);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 

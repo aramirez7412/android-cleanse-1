@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /** The helper class used to toggle the left navigation drawer open and closed. */
     private ActionBarDrawerToggle drawerToggle;
 
+    private String jsonPlan1;
+    private int    planInt; //not sure if will keep, used to tell menu fragment which plan for testing
+
     private Button   signOutButton;
 
     /**
@@ -160,6 +163,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         setupToolbar(savedInstanceState);
 
         setupNavigationMenu(savedInstanceState);
+
+        //delete this after testing
+        planInt = 0;
     }
 
     @Override
@@ -246,8 +252,29 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         super.onBackPressed();
     }
 
+    boolean isPlanEmpty(){
+        return jsonPlan1.isEmpty();
+    }
 
-    void switchFragment(){
+    void setPlan(String jsonString){
+        jsonPlan1 = jsonString;
+    }
+
+    String getJSONPlan(){
+        return jsonPlan1;
+    }
+
+    int getPlanInt(){
+        return planInt;
+    }
+
+    void setPlanInt(int num){
+        planInt =  num;
+    }
+
+
+
+    void switchToQuizFragment(){
 
         Fragment fragment;
         String fragmentName;
@@ -259,6 +286,36 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
                 fragment = new QuizFragment();
                 fragmentName = "Quiz";
+
+
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment_container, fragment, fragmentName)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+
+        // Set the title for the fragment.
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(fragmentName);
+        }
+    }//end switch fragment function
+
+
+
+    void switchToPurchaseFragment(String planInfo){
+
+        Fragment fragment;
+        String fragmentName;
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Clear back stack when navigating from the Nav Drawer.
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        fragment = new PurchasePlanFragment();
+        fragmentName = "Purchase Fragment";
 
 
 
