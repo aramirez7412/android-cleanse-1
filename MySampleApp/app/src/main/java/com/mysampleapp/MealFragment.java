@@ -847,6 +847,7 @@ public class MealFragment extends Fragment {
 
 
                         v.setBackgroundColor(Color.parseColor("#AFC6C9"));
+                        recipeImageView.setBackgroundColor(Color.parseColor("#AFC6C9"));
 
 
                         //this listen allows users to expand/collapse a meal
@@ -891,6 +892,7 @@ public class MealFragment extends Fragment {
 
         void mealComplete(View v) {
             v.setBackgroundColor(Color.GRAY);
+            v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
             v.setOnLongClickListener(null);
         }
 

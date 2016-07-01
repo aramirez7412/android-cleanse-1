@@ -2083,8 +2083,8 @@ containing a value of this type.
         public static final int list_item_title=0x7f0c00ab;
         public static final int main_content_layout=0x7f0c006a;
         public static final int main_fragment_container=0x7f0c006c;
-        public static final int mealCellImageView=0x7f0c00af;
-        public static final int mealHeader=0x7f0c00ae;
+        public static final int mealCellImageView=0x7f0c00ae;
+        public static final int mealHeader=0x7f0c00af;
         public static final int mealListChildItem=0x7f0c00b6;
         public static final int mealListDayHeader=0x7f0c007d;
         public static final int mealListHeadingItem=0x7f0c00b8;
