@@ -12,7 +12,6 @@
     android:orientation="vertical">
 
 
-
     <ViewAnimator
         android:id="@+id/myViewAnimator"
         android:layout_width="match_parent"
@@ -27,9 +26,8 @@
 
     </ViewAnimator>
 
-    <include layout="@layout/recipe_box"
-        android:id="@+id/recipeBoxView" />
-
+    <include layout="@layout/no_plan_layout"
+        android:id="@+id/noPlanLayoutId" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -164,5 +162,9 @@
             android:layout_below="@+id/mealTrackerTopMenuPage2" />
 
     </RelativeLayout>
+
+    <include layout="@layout/recipe_box"
+        android:id="@+id/recipeBoxView" />
+
 
 </RelativeLayout>

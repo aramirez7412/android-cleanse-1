@@ -77,6 +77,8 @@ public class MealFragment extends Fragment {
 
     View view;
 
+    ViewGroup noPlanView;
+
     //used for both displaying one day of plan, all elements marked 2
     //are used to animate swiping through days of plan
     ListView testList;
@@ -278,22 +280,7 @@ public class MealFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
-        //just used for testing to determine if plan was purchased or not
-        if(((MainActivity)getActivity()).getPlanInt() == 0){
-            setCurrentPlan(temp);
-        }
-        else{
-            setCurrentPlan(((MainActivity)getActivity()).getJSONPlan());
-        }
-
-        purchasePlanTextView1 = (TextView) view.findViewById(R.id.purchasePlanTextView1);
-
-        purchasePlanTextView1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToPurchaseFragment("My Meal Plan");
-            }
-        });
+        noPlanView = (ViewGroup) view.findViewById(R.id.noPlanLayoutId);
 
 
         ViewGroup layout1 = (ViewGroup) view.findViewById(R.id.layout1);
@@ -321,6 +308,173 @@ public class MealFragment extends Fragment {
         recipeDirectionsContent = (TextView) recipeBox.findViewById(R.id.recipeDirectionsContent);
         recipeBoxImageView = (ImageView) recipeBox.findViewById(R.id.recipeBoxImageView);
 
+        //setup top menu
+        topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
+        topMenuPage1 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage1);
+        topMenuPage2 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage2);
+        viewPlansButton = (Button) view.findViewById(R.id.viewOtherPlansButton);
+        takeQuizButton = (Button) view.findViewById(R.id.takeQuizButton);
+
+        topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
+        menuArrow = (TextView) layout1.findViewById(R.id.menuArrow);
+        menuArrow2 = (TextView) layout2.findViewById(R.id.menuArrow);
+        upArrow = (TextView) view.findViewById(R.id.upMenuButton);
+
+        final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
+
+        final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
+
+        mQuickFadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                topMenuPage1.setVisibility(view.GONE);
+                topMenuPage2.startAnimation(mQuickFadeIn);
+                topMenuPage2.setVisibility(view.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+        viewPlansButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                topMenuPage1.startAnimation(mQuickFadeOut);
+
+            }
+        });
+
+
+        topMenu.setY(-1000);
+        topMenu.setVisibility(INVISIBLE);
+        topMenu.bringToFront();
+
+
+        final View.OnClickListener showTopMenu = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                topMenu.setVisibility(View.VISIBLE);
+                topMenuPage2.setVisibility(View.INVISIBLE);
+                topMenuPage1.setVisibility(View.VISIBLE);
+                topMenu.animate().translationY(0).setDuration(600).start();
+
+            }
+        };
+
+        menuArrow.setOnClickListener(showTopMenu);
+
+        menuArrow2.setOnClickListener(showTopMenu);
+
+        upArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                topMenu.animate().translationY(-1000).setDuration(600).start();
+                topMenu.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        takeQuizButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startQuiz();
+            }
+        });
+
+        purchasePlanTextView1 = (TextView) view.findViewById(R.id.purchasePlanTextView1);
+
+        purchasePlanTextView1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToPurchaseFragment("My Meal Plan");
+            }
+        });
+
+
+        //just used for testing to determine if plan was purchased or not
+        if(((MainActivity)getActivity()).getPlanInt() == 0){
+
+            noPlanView.setVisibility(View.VISIBLE);
+
+
+            Button planButton1 = (Button) view.findViewById(R.id.mealPlan1Button);
+
+            Button planButton2 = (Button) view.findViewById(R.id.mealPlan2Button);
+
+            Button planButton3 = (Button) view.findViewById(R.id.mealPlan3Button);
+
+            planButton1.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switchToPurchaseFragment("My Meal Plan");
+                }
+            });
+
+            planButton2.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switchToPurchaseFragment("My Meal Plan");
+                }
+            });
+
+            planButton3.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switchToPurchaseFragment("My Meal Plan");
+                }
+            });
+
+
+//           // setCurrentPlan(temp); dont need this line here for testing
+//
+//            //sets up the actions that are connected to "take quiz?" prompt
+//            //-------------------------------------------------------------------------
+//            final DialogInterface.OnClickListener takeQuizDialogListener = new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    switch (which) {
+//                        case DialogInterface.BUTTON_POSITIVE:
+//                            System.out.println("yes");
+//                            startQuiz();
+//                            dialog.dismiss();
+//                            break;
+//
+//                        case DialogInterface.BUTTON_NEGATIVE:
+//                            System.out.println("no");
+//                            dialog.dismiss();
+//                            break;
+//                    }//end switch
+//                }
+//            };//end listener
+//
+//            //this sets up a yes/no selection box to make sure users want to complete a meal
+//            final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(getContext());
+//            takeQuizBuilder.setMessage("You currently have no meal plans available!\nWould you like to take a quiz to see which one is best for you?\n(if you select no, quiz can be located on pull down menu above)").setPositiveButton("YES", takeQuizDialogListener)
+//                    .setNegativeButton("NO", takeQuizDialogListener);
+//
+//            takeQuizBuilder.show();
+//            //-------------------------------------------------------------------------
+
+
+
+
+        }
+        else {
+            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
+
+
+
+            noPlanView.setVisibility(View.GONE);
 
 
 
@@ -330,88 +484,7 @@ public class MealFragment extends Fragment {
 
             list = new ArrayList<MealItem>();
 
-            //setup top menu
-            topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
-            topMenuPage1 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage1);
-            topMenuPage2 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage2);
-            viewPlansButton = (Button) view.findViewById(R.id.viewOtherPlansButton);
-            takeQuizButton = (Button) view.findViewById(R.id.takeQuizButton);
 
-            topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
-            menuArrow = (TextView) layout1.findViewById(R.id.menuArrow);
-            menuArrow2 = (TextView) layout2.findViewById(R.id.menuArrow);
-            upArrow = (TextView) view.findViewById(R.id.upMenuButton);
-
-
-
-
-            final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
-
-            final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
-
-            mQuickFadeOut.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-
-                        topMenuPage1.setVisibility(view.GONE);
-                        topMenuPage2.startAnimation(mQuickFadeIn);
-                        topMenuPage2.setVisibility(view.VISIBLE);
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-
-
-            viewPlansButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    topMenuPage1.startAnimation(mQuickFadeOut);
-
-                }
-            });
-
-
-
-
-            topMenu.setY(-1000);
-            topMenu.setVisibility(INVISIBLE);
-            topMenu.bringToFront();
-
-
-
-            final View.OnClickListener showTopMenu = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    topMenu.setVisibility(View.VISIBLE);
-                    topMenuPage2.setVisibility(View.INVISIBLE);
-                    topMenuPage1.setVisibility(View.VISIBLE);
-                    topMenu.animate().translationY(0).setDuration(600).start();
-
-                }
-            };
-
-            menuArrow.setOnClickListener(showTopMenu);
-
-            menuArrow2.setOnClickListener(showTopMenu);
-
-            upArrow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    topMenu.animate().translationY(-1000).setDuration(600).start();
-                    topMenu.setVisibility(View.INVISIBLE);
-                }
-            });
 
 
 
@@ -437,16 +510,14 @@ public class MealFragment extends Fragment {
             //----------
 
 
-
-
             //initialize all animation variables
             final Animation outRight = AnimationUtils.loadAnimation(
                     getContext(), R.anim.slide_out_right);
             final Animation inLeft = AnimationUtils.loadAnimation(
                     getContext(), R.anim.slide_in_left);
-            final  Animation inRight = AnimationUtils.loadAnimation(
+            final Animation inRight = AnimationUtils.loadAnimation(
                     getContext(), R.anim.slide_in_right_mt);
-            final  Animation outLeft = AnimationUtils.loadAnimation(
+            final Animation outLeft = AnimationUtils.loadAnimation(
                     getContext(), R.anim.slide_out_left);
 
             //initialize all current- variables to currently displayed views
@@ -463,8 +534,8 @@ public class MealFragment extends Fragment {
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(swipeDetector.swipeDetected()){
-                        if(swipeDetector.getAction() == SwipeDetector.Action.LR){
+                    if (swipeDetector.swipeDetected()) {
+                        if (swipeDetector.getAction() == SwipeDetector.Action.LR) {
                             recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
                         }
                     }//end if swipe detected
@@ -476,7 +547,7 @@ public class MealFragment extends Fragment {
             tv.setOnTouchListener(swipeDetector);
             tv2.setOnTouchListener(swipeDetector);
 
-            View.OnClickListener switchDay = new View.OnClickListener(){
+            View.OnClickListener switchDay = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -555,42 +626,7 @@ public class MealFragment extends Fragment {
 
 
 
-        //sets up the actions that are connected to "take quiz?" prompt
-        //-------------------------------------------------------------------------
-        final DialogInterface.OnClickListener takeQuizDialogListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        System.out.println("yes");
-                        startQuiz();
-                        dialog.dismiss();
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        System.out.println("no");
-                        dialog.dismiss();
-                        break;
-                }//end switch
-            }
-        };//end listener
-
-        //this sets up a yes/no selection box to make sure users want to complete a meal
-        final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(getContext());
-        takeQuizBuilder.setMessage("You currently have no meal plans available!\nWould you like to take a quiz to see which one is best for you?\n(if you select no, quiz can be located on pull down menu above)").setPositiveButton("YES", takeQuizDialogListener)
-                .setNegativeButton("NO", takeQuizDialogListener);
-
-        takeQuizBuilder.show();
-        //-------------------------------------------------------------------------
-
-
-        takeQuizButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startQuiz();
-            }
-        });
-
+        }
         return view;
     }
 
@@ -854,6 +890,7 @@ public class MealFragment extends Fragment {
                         v.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                System.out.println("show it plz");
                                 //tempDay = day; //used to see if new day when displaying list, so it will close all open items
                                 hideAndShowMealItem(o);
                                 //recipeBox.setVisibility(View.VISIBLE);
@@ -886,6 +923,7 @@ public class MealFragment extends Fragment {
             recipeIngredientsContent.setText(o.getIngredients());
             recipeDirectionsContent.setText(o.getDirections());
             Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
+
 
             recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
         }
