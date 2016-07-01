@@ -4,9 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,15 +38,18 @@ import android.widget.ViewFlipper;
 
 import com.amazonaws.http.HttpResponse;
 import com.mysampleapp.demo.DemoFragmentBase;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -112,9 +119,14 @@ public class MealFragment extends Fragment {
     TextView ingredientHeader;
     TextView recipeIngredientsContent;
     TextView recipeDirectionsContent;
+    ImageView recipeBoxImageView;
+
 
 
     TextView purchasePlanTextView1;
+
+
+    String temp = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\",\"imgurl\":\"http://www.theeasymarket.com/image/cache/data/0000000004070-500x500.jpg\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":2,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Cup Berries & 1/2 Cup Min. Cucumbers & Radishes\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Chicken & Broccoli Bowl*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":3,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1 Sliced Apple with 1/2 cup Min. Jicama\",\"time\":\"snack\",\"imgurl\":\"http://2.bp.blogspot.com/-9y7X5A1hrto/TbdcYr0qzqI/AAAAAAAABrY/JMjPFOeg3VA/s1600/IMG_3705.JPG\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Turkey Soup* (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Asian_Turkey_SoupFS.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snacks\"]},{\"day\":4,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Chili*\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":5,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":6,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":7,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":8,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Turkey Soup*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Hot+and+Sour+Turkey+Soup.jpg\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":9,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/4 Cup Raw Almonds\",\"time\":\"snack\",\"imgurl\":\"https://www.ohnuts.com/noapp/showImage.cfm/extra-large/Raw%20Almond%20NEW1.jpg\"},{\"meal\":\"Brown Rice Fusilli*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snack\"]},{\"day\":10,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Avocado & 1/2 Cup Min. Sliced Peppers\",\"time\":\"snack\",\"imgurl\":\"https://s-media-cache-ak0.pinimg.com/736x/d0/e3/af/d0e3af6670fb1a999e36878d71a00a91.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"2 Tablespoon Raw Almond Butter & 1/2 Cup Min. Celery\",\"time\":\"snack\",\"imgurl\":\"http://www.irishrawfoodcoach.com/uploads/4/7/8/7/47876049/2917115_orig.jpg\"},{\"meal\":\"Shrimp & Asparagus Stiry Fry*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Gingered+Shrimp+and+Veggie+Stir-Fry.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
 
 
     String temp3 = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
@@ -257,13 +269,18 @@ public class MealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
-
         //just used for testing to determine if plan was purchased or not
         if(((MainActivity)getActivity()).getPlanInt() == 0){
-            setCurrentPlan(temp3);
+            setCurrentPlan(temp);
         }
         else{
             setCurrentPlan(((MainActivity)getActivity()).getJSONPlan());
@@ -302,7 +319,7 @@ public class MealFragment extends Fragment {
         ingredientHeader = (TextView) recipeBox.findViewById(R.id.ingredientHeader);
         recipeIngredientsContent = (TextView) recipeBox.findViewById(R.id.recipeIngredientsContent);
         recipeDirectionsContent = (TextView) recipeBox.findViewById(R.id.recipeDirectionsContent);
-
+        recipeBoxImageView = (ImageView) recipeBox.findViewById(R.id.recipeBoxImageView);
 
 
 
@@ -788,7 +805,10 @@ public class MealFragment extends Fragment {
 
                 TextView recipeTitle = (TextView) v.findViewById(R.id.mealName);
                 TextView recipeHeader = (TextView) v.findViewById(R.id.mealHeader);
+                ImageView recipeImageView = (ImageView) v.findViewById(R.id.mealCellImageView);
 
+
+                Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
 
                 if (recipeTitle != null) {
                     recipeTitle.setText(o.getTitle());
@@ -864,6 +884,8 @@ public class MealFragment extends Fragment {
             ingredientHeader.setText("Ingredients (Serves " + o.getServings() + ")");
             recipeIngredientsContent.setText(o.getIngredients());
             recipeDirectionsContent.setText(o.getDirections());
+            Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
+
             recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
         }
 
@@ -989,6 +1011,8 @@ class SwipeDetector implements OnTouchListener {
 
 
 }
+
+
 
 
 

@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -197,6 +199,17 @@ public class QuizFragment extends Fragment {
 
         });
         //-------------------------------------------------------------------------------------------
+
+
+        //initialize all animation variables
+        final Animation outRight = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_out_right);
+        final Animation inLeft = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_in_left);
+        final  Animation inRight = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_in_right_mt);
+        final  Animation outLeft = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_out_left);
 
 
         recommendQuizTextView.setOnClickListener(new View.OnClickListener() {

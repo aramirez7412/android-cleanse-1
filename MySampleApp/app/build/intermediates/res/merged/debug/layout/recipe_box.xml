@@ -25,11 +25,12 @@
             android:layout_gravity="center" />
 
         <ImageView
-            android:layout_width="71dp"
-            android:layout_height="85dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:scaleType="fitXY"
             android:layout_gravity="center"
-            android:src="@drawable/shaker_bottle"></ImageView>
+            android:src="@drawable/shaker_bottle"
+            android:id="@+id/recipeBoxImageView"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"

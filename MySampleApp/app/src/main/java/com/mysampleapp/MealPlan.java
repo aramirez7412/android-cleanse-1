@@ -24,13 +24,13 @@ public class MealPlan {
         //loop through each day
         for(int k = 0; k < planAr.length(); k++) {
 
-            System.out.println("we gotta k of " + k);
             ArrayList<MealItem> dayPlan = new ArrayList<>();
             JSONArray mealAr = null;
             try {
                 mealAr = planAr.getJSONObject(k).getJSONArray("meals");
             } catch (JSONException e) {
-                System.out.println("fuckkkkkkk");            }
+                System.out.println("Failed");
+                          }
 
             //loop through every meal per day
             for (int i = 0; i < mealAr.length(); i++) {
@@ -45,6 +45,7 @@ public class MealPlan {
                 mealItem.setTitle(mealObject.getString("meal"));
                 //set images
                 //------------
+                mealItem.setImageUrl(mealObject.getString("imgurl"));
                 //------------
 //                mealItem.setServings(mealObject.getInt("servings"));
 //                //set ingredients
