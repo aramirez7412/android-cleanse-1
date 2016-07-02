@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4C442D"
+        android:background="#18577A"
         android:paddingBottom="10dp">
 
         <TextView
@@ -46,7 +46,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:padding="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,7 +59,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:padding="15dp" />
     </RelativeLayout>
 
     <ListView

@@ -133,6 +133,11 @@ public class MealFragment extends Fragment {
     TextView nextDayButton2;
     TextView prevDayButton2;
 
+    String heavyMetalInformation = "The Fast Metabolism Heavy Metal Cleanse is for individuals looking for a program designed to help reduce: \n• Alcohol intolerance • Allergies (environmental / food sensitivities) • Anxiety and irritability • Brain fog • Inability to lose weight • Chronic unexplained pain • Coated tongue • Cold hands and feet • Dark circles under the eyes • Depression • Digestive problems • Extreme fatigue • Frequent colds and flus • Headaches • High levels of toxic metals in your blood, urine or tissues • Insomnia • Intolerance to medications & vitamins • Loss of memory and forgetfulness • Low body temperature • Metallic taste in mouth • Muscle and joint pain • Muscle tics or twitches • Muscle tremors • Night sweats • Prone to mood swings • Prone to rashes • Sensitive teeth • Sensitive to smells like tobacco smoke, perfumes, paint fumes and chemical odors • Skin problems • Small black spots on your gums • Sore or receding gums • Tingling in the extremities";
+
+    String candidaInformation = "The Fast Metabolism Candida Cleanse is for individuals looking for a program designed to help reduce:\n• Skin and nail fungal infections, such as athlete's foot or toenail fungus • Feeling tired and worn down, or suffering from chronic fatigue or fibromyalgia • Digestive issues such as bloating, constipation, diarrhea or chronic flatulence • Abdominal cramps alleviated by bowel movements • Irritable Bowel Syndrome ( Note: some have had amazing results with IBS after dealing with Candida / Yeast Issues ) • Heart burn / Indigestion • Dry mouth, bad breath • Autoimmune diseases such as Hashimoto's thyroiditis, rheumatoid arthritis, ulcerative colitis, lupus, psoriasis, scleroderma, or multiple sclerosis • Difficulty concentrating, poor memory, lack of focus, ADD, ADHD, and brain fog • Skin issues (eczema, psoriasis, hives, and rashes) • Irritability, mood swings, anxiety, or depression • Vaginal infections, urinary tract infections, rectal itching, or vaginal itching • Severe seasonal allergies or itchy ears • Strong sugar and refined carbohydrate cravings • White coated tongue / Oral thrush • Food and chemical sensitivities • Eye fatigue, spots in front of eyes, burning or tearing eyes • Frequent ear infections, pressure, swelling or tingling of ears, itchy ears • Headaches • Dandruff, dry, itchy skin • Acne or other skin problems • Frequent urination • Frequent vaginal yeast infections, persistent vaginal  itching • Irregular menstruation, endometriosis, PMS • Poor libido";
+
+    String parasiteInformation = "The Fast Metabolism Parasite Cleanse is for individuals looking for a program designed to help reduce:\n• Parasites • Symptoms of IBS • Traveler's diarrhea • Skin irritations or unexplained rashes, hives, rosacea or eczema • Teeth grinding throughout the night • Pain or aching in your muscles or joints • Fatigue, exhaustion, depression, or frequent feelings of apathy • Iron-deficiency anemia \nIt also can help enhance performance, mental clarity, and stimulate detoxiﬁcation.";
 
     String temp = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\",\"imgurl\":\"http://www.theeasymarket.com/image/cache/data/0000000004070-500x500.jpg\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":2,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Cup Berries & 1/2 Cup Min. Cucumbers & Radishes\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Chicken & Broccoli Bowl*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":3,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1 Sliced Apple with 1/2 cup Min. Jicama\",\"time\":\"snack\",\"imgurl\":\"http://2.bp.blogspot.com/-9y7X5A1hrto/TbdcYr0qzqI/AAAAAAAABrY/JMjPFOeg3VA/s1600/IMG_3705.JPG\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Turkey Soup* (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Asian_Turkey_SoupFS.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snacks\"]},{\"day\":4,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Chili*\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":5,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":6,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":7,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":8,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Turkey Soup*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Hot+and+Sour+Turkey+Soup.jpg\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":9,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/4 Cup Raw Almonds\",\"time\":\"snack\",\"imgurl\":\"https://www.ohnuts.com/noapp/showImage.cfm/extra-large/Raw%20Almond%20NEW1.jpg\"},{\"meal\":\"Brown Rice Fusilli*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snack\"]},{\"day\":10,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Avocado & 1/2 Cup Min. Sliced Peppers\",\"time\":\"snack\",\"imgurl\":\"https://s-media-cache-ak0.pinimg.com/736x/d0/e3/af/d0e3af6670fb1a999e36878d71a00a91.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"2 Tablespoon Raw Almond Butter & 1/2 Cup Min. Celery\",\"time\":\"snack\",\"imgurl\":\"http://www.irishrawfoodcoach.com/uploads/4/7/8/7/47876049/2917115_orig.jpg\"},{\"meal\":\"Shrimp & Asparagus Stiry Fry*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Gingered+Shrimp+and+Veggie+Stir-Fry.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
 
@@ -399,12 +404,12 @@ public class MealFragment extends Fragment {
 
         purchasePlanTextView1 = (TextView) view.findViewById(R.id.purchasePlanTextView1);
 
-        purchasePlanTextView1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToPurchaseFragment("My Meal Plan");
-            }
-        });
+//        purchasePlanTextView1.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                switchToPurchaseFragment("My Meal Plan");
+//            }
+//        });
 
 
         //just used for testing to determine if plan was purchased or not
@@ -413,13 +418,13 @@ public class MealFragment extends Fragment {
             noPlanView.setVisibility(View.VISIBLE);
 
 
-            Button candidaPlanButton = (Button) view.findViewById(R.id.mealPlan1Button);
+            final Button candidaPlanButton = (Button) view.findViewById(R.id.mealPlan1Button);
             candidaPlanButton.setText("Candida Meal Plan");
 
             Button parasitePlanButton = (Button) view.findViewById(R.id.mealPlan2Button);
             parasitePlanButton.setText("Parasite Meal Plan");
 
-            Button metalMealPlanButton = (Button) view.findViewById(R.id.mealPlan3Button);
+            final Button metalMealPlanButton = (Button) view.findViewById(R.id.mealPlan3Button);
             metalMealPlanButton.setText("Heavy Metal Meal Plan");
 
 
@@ -427,21 +432,21 @@ public class MealFragment extends Fragment {
             candidaPlanButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToPurchaseFragment("Candida Meal Plan");
+                    switchToPurchaseFragment("Candida Meal Plan", candidaInformation);
                 }
             });
 
             parasitePlanButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToPurchaseFragment("Parasite Meal Plan");
+                    switchToPurchaseFragment("Parasite Meal Plan", parasiteInformation);
                 }
             });
 
             metalMealPlanButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToPurchaseFragment("Heavy Metal Meal Plan");
+                    switchToPurchaseFragment("Heavy Metal Meal Plan", heavyMetalInformation);
                 }
             });
 
@@ -860,9 +865,9 @@ public class MealFragment extends Fragment {
         ((MainActivity)getActivity()).switchToQuizFragment();
     }
 
-    void switchToPurchaseFragment(String planInfo){
+    void switchToPurchaseFragment(String planInfo, String planDesc){
 
-        ((MainActivity)getActivity()).switchToPurchaseFragment(planInfo);
+        ((MainActivity)getActivity()).switchToPurchaseFragment(planInfo, planDesc);
     }
 
     void switchLayout(ViewGroup v1, ViewGroup v2) {
@@ -925,7 +930,8 @@ public class MealFragment extends Fragment {
                 ImageView recipeImageView = (ImageView) v.findViewById(R.id.mealCellImageView);
 
 
-                Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
+                if(!o.getImageUrl().isEmpty())
+                     Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
 
                 if (recipeTitle != null) {
                     recipeTitle.setText(o.getTitle());
@@ -1003,7 +1009,9 @@ public class MealFragment extends Fragment {
             ingredientHeader.setText("Ingredients (Serves " + o.getServings() + ")");
             recipeIngredientsContent.setText(o.getIngredients());
             recipeDirectionsContent.setText(o.getDirections());
-            Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
+
+            if(!o.getImageUrl().isEmpty())
+             Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
 
 
             recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();

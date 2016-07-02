@@ -10,6 +10,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.mobile.AWSMobileClient;
@@ -99,6 +104,37 @@ public class SignInActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        final TextView splashNameTextView = (TextView) findViewById(R.id.splashNameTextView);
+        final ImageButton faceBookLoginButton = (ImageButton) findViewById(R.id.fb_login_button);
+
+
+        final Animation mLongFadeOut = AnimationUtils.loadAnimation(this, R.anim.long_fade_out);
+
+        final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this, R.anim.quick_fade_in);
+
+        mLongFadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                splashNameTextView.setVisibility(View.GONE);
+                faceBookLoginButton.startAnimation(mQuickFadeIn);
+                faceBookLoginButton.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        splashNameTextView.startAnimation(mLongFadeOut);
 
         signInManager = SignInManager.getInstance(this);
 

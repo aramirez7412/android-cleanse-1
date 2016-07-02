@@ -25,7 +25,7 @@
         app:wlv_waveColor="@color/com_facebook_blue"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
-        android:alpha=".4" />
+        android:alpha=".7" />
 
     <ImageView
         android:layout_width="fill_parent"

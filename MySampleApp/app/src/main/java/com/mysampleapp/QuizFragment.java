@@ -55,6 +55,8 @@ public class QuizFragment extends Fragment {
     String[] detoxPlanLinks;
     String linkToLoad;
     String planName;
+    String[] detoxDescriptions;
+    String tempDesc;
 
 
 
@@ -144,6 +146,13 @@ public class QuizFragment extends Fragment {
 
         detoxStringArray = new String[]  {"Candida", "Parasite", "Heavy Metal"};
 
+        detoxDescriptions = new String[] {"The Fast Metabolism Heavy Metal Cleanse is for individuals looking for a program designed to help reduce: \n• Alcohol intolerance • Allergies (environmental / food sensitivities) • Anxiety and irritability • Brain fog • Inability to lose weight • Chronic unexplained pain • Coated tongue • Cold hands and feet • Dark circles under the eyes • Depression • Digestive problems • Extreme fatigue • Frequent colds and flus • Headaches • High levels of toxic metals in your blood, urine or tissues • Insomnia • Intolerance to medications & vitamins • Loss of memory and forgetfulness • Low body temperature • Metallic taste in mouth • Muscle and joint pain • Muscle tics or twitches • Muscle tremors • Night sweats • Prone to mood swings • Prone to rashes • Sensitive teeth • Sensitive to smells like tobacco smoke, perfumes, paint fumes and chemical odors • Skin problems • Small black spots on your gums • Sore or receding gums • Tingling in the extremities",
+
+        "The Fast Metabolism Candida Cleanse is for individuals looking for a program designed to help reduce:\n• Skin and nail fungal infections, such as athlete's foot or toenail fungus • Feeling tired and worn down, or suffering from chronic fatigue or fibromyalgia • Digestive issues such as bloating, constipation, diarrhea or chronic flatulence • Abdominal cramps alleviated by bowel movements • Irritable Bowel Syndrome ( Note: some have had amazing results with IBS after dealing with Candida / Yeast Issues ) • Heart burn / Indigestion • Dry mouth, bad breath • Autoimmune diseases such as Hashimoto's thyroiditis, rheumatoid arthritis, ulcerative colitis, lupus, psoriasis, scleroderma, or multiple sclerosis • Difficulty concentrating, poor memory, lack of focus, ADD, ADHD, and brain fog • Skin issues (eczema, psoriasis, hives, and rashes) • Irritability, mood swings, anxiety, or depression • Vaginal infections, urinary tract infections, rectal itching, or vaginal itching • Severe seasonal allergies or itchy ears • Strong sugar and refined carbohydrate cravings • White coated tongue / Oral thrush • Food and chemical sensitivities • Eye fatigue, spots in front of eyes, burning or tearing eyes • Frequent ear infections, pressure, swelling or tingling of ears, itchy ears • Headaches • Dandruff, dry, itchy skin • Acne or other skin problems • Frequent urination • Frequent vaginal yeast infections, persistent vaginal  itching • Irregular menstruation, endometriosis, PMS • Poor libido",
+
+        "The Fast Metabolism Parasite Cleanse is for individuals looking for a program designed to help reduce:\n• Parasites • Symptoms of IBS • Traveler's diarrhea • Skin irritations or unexplained rashes, hives, rosacea or eczema • Teeth grinding throughout the night • Pain or aching in your muscles or joints • Fatigue, exhaustion, depression, or frequent feelings of apathy • Iron-deficiency anemia \nIt also can help enhance performance, mental clarity, and stimulate detoxiﬁcation."};
+
+
         detoxPlanLinks = new String[] {"https://hayliepomroy.com/product/14-day-candida-cleanse",
                 "https://hayliepomroy.com/product/14-day-parasite-cleanse",
                 "https://hayliepomroy.com/product/14-day-heavy-metal-cleanse"};
@@ -216,7 +225,8 @@ public class QuizFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity)getActivity()).switchToPurchaseFragment(planName);
+
+                ((MainActivity)getActivity()).switchToPurchaseFragment(planName + " Meal Plan", tempDesc);
                 //webView.loadUrl(linkToLoad);
                 //switchLayout(quizEndLayout, detoxPlanWebViewLayout);
                // counter++;
@@ -318,23 +328,28 @@ public class QuizFragment extends Fragment {
 
             String temp;
 
+
             if (plan1Counter > plan2Counter) {
 
                 if (plan1Counter > plan3Counter) {
                     temp = detoxStringArray[0];
                     linkToLoad = detoxPlanLinks[0];
+                    tempDesc = detoxDescriptions[0];
                 } else {
                     temp = detoxStringArray[2];
                     linkToLoad = detoxPlanLinks[2];
+                    tempDesc = detoxDescriptions[2];
                 }
             } else {
 
                 if (plan2Counter > plan3Counter) {
                     temp = detoxStringArray[1];
                     linkToLoad = detoxPlanLinks[1];
+                    tempDesc = detoxDescriptions[1];
                 } else {
                     temp = detoxStringArray[2];
                     linkToLoad = detoxPlanLinks[2];
+                    tempDesc = detoxDescriptions[2];
                 }
 
             }

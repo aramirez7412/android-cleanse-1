@@ -8,9 +8,7 @@
 //
 package com.mysampleapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,7 +18,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,9 +25,6 @@ import android.widget.ListView;
 
 import com.amazonaws.mobile.AWSMobileClient;
 import com.amazonaws.mobile.user.IdentityManager;
-import com.amazonaws.mobileconnectors.cognito.Dataset;
-import com.amazonaws.mobileconnectors.cognito.DefaultSyncCallback;
-import com.amazonaws.mobileconnectors.cognito.Record;
 import com.mysampleapp.demo.DemoConfiguration;
 import com.mysampleapp.demo.HomeDemoFragment;
 import com.mysampleapp.navigation.NavigationDrawer;
@@ -58,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int    planInt; //not sure if will keep, used to tell menu fragment which plan for testing
 
     private Button   signOutButton;
+
 
     /**
      * Initializes the Toolbar for use with the activity.
@@ -105,21 +100,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Add navigation drawer menu items.
         // Home isn't a demo, but is fake as a demo.
         DemoConfiguration.DemoFeature home = new DemoConfiguration.DemoFeature();
-        home.iconResId = R.mipmap.icon_home;
+        home.iconResId = R.drawable.home_icon;
         home.titleResId = R.string.main_nav_menu_item_home;
         navigationDrawer.addDemoFeatureToMenu(home);
 
-navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.user_identity,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
+navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tracker", R.drawable.meal_icon,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
         R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
         new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.mipmap.icon_home, R.mipmap.icon_home, MealFragment.class)));
 
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Quiz", R.mipmap.user_identity,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
-                R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_quiz_fragment, R.mipmap.icon_home, R.mipmap.icon_home, QuizFragment.class)));
 
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Water Tracker", R.mipmap.user_identity,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Water Tracker", R.drawable.water_tracker_icon,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
                 R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
                 new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_water_fragment, R.mipmap.icon_home, R.mipmap.icon_home, WaterFragment.class)));
+
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Quiz", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
+                R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_quiz_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, QuizFragment.class)));
+
 
         //DemoConfiguration.DemoFeature mealTracker = new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.icon_home, R.string.main_nav_menu_item_meal_fragment,
                 //R.string.main_nav_menu_item_meal_fragment, R.string.main_nav_menu_item_meal_fragment,
@@ -295,6 +292,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
                 .beginTransaction()
                 .replace(R.id.main_fragment_container, fragment, fragmentName)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack("previous fragment")
                 .commit();
 
         // Set the title for the fragment.
@@ -306,24 +304,54 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
 
 
-    void switchToPurchaseFragment(String planInfo){
+    void switchToPurchaseFragment(String planInfo, String planDesc){
 
         Fragment fragment;
         String fragmentName;
 
         Bundle bundle = new Bundle();
         bundle.putString("planName", planInfo);
+        bundle.putString("planDesc", planDesc);
 
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Clear back stack when navigating from the Nav Drawer.
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         fragment = new PurchasePlanFragment();
         fragmentName = "Purchase Fragment";
         fragment.setArguments(bundle);
 
+
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment_container, fragment, fragmentName)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack("previousFragment")
+                .commit();
+
+        // Set the title for the fragment.
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(fragmentName);
+        }
+    }//end switch fragment function
+
+
+    void switchToPlanFragment(){
+
+        Fragment fragment;
+        String fragmentName;
+
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Clear back stack when navigating from the Nav Drawer.
+        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragment = new MealFragment();
+        fragmentName = "Meal Fragment";
 
 
         getSupportFragmentManager()

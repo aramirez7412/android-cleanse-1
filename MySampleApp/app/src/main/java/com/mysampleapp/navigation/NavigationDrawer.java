@@ -1,5 +1,7 @@
 package com.mysampleapp.navigation;
 
+//showHome() function shows mealMapper fragment for demo purposes
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import com.amazonaws.mobile.AWSMobileClient;
 import com.amazonaws.mobile.user.IdentityManager;
 import com.amazonaws.mobile.user.IdentityProvider;
+import com.mysampleapp.MainActivity;
 import com.mysampleapp.MealFragment;
 import com.mysampleapp.QuizFragment;
 import com.mysampleapp.R;
@@ -104,12 +107,12 @@ public class NavigationDrawer {
                         fragmentName = "Meal Tracker";
                         break;
                     case 2:
-                        fragment = new QuizFragment();
-                        fragmentName = "Quiz";
-                        break;
-                    case 3:
                         fragment = new WaterFragment();
                         fragmentName = "Water Tracker";
+                        break;
+                    case 3:
+                        fragment = new QuizFragment();
+                        fragmentName = "Quiz";
                         break;
                     default:
 
@@ -220,7 +223,7 @@ public class NavigationDrawer {
     }
 
     public void showHome() {
-        final Fragment fragment = new HomeDemoFragment();
+        final Fragment fragment = new MealFragment();
 
         containingActivity.getSupportFragmentManager()
                 .beginTransaction()

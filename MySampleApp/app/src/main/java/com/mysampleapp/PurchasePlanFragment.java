@@ -5,12 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import java.io.BufferedReader;
@@ -106,12 +107,15 @@ public class PurchasePlanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         String planName;
+        String planDesc;
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             planName = bundle.getString("planName");
+            planDesc = bundle.getString("planDesc");
         }
         else{
             planName = "NO PLAN";
+            planDesc = "NO DESC";
         }
 
 
@@ -122,6 +126,7 @@ public class PurchasePlanFragment extends Fragment {
         planNameTextView = (TextView) view.findViewById(R.id.planNameTextView);
         planNameTextView.setText(planName);
         planDescriptionTextView = (TextView) view.findViewById(R.id.planDescriptionTextView);
+       // planDescriptionTextView.setText(planDesc);
 
 
 
@@ -145,11 +150,42 @@ public class PurchasePlanFragment extends Fragment {
                 }
 
 
+                ((MainActivity)getActivity()).switchToPlanFragment();
+
             }
         });
 
         return view;
     }
+
+    //used to override back button functionality
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    getFragmentManager().popBackStackImmediate();
+
+                }
+
+                return true;
+            }
+
+
+
+            });
+        }
+
+
 
 
 
