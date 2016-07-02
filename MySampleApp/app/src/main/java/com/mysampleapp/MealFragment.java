@@ -128,6 +128,12 @@ public class MealFragment extends Fragment {
     TextView purchasePlanTextView1;
 
 
+    TextView nextDayButton;
+    TextView prevDayButton;
+    TextView nextDayButton2;
+    TextView prevDayButton2;
+
+
     String temp = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\",\"imgurl\":\"http://www.theeasymarket.com/image/cache/data/0000000004070-500x500.jpg\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":2,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Cup Berries & 1/2 Cup Min. Cucumbers & Radishes\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Chicken & Broccoli Bowl*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":3,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1 Sliced Apple with 1/2 cup Min. Jicama\",\"time\":\"snack\",\"imgurl\":\"http://2.bp.blogspot.com/-9y7X5A1hrto/TbdcYr0qzqI/AAAAAAAABrY/JMjPFOeg3VA/s1600/IMG_3705.JPG\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Turkey Soup* (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Asian_Turkey_SoupFS.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snacks\"]},{\"day\":4,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Chili*\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":5,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":6,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":7,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":8,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Turkey Soup*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Hot+and+Sour+Turkey+Soup.jpg\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":9,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/4 Cup Raw Almonds\",\"time\":\"snack\",\"imgurl\":\"https://www.ohnuts.com/noapp/showImage.cfm/extra-large/Raw%20Almond%20NEW1.jpg\"},{\"meal\":\"Brown Rice Fusilli*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snack\"]},{\"day\":10,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Avocado & 1/2 Cup Min. Sliced Peppers\",\"time\":\"snack\",\"imgurl\":\"https://s-media-cache-ak0.pinimg.com/736x/d0/e3/af/d0e3af6670fb1a999e36878d71a00a91.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"2 Tablespoon Raw Almond Butter & 1/2 Cup Min. Celery\",\"time\":\"snack\",\"imgurl\":\"http://www.irishrawfoodcoach.com/uploads/4/7/8/7/47876049/2917115_orig.jpg\"},{\"meal\":\"Shrimp & Asparagus Stiry Fry*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Gingered+Shrimp+and+Veggie+Stir-Fry.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
 
 
@@ -407,30 +413,35 @@ public class MealFragment extends Fragment {
             noPlanView.setVisibility(View.VISIBLE);
 
 
-            Button planButton1 = (Button) view.findViewById(R.id.mealPlan1Button);
+            Button candidaPlanButton = (Button) view.findViewById(R.id.mealPlan1Button);
+            candidaPlanButton.setText("Candida Meal Plan");
 
-            Button planButton2 = (Button) view.findViewById(R.id.mealPlan2Button);
+            Button parasitePlanButton = (Button) view.findViewById(R.id.mealPlan2Button);
+            parasitePlanButton.setText("Parasite Meal Plan");
 
-            Button planButton3 = (Button) view.findViewById(R.id.mealPlan3Button);
+            Button metalMealPlanButton = (Button) view.findViewById(R.id.mealPlan3Button);
+            metalMealPlanButton.setText("Heavy Metal Meal Plan");
 
-            planButton1.setOnClickListener(new OnClickListener() {
+
+
+            candidaPlanButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToPurchaseFragment("My Meal Plan");
+                    switchToPurchaseFragment("Candida Meal Plan");
                 }
             });
 
-            planButton2.setOnClickListener(new OnClickListener() {
+            parasitePlanButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToPurchaseFragment("My Meal Plan");
+                    switchToPurchaseFragment("Parasite Meal Plan");
                 }
             });
 
-            planButton3.setOnClickListener(new OnClickListener() {
+            metalMealPlanButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToPurchaseFragment("My Meal Plan");
+                    switchToPurchaseFragment("Heavy Metal Meal Plan");
                 }
             });
 
@@ -471,6 +482,7 @@ public class MealFragment extends Fragment {
         }
         else {
             setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
+
 
 
 
@@ -541,6 +553,74 @@ public class MealFragment extends Fragment {
                     }//end if swipe detected
                 }
             });
+
+
+
+            nextDayButton = (TextView) layout1.findViewById(R.id.nextDayButton);
+            prevDayButton = (TextView) layout1.findViewById(R.id.prevDayButton);
+            nextDayButton2 = (TextView) layout2.findViewById(R.id.nextDayButton);
+            prevDayButton2 = (TextView) layout2.findViewById(R.id.prevDayButton);
+
+            OnClickListener nextDay = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    System.out.println("clickeddddd");
+
+                    if (day < daysInPlan - 1) {
+
+                        viewAnimator.setInAnimation(inRight);
+                        viewAnimator.setOutAnimation(outLeft);
+
+                        switchListView();
+
+                        day++;
+                        currenttv.setText("Day " + (day + 1));
+                        currentAdapter.clear();
+                        currentAdapter.addAll(mealPlan.getListForDay(day));
+                        currentAdapter.notifyDataSetChanged();
+
+                        viewAnimator.showNext();
+
+                    }
+
+                }
+            };
+
+
+            OnClickListener prevDay = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    System.out.println("clickeddddd");
+                    //check if previous day exists, if so proceed displaying previous day
+                    if (day > 0) {
+
+                        viewAnimator.setInAnimation(inLeft);
+                        viewAnimator.setOutAnimation(outRight);
+
+                        switchListView();
+
+                        day--;
+
+                        currenttv.setText("Day " + (day + 1));
+                        currentAdapter.clear();
+                        currentAdapter.addAll(mealPlan.getListForDay(day));
+                        currentAdapter.notifyDataSetChanged();
+
+                        viewAnimator.showPrevious();
+
+                    }
+                }
+            };
+
+
+            nextDayButton.setOnClickListener(nextDay);
+            nextDayButton2.setOnClickListener(nextDay);
+
+
+            prevDayButton.setOnClickListener(prevDay);
+            prevDayButton2.setOnClickListener(prevDay);
 
 
             //set swipe detector for dayListView
@@ -781,6 +861,7 @@ public class MealFragment extends Fragment {
     }
 
     void switchToPurchaseFragment(String planInfo){
+
         ((MainActivity)getActivity()).switchToPurchaseFragment(planInfo);
     }
 

@@ -39,119 +39,70 @@
       <file leaf-file-name="MealFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.62963">
-              <caret line="926" column="0" selection-start-line="926" selection-start-column="0" selection-end-line="926" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#21174#21346#0" expanded="true" />
-                <element signature="e#21345#21346#0" expanded="true" />
-                <element signature="e#21505#21870#0" expanded="true" />
-                <element signature="e#21869#21870#0" expanded="true" />
-                <element signature="e#22013#22264#0" expanded="true" />
-                <element signature="e#22263#22264#0" expanded="true" />
-                <element signature="e#22310#22450#0" expanded="true" />
-                <element signature="e#22449#22450#0" expanded="true" />
-                <element signature="e#22594#22763#0" expanded="true" />
-                <element signature="e#22762#22763#0" expanded="true" />
-                <element signature="e#23253#23442#0" expanded="true" />
-                <element signature="e#23441#23442#0" expanded="true" />
-                <element signature="e#23489#23678#0" expanded="true" />
-                <element signature="e#23677#23678#0" expanded="true" />
-                <element signature="e#23725#23914#0" expanded="true" />
-                <element signature="e#23913#23914#0" expanded="true" />
-                <element signature="e#27803#28249#0" expanded="true" />
-                <element signature="e#28248#28249#0" expanded="true" />
-                <element signature="e#34563#35726#0" expanded="true" />
-                <element signature="e#35725#35726#0" expanded="true" />
+                <element signature="e#24084#24282#0" expanded="true" />
+                <element signature="e#24281#24282#0" expanded="true" />
+                <element signature="e#29788#30625#0" expanded="true" />
+                <element signature="e#30624#30625#0" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_meal.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_meal.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.958333">
-              <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="day_layout.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/day_layout.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="no_plan_layout.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/no_plan_layout.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.25">
-              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recipe_box.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recipe_box.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.9607842">
-              <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MealPlan.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealPlan.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.962963">
-              <caret line="58" column="27" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="meal_cell.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/meal_cell.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7169812">
-              <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-122.22222">
-              <caret line="255" column="16" selection-start-line="255" selection-start-column="16" selection-end-line="255" selection-end-column="16" />
+            <state vertical-scroll-proportion="-8.592592">
+              <caret line="326" column="0" selection-start-line="326" selection-start-column="0" selection-end-line="326" selection-end-column="0" />
               <folding>
-                <element signature="e#11121#11122#0" expanded="true" />
-                <element signature="e#11153#11154#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#4107#4139#0" expanded="true" />
+                <element signature="e#10978#10979#0" expanded="true" />
+                <element signature="e#11020#11021#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PurchasePlanFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/PurchasePlanFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.7670157">
+              <caret line="107" column="24" selection-start-line="107" selection-start-column="24" selection-end-line="107" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuizFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/QuizFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.814815">
+              <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.235294">
+              <caret line="25" column="48" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignInActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/SignInActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="102" column="44" selection-start-line="102" selection-start-column="44" selection-end-line="102" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1796,28 +1747,33 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/WaterFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_water.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/day_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/JSONParser.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/purchase_plan_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/PurchasePlanFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_purchase_plan.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/QuizFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealPlan.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/DownloadImagesTask.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/meal_cell.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/recipe_box.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_meal.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/no_plan_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_meal.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/day_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/recipe_box.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/navigation/NavigationDrawer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/demo/DemoConfiguration.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealPlan.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/PurchasePlanFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/QuizFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealFragment.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="812" />
+    <option name="height" value="807" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1844,6 +1800,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1895,6 +1852,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1976,36 +1963,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MySampleApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MySampleApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2048,7 +2005,49 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
+              <option name="myItemId" value="mysampleapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MealFragment.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MySampleApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mysampleapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="navigation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2062,16 +2061,35 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value=".gradle" />
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2080,7 +2098,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../testingPages" />
     <property name="device.picker.selection" value="It_Works" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="641" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="422" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -2369,27 +2387,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="812" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="807" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706222" sideWeight="0.6123033" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706222" sideWeight="0.60872674" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3678161" sideWeight="0.45922747" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3678161" sideWeight="0.54077256" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36758322" sideWeight="0.46781117" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36758322" sideWeight="0.53218883" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32471263" sideWeight="0.47424892" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32416788" sideWeight="0.47138768" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2420,77 +2438,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recipe_box.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="39" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#21174#21346#0" expanded="true" />
-            <element signature="e#21345#21346#0" expanded="true" />
-            <element signature="e#21505#21870#0" expanded="true" />
-            <element signature="e#21869#21870#0" expanded="true" />
-            <element signature="e#22013#22264#0" expanded="true" />
-            <element signature="e#22263#22264#0" expanded="true" />
-            <element signature="e#22310#22450#0" expanded="true" />
-            <element signature="e#22449#22450#0" expanded="true" />
-            <element signature="e#22594#22763#0" expanded="true" />
-            <element signature="e#22762#22763#0" expanded="true" />
-            <element signature="e#23253#23442#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23489#23678#0" expanded="true" />
-            <element signature="e#23677#23678#0" expanded="true" />
-            <element signature="e#23725#23914#0" expanded="true" />
-            <element signature="e#23913#23914#0" expanded="true" />
-            <element signature="e#27803#28249#0" expanded="true" />
-            <element signature="e#28248#28249#0" expanded="true" />
-            <element signature="e#34563#35726#0" expanded="true" />
-            <element signature="e#35725#35726#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#11121#11122#0" expanded="true" />
-            <element signature="e#11153#11154#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/ExpandableListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/DailyCalorieList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
-          <folding>
-            <element signature="e#2133#2134#0" expanded="false" />
-            <element signature="e#2163#2164#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_meal.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2508,26 +2455,10 @@
           <caret line="405" column="17" selection-start-line="405" selection-start-column="17" selection-end-line="405" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#21174#21346#0" expanded="true" />
-            <element signature="e#21345#21346#0" expanded="true" />
-            <element signature="e#21505#21870#0" expanded="true" />
-            <element signature="e#21869#21870#0" expanded="true" />
-            <element signature="e#22013#22264#0" expanded="true" />
-            <element signature="e#22263#22264#0" expanded="true" />
-            <element signature="e#22310#22450#0" expanded="true" />
-            <element signature="e#22449#22450#0" expanded="true" />
-            <element signature="e#22594#22763#0" expanded="true" />
-            <element signature="e#22762#22763#0" expanded="true" />
-            <element signature="e#23253#23442#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23489#23678#0" expanded="true" />
-            <element signature="e#23677#23678#0" expanded="true" />
-            <element signature="e#23725#23914#0" expanded="true" />
-            <element signature="e#23913#23914#0" expanded="true" />
-            <element signature="e#27803#28249#0" expanded="true" />
-            <element signature="e#28248#28249#0" expanded="true" />
-            <element signature="e#34563#35726#0" expanded="true" />
-            <element signature="e#35725#35726#0" expanded="true" />
+            <element signature="e#24084#24282#0" expanded="true" />
+            <element signature="e#24281#24282#0" expanded="true" />
+            <element signature="e#29788#30625#0" expanded="true" />
+            <element signature="e#30624#30625#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2537,8 +2468,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="272" column="32" selection-start-line="272" selection-start-column="32" selection-end-line="272" selection-end-column="32" />
           <folding>
-            <element signature="e#11121#11122#0" expanded="true" />
-            <element signature="e#11153#11154#0" expanded="true" />
+            <element signature="e#0#13212#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#9643#9644#0" expanded="false" />
+            <element signature="e#9674#9675#0" expanded="false" />
+            <element signature="e#10978#10979#0" expanded="true" />
+            <element signature="e#11020#11021#0" expanded="true" />
+            <element signature="e#11058#11059#0" expanded="false" />
+            <element signature="e#11096#11097#0" expanded="false" />
+            <element signature="e#11178#11179#0" expanded="false" />
+            <element signature="e#11208#11209#0" expanded="false" />
+            <element signature="e#11239#11240#0" expanded="false" />
+            <element signature="e#11269#11270#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2582,26 +2523,10 @@
           <caret line="405" column="17" selection-start-line="405" selection-start-column="17" selection-end-line="405" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#21174#21346#0" expanded="true" />
-            <element signature="e#21345#21346#0" expanded="true" />
-            <element signature="e#21505#21870#0" expanded="true" />
-            <element signature="e#21869#21870#0" expanded="true" />
-            <element signature="e#22013#22264#0" expanded="true" />
-            <element signature="e#22263#22264#0" expanded="true" />
-            <element signature="e#22310#22450#0" expanded="true" />
-            <element signature="e#22449#22450#0" expanded="true" />
-            <element signature="e#22594#22763#0" expanded="true" />
-            <element signature="e#22762#22763#0" expanded="true" />
-            <element signature="e#23253#23442#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23489#23678#0" expanded="true" />
-            <element signature="e#23677#23678#0" expanded="true" />
-            <element signature="e#23725#23914#0" expanded="true" />
-            <element signature="e#23913#23914#0" expanded="true" />
-            <element signature="e#27803#28249#0" expanded="true" />
-            <element signature="e#28248#28249#0" expanded="true" />
-            <element signature="e#34563#35726#0" expanded="true" />
-            <element signature="e#35725#35726#0" expanded="true" />
+            <element signature="e#24084#24282#0" expanded="true" />
+            <element signature="e#24281#24282#0" expanded="true" />
+            <element signature="e#29788#30625#0" expanded="true" />
+            <element signature="e#30624#30625#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2611,8 +2536,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="272" column="32" selection-start-line="272" selection-start-column="32" selection-end-line="272" selection-end-column="32" />
           <folding>
-            <element signature="e#11121#11122#0" expanded="true" />
-            <element signature="e#11153#11154#0" expanded="true" />
+            <element signature="e#0#13212#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#9643#9644#0" expanded="false" />
+            <element signature="e#9674#9675#0" expanded="false" />
+            <element signature="e#10978#10979#0" expanded="true" />
+            <element signature="e#11020#11021#0" expanded="true" />
+            <element signature="e#11058#11059#0" expanded="false" />
+            <element signature="e#11096#11097#0" expanded="false" />
+            <element signature="e#11178#11179#0" expanded="false" />
+            <element signature="e#11208#11209#0" expanded="false" />
+            <element signature="e#11239#11240#0" expanded="false" />
+            <element signature="e#11269#11270#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2682,26 +2617,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#21174#21346#0" expanded="true" />
-            <element signature="e#21345#21346#0" expanded="true" />
-            <element signature="e#21505#21870#0" expanded="true" />
-            <element signature="e#21869#21870#0" expanded="true" />
-            <element signature="e#22013#22264#0" expanded="true" />
-            <element signature="e#22263#22264#0" expanded="true" />
-            <element signature="e#22310#22450#0" expanded="true" />
-            <element signature="e#22449#22450#0" expanded="true" />
-            <element signature="e#22594#22763#0" expanded="true" />
-            <element signature="e#22762#22763#0" expanded="true" />
-            <element signature="e#23253#23442#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23489#23678#0" expanded="true" />
-            <element signature="e#23677#23678#0" expanded="true" />
-            <element signature="e#23725#23914#0" expanded="true" />
-            <element signature="e#23913#23914#0" expanded="true" />
-            <element signature="e#27803#28249#0" expanded="true" />
-            <element signature="e#28248#28249#0" expanded="true" />
-            <element signature="e#34563#35726#0" expanded="true" />
-            <element signature="e#35725#35726#0" expanded="true" />
+            <element signature="e#24084#24282#0" expanded="true" />
+            <element signature="e#24281#24282#0" expanded="true" />
+            <element signature="e#29788#30625#0" expanded="true" />
+            <element signature="e#30624#30625#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2715,13 +2634,6 @@
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/navigation/NavigationDrawer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="11" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/meal_tracker_recipe_item.xml">
@@ -2834,7 +2746,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2854,24 +2766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/QuizFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4590443">
-          <caret line="211" column="53" selection-start-line="211" selection-start-column="53" selection-end-line="211" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/PurchasePlanFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.025597269">
-          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="39" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/os/StrictMode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33169532">
@@ -2888,14 +2782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.02457">
-          <caret line="56" column="20" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_purchase_plan.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2907,20 +2793,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-122.22222">
-          <caret line="255" column="16" selection-start-line="255" selection-start-column="16" selection-end-line="255" selection-end-column="16" />
-          <folding>
-            <element signature="e#11121#11122#0" expanded="true" />
-            <element signature="e#11153#11154#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/meal_cell.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7169812">
+        <state vertical-scroll-proportion="0.0">
           <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
           <folding />
         </state>
@@ -2929,34 +2804,37 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.62963">
-          <caret line="926" column="0" selection-start-line="926" selection-start-column="0" selection-end-line="926" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#21174#21346#0" expanded="true" />
-            <element signature="e#21345#21346#0" expanded="true" />
-            <element signature="e#21505#21870#0" expanded="true" />
-            <element signature="e#21869#21870#0" expanded="true" />
-            <element signature="e#22013#22264#0" expanded="true" />
-            <element signature="e#22263#22264#0" expanded="true" />
-            <element signature="e#22310#22450#0" expanded="true" />
-            <element signature="e#22449#22450#0" expanded="true" />
-            <element signature="e#22594#22763#0" expanded="true" />
-            <element signature="e#22762#22763#0" expanded="true" />
-            <element signature="e#23253#23442#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23489#23678#0" expanded="true" />
-            <element signature="e#23677#23678#0" expanded="true" />
-            <element signature="e#23725#23914#0" expanded="true" />
-            <element signature="e#23913#23914#0" expanded="true" />
-            <element signature="e#27803#28249#0" expanded="true" />
-            <element signature="e#28248#28249#0" expanded="true" />
-            <element signature="e#34563#35726#0" expanded="true" />
-            <element signature="e#35725#35726#0" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/no_plan_layout.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_meal.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.208333">
+          <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/day_layout.xml">
@@ -2972,7 +2850,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recipe_box.xml">
       <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9607842">
+        <state vertical-scroll-proportion="0.0">
           <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
           <folding />
         </state>
@@ -2981,34 +2859,112 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_meal.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/demo/DemoConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8239609">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.235294">
+          <caret line="25" column="48" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.958333">
-          <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+        <state vertical-scroll-proportion="-2.627451">
+          <caret line="86" column="24" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
           <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/navigation/NavigationDrawer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29319373">
+          <caret line="224" column="54" selection-start-line="224" selection-start-column="54" selection-end-line="224" selection-end-column="54" />
+          <folding>
+            <element signature="e#3521#5484#0" expanded="true" />
+            <element signature="e#5483#5484#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#978#979#0" expanded="true" />
+            <element signature="e#1009#1010#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealPlan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.962963">
-          <caret line="58" column="27" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.33246073">
+          <caret line="54" column="53" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/no_plan_layout.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.25">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/QuizFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.814815">
+          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/SignInActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="44" selection-start-line="102" selection-start-column="44" selection-end-line="102" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.592592">
+          <caret line="326" column="0" selection-start-line="326" selection-start-column="0" selection-end-line="326" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4107#4139#0" expanded="true" />
+            <element signature="e#10978#10979#0" expanded="true" />
+            <element signature="e#11020#11021#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/MealFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#24084#24282#0" expanded="true" />
+            <element signature="e#24281#24282#0" expanded="true" />
+            <element signature="e#29788#30625#0" expanded="true" />
+            <element signature="e#30624#30625#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mysampleapp/PurchasePlanFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.7670157">
+          <caret line="107" column="24" selection-start-line="107" selection-start-column="24" selection-end-line="107" selection-end-column="24" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

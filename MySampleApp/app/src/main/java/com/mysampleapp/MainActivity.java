@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navigationDrawer = new NavigationDrawer(this, toolbar, drawerLayout, drawerItems,
             R.id.main_fragment_container);
 
+
+
         // Add navigation drawer menu items.
         // Home isn't a demo, but is fake as a demo.
         DemoConfiguration.DemoFeature home = new DemoConfiguration.DemoFeature();
@@ -309,6 +311,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         Fragment fragment;
         String fragmentName;
 
+        Bundle bundle = new Bundle();
+        bundle.putString("planName", planInfo);
+
+
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Clear back stack when navigating from the Nav Drawer.
@@ -316,6 +322,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         fragment = new PurchasePlanFragment();
         fragmentName = "Purchase Fragment";
+        fragment.setArguments(bundle);
 
 
 

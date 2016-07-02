@@ -105,11 +105,22 @@ public class PurchasePlanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String planName;
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            planName = bundle.getString("planName");
+        }
+        else{
+            planName = "NO PLAN";
+        }
+
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_purchase_plan, container, false);
 
         confirmPurchaseButton = (Button) view.findViewById(R.id.confirmPurchaseButton);
         planNameTextView = (TextView) view.findViewById(R.id.planNameTextView);
+        planNameTextView.setText(planName);
         planDescriptionTextView = (TextView) view.findViewById(R.id.planDescriptionTextView);
 
 

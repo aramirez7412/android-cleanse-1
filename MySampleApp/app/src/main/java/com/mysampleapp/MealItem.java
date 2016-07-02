@@ -9,7 +9,7 @@ public class MealItem {
     String header;
     String title;
     String imageUrl;
-    int servings;
+    String servings;
     String ingredients;
     String directions;
     boolean completed;
@@ -35,7 +35,7 @@ public class MealItem {
         return imageUrl;
     }
 
-    int getServings(){
+    String getServings(){
         return servings;
     }
 
@@ -57,7 +57,7 @@ public class MealItem {
     void setImageUrl(String temp){
         imageUrl = temp;
     }
-    void setServings(int temp){
+    void setServings(String temp){
         servings = temp;
     }
     void setIngredients(String temp){

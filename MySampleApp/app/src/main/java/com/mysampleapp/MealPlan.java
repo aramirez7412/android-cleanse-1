@@ -47,6 +47,24 @@ public class MealPlan {
                 //------------
                 mealItem.setImageUrl(mealObject.getString("imgurl"));
                 //------------
+                JSONObject recipeObject = mealObject.getJSONObject("recipe");
+
+                mealItem.setServings(recipeObject.getString("serves"));
+                //set ingredients
+                //---------------------------------------------------
+                JSONArray ingredientsArray = recipeObject.getJSONArray("ingredients");
+                for (int j = 0; j < ingredientsArray.length(); j++) {
+                    tempString += "•" + ingredientsArray.getString(j) + "\n";
+                }
+                mealItem.setIngredients(tempString);
+                //---------------------------------------------------
+                mealItem.setDirections(recipeObject.getString("instructions"));
+
+                System.out.println(mealItem.getDirections());
+
+
+
+
 //                mealItem.setServings(mealObject.getInt("servings"));
 //                //set ingredients
 //                //---------------------------------------------------
