@@ -126,7 +126,7 @@ public class PurchasePlanFragment extends Fragment {
         planNameTextView = (TextView) view.findViewById(R.id.planNameTextView);
         planNameTextView.setText(planName);
         planDescriptionTextView = (TextView) view.findViewById(R.id.planDescriptionTextView);
-       // planDescriptionTextView.setText(planDesc);
+        planDescriptionTextView.setText(planDesc);
 
 
 

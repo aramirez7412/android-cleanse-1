@@ -306,7 +306,7 @@ public class MealFragment extends Fragment {
 
         viewAnimator = (ViewAnimator) view.findViewById(R.id.myViewAnimator);
 
-        mealCell = (ViewGroup) view.findViewById(R.id.meal_cell_view);
+        mealCell = (ViewGroup) layout1.findViewById(R.id.meal_cell_view);
 
         recipeBox = view.findViewById(R.id.recipeBoxView);
         recipeBox.setX(1500);
@@ -636,8 +636,6 @@ public class MealFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    System.out.println("testin dammit");
-
                     if (swipeDetector.swipeDetected()) {
 
                         //figure out how to use correct libraries to support all animations
@@ -704,10 +702,15 @@ public class MealFragment extends Fragment {
             };
 
 
+
             tv.setOnClickListener(switchDay);
             tv2.setOnClickListener(switchDay);
 
 
+
+
+            viewAnimator.setOnTouchListener(swipeDetector);
+            viewAnimator.setOnClickListener(switchDay);
 
 
 
@@ -846,7 +849,7 @@ public class MealFragment extends Fragment {
                         recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
                     }
                     else{
-                        Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
                         getActivity().onBackPressed();
                     }
 
@@ -907,6 +910,14 @@ public class MealFragment extends Fragment {
 
         private ArrayList<MealItem> items;
 
+        //used for detecting swipe vs click
+        final int MAX_CLICK_DURATION = 1000;
+        final int MAX_CLICK_DISTANCE = 15;
+        long pressStartTime;
+        float pressedX;
+        float pressedY;
+        boolean stayedWithinClickDistance;
+
         public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items) {
             super(context, textViewResourceId, items);
             this.items = items;
@@ -916,6 +927,16 @@ public class MealFragment extends Fragment {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             View v = convertView;
+            //initialize all animation variables
+            final Animation outRight = AnimationUtils.loadAnimation(
+                    getContext(), R.anim.slide_out_right);
+            final Animation inLeft = AnimationUtils.loadAnimation(
+                    getContext(), R.anim.slide_in_left);
+            final Animation inRight = AnimationUtils.loadAnimation(
+                    getContext(), R.anim.slide_in_right_mt);
+            final Animation outLeft = AnimationUtils.loadAnimation(
+                    getContext(), R.anim.slide_out_left);
+
             if (v == null) {
                 LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.meal_cell, null);
@@ -974,16 +995,15 @@ public class MealFragment extends Fragment {
 
 
                         //this listen allows users to expand/collapse a meal
-                        v.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                System.out.println("show it plz");
-                                //tempDay = day; //used to see if new day when displaying list, so it will close all open items
-                                hideAndShowMealItem(o);
-                                //recipeBox.setVisibility(View.VISIBLE);
-                            }
-                        });
-
+//                        v.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                System.out.println("show it plz");
+//                                //tempDay = day; //used to see if new day when displaying list, so it will close all open items
+//                                hideAndShowMealItem(o);
+//                                //recipeBox.setVisibility(View.VISIBLE);
+//                            }
+//                        });
                         //this listener allows users to complete meal
                         v.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
@@ -993,6 +1013,164 @@ public class MealFragment extends Fragment {
                                 return true;
                             }
                         });
+
+                        v.setOnTouchListener(new OnTouchListener() {
+
+                            @Override
+                            public boolean onTouch(View v, MotionEvent e) {
+
+
+                                switch (e.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        pressStartTime = System.currentTimeMillis();
+                                        pressedX = e.getX();
+                                        pressedY = e.getY();
+                                        stayedWithinClickDistance = true;
+                                        break;
+                                    }
+                                    case MotionEvent.ACTION_MOVE: {
+                                        if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getX(), e.getY()) > MAX_CLICK_DISTANCE) {
+                                            stayedWithinClickDistance = false;
+                                        }
+                                        break;
+                                    }
+                                    case MotionEvent.ACTION_UP: {
+                                        long pressDuration = System.currentTimeMillis() - pressStartTime;
+                                        if (pressDuration < MAX_CLICK_DURATION && stayedWithinClickDistance) {
+                                            // Click event has occurred
+                                            // open recipe
+                                            hideAndShowMealItem(o);
+                                        }
+                                        else{
+                                            //LR
+                                            if(pressedX < e.getX()){
+                                                //check if previous day exists, if so proceed displaying previous day
+                                                if (day > 0) {
+
+                                                    viewAnimator.setInAnimation(inLeft);
+                                                    viewAnimator.setOutAnimation(outRight);
+
+                                                    switchListView();
+
+                                                    day--;
+
+                                                    currenttv.setText("Day " + (day + 1));
+                                                    currentAdapter.clear();
+                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                                    currentAdapter.notifyDataSetChanged();
+
+                                                    viewAnimator.showPrevious();
+                                                }
+                                            }
+                                            //RL
+                                            else{
+
+                                                //check if next day exists, if so proceed displaying next day
+                                                if (day < daysInPlan - 1) {
+
+                                                    viewAnimator.setInAnimation(inRight);
+                                                    viewAnimator.setOutAnimation(outLeft);
+
+                                                    switchListView();
+
+                                                    day++;
+                                                    currenttv.setText("Day " + (day + 1));
+                                                    currentAdapter.clear();
+                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                                    currentAdapter.notifyDataSetChanged();
+
+                                                    viewAnimator.showNext();
+
+                                                }//end if
+                                            }//end else
+                                        }
+                                    }
+                                }
+                                return false;
+                            }
+
+                        });
+
+
+
+//                        v.setOnTouchListener(swipeDetector);
+//
+//
+//
+//                        v.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//
+//                                if (swipeDetector.swipeDetected()) {
+//
+//                                    //figure out how to use correct libraries to support all animations
+//
+//
+//                                    switch (swipeDetector.getAction()) {
+//
+//                                        //if right to left swipe then swipe then switch displayed plan to the next day
+//                                        case RL:
+//
+//                                            //check if next day exists, if so proceed displaying next day
+//                                            if (day < daysInPlan - 1) {
+//
+//                                                viewAnimator.setInAnimation(inRight);
+//                                                viewAnimator.setOutAnimation(outLeft);
+//
+//                                                switchListView();
+//
+//                                                day++;
+//                                                currenttv.setText("Day " + (day + 1));
+//                                                currentAdapter.clear();
+//                                                currentAdapter.addAll(mealPlan.getListForDay(day));
+//                                                currentAdapter.notifyDataSetChanged();
+//
+//                                                viewAnimator.showNext();
+//
+//                                            }
+//                                            break;
+//
+//                                        //if left to right swipe then switch displayed plan to previous day
+//                                        case LR:
+//
+//                                            //check if previous day exists, if so proceed displaying previous day
+//                                            if (day > 0) {
+//
+//                                                viewAnimator.setInAnimation(inLeft);
+//                                                viewAnimator.setOutAnimation(outRight);
+//
+//                                                switchListView();
+//
+//                                                day--;
+//
+//                                                currenttv.setText("Day " + (day + 1));
+//                                                currentAdapter.clear();
+//                                                currentAdapter.addAll(mealPlan.getListForDay(day));
+//                                                currentAdapter.notifyDataSetChanged();
+//
+//                                                viewAnimator.showPrevious();
+//
+//                                            }
+//                                            break;
+//                                        case TB:
+//                                            //put in function cuz this is used twice
+//
+//
+//                                            break;
+//                                        default:
+//
+//                                            break;
+//                                    }//end switch
+//                                }//end if swipe detected
+//                                else{
+//                                    //just open recipe
+//                                    hideAndShowMealItem(o);
+//                                }
+//                            }//end on click
+//
+//                        });
+
+
                     }//end else
 
 
@@ -1003,6 +1181,17 @@ public class MealFragment extends Fragment {
             return v;
         }
 
+
+         private float distance(float x1, float y1, float x2, float y2) {
+            float dx = x1 - x2;
+            float dy = y1 - y2;
+            float distanceInPx = (float) Math.sqrt(dx * dx + dy * dy);
+            return pxToDp(distanceInPx);
+        }
+
+        private float pxToDp(float px) {
+            return px / getResources().getDisplayMetrics().density;
+        }
 
         void hideAndShowMealItem(MealItem o) {
             recipeTitle.setText(o.getTitle());

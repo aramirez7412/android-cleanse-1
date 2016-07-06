@@ -34,6 +34,10 @@ public class WaterFragment extends Fragment {
     WaveLoadingView waveView;
     int ounces;
     TextView ounceTextView;
+    Button plusOunce;
+    Button minusOunce;
+
+    int subtractOunce;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,10 +82,34 @@ public class WaterFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_water, container, false);
 
+        subtractOunce = 8;
 
 
+            plusOunce = (Button) view.findViewById(R.id.plusOunceButton);
+            minusOunce = (Button) view.findViewById(R.id.minusOunceButton);
 
-            drinkWaterButton = (Button) view.findViewById(R.id.drinkWaterButton);
+        drinkWaterButton = (Button) view.findViewById(R.id.drinkWaterButton);
+
+
+        plusOunce.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    subtractOunce++;
+                    drinkWaterButton.setText("Drink " + subtractOunce + " Ounces");
+                }
+            });
+
+            minusOunce.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(subtractOunce != 1){
+                        subtractOunce--;
+                        drinkWaterButton.setText("Drink " + subtractOunce + " Ounces");
+                    }
+                }
+            });
+
+
             waveView = (WaveLoadingView) view.findViewById(R.id.waveLoadingView);
             ounceTextView = (TextView) view.findViewById(R.id.ounceTextView);
             ounces = 64;
@@ -91,9 +119,10 @@ public class WaterFragment extends Fragment {
             drinkWaterButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    waveView.setProgressValue(waveView.getProgressValue()-13);
 
-                    ounces-=8;
+                    ounces-=subtractOunce;
+                    waveView.setProgressValue(waveView.getProgressValue()-(int)(subtractOunce*1.8));
+
 
                     if(ounces <= 0) {
 

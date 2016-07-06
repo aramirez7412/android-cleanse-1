@@ -427,7 +427,7 @@ public class QuizFragment extends Fragment {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 
                     if(counter == -1) {
-                        Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
                         getActivity().onBackPressed();
                     }
                     else if(counter == 0) {
