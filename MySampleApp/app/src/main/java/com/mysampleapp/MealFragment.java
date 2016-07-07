@@ -9,6 +9,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -87,8 +88,8 @@ public class MealFragment extends Fragment {
     ArrayList<MealItem> list2;
     TextView menuArrow;
     TextView menuArrow2;
-    ViewGroup dayListView;
-    ViewGroup dayListView2;
+    ListView dayListView;
+    ListView dayListView2;
     MealItemAdapter adapter;
     MealItemAdapter adapter2;
 
@@ -110,6 +111,7 @@ public class MealFragment extends Fragment {
     ViewGroup topMenu;
     TextView currenttv;
     MealItemAdapter currentAdapter;
+    ListView previousList;
 
     ViewAnimator viewAnimator;
 
@@ -301,8 +303,8 @@ public class MealFragment extends Fragment {
         tv = ((TextView) layout1.findViewById(R.id.mealListDayHeader));
         tv2 = ((TextView) layout2.findViewById(R.id.mealListDayHeader));
 
-        dayListView = (ViewGroup) layout1.findViewById(R.id.testId);
-        dayListView2 = (ViewGroup) layout2.findViewById(R.id.testId);
+        dayListView = (ListView) layout1.findViewById(R.id.testListView);
+        dayListView2 = (ListView) layout2.findViewById(R.id.testListView);
 
         viewAnimator = (ViewAnimator) view.findViewById(R.id.myViewAnimator);
 
@@ -538,6 +540,7 @@ public class MealFragment extends Fragment {
                     getContext(), R.anim.slide_out_left);
 
             //initialize all current- variables to currently displayed views
+            previousList = dayListView2;
             currentAdapter = adapter;
             currenttv = tv;
             listViewNum = 1;
@@ -586,6 +589,8 @@ public class MealFragment extends Fragment {
                         currentAdapter.notifyDataSetChanged();
 
                         viewAnimator.showNext();
+
+
 
                     }
 
@@ -660,7 +665,8 @@ public class MealFragment extends Fragment {
                                     currentAdapter.addAll(mealPlan.getListForDay(day));
                                     currentAdapter.notifyDataSetChanged();
 
-                                    viewAnimator.showNext();
+
+
 
                                 }
                                 break;
@@ -684,6 +690,8 @@ public class MealFragment extends Fragment {
                                     currentAdapter.notifyDataSetChanged();
 
                                     viewAnimator.showPrevious();
+
+
 
                                 }
                                 break;
@@ -727,16 +735,24 @@ public class MealFragment extends Fragment {
 
     //this method is used to switch all current- variables to the other layout (used for animation purposes)
     void switchListView(){
+
+
+
         if(listViewNum == 1){
             listViewNum =2;
             currentAdapter = adapter2;
             currenttv = tv2;
+            previousList = dayListView;
         }
         else{
             listViewNum = 1;
             currentAdapter = adapter;
             currenttv = tv;
+            previousList = dayListView2;
         }
+
+
+
     }
 
     @Override
@@ -911,7 +927,7 @@ public class MealFragment extends Fragment {
         private ArrayList<MealItem> items;
 
         //used for detecting swipe vs click
-        final int MAX_CLICK_DURATION = 1000;
+        final int MAX_CLICK_DURATION = 500;
         final int MAX_CLICK_DISTANCE = 15;
         long pressStartTime;
         float pressedX;
@@ -1041,7 +1057,7 @@ public class MealFragment extends Fragment {
                                             // open recipe
                                             hideAndShowMealItem(o);
                                         }
-                                        else{
+                                        else if(!stayedWithinClickDistance){
                                             //LR
                                             if(pressedX < e.getX()){
                                                 //check if previous day exists, if so proceed displaying previous day
