@@ -1057,7 +1057,7 @@ public class MealFragment extends Fragment {
                                             // open recipe
                                             hideAndShowMealItem(o);
                                         }
-                                        else if(!stayedWithinClickDistance){
+                                        else if(pressDuration < MAX_CLICK_DURATION){
                                             //LR
                                             if(pressedX < e.getX()){
                                                 //check if previous day exists, if so proceed displaying previous day
