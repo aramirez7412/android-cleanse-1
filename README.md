@@ -40,7 +40,9 @@
 9. Drink more coffee. :coffee:
 
 ###A Brief Doxygen Style Guide
+
 **note:** *ALL code must be doxygen commented.* **If your code isn't commented, it will not be approved for merge.**
+Testing README.md update.
 
 **In QT, typing**
 ``/** + return`` **above a declaration will produce a doxygen comment block.**
