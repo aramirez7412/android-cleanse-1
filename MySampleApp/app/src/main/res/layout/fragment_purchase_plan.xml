@@ -10,7 +10,8 @@
         android:id="@+id/scrollView"
         android:layout_below="@+id/planNameTextView"
         android:layout_marginTop="20dp"
-        android:scrollIndicators="top|bottom">
+        android:scrollIndicators="top|bottom"
+        android:layout_above="@+id/confirmPurchaseButton">
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Click To Confirm Purchase"
         android:id="@+id/confirmPurchaseButton"
+        android:layout_marginBottom="62dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="61dp" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

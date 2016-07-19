@@ -25,13 +25,12 @@ import android.widget.TextView;
 import com.amazonaws.mobile.AWSMobileClient;
 import com.amazonaws.mobile.user.IdentityManager;
 import com.amazonaws.mobile.user.IdentityProvider;
-import com.mysampleapp.MainActivity;
+import com.mysampleapp.HomeFragment;
 import com.mysampleapp.MealFragment;
 import com.mysampleapp.QuizFragment;
 import com.mysampleapp.R;
 import com.mysampleapp.WaterFragment;
 import com.mysampleapp.demo.DemoConfiguration;
-import com.mysampleapp.demo.DemoInstructionFragment;
 import com.mysampleapp.demo.HomeDemoFragment;
 
 import static com.mysampleapp.R.string.app_name;
@@ -223,7 +222,7 @@ public class NavigationDrawer {
     }
 
     public void showHome() {
-        final Fragment fragment = new MealFragment();
+        final Fragment fragment = new HomeFragment();
 
         containingActivity.getSupportFragmentManager()
                 .beginTransaction()
