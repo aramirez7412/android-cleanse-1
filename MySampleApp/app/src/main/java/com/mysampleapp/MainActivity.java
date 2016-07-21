@@ -229,25 +229,29 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         }
 
         if (fragmentManager.getBackStackEntryCount() == 0) {
-            if (fragmentManager.findFragmentByTag(HomeDemoFragment.class.getSimpleName()) == null) {
-                final Class fragmentClass = HomeDemoFragment.class;
-                // if we aren't on the home fragment, navigate home.
-                final Fragment fragment = Fragment.instantiate(this, fragmentClass.getName());
 
-                fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_fragment_container, fragment, fragmentClass.getSimpleName())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit();
+            if (fragmentManager.findFragmentByTag("Home Fragment") == null) {
+                Fragment fragment;
+                String fragmentName;
 
-                // Set the title for the fragment.
-                final ActionBar actionBar = this.getSupportActionBar();
-                if (actionBar != null) {
-                    actionBar.setTitle(getString(R.string.app_name));
-                }
+
+                // Clear back stack when navigating from the Nav Drawer.
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragment = new HomeFragment();
+                fragmentName = "Home Fragment";
+
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment_container, fragment, fragmentName)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+
                 return;
             }
+
         }
+
         super.onBackPressed();
     }
 
@@ -281,12 +285,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Clear back stack when navigating from the Nav Drawer.
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+       // fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
                 fragment = new QuizFragment();
                 fragmentName = "Quiz";
-
-
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -357,6 +359,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_fragment_container, fragment, fragmentName)
+                .addToBackStack("previousFragment")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
 

@@ -40,7 +40,8 @@
         android:layout_height="wrap_content"
         android:text="Click To Confirm Purchase"
         android:id="@+id/confirmPurchaseButton"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
 </RelativeLayout>

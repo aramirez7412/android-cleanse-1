@@ -226,7 +226,7 @@ public class NavigationDrawer {
 
         containingActivity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(fragmentContainerId, fragment, HomeDemoFragment.class.getSimpleName())
+                .replace(fragmentContainerId, fragment, "Home Fragment")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
 

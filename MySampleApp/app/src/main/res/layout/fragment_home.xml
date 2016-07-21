@@ -14,11 +14,11 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp">
 
-        <Button
+        <ImageView
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/shoppingListButton"
-            android:background="@drawable/icon_shopping_list"
+            android:id="@+id/imageView3"
+            android:src="@drawable/icon_shopping_list"
             android:layout_gravity="center" />
 
         <TextView
@@ -41,11 +41,11 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp">
 
-        <Button
+        <ImageView
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/button"
-            android:background="@drawable/icon_recipes_orange"
+            android:id="@+id/imageView4"
+            android:src="@drawable/icon_recipes_orange"
             android:layout_gravity="center" />
 
         <TextView
@@ -74,22 +74,22 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout6"
+            android:id="@+id/myDayButton"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true">
 
-            <Button
+            <ImageView
                 android:layout_width="95dp"
                 android:layout_height="95dp"
-                android:id="@+id/button2"
-                android:background="@drawable/icon_food_list_orange"
+                android:id="@+id/imageView5"
+                android:src="@drawable/icon_food_list_orange"
                 android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Recipes"
+                android:text="My Day"
                 android:id="@+id/textView11"
                 android:layout_alignParentStart="true"
                 android:textSize="40dp"
@@ -110,11 +110,11 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp">
 
-        <Button
+        <ImageView
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/atAGlanceButton"
-            android:background="@drawable/icon_at_a_glance"
+            android:id="@+id/imageView6"
+            android:src="@drawable/icon_at_a_glance"
             android:layout_gravity="center" />
 
         <TextView
@@ -138,13 +138,12 @@
         android:layout_alignRight="@+id/linearLayout3"
         android:layout_alignEnd="@+id/linearLayout3">
 
-        <Button
+        <ImageView
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/settingsButton"
-            android:background="@drawable/icon_settings"
-            android:layout_gravity="center"
-            android:layout_weight="16.50" />
+            android:id="@+id/imageView8"
+            android:src="@drawable/icon_settings"
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -167,14 +166,12 @@
         android:layout_alignTop="@+id/linearLayout2"
         android:layout_centerHorizontal="true">
 
-        <Button
+        <ImageView
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/checkListButton"
-            android:background="@drawable/icon_checklist"
-            android:layout_gravity="center"
-            android:layout_alignBottom="@+id/linearLayout5"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/imageView7"
+            android:src="@drawable/icon_checklist"
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"

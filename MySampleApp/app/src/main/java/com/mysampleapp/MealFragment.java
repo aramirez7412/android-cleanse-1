@@ -488,6 +488,7 @@ public class MealFragment extends Fragment {
 
         }
         else {
+
             setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
 
 
