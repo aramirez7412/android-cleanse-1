@@ -92,8 +92,12 @@ public class MealPlan {
 
     }
 
-    void setCompleted(int day, int meal){
-        mealPlan.get(day).get(meal).complete();
+    void toggleCompletion(int day, int meal){
+        mealPlan.get(day).get(meal).toggleComplete();
+    }
+
+    Boolean isCompleted(int day, int meal){
+       return mealPlan.get(day).get(meal).isCompleted();
     }
 
     int getDays(){

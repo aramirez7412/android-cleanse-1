@@ -76,9 +76,10 @@ public class MealItem {
         return completed;
     }
 
-    void complete() {
-        completed = true;
+    void toggleComplete(){
+        completed = !completed;
     }
+
 
 
 }

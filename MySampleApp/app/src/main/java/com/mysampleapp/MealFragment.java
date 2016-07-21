@@ -878,6 +878,9 @@ public class MealFragment extends Fragment {
         });
 
 
+
+
+
     }
 
     void startQuiz() {
@@ -941,6 +944,8 @@ public class MealFragment extends Fragment {
         }
 
 
+
+
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             View v = convertView;
@@ -984,18 +989,51 @@ public class MealFragment extends Fragment {
                     //if not then set up listener to handle the completion of a meal and set color to blue
                     else {
 
+//                        //sets up the actions that are connected to meal completion confirmation dialog
+//                        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case DialogInterface.BUTTON_POSITIVE:
+//                                        mealComplete(currentSelection);
+//
+//                                        mealPlan.setCompleted(day, position);
+//                                        break;
+//
+//                                    case DialogInterface.BUTTON_NEGATIVE:
+//                                        break;
+//                                }//end switch
+//                            }
+//                        };//end listener
+//
+//                        //this sets up a yes/no selection box to make sure users want to complete a meal
+//                        final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+//                        builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
+//                                .setNegativeButton("NO", dialogClickListener);
                         //sets up the actions that are connected to meal completion confirmation dialog
+
                         final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which) {
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        mealComplete(currentSelection);
 
-                                        mealPlan.setCompleted(day, position);
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        mealPlan.toggleCompletion(day, position);
+
+                                        if(mealPlan.isCompleted(day, position)){
+                                            mealComplete(currentSelection);
+                                        }
+                                        else{
+                                            mealUncomplete(currentSelection);
+                                        }
                                         break;
 
                                     case DialogInterface.BUTTON_NEGATIVE:
+
+
+                                        break;
+
+                                    case DialogInterface.BUTTON_NEUTRAL:
                                         break;
                                 }//end switch
                             }
@@ -1003,8 +1041,8 @@ public class MealFragment extends Fragment {
 
                         //this sets up a yes/no selection box to make sure users want to complete a meal
                         final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-                        builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
-                                .setNegativeButton("NO", dialogClickListener);
+                        builder.setMessage("Please Select an Option").setPositiveButton("Complete", dialogClickListener)
+                                .setNegativeButton("Change Meal", dialogClickListener).setNeutralButton("Cancel", dialogClickListener);
 
 
                         v.setBackgroundColor(Color.parseColor("#AFC6C9"));
@@ -1226,7 +1264,13 @@ public class MealFragment extends Fragment {
         void mealComplete(View v) {
             v.setBackgroundColor(Color.GRAY);
             v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
-            v.setOnLongClickListener(null);
+            //v.setOnLongClickListener(null);
+        }
+
+        void mealUncomplete(View v){
+            v.setBackgroundColor(getResources().getColor(R.color.main_background));
+            v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
+            //v.setOnLongClickListener(null);
         }
 
         private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
