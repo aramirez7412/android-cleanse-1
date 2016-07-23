@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,10 +19,10 @@ import java.util.List;
 public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     private List<String> headerTitles;
-    private HashMap<String, List<String>> childTitles;
+    private List<Object> childTitles;
     private Context context;
 
-    ExpandableListAdapter(Context context, List<String> headerTitles, HashMap<String, List<String>> childTitles){
+    ExpandableListAdapter(Context context, List<String> headerTitles, List<Object> childTitles){
         this.context = context;
         this.childTitles = childTitles;
         this.headerTitles  = headerTitles;
@@ -34,7 +35,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return childTitles.get(headerTitles.get(groupPosition)).size();
+       // return childTitles.size();
+        return ((ArrayList)childTitles.get(groupPosition)).size();
     }
 
     @Override
@@ -44,8 +46,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-
-        return childTitles.get(headerTitles.get(groupPosition)).get(0);
+        System.out.println("Testing     " + ((ArrayList) childTitles.get(groupPosition)).get(childPosition));
+        return ((ArrayList) childTitles.get(groupPosition)).get(childPosition);
+       // return childTitles.get(headerTitles.get(groupPosition)).get(0);
         //return childTitles.get(headerTitles.get(groupPosition)).get(childPosition);
     }
 
@@ -80,6 +83,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         return convertView;
     }
 
+
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
@@ -87,22 +91,24 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         //int id = (int) this.getChild(groupPosition, childPosition).getClass();
 
 
-        //if(convertView == null){
+      // if(convertView == null){
         System.out.println(title);
 
         LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(title == "meal")
-            convertView = layoutInflater.inflate(R.layout.recipe_box, null);
-        else
-            convertView = layoutInflater.inflate(R.layout.meal_cell_sample, null);
+        convertView = layoutInflater.inflate(R.layout.meal_expandable_list_child_single, null);
+//        if(title == "meal")
+//            convertView = layoutInflater.inflate(R.layout.recipe_box, null);
+//        else
+//            convertView = layoutInflater.inflate(R.layout.meal_cell_sample, null);
 
-        //}
+      //  }
 
 
-        //TextView textView = (TextView) convertView.findViewById(R.id.recipeTitle);
-        //textView.setTypeface(null, Typeface.NORMAL);
-        //textView.setText(title);
+
+        TextView textView = (TextView) convertView.findViewById(R.id.mealListChildItem);
+        textView.setTypeface(null, Typeface.NORMAL);
+        textView.setText(title);
 
         return convertView;
     }

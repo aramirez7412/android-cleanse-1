@@ -53,6 +53,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
@@ -929,6 +931,10 @@ public class MealFragment extends Fragment {
     class MealItemAdapter extends ArrayAdapter<MealItem> {
 
         private ArrayList<MealItem> items;
+//        ArrayAdapter<String> swapRecipeAdapter = new ArrayAdapter<String>(
+//                getContext(),
+//                android.R.layout.select_dialog_singlechoice);
+
 
         //used for detecting swipe vs click
         final int MAX_CLICK_DURATION = 500;
@@ -937,9 +943,209 @@ public class MealFragment extends Fragment {
         float pressedX;
         float pressedY;
         boolean stayedWithinClickDistance;
+        AlertDialog.Builder builderSingle;
+        ExpandableListView myList;
+        ExpandableListAdapter swapRecipeAdapter;
+        AlertDialog alert;
+        ArrayList<String> set1;
+        ArrayList<String> set2;
+        ArrayList<String> set3;
+        ArrayList<String> set4;
+        ArrayList<String> set5;
+        ArrayList<String> set6;
+        ArrayList<String> set7;
+        ArrayList<String> set8;
+        List<String> headerTitles;
+        List<Object> childTitles;
+
 
         public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items) {
             super(context, textViewResourceId, items);
+
+            set1 = new ArrayList<>();
+            set1.add("Cheese");
+            set1.add("Crab Cakes");
+            set1.add("Fried Chicken");
+            set1.add("Yogurt");
+            set1.add("Zucchini");
+            set2 = new ArrayList<>();
+            set2.add("Grilled Chicken");
+            set2.add("Lobster");
+            set2.add("Meat");
+            set2.add("Sour Cream and Eggs");
+            set3 = new ArrayList<>();
+            set3.add("Cheese");
+            set3.add("Crab Cakes");
+            set3.add("Fried Chicken");
+            set3.add("Yogurt");
+            set3.add("Cheese");
+            set3.add("Crab Cakes");
+            set3.add("Fried Chicken");
+            set3.add("Yogurt");
+            set3.add("Cheese");
+            set3.add("Crab Cakes");
+            set3.add("Fried Chicken");
+            set3.add("Yogurt");
+            set3.add("Cheese");
+            set3.add("Crab Cakes");
+            set3.add("Fried Chicken");
+            set3.add("Yogurt");
+            set4 = new ArrayList<>();
+            set4.add("Grilled Chicken");
+            set4.add("Lobster");
+            set4.add("Meat");
+            set4.add("Sour Cream and Eggs");
+            set5 = new ArrayList<>();
+            set5.add("Grilled Chicken");
+            set5.add("Lobster");
+            set5.add("Meat");
+            set5.add("Sour Cream and Eggs");
+            set6 = new ArrayList<>();
+            set6.add("Grilled Chicken");
+            set6.add("Lobster");
+            set6.add("Meat");
+            set6.add("Sour Cream and Eggs");
+            set7 = new ArrayList<>();
+            set7.add("Grilled Chicken");
+            set7.add("Lobster");
+            set7.add("Meat");
+            set7.add("Sour Cream and Eggs");
+            set8 = new ArrayList<>();
+            set8.add("Grilled Chicken");
+            set8.add("Lobster");
+            set8.add("Meat");
+            set8.add("Sour Cream and Eggs");
+
+
+
+
+            headerTitles = new ArrayList<>();
+            headerTitles.add("Fancy Meals vol 1");
+            headerTitles.add("Fancy Meals vol 2");
+            headerTitles.add("Fancy Meals vol 3");
+            headerTitles.add("Fancy Meals vol 4");
+            headerTitles.add("Fancy Meals vol 5");
+            headerTitles.add("Fancy Meals vol 6");
+            headerTitles.add("Fancy Meals vol 7");
+            headerTitles.add("Fancy Meals vol 8");
+
+
+            childTitles = new ArrayList<>();
+            childTitles.add(set1);
+            childTitles.add(set2);
+            childTitles.add(set3);
+            childTitles.add(set4);
+            childTitles.add(set5);
+            childTitles.add(set6);
+            childTitles.add(set7);
+            childTitles.add(set8);
+
+
+
+            swapRecipeAdapter = new ExpandableListAdapter(getContext(),headerTitles, childTitles);
+
+                        myList = new ExpandableListView(getContext());
+
+                        myList.setAdapter(swapRecipeAdapter);
+
+
+
+
+
+                        myList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                            @Override
+                            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+
+                                String strName = swapRecipeAdapter.getChild(groupPosition,childPosition).toString();
+
+                                AlertDialog.Builder builderInner = new AlertDialog.Builder(
+                                        getContext());
+                                builderInner.setMessage(strName);
+                                builderInner.setTitle("You Have Selected");
+                                builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
+
+                                ) {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        //builderSingle.show();
+                                    }
+                                });
+                                builderInner.setPositiveButton(
+                                        "Confirm",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(
+                                                    DialogInterface dialog,
+                                                    int which) {
+                                                dialog.dismiss();
+                                                alert.dismiss();
+                                            }
+                                        });
+
+                                builderInner.show();
+                                return false;
+                            }
+
+                        });
+
+                        builderSingle = new AlertDialog.Builder(getContext());
+                        // builderSingle.setIcon(R.drawable.ic_launcher);
+                        builderSingle.setTitle("Select Recipe to Swap:");
+
+
+
+                        builderSingle.setView(myList);
+
+
+
+
+
+                    builderSingle.setNeutralButton(
+                                "cancel",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alert.dismiss();
+                                    }
+                                });
+
+            alert = builderSingle.create();
+
+//            builderSingle.setAdapter(
+//                    swapRecipeAdapter,
+//                    new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            String strName = swapRecipeAdapter.getItem(which);
+//                            AlertDialog.Builder builderInner = new AlertDialog.Builder(
+//                                    getContext());
+//                            builderInner.setMessage(strName);
+//                            builderInner.setTitle("You Have Selected");
+//                            builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
+//
+//                            ) {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                    builderSingle.show();
+//                                }
+//                            });
+//                            builderInner.setPositiveButton(
+//                                    "Confirm",
+//                                    new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(
+//                                                DialogInterface dialog,
+//                                                int which) {
+//                                            dialog.dismiss();
+//                                        }
+//                                    });
+//                            builderInner.show();
+//                        }
+//                    });
+
             this.items = items;
         }
 
@@ -989,6 +1195,11 @@ public class MealFragment extends Fragment {
                     //if not then set up listener to handle the completion of a meal and set color to blue
                     else {
 
+
+
+
+
+
 //                        //sets up the actions that are connected to meal completion confirmation dialog
 //                        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 //                            @Override
@@ -1030,6 +1241,12 @@ public class MealFragment extends Fragment {
 
                                     case DialogInterface.BUTTON_NEGATIVE:
 
+                                        for (int i = 0; i < swapRecipeAdapter.getGroupCount(); i++) {
+                                            myList.collapseGroup(i);
+                                        }
+
+
+                                        alert.show();
 
                                         break;
 
@@ -1059,6 +1276,8 @@ public class MealFragment extends Fragment {
 //                                //recipeBox.setVisibility(View.VISIBLE);
 //                            }
 //                        });
+
+
                         //this listener allows users to complete meal
                         v.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override

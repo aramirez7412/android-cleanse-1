@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Breakfast"
         android:id="@+id/mealListHeadingItem"
-        android:textSize="40sp"
+        android:textSize="25sp"
         android:textAlignment="center"
         android:background="#628799"
         android:textColor="#ffffff"

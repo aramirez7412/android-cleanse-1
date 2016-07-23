@@ -45,7 +45,7 @@
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:id="@+id/imageView4"
-            android:src="@drawable/icon_recipes_orange"
+            android:src="@drawable/icon_recipes"
             android:layout_gravity="center" />
 
         <TextView
@@ -82,7 +82,7 @@
                 android:layout_width="95dp"
                 android:layout_height="95dp"
                 android:id="@+id/imageView5"
-                android:src="@drawable/icon_food_list_orange"
+                android:src="@drawable/icon_food_list"
                 android:layout_gravity="center" />
 
             <TextView

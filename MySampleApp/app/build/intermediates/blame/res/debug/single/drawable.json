@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/icon_food_list_orange.png",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/icon_food_list_orange.png"
-    },
-    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_item_background_holo_light.xml"
     },
@@ -104,6 +100,10 @@
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
+        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/icon_food_list.png",
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/icon_food_list.png"
+    },
+    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/meal_icon.png",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/meal_icon.png"
     },
@@ -120,6 +120,10 @@
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/com_facebook_button_send_background.xml"
     },
     {
+        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/icon_recipes.png",
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/icon_recipes.png"
+    },
+    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_cab_background_top_material.xml"
     },
@@ -134,10 +138,6 @@
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/question_mark_icon.png",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/question_mark_icon.png"
-    },
-    {
-        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/icon_recipes_orange.png",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/icon_recipes_orange.png"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
