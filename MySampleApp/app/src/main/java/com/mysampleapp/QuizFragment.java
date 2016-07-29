@@ -20,6 +20,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
@@ -57,6 +61,8 @@ public class QuizFragment extends Fragment {
     String planName;
     String[] detoxDescriptions;
     String tempDesc;
+    int questionNumber;
+    List<Integer> order;
 
 
 
@@ -152,6 +158,14 @@ public class QuizFragment extends Fragment {
 
         "The Fast Metabolism Parasite Cleanse is for individuals looking for a program designed to help reduce:\n• Parasites • Symptoms of IBS • Traveler's diarrhea • Skin irritations or unexplained rashes, hives, rosacea or eczema • Teeth grinding throughout the night • Pain or aching in your muscles or joints • Fatigue, exhaustion, depression, or frequent feelings of apathy • Iron-deficiency anemia \nIt also can help enhance performance, mental clarity, and stimulate detoxiﬁcation."};
 
+        order = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            order.add(i);
+        }
+
+        Collections.shuffle(order);
+
+
 
         detoxPlanLinks = new String[] {"https://hayliepomroy.com/product/14-day-candida-cleanse",
                 "https://hayliepomroy.com/product/14-day-parasite-cleanse",
@@ -173,6 +187,7 @@ public class QuizFragment extends Fragment {
         plan1Counter = 0;
         plan2Counter = 0;
         plan3Counter = 0;
+
 
 
 
@@ -234,13 +249,15 @@ public class QuizFragment extends Fragment {
         });
 
 
+
+
         quizHomeLayout.setOnTouchListener(new View.OnTouchListener(){
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switchLayout(quizHomeLayout, quizQuestionsLayout);
                 counter++;
-                quizQuestion.setText((counter+1) + ": " + questionsAr[counter]);
+                quizQuestion.setText((counter+1) + ": " + questionsAr[order.get(counter)]);
                 return false;
             }
         });
@@ -261,14 +278,14 @@ public class QuizFragment extends Fragment {
                  public void onClick(View v) {
 
                      if(counter == 29){
-                         answersAr[counter] = true;
+                         answersAr[order.get(counter)] = true;
                          counter = 30;
                          endQuiz();
                      }
                      else {
-                         answersAr[counter] = true;
+                         answersAr[order.get(counter)] = true;
                          counter++;
-                         quizQuestion.setText((counter + 1) + ": " + questionsAr[counter]);
+                         quizQuestion.setText((counter + 1) + ": " + questionsAr[order.get(counter)]);
 
                          quizProgressBar.incrementProgressBy(1);
 
@@ -282,14 +299,14 @@ public class QuizFragment extends Fragment {
                  @Override
                  public void onClick(View v) {
                      if(counter == 29){
-                         answersAr[counter] = false;
+                         answersAr[order.get(counter)] = false;
                          counter = 30;
                          endQuiz();
 
                      }
                      else {
 
-                         answersAr[counter] = false;
+                         answersAr[order.get(counter)] = false;
                          counter++;
                          quizQuestion.setText((counter + 1) + ": " + questionsAr[counter]);
                          quizProgressBar.incrementProgressBy(1);
@@ -362,6 +379,10 @@ public class QuizFragment extends Fragment {
               switchLayout(quizQuestionsLayout, quizEndLayout);
         }
 
+        void RandomizeQuestion(){
+
+        }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -422,7 +443,6 @@ public class QuizFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                System.out.println("counter " + counter);
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 

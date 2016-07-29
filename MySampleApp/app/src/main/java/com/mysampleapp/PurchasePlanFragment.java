@@ -44,7 +44,7 @@ public class PurchasePlanFragment extends Fragment {
 
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    private static final String GET_URL = "http://ec2-54-183-2-68.us-west-1.compute.amazonaws.com:3000/meal-plans";
+    private static final String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
 
     private static final String POST_URL = "http://localhost:9090/SpringMVCExample/home";
 

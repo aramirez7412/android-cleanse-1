@@ -170,7 +170,6 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     @Override
     protected void onResume() {
         super.onResume();
-
         if (!AWSMobileClient.defaultMobileClient().getIdentityManager().isUserSignedIn()) {
             // In the case that the activity is restarted by the OS after the application
             // is killed we must redirect to the splash activity to handle the sign-in flow.
