@@ -8,7 +8,11 @@
 //
 package com.mysampleapp;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +22,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +33,12 @@ import com.amazonaws.mobile.user.IdentityManager;
 import com.mysampleapp.demo.DemoConfiguration;
 import com.mysampleapp.demo.HomeDemoFragment;
 import com.mysampleapp.navigation.NavigationDrawer;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /** Class name for log messages. */
@@ -52,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int    planInt; //not sure if will keep, used to tell menu fragment which plan for testing
 
     private Button   signOutButton;
-
+    private Button   signInButton;
 
     /**
      * Initializes the Toolbar for use with the activity.
@@ -80,6 +91,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         signOutButton = (Button) findViewById(R.id.button_signout);
         signOutButton.setOnClickListener(this);
+
+        signInButton = (Button) findViewById(R.id.button_signin);
+        signInButton.setOnClickListener(this);
+
+        final boolean isUserSignedIn = identityManager.isUserSignedIn();
+        signOutButton.setVisibility(isUserSignedIn ? View.VISIBLE : View.INVISIBLE);
+        signInButton.setVisibility(!isUserSignedIn ? View.VISIBLE : View.INVISIBLE);
 
     }
 
@@ -173,9 +191,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         if (!AWSMobileClient.defaultMobileClient().getIdentityManager().isUserSignedIn()) {
             // In the case that the activity is restarted by the OS after the application
             // is killed we must redirect to the splash activity to handle the sign-in flow.
-            Intent intent = new Intent(this, SplashActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+          //  Intent intent = new Intent(this, SplashActivity.class);
+          //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+          //  startActivity(intent);
             return;
         }
 
@@ -204,11 +222,21 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         if (view == signOutButton) {
             // The user is currently signed in with a provider. Sign out of that provider.
             identityManager.signOut();
-            startActivity(new Intent(this, SignInActivity.class));
-            finish();
+            // Show the sign-in button and hide the sign-out button.
+            signOutButton.setVisibility(View.INVISIBLE);
+            signInButton.setVisibility(View.VISIBLE);
+
+            // Close the navigation drawer.
+            navigationDrawer.closeDrawer();
             return;
         }
-
+        if (view == signInButton) {
+            // Start the sign-in activity. Do not finish this activity to allow the user to navigate back.
+            startActivity(new Intent(this, SignInActivity.class));
+            // Close the navigation drawer.
+            navigationDrawer.closeDrawer();
+            return;
+        }
         // ... add any other button handling code here ...
 
     }
@@ -370,4 +398,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     }//end switch fragment function
 
 
+
 }
+
+
+

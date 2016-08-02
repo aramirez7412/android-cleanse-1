@@ -2,13 +2,18 @@ package com.mysampleapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -39,13 +44,19 @@ import android.widget.ViewFlipper;
 
 import com.amazonaws.http.HttpResponse;
 import com.mysampleapp.demo.DemoFragmentBase;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -827,7 +838,7 @@ public class MealFragment extends Fragment {
 
             System.out.println("before the parse");
             //parse the object and create a meal plan
-            mealPlan = new MealPlan(jsonObject);
+            mealPlan = new MealPlan(jsonObject, getContext());
 
 
 
@@ -1087,12 +1098,118 @@ public class MealFragment extends Fragment {
             if (o != null) {
 
                 TextView recipeTitle = (TextView) v.findViewById(R.id.mealName);
-                TextView recipeHeader = (TextView) v.findViewById(R.id.mealHeader);
-                ImageView recipeImageView = (ImageView) v.findViewById(R.id.mealCellImageView);
+                final TextView recipeHeader = (TextView) v.findViewById(R.id.mealHeader);
+                final ImageView recipeImageView = (ImageView) v.findViewById(R.id.mealCellImageView);
 
 
-                if(!o.getImageUrl().isEmpty())
-                     Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
+              //  if(!o.getImageUrl().isEmpty()) {
+
+//                    if(!o.isLoaded()){
+//
+//
+//
+//
+//
+//                        Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView, new com.squareup.picasso.Callback() {
+//                            @Override
+//                            public void onSuccess() {
+//
+//
+//                                File file = new File(getContext().getFilesDir(), o.getImageUrl());
+//
+//                                File parent = file.getParentFile();
+//                                if(!parent.exists() && !parent.mkdirs()){
+//                                    throw new IllegalStateException("Couldn't create dir: " + parent);
+//                                }
+//
+//                                try {
+//                                    file.createNewFile();
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                System.out.println(file.exists() + " does it exists");
+//
+//                                FileOutputStream fos = null;
+//                                try {
+//
+//
+//                                   // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+//                                    fos = new FileOutputStream(file);
+//
+//
+//
+//                                    Bitmap bitmap = ((BitmapDrawable)recipeImageView.getDrawable()).getBitmap();
+//
+//
+//                                    String s = o.getImageUrl();
+//                                    if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
+//                                        System.out.println(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos) + " bitmap checked");
+//                                        System.out.println("jpeg");
+//                                    }
+//                                    else
+//                                    {
+//                                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//                                        System.out.println("png");
+//
+//                                    }
+//
+//                                    //bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//                                    //System.out.println("4");
+//
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                } finally {
+//                                    try {
+//                                        fos.close();
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                                o.setLoaded(true);
+//                                Log.i("image", "image saved to >>>" + file.getAbsolutePath());
+//                            }
+//
+//                            @Override
+//                            public void onError() {
+//                                System.out.println("failure");
+//                            }
+//                        });
+//
+//
+//                       // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
+//
+//
+//                    }//end if not loaded
+//                else {
+//
+//                        File file = new File(getContext().getFilesDir(), o.getImageUrl());
+//
+//                        if (!file.exists()) {
+//                            System.out.println("file did not exist");
+//                            o.setLoaded(false);
+//
+//                        } else {
+//
+//
+////                        Picasso.Builder builder = new Picasso.Builder(getContext());
+////                        builder.listener(new Picasso.Listener()
+////                        {
+////                            @Override
+////                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+////                            {
+////                                exception.printStackTrace();
+////                            }
+////                        });
+//                            System.out.println("loaded from memory");
+//                            Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(recipeImageView);
+//                        }
+//                    }
+
+                loadPicassoPicFromFile(recipeImageView, o);
+
+
+               // }
 
                 if (recipeTitle != null) {
                     recipeTitle.setText(o.getTitle());
@@ -1368,6 +1485,9 @@ public class MealFragment extends Fragment {
         }
 
 
+
+
+
          private float distance(float x1, float y1, float x2, float y2) {
             float dx = x1 - x2;
             float dy = y1 - y2;
@@ -1385,11 +1505,113 @@ public class MealFragment extends Fragment {
             recipeIngredientsContent.setText(o.getIngredients());
             recipeDirectionsContent.setText(o.getDirections());
 
-            if(!o.getImageUrl().isEmpty())
-             Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
-
+            if(!o.getImageUrl().isEmpty()) {
+               // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
+                loadPicassoPicFromFile(recipeBoxImageView, o);
+            }
 
             recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
+        }
+
+
+        void loadPicassoPicFromFile(final ImageView v, final MealItem o){
+            if(!o.isLoaded()){
+
+                Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+
+
+                        File file = new File(getContext().getFilesDir(), o.getImageUrl());
+
+                        File parent = file.getParentFile();
+                        if(!parent.exists() && !parent.mkdirs()){
+                            throw new IllegalStateException("Couldn't create dir: " + parent);
+                        }
+
+                        try {
+                            file.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        System.out.println(file.exists() + " does it exists");
+
+                        FileOutputStream fos = null;
+                        try {
+
+
+                            // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+                            fos = new FileOutputStream(file);
+
+
+
+                            Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
+
+
+                            String s = o.getImageUrl();
+                            if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
+                                System.out.println(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos) + " bitmap checked");
+                                System.out.println("jpeg");
+                            }
+                            else
+                            {
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                                System.out.println("png");
+
+                            }
+
+                            //bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                            //System.out.println("4");
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        o.setLoaded(true);
+                        Log.i("image", "image saved to >>>" + file.getAbsolutePath());
+                    }
+
+                    @Override
+                    public void onError() {
+                        System.out.println("failure");
+                    }
+                });
+
+
+                // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
+
+
+            }//end if not loaded
+            else {
+
+                File file = new File(getContext().getFilesDir(), o.getImageUrl());
+
+                if (!file.exists()) {
+                    System.out.println("file did not exist");
+                    o.setLoaded(false);
+
+                } else {
+
+
+//                        Picasso.Builder builder = new Picasso.Builder(getContext());
+//                        builder.listener(new Picasso.Listener()
+//                        {
+//                            @Override
+//                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+//                            {
+//                                exception.printStackTrace();
+//                            }
+//                        });
+                    System.out.println("loaded from memory");
+                    Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
+                }
+            }
         }
 
         void mealComplete(View v) {

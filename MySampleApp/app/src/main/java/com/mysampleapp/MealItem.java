@@ -12,16 +12,22 @@ public class MealItem {
     String servings;
     String ingredients;
     String directions;
+    Boolean loaded;
     boolean completed;
 
     MealItem() {
         imageUrl = "@mipmap/sample_food";
         completed = false;
+        loaded = false;
     }
 
     String getType(){
         return type;
     }
+
+    Boolean isLoaded() { return loaded; };
+
+    void setLoaded(Boolean b) { loaded = b; };
 
     String getHeader(){
         return header;
