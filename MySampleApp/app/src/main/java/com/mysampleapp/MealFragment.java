@@ -60,6 +60,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -695,7 +696,31 @@ public class MealFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        FileOutputStream fos = null;
+        try {
+
+            File file = new File(getContext().getFilesDir(), "currentMealPlan");
+
+            File parent = file.getParentFile();
+            if(!parent.exists() && !parent.mkdirs()){
+                throw new IllegalStateException("Couldn't create dir: " + parent);
+            }
+
+            fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+           // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(mealPlan);
+            os.close();
+            fos.close();
+            System.out.println("successfully saved to: " + file.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         mListener = null;
+
     }
 
 
@@ -1540,29 +1565,22 @@ public class MealFragment extends Fragment {
                         FileOutputStream fos = null;
                         try {
 
-
                             // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
                             fos = new FileOutputStream(file);
 
-
-
                             Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
 
-
                             String s = o.getImageUrl();
-                            if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
-                                System.out.println(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos) + " bitmap checked");
-                                System.out.println("jpeg");
-                            }
-                            else
-                            {
+                            //if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
+                              //  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            //}
+                            //else
+                            //{
                                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                                System.out.println("png");
+                            //}
 
-                            }
-
-                            //bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                            //System.out.println("4");
+                            o.setLoaded(true);
+                            Log.i("image", "image saved to >>>" + file.getAbsolutePath());
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -1573,8 +1591,7 @@ public class MealFragment extends Fragment {
                                 e.printStackTrace();
                             }
                         }
-                        o.setLoaded(true);
-                        Log.i("image", "image saved to >>>" + file.getAbsolutePath());
+
                     }
 
                     @Override
