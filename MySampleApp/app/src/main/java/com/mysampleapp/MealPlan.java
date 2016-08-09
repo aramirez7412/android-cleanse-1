@@ -17,26 +17,42 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by mattcorrente on 5/30/16.
  */
-public class MealPlan {
+public class MealPlan implements Serializable {
 
     String urlString;
 
+    // copy constructor
+    MealPlan(MealPlan m) {
+        System.out.println("copy me bro");
+        this.mealPlan = new ArrayList<ArrayList<MealItem>>();
 
-    MealPlan(JSONObject jsonObject, Context c) throws JSONException {
 
-        context = c;
+        for (int i = 0; i < m.getDays(); i++) {
+            for (int j = 0; j < m.getListForDay(i).size(); j++) {
+                this.mealPlan.get(i).add(j, m.getListForDay(i).get(j));
+            }
+        }
+
+
+    }
+
+
+    MealPlan(JSONObject jsonObject) throws JSONException {
+
+
 
         mealPlan = new ArrayList<ArrayList<MealItem>>();
 
 
         JSONArray planAr = jsonObject.getJSONArray("days");
 
-        System.out.println(planAr.length() + "---asdfljdslfjdslfjlasdjflkasdjfldsjflsd");
 
         //loop through each day
         for(int k = 0; k < planAr.length(); k++) {
@@ -78,8 +94,6 @@ public class MealPlan {
                 mealItem.setIngredients(tempString);
                 //---------------------------------------------------
                 mealItem.setDirections(recipeObject.getString("instructions"));
-
-                System.out.println(mealItem.getDirections());
 
 
 
@@ -136,11 +150,19 @@ public class MealPlan {
         return mealPlan.get(day);
     }
 
+    ArrayList<ArrayList<MealItem>> getPlan(){
+        return mealPlan;
+    }
+
+
 
     ArrayList<ArrayList<MealItem>> mealPlan;
 
 
 
-private Context context;
 
 }
+
+
+
+

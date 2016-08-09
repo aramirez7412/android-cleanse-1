@@ -60,6 +60,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -429,81 +430,121 @@ public class MealFragment extends Fragment {
 
 
         //just used for testing to determine if plan was purchased or not
-        if(((MainActivity)getActivity()).getPlanInt() == 0){
+        //if(((MainActivity)getActivity()).getPlanInt() == 0){
 
-            noPlanView.setVisibility(View.VISIBLE);
-
-
-            final Button candidaPlanButton = (Button) view.findViewById(R.id.mealPlan1Button);
-            candidaPlanButton.setText("Candida Meal Plan");
-
-            Button parasitePlanButton = (Button) view.findViewById(R.id.mealPlan2Button);
-            parasitePlanButton.setText("Parasite Meal Plan");
-
-            final Button metalMealPlanButton = (Button) view.findViewById(R.id.mealPlan3Button);
-            metalMealPlanButton.setText("Heavy Metal Meal Plan");
+            //noPlanView.setVisibility(View.VISIBLE);
 
 
-
-            candidaPlanButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switchToPurchaseFragment("Candida Meal Plan", candidaInformation);
-                }
-            });
-
-            parasitePlanButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switchToPurchaseFragment("Parasite Meal Plan", parasiteInformation);
-                }
-            });
-
-            metalMealPlanButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switchToPurchaseFragment("Heavy Metal Meal Plan", heavyMetalInformation);
-                }
-            });
-
-
-//           // setCurrentPlan(temp); dont need this line here for testing
+//            final Button candidaPlanButton = (Button) view.findViewById(R.id.mealPlan1Button);
+//            candidaPlanButton.setText("Candida Meal Plan");
 //
-//            //sets up the actions that are connected to "take quiz?" prompt
-//            //-------------------------------------------------------------------------
-//            final DialogInterface.OnClickListener takeQuizDialogListener = new DialogInterface.OnClickListener() {
+//            Button parasitePlanButton = (Button) view.findViewById(R.id.mealPlan2Button);
+//            parasitePlanButton.setText("Parasite Meal Plan");
+//
+//            final Button metalMealPlanButton = (Button) view.findViewById(R.id.mealPlan3Button);
+//            metalMealPlanButton.setText("Heavy Metal Meal Plan");
+//
+//
+//
+//            candidaPlanButton.setOnClickListener(new OnClickListener() {
 //                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    switch (which) {
-//                        case DialogInterface.BUTTON_POSITIVE:
-//                            System.out.println("yes");
-//                            startQuiz();
-//                            dialog.dismiss();
-//                            break;
-//
-//                        case DialogInterface.BUTTON_NEGATIVE:
-//                            System.out.println("no");
-//                            dialog.dismiss();
-//                            break;
-//                    }//end switch
+//                public void onClick(View v) {
+//                    switchToPurchaseFragment("Candida Meal Plan", candidaInformation);
 //                }
-//            };//end listener
+//            });
 //
-//            //this sets up a yes/no selection box to make sure users want to complete a meal
-//            final AlertDialog.Builder takeQuizBuilder = new AlertDialog.Builder(getContext());
-//            takeQuizBuilder.setMessage("You currently have no meal plans available!\nWould you like to take a quiz to see which one is best for you?\n(if you select no, quiz can be located on pull down menu above)").setPositiveButton("YES", takeQuizDialogListener)
-//                    .setNegativeButton("NO", takeQuizDialogListener);
+//            parasitePlanButton.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    switchToPurchaseFragment("Parasite Meal Plan", parasiteInformation);
+//                }
+//            });
 //
-//            takeQuizBuilder.show();
-//            //-------------------------------------------------------------------------
+//            metalMealPlanButton.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    switchToPurchaseFragment("Heavy Metal Meal Plan", heavyMetalInformation);
+//                }
+//            });
 
 
+
+
+
+
+    //    }
+    //    else {
+
+
+        FileOutputStream fos = null;
+        Boolean test = false;
+        try {
+
+            FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+            mealPlan = (MealPlan) is.readObject();
+
+
+            //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+            is.close();
+            fis.close();
+
+            System.out.println("successfully loaded mealPlan");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            test = true;
+        } catch (IOException e) {
+            test = true;
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            test = true;
+            e.printStackTrace();
+        }
+
+        if(test) {
+            try {
+                String jsonPlan = sendGET();
+
+                if (!jsonPlan.isEmpty()) {
+                    ((MainActivity) getActivity()).setPlan(jsonPlan);
+                   // ((MainActivity) getActivity()).setPlanInt(1);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
+
+            fos = null;
+            try {
+
+                //File file = new File();
+
+//                File parent = file.getParentFile();
+//                if(!parent.exists() && !parent.mkdirs()){
+//                    throw new IllegalStateException("Couldn't create dir: " + parent);
+//                }
+
+                fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
+                // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+                ObjectOutputStream os = new ObjectOutputStream(fos);
+                os.reset();
+                os.writeObject(mealPlan);
+                os.close();
+                fos.close();
+                System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }
-        else {
 
-            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
 
 
 
@@ -517,11 +558,6 @@ public class MealFragment extends Fragment {
             System.out.println("post the parse");
 
             list = new ArrayList<MealItem>();
-
-
-
-
-
 
 
             //setup the first layout to be displayed
@@ -649,7 +685,7 @@ public class MealFragment extends Fragment {
 
 
 
-        }
+      //  }
         return view;
     }
 
@@ -699,23 +735,38 @@ public class MealFragment extends Fragment {
         FileOutputStream fos = null;
         try {
 
-            File file = new File(getContext().getFilesDir(), "currentMealPlan");
 
-            File parent = file.getParentFile();
-            if(!parent.exists() && !parent.mkdirs()){
-                throw new IllegalStateException("Couldn't create dir: " + parent);
-            }
+           // File parent = file.getParentFile();
+            //if(!parent.exists() && !parent.mkdirs()){
+            //    throw new IllegalStateException("Couldn't create dir: " + parent);
+            //}
 
-            fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+            fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId() + "/currentPlan.ser"));
            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.reset();
             os.writeObject(mealPlan);
             os.close();
             fos.close();
-            System.out.println("successfully saved to: " + file.getAbsolutePath());
+            System.out.println(mealPlan.getListForDay(0).get(0).isCompleted() + "da fuq is this shit");
+
+            System.out.println("successfully saved meal plan to: somethin");
+
+            FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId() + "/currentPlan.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+
+            System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+
+            is.close();
+            fis.close();
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -863,7 +914,7 @@ public class MealFragment extends Fragment {
 
             System.out.println("before the parse");
             //parse the object and create a meal plan
-            mealPlan = new MealPlan(jsonObject, getContext());
+            mealPlan = new MealPlan(jsonObject);
 
 
 
@@ -871,9 +922,40 @@ public class MealFragment extends Fragment {
             e.printStackTrace();
         }
 
-
     }
 
+
+    private static String sendGET() throws IOException {
+
+
+        String USER_AGENT = "Mozilla/5.0";
+        String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
+
+        URL obj = new URL(GET_URL);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response.toString());
+            return response.toString();
+        } else {
+            System.out.println("GET request not worked");
+            return "";
+        }
+
+    }
 
 
     class MealItemAdapter extends ArrayAdapter<MealItem> {
@@ -1061,38 +1143,6 @@ public class MealFragment extends Fragment {
 
             alert = builderSingle.create();
 
-//            builderSingle.setAdapter(
-//                    swapRecipeAdapter,
-//                    new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            String strName = swapRecipeAdapter.getItem(which);
-//                            AlertDialog.Builder builderInner = new AlertDialog.Builder(
-//                                    getContext());
-//                            builderInner.setMessage(strName);
-//                            builderInner.setTitle("You Have Selected");
-//                            builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
-//
-//                            ) {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                    builderSingle.show();
-//                                }
-//                            });
-//                            builderInner.setPositiveButton(
-//                                    "Confirm",
-//                                    new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(
-//                                                DialogInterface dialog,
-//                                                int which) {
-//                                            dialog.dismiss();
-//                                        }
-//                                    });
-//                            builderInner.show();
-//                        }
-//                    });
 
             this.items = items;
         }
@@ -1127,114 +1177,9 @@ public class MealFragment extends Fragment {
                 final ImageView recipeImageView = (ImageView) v.findViewById(R.id.mealCellImageView);
 
 
-              //  if(!o.getImageUrl().isEmpty()) {
-
-//                    if(!o.isLoaded()){
-//
-//
-//
-//
-//
-//                        Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView, new com.squareup.picasso.Callback() {
-//                            @Override
-//                            public void onSuccess() {
-//
-//
-//                                File file = new File(getContext().getFilesDir(), o.getImageUrl());
-//
-//                                File parent = file.getParentFile();
-//                                if(!parent.exists() && !parent.mkdirs()){
-//                                    throw new IllegalStateException("Couldn't create dir: " + parent);
-//                                }
-//
-//                                try {
-//                                    file.createNewFile();
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                                System.out.println(file.exists() + " does it exists");
-//
-//                                FileOutputStream fos = null;
-//                                try {
-//
-//
-//                                   // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
-//                                    fos = new FileOutputStream(file);
-//
-//
-//
-//                                    Bitmap bitmap = ((BitmapDrawable)recipeImageView.getDrawable()).getBitmap();
-//
-//
-//                                    String s = o.getImageUrl();
-//                                    if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
-//                                        System.out.println(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos) + " bitmap checked");
-//                                        System.out.println("jpeg");
-//                                    }
-//                                    else
-//                                    {
-//                                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//                                        System.out.println("png");
-//
-//                                    }
-//
-//                                    //bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//                                    //System.out.println("4");
-//
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                } finally {
-//                                    try {
-//                                        fos.close();
-//                                    } catch (IOException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                                o.setLoaded(true);
-//                                Log.i("image", "image saved to >>>" + file.getAbsolutePath());
-//                            }
-//
-//                            @Override
-//                            public void onError() {
-//                                System.out.println("failure");
-//                            }
-//                        });
-//
-//
-//                       // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
-//
-//
-//                    }//end if not loaded
-//                else {
-//
-//                        File file = new File(getContext().getFilesDir(), o.getImageUrl());
-//
-//                        if (!file.exists()) {
-//                            System.out.println("file did not exist");
-//                            o.setLoaded(false);
-//
-//                        } else {
-//
-//
-////                        Picasso.Builder builder = new Picasso.Builder(getContext());
-////                        builder.listener(new Picasso.Listener()
-////                        {
-////                            @Override
-////                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
-////                            {
-////                                exception.printStackTrace();
-////                            }
-////                        });
-//                            System.out.println("loaded from memory");
-//                            Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(recipeImageView);
-//                        }
-//                    }
-
                 loadPicassoPicFromFile(recipeImageView, o);
 
 
-               // }
 
                 if (recipeTitle != null) {
                     recipeTitle.setText(o.getTitle());
@@ -1243,11 +1188,10 @@ public class MealFragment extends Fragment {
 
                     //check if meal to be added is completed, if so then it will not need a long click listener and will
                     //need to set the header to grey
-                    if (o.isCompleted()) {
-                        mealComplete(v);
-                    }
+
+
                     //if not then set up listener to handle the completion of a meal and set color to blue
-                    else {
+
 
 
 
@@ -1286,10 +1230,12 @@ public class MealFragment extends Fragment {
                                         mealPlan.toggleCompletion(day, position);
 
                                         if(mealPlan.isCompleted(day, position)){
+                                            System.out.println("complete");
                                             mealComplete(currentSelection);
                                         }
                                         else{
                                             mealUncomplete(currentSelection);
+                                            System.out.println("uncomp");
                                         }
                                         break;
 
@@ -1504,7 +1450,10 @@ public class MealFragment extends Fragment {
 
                 }//if (recipeTitle != null) {
 
-            }//end if (o != null) {
+            //end if (o != null) {
+
+            if (o.isCompleted()) 
+                mealComplete(v);
 
             return v;
         }

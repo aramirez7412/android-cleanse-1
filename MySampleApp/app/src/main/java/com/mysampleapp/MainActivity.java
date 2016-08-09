@@ -36,9 +36,21 @@ import com.mysampleapp.navigation.NavigationDrawer;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /** Class name for log messages. */
@@ -65,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button   signOutButton;
     private Button   signInButton;
 
+
+    User currentUser;
+
     /**
      * Initializes the Toolbar for use with the activity.
      */
@@ -83,6 +98,101 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 savedInstanceState.getCharSequence(BUNDLE_KEY_TOOLBAR_TITLE));
         }
     }
+
+    User LoadUser(String id){
+        try {
+
+            System.out.println(this.getFilesDir() + "/" + id + "/userInfo.ser");
+
+            //File f = new File(this.getFilesDir() + "/" + id);
+           //f.delete();
+
+            FileInputStream fis = new FileInputStream (new File(this.getFilesDir() + "/" + id + "/userInfo.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+            User retUser = (User) is.readObject();
+            is.close();
+            fis.close();
+
+            System.out.println("successfully loaded user");
+
+            return retUser;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("user does not exist yet");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    boolean SaveUser(User user){
+        FileOutputStream fos = null;
+        try {
+
+            File file = new File(this.getFilesDir() + "/" + currentUser.getUserId() + "/");
+
+            file.mkdirs();
+//            File parent = file.getParentFile();
+//            if(!parent.exists() && !parent.mkdirs()){
+//                throw new IllegalStateException("Couldn't create dir: " + parent);
+//            }
+
+            File outputFile = new File(file, "userInfo.ser");
+            fos = new FileOutputStream(outputFile);
+            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(user);
+            os.close();
+            fos.close();
+            System.out.println("successfully saved user to: " + outputFile.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+//    boolean SaveDefaultPlan(){
+//        FileOutputStream fos = null;
+//        try {
+//
+//
+//            File file = new File(this.getFilesDir(), currentUser.getUserId());
+//
+//            File parent = file.getParentFile();
+//            if(!parent.exists() && !parent.mkdirs()){
+//                throw new IllegalStateException("Couldn't create dir: " + parent);
+//            }
+//
+//            fos = this.openFileOutput(file.getName(), Context.MODE_PRIVATE);
+//            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+//            ObjectOutputStream os = new ObjectOutputStream(fos);
+//            os.writeObject(plan);
+//            os.close();
+//            fos.close();
+//            System.out.println("successfully saved user to: " + file.getAbsolutePath());
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            return false;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//
+//        return true;
+//
+//    }
 
     /**
      * Initializes the sign-in and sign-out buttons.
@@ -180,6 +290,48 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         setupToolbar(savedInstanceState);
 
         setupNavigationMenu(savedInstanceState);
+
+
+        currentUser = new User();
+
+        //will need to pull this from logged in user, guest will be defaulted
+        currentUser.setUserId("guestUser");
+
+
+
+        currentUser = LoadUser(currentUser.getUserId());
+
+        if(currentUser == null){
+            currentUser = new User();
+            currentUser.setUserId("guestUser");
+            currentUser.setUserName("Tim Allen");
+            SaveUser(currentUser);
+        }
+
+//        //will need to check if online
+//        IdentityManager.IdentityHandler idHandler = new IdentityManager.IdentityHandler() {
+//            @Override
+//            public void handleIdentityID(String identityId) throws IOException, JSONException {
+//                currentUser = LoadUser(identityId);
+//                if(currentUser == null){
+//                    currentUser = new User();
+//                    currentUser.setUserName(identityManager.getUserName());
+//                    currentUser.setUserId(identityId);
+//                    SaveUser(currentUser);
+//                }
+//            }
+//
+//            @Override
+//            public void handleError(Exception exception) {
+//                System.out.println("didnt work");
+//
+//            }
+//        };
+//
+//        identityManager.getUserID(idHandler);
+
+
+
 
         //delete this after testing
         planInt = 0;
@@ -396,6 +548,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             actionBar.setTitle(fragmentName);
         }
     }//end switch fragment function
+
+    String getUserId(){
+        return currentUser.getUserId();
+    }
 
 
 

@@ -1,9 +1,11 @@
 package com.mysampleapp;
 
+import java.io.Serializable;
+
 /**
  * Created by mattcorrente on 5/28/16.
  */
-public class MealItem {
+public class MealItem implements Serializable{
 
     String type;
     String header;
@@ -12,7 +14,7 @@ public class MealItem {
     String servings;
     String ingredients;
     String directions;
-    Boolean loaded;
+    boolean loaded;
     boolean completed;
 
     MealItem() {
@@ -25,9 +27,9 @@ public class MealItem {
         return type;
     }
 
-    Boolean isLoaded() { return loaded; };
+    boolean isLoaded() { return loaded; };
 
-    void setLoaded(Boolean b) { loaded = b; };
+    void setLoaded(boolean b) { loaded = b; };
 
     String getHeader(){
         return header;

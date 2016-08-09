@@ -19,6 +19,8 @@ import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.AWSConfiguration;
 import com.amazonaws.mobile.util.ThreadUtils;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -45,7 +47,7 @@ public class IdentityManager {
          * @param identityId Amazon Cognito Identity ID which uniquely identifies
          *                   the user.
          */
-        public void handleIdentityID(final String identityId);
+        public void handleIdentityID(final String identityId) throws IOException, JSONException;
 
         /**
          * Handles any error that might have occurred while getting the user's
@@ -172,7 +174,13 @@ public class IdentityManager {
                                 return;
                             }
 
-                            handler.handleIdentityID(result);
+                            try {
+                                handler.handleIdentityID(result);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 }
