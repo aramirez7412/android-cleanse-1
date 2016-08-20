@@ -44,12 +44,12 @@
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_text_cursor_material.xml"
     },
     {
-        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/icon_at_a_glance.png",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/icon_at_a_glance.png"
-    },
-    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/icon_at_a_glance.png",
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/drawable/icon_at_a_glance.png"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/drawable/com_facebook_button_like_background.xml",

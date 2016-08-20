@@ -505,13 +505,13 @@ public class MealFragment extends Fragment {
         if(test) {
             try {
                 String jsonPlan = sendGET();
-
                 if (!jsonPlan.isEmpty()) {
                     ((MainActivity) getActivity()).setPlan(jsonPlan);
                    // ((MainActivity) getActivity()).setPlanInt(1);
                 }
 
             } catch (IOException e) {
+                System.out.println("error downloading plan");
                 e.printStackTrace();
             }
 
@@ -732,17 +732,25 @@ public class MealFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
+        saveFile();
+
+        mListener = null;
+
+    }
+
+    void saveFile(){
         FileOutputStream fos = null;
         try {
 
 
-           // File parent = file.getParentFile();
+            // File parent = file.getParentFile();
             //if(!parent.exists() && !parent.mkdirs()){
             //    throw new IllegalStateException("Couldn't create dir: " + parent);
             //}
 
             fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId() + "/currentPlan.ser"));
-           // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.reset();
             os.writeObject(mealPlan);
@@ -769,9 +777,6 @@ public class MealFragment extends Fragment {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        mListener = null;
-
     }
 
 
@@ -908,7 +913,8 @@ public class MealFragment extends Fragment {
         try {
 
             //initialize the jsonObject
-            JSONArray jsonArray = null;
+            JSONArray jsonArray;
+            System.out.println("please work" + JSONPlan);
             jsonArray = new JSONArray(JSONPlan);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
 
@@ -1111,6 +1117,7 @@ public class MealFragment extends Fragment {
                                                     int which) {
                                                 dialog.dismiss();
                                                 alert.dismiss();
+                                                saveFile();
                                             }
                                         });
 
@@ -1237,6 +1244,9 @@ public class MealFragment extends Fragment {
                                             mealUncomplete(currentSelection);
                                             System.out.println("uncomp");
                                         }
+
+                                        saveFile();
+
                                         break;
 
                                     case DialogInterface.BUTTON_NEGATIVE:
@@ -1487,97 +1497,176 @@ public class MealFragment extends Fragment {
             recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
         }
 
-
         void loadPicassoPicFromFile(final ImageView v, final MealItem o){
-            if(!o.isLoaded()){
 
-                Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-
-
-                        File file = new File(getContext().getFilesDir(), o.getImageUrl());
-
-                        File parent = file.getParentFile();
-                        if(!parent.exists() && !parent.mkdirs()){
-                            throw new IllegalStateException("Couldn't create dir: " + parent);
-                        }
-
-                        try {
-                            file.createNewFile();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        System.out.println(file.exists() + " does it exists");
-
-                        FileOutputStream fos = null;
-                        try {
-
-                            // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
-                            fos = new FileOutputStream(file);
-
-                            Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
-
-                            String s = o.getImageUrl();
-                            //if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
-                              //  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            //}
-                            //else
-                            //{
-                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                            //}
-
-                            o.setLoaded(true);
-                            Log.i("image", "image saved to >>>" + file.getAbsolutePath());
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                fos.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onError() {
-                        System.out.println("failure");
-                    }
-                });
-
-
-                // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
-
-
-            }//end if not loaded
-            else {
 
                 File file = new File(getContext().getFilesDir(), o.getImageUrl());
 
                 if (!file.exists()) {
                     System.out.println("file did not exist");
-                    o.setLoaded(false);
+                    //o.setLoaded(false);
+
+                    Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+
+
+                            File file = new File(getContext().getFilesDir(), o.getImageUrl());
+
+                            File parent = file.getParentFile();
+                            if(!parent.exists() && !parent.mkdirs()){
+                                throw new IllegalStateException("Couldn't create dir: " + parent);
+                            }
+
+                            try {
+                                file.createNewFile();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            System.out.println(file.exists() + " does it exists");
+
+                            FileOutputStream fos = null;
+                            try {
+
+                                // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+                                fos = new FileOutputStream(file);
+
+                                Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
+
+                                String s = o.getImageUrl();
+                                //if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
+                                //  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                //}
+                                //else
+                                //{
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                                //}
+
+                                o.setLoaded(true);
+                                Log.i("image", "image saved to >>>" + file.getAbsolutePath());
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } finally {
+                                try {
+                                    fos.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            System.out.println("failure");
+                        }
+                    });
 
                 } else {
 
-
-//                        Picasso.Builder builder = new Picasso.Builder(getContext());
-//                        builder.listener(new Picasso.Listener()
-//                        {
-//                            @Override
-//                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
-//                            {
-//                                exception.printStackTrace();
-//                            }
-//                        });
                     System.out.println("loaded from memory");
                     Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
                 }
             }
+        //}
+
+//        void loadPicassoPicFromFile(final ImageView v, final MealItem o){
+//            if(!o.isLoaded()){
+//
+//                Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
+//                    @Override
+//                    public void onSuccess() {
+//
+//
+//                        File file = new File(getContext().getFilesDir(), o.getImageUrl());
+//
+//                        File parent = file.getParentFile();
+//                        if(!parent.exists() && !parent.mkdirs()){
+//                            throw new IllegalStateException("Couldn't create dir: " + parent);
+//                        }
+//
+//                        try {
+//                            file.createNewFile();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        System.out.println(file.exists() + " does it exists");
+//
+//                        FileOutputStream fos = null;
+//                        try {
+//
+//                            // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
+//                            fos = new FileOutputStream(file);
+//
+//                            Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
+//
+//                            String s = o.getImageUrl();
+//                            //if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
+//                              //  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                            //}
+//                            //else
+//                            //{
+//                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//                            //}
+//
+//                            o.setLoaded(true);
+//                            Log.i("image", "image saved to >>>" + file.getAbsolutePath());
+//
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        } finally {
+//                            try {
+//                                fos.close();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//                        System.out.println("failure");
+//                    }
+//                });
+//
+//
+//                // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
+//
+//
+//            }//end if not loaded
+//            else {
+//
+//                File file = new File(getContext().getFilesDir(), o.getImageUrl());
+//
+//                if (!file.exists()) {
+//                    System.out.println("file did not exist");
+//                    o.setLoaded(false);
+//
+//                } else {
+//
+//
+////                        Picasso.Builder builder = new Picasso.Builder(getContext());
+////                        builder.listener(new Picasso.Listener()
+////                        {
+////                            @Override
+////                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+////                            {
+////                                exception.printStackTrace();
+////                            }
+////                        });
+//                    System.out.println("loaded from memory");
+//                    Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
+//                }
+//            }
+//        }
+
+
+        void downloadAndSaveImage(){
+
         }
 
         void mealComplete(View v) {
