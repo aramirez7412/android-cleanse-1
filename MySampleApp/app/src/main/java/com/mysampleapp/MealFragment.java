@@ -62,6 +62,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -156,94 +157,6 @@ public class MealFragment extends Fragment {
 
     String parasiteInformation = "The Fast Metabolism Parasite Cleanse is for individuals looking for a program designed to help reduce:\n• Parasites • Symptoms of IBS • Traveler's diarrhea • Skin irritations or unexplained rashes, hives, rosacea or eczema • Teeth grinding throughout the night • Pain or aching in your muscles or joints • Fatigue, exhaustion, depression, or frequent feelings of apathy • Iron-deficiency anemia \nIt also can help enhance performance, mental clarity, and stimulate detoxiﬁcation.";
 
-    String temp = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\",\"imgurl\":\"http://www.theeasymarket.com/image/cache/data/0000000004070-500x500.jpg\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":2,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Cup Berries & 1/2 Cup Min. Cucumbers & Radishes\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/p3_fruit.jpg\"},{\"meal\":\"Chicken & Broccoli Bowl*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]},{\"day\":3,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1 Sliced Apple with 1/2 cup Min. Jicama\",\"time\":\"snack\",\"imgurl\":\"http://2.bp.blogspot.com/-9y7X5A1hrto/TbdcYr0qzqI/AAAAAAAABrY/JMjPFOeg3VA/s1600/IMG_3705.JPG\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Turkey Soup* (Freeze Leftovers For Future Use)\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Asian_Turkey_SoupFS.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snacks\"]},{\"day\":4,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Chili*\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":5,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":6,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":7,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"}],\"at-a-glance\":[\"5 Shakes (Unlimited Veggies)\"]},{\"day\":8,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Leftover Turkey Soup*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Hot+and+Sour+Turkey+Soup.jpg\"}],\"at-a-glance\":[\"4 Shakes\",\"1 Meal\"]},{\"day\":9,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/4 Cup Raw Almonds\",\"time\":\"snack\",\"imgurl\":\"https://www.ohnuts.com/noapp/showImage.cfm/extra-large/Raw%20Almond%20NEW1.jpg\"},{\"meal\":\"Brown Rice Fusilli*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Chicken+Sausage+with+Brown+Rice+Fusilli.jpg\"}],\"at-a-glance\":[\"3 Shakes\",\"1 Meal\",\"1 Snack\"]},{\"day\":10,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"1/2 Avocado & 1/2 Cup Min. Sliced Peppers\",\"time\":\"snack\",\"imgurl\":\"https://s-media-cache-ak0.pinimg.com/736x/d0/e3/af/d0e3af6670fb1a999e36878d71a00a91.jpg\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\"},{\"meal\":\"2 Tablespoon Raw Almond Butter & 1/2 Cup Min. Celery\",\"time\":\"snack\",\"imgurl\":\"http://www.irishrawfoodcoach.com/uploads/4/7/8/7/47876049/2917115_orig.jpg\"},{\"meal\":\"Shrimp & Asparagus Stiry Fry*\",\"time\":\"dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Gingered+Shrimp+and+Veggie+Stir-Fry.jpg\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
-
-
-    String temp3 = "[{\"mealplan\":\"sample meal plan\",\"days\":[{\"day\":1,\"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"breakfast\"},{\"meal\":\"1/2 cup blueberries & 1/2 cup min. carrots\",\"time\":\"snack\"},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"lunch\"},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"snack\"},{\"meal\":\"Chili * (Freeze Leftovers For Future Use)\",\"time\":\"dinner\"}],\"at-a-glance\":[\"2 Shakes\",\"1 Meal\",\"2 Snacks\"]}],\"id\":\"d56a99f257da9bf6\"}]";
-
-    String temp2 = "{\n" +
-            "    \"mealPlan\": { \n" +
-            "     \"0\": [\t\n" +
-            "        {\n" +
-            "           \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"Breakfast\",\n" +
-            "           \"mealTitle\": \"Beef Stew\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 4,\n" +
-            "           \"ingredients\": [\"cheese\", \"eggs\"],\n" +
-            "           \"directions\": [\"milk cow\", \"bake potatoes\", \"code\"]\n" +
-            "        },\t \n" +
-            "        {\n" +
-            "          \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"Lunch\",\n" +
-            "           \"mealTitle\": \"Tamales\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 3,\n" +
-            "           \"ingredients\": [\"chicken\", \"nuggets\"],\n" +
-            "           \"directions\": [\"go to mcDons\", \"give them money\"]\n" +
-            "        },\t \n" +
-            "        {\n" +
-            "          \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"Dinner\",\n" +
-            "           \"mealTitle\": \"Burgers\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 900,\n" +
-            "           \"ingredients\": [\"1000 packages of hot dogs\"],\n" +
-            "           \"directions\": [\"grill those bad boys\", \"eat til you puke\"]\n" +
-            "        }\n" +
-            "   ],\n" +
-            "   \"1\": [\t\n" +
-            "        {\n" +
-            "           \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"Breakfast\",\n" +
-            "           \"mealTitle\": \"Tacos\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 4,\n" +
-            "           \"ingredients\": [\"cheese\", \"eggs\"],\n" +
-            "           \"directions\": [\"milk cow\", \"bake potatoes\", \"code\"]\n" +
-            "        },\t \n" +
-            "        {\n" +
-            "          \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"Lunch\",\n" +
-            "           \"mealTitle\": \"Garbage\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 3,\n" +
-            "           \"ingredients\": [\"chicken\", \"nuggets\"],\n" +
-            "           \"directions\": [\"go to mcDons\", \"give them money\"]\n" +
-            "        },\t \n" +
-            "        {\n" +
-            "          \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"Dinner\",\n" +
-            "           \"mealTitle\": \"Salad\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 900,\n" +
-            "           \"ingredients\": [\"1000 packages of hot dogs\"],\n" +
-            "           \"directions\": [\"grill those bad boys\", \"eat til you puke\"]\n" +
-            "        }\n" +
-            "      ],\n" +
-            "   \"2\": [\t\n" +
-            "        {\n" +
-            "           \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"nothing\",\n" +
-            "           \"mealTitle\": \"Candy\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 4,\n" +
-            "           \"ingredients\": [\"cheese\", \"eggs\"],\n" +
-            "           \"directions\": [\"milk cow\", \"bake potatoes\", \"code\"]\n" +
-            "        },\t \n" +
-            "        {\n" +
-            "          \"type\":\"recipe\",\n" +
-            "           \"cellHeader\": \"iForgot\",\n" +
-            "           \"mealTitle\": \"Crab Cakes\",\n" +
-            "           \"images\": \"@mipmap/sample_food\",\n" +
-            "           \"servings\": 3,\n" +
-            "           \"ingredients\": [\"chicken\", \"nuggets\"],\n" +
-            "           \"directions\": [\"go to mcDons\", \"give them money\"]\n" +
-            "        }\n" +
-            "   ]\n" +
-            "}\n" +
-            "  \n" +
-            "}";
 
     ViewGroup topMenuPage1;
     ViewGroup topMenuPage2;
@@ -372,6 +285,9 @@ public class MealFragment extends Fragment {
 
             }
         });
+
+
+
 
 
         viewPlansButton.setOnClickListener(new OnClickListener() {
@@ -504,7 +420,7 @@ public class MealFragment extends Fragment {
 
         if(test) {
             try {
-                String jsonPlan = sendGET();
+                String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
                 if (!jsonPlan.isEmpty()) {
                     ((MainActivity) getActivity()).setPlan(jsonPlan);
                    // ((MainActivity) getActivity()).setPlanInt(1);
@@ -624,7 +540,6 @@ public class MealFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    System.out.println("clickeddddd");
 
                     if (day < daysInPlan - 1) {
 
@@ -653,7 +568,6 @@ public class MealFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    System.out.println("clickeddddd");
                     //check if previous day exists, if so proceed displaying previous day
                     if (day > 0) {
 
@@ -737,6 +651,80 @@ public class MealFragment extends Fragment {
 
         mListener = null;
 
+    }
+
+    RecipeSet getSetFromFile(String fileName) {
+
+        RecipeSet retSet = null;
+
+        FileOutputStream fos = null;
+        Boolean test = false;
+        try {
+
+            FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/recipeSet/", "genericSet.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+            retSet = (RecipeSet) is.readObject();
+
+
+            //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+            is.close();
+            fis.close();
+
+            System.out.println("successfully loaded recipeSet");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            test = true;
+        } catch (IOException e) {
+            test = true;
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            test = true;
+            e.printStackTrace();
+        }
+
+//        if (test) {
+//            try {
+//                String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
+//                if (!jsonPlan.isEmpty()) {
+//                    ((MainActivity) getActivity()).setPlan(jsonPlan);
+//                    // ((MainActivity) getActivity()).setPlanInt(1);
+//                }
+//
+//            } catch (IOException e) {
+//                System.out.println("error downloading plan");
+//                e.printStackTrace();
+//            }
+//
+//            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
+//
+//            fos = null;
+//            try {
+//
+//                //File file = new File();
+//
+////                File parent = file.getParentFile();
+////                if(!parent.exists() && !parent.mkdirs()){
+////                    throw new IllegalStateException("Couldn't create dir: " + parent);
+////                }
+//
+//                fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
+//                // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+//                ObjectOutputStream os = new ObjectOutputStream(fos);
+//                os.reset();
+//                os.writeObject(mealPlan);
+//                os.close();
+//                fos.close();
+//                System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        return retSet;
     }
 
     void saveFile(){
@@ -931,11 +919,12 @@ public class MealFragment extends Fragment {
     }
 
 
-    private static String sendGET() throws IOException {
+
+    private static String sendGET(String GET_URL) throws IOException {
 
 
         String USER_AGENT = "Mozilla/5.0";
-        String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
+       // String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
 
         URL obj = new URL(GET_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -983,7 +972,7 @@ public class MealFragment extends Fragment {
         ExpandableListView myList;
         ExpandableListAdapter swapRecipeAdapter;
         AlertDialog alert;
-        ArrayList<String> set1;
+        ArrayList<MealItem> set1;
         ArrayList<String> set2;
         ArrayList<String> set3;
         ArrayList<String> set4;
@@ -993,88 +982,109 @@ public class MealFragment extends Fragment {
         ArrayList<String> set8;
         List<String> headerTitles;
         List<Object> childTitles;
+        int helperPosition;
+        ArrayList<ArrayList<MealItem>> recipeSets;
+
+      //  ArrayList<ArrayList<MealItem>> completeList;
 
 
-        public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items) {
-            super(context, textViewResourceId, items);
+        public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items2) {
+            super(context, textViewResourceId, items2);
 
-            set1 = new ArrayList<>();
-            set1.add("Cheese");
-            set1.add("Crab Cakes");
-            set1.add("Fried Chicken");
-            set1.add("Yogurt");
-            set1.add("Zucchini");
-            set2 = new ArrayList<>();
-            set2.add("Grilled Chicken");
-            set2.add("Lobster");
-            set2.add("Meat");
-            set2.add("Sour Cream and Eggs");
-            set3 = new ArrayList<>();
-            set3.add("Cheese");
-            set3.add("Crab Cakes");
-            set3.add("Fried Chicken");
-            set3.add("Yogurt");
-            set3.add("Cheese");
-            set3.add("Crab Cakes");
-            set3.add("Fried Chicken");
-            set3.add("Yogurt");
-            set3.add("Cheese");
-            set3.add("Crab Cakes");
-            set3.add("Fried Chicken");
-            set3.add("Yogurt");
-            set3.add("Cheese");
-            set3.add("Crab Cakes");
-            set3.add("Fried Chicken");
-            set3.add("Yogurt");
-            set4 = new ArrayList<>();
-            set4.add("Grilled Chicken");
-            set4.add("Lobster");
-            set4.add("Meat");
-            set4.add("Sour Cream and Eggs");
-            set5 = new ArrayList<>();
-            set5.add("Grilled Chicken");
-            set5.add("Lobster");
-            set5.add("Meat");
-            set5.add("Sour Cream and Eggs");
-            set6 = new ArrayList<>();
-            set6.add("Grilled Chicken");
-            set6.add("Lobster");
-            set6.add("Meat");
-            set6.add("Sour Cream and Eggs");
-            set7 = new ArrayList<>();
-            set7.add("Grilled Chicken");
-            set7.add("Lobster");
-            set7.add("Meat");
-            set7.add("Sour Cream and Eggs");
-            set8 = new ArrayList<>();
-            set8.add("Grilled Chicken");
-            set8.add("Lobster");
-            set8.add("Meat");
-            set8.add("Sour Cream and Eggs");
+
+
+            File file = new File(getActivity().getFilesDir() + "/recipeSet/");
+            File inputFile = new File(file, "genericSet.ser");
+
+            RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
+            //items = rs.getRecipeSet();
+            set1 = rs.getRecipeSet();
+            recipeSets = new ArrayList<ArrayList<MealItem>>();
+
+
+//            for (int i = 0; i < items.size(); i++) {
+//                set1.add(items.get(i).getTitle());
+//            }
+            recipeSets.add(set1);
+
+
+//            set1 = new ArrayList<>();
+//            set1.add("Cheese");
+//            set1.add("Crab Cakes");
+//            set1.add("Fried Chicken");
+//            set1.add("Yogurt");
+//            set1.add("Zucchini");
+//            set2 = new ArrayList<>();
+//            set2.add("Grilled Chicken");
+//            set2.add("Lobster");
+//            set2.add("Meat");
+//            set2.add("Sour Cream and Eggs");
+//            set3 = new ArrayList<>();
+//            set3.add("Cheese");
+//            set3.add("Crab Cakes");
+//            set3.add("Fried Chicken");
+//            set3.add("Yogurt");
+//            set3.add("Cheese");
+//            set3.add("Crab Cakes");
+//            set3.add("Fried Chicken");
+//            set3.add("Yogurt");
+//            set3.add("Cheese");
+//            set3.add("Crab Cakes");
+//            set3.add("Fried Chicken");
+//            set3.add("Yogurt");
+//            set3.add("Cheese");
+//            set3.add("Crab Cakes");
+//            set3.add("Fried Chicken");
+//            set3.add("Yogurt");
+//            set4 = new ArrayList<>();
+//            set4.add("Grilled Chicken");
+//            set4.add("Lobster");
+//            set4.add("Meat");
+//            set4.add("Sour Cream and Eggs");
+//            set5 = new ArrayList<>();
+//            set5.add("Grilled Chicken");
+//            set5.add("Lobster");
+//            set5.add("Meat");
+//            set5.add("Sour Cream and Eggs");
+//            set6 = new ArrayList<>();
+//            set6.add("Grilled Chicken");
+//            set6.add("Lobster");
+//            set6.add("Meat");
+//            set6.add("Sour Cream and Eggs");
+//            set7 = new ArrayList<>();
+//            set7.add("Grilled Chicken");
+//            set7.add("Lobster");
+//            set7.add("Meat");
+//            set7.add("Sour Cream and Eggs");
+//            set8 = new ArrayList<>();
+//            set8.add("Grilled Chicken");
+//            set8.add("Lobster");
+//            set8.add("Meat");
+//            set8.add("Sour Cream and Eggs");
 
 
 
 
             headerTitles = new ArrayList<>();
-            headerTitles.add("Fancy Meals vol 1");
-            headerTitles.add("Fancy Meals vol 2");
-            headerTitles.add("Fancy Meals vol 3");
-            headerTitles.add("Fancy Meals vol 4");
-            headerTitles.add("Fancy Meals vol 5");
-            headerTitles.add("Fancy Meals vol 6");
-            headerTitles.add("Fancy Meals vol 7");
-            headerTitles.add("Fancy Meals vol 8");
+            headerTitles.add(rs.getRecipeSetTitle());
+//            headerTitles.add("Fancy Meals vol 2");
+//            headerTitles.add("Fancy Meals vol 3");
+//            headerTitles.add("Fancy Meals vol 4");
+//            headerTitles.add("Fancy Meals vol 5");
+//            headerTitles.add("Fancy Meals vol 6");
+//            headerTitles.add("Fancy Meals vol 7");
+//            headerTitles.add("Fancy Meals vol 8");
 
 
             childTitles = new ArrayList<>();
             childTitles.add(set1);
-            childTitles.add(set2);
-            childTitles.add(set3);
-            childTitles.add(set4);
-            childTitles.add(set5);
-            childTitles.add(set6);
-            childTitles.add(set7);
-            childTitles.add(set8);
+//            childTitles.add(set2);
+//            childTitles.add(set3);
+//            childTitles.add(set4);
+//            childTitles.add(set5);
+//            childTitles.add(set6);
+//            childTitles.add(set7);
+//            childTitles.add(set8);
 
 
 
@@ -1085,20 +1095,33 @@ public class MealFragment extends Fragment {
                         myList.setAdapter(swapRecipeAdapter);
 
 
-
-
-
-                        myList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            myList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                             @Override
-                            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                            public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
 
 
-                                String strName = swapRecipeAdapter.getChild(groupPosition,childPosition).toString();
+                                String strName = ((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)).getHeader();
 
                                 AlertDialog.Builder builderInner = new AlertDialog.Builder(
                                         getContext());
-                                builderInner.setMessage(strName);
+                                //builderInner.setMessage(strName);
                                 builderInner.setTitle("You Have Selected");
+
+                                View myV;
+                                LayoutInflater myVi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                myV = myVi.inflate(R.layout.meal_cell_image_only_layout, null);
+                                TextView text = (TextView) myV.findViewById(R.id.nameToSwap);
+                                text.setText(((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)).getTitle());
+                                ImageView image = (ImageView) myV.findViewById(R.id.imageViewtoSwap);
+
+                                builderInner.setView(myV);
+
+
+
+
+
+
+
                                 builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
 
                                 ) {
@@ -1115,13 +1138,28 @@ public class MealFragment extends Fragment {
                                             public void onClick(
                                                     DialogInterface dialog,
                                                     int which) {
+
+                                                //recipeSets.get(groupPosition).get(childPosition).setHeader(mealItemToSwap.getHeader());
+                                                //items.set(helperPosition, recipeSets.get(groupPosition).get(childPosition));
+                                                mealPlan.swapMeal(day, helperPosition, (MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition));
+                                                mealPlan.getListForDay(day).get(helperPosition).setHeader(items.get(helperPosition).getHeader());
+                                                //currentAdapter.notifyDataSetChanged();
+                                                currentAdapter.clear();
+                                                currentAdapter.addAll(mealPlan.getListForDay(day));
+                                                currentAdapter.notifyDataSetChanged();
+
                                                 dialog.dismiss();
                                                 alert.dismiss();
-                                                saveFile();
+                                                //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
+
+
+
+                                               // saveFile();
                                             }
                                         });
 
                                 builderInner.show();
+                                loadPicassoPicFromFile(image, ((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)));
                                 return false;
                             }
 
@@ -1151,7 +1189,9 @@ public class MealFragment extends Fragment {
             alert = builderSingle.create();
 
 
-            this.items = items;
+
+            this.items = items2;
+
         }
 
 
@@ -1176,6 +1216,7 @@ public class MealFragment extends Fragment {
             }
 
             final MealItem o = items.get(position);
+
 
             if (o != null) {
 
@@ -1294,6 +1335,8 @@ public class MealFragment extends Fragment {
                             public boolean onLongClick(View v) {
                                 currentSelection = v;
                                 builder.show();
+                                helperPosition = position;
+
                                 return true;
                             }
                         });
@@ -1679,6 +1722,11 @@ public class MealFragment extends Fragment {
             v.setBackgroundColor(getResources().getColor(R.color.main_background));
             v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
             //v.setOnLongClickListener(null);
+        }
+
+        void swapMeal(){
+
+            currentAdapter.notifyDataSetChanged();
         }
 
         private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected

@@ -140,6 +140,13 @@ public class MealPlan implements Serializable {
         return mealPlan;
     }
 
+    void swapMeal(int day, int mealNum, MealItem newMeal){
+        mealPlan.get(day).set(mealNum, newMeal);
+        System.out.println("setting day " + day + "'s meal " + mealNum + "   to " + mealPlan.get(day).get(mealNum).getTitle());
+
+
+    }
+
 
 
     ArrayList<ArrayList<MealItem>> mealPlan;

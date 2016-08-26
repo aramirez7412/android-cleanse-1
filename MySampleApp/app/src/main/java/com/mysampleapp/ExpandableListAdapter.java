@@ -87,7 +87,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        String title = (String) this.getChild(groupPosition, childPosition);
+        String title =  ((MealItem)this.getChild(groupPosition, childPosition)).getTitle();
         //int id = (int) this.getChild(groupPosition, childPosition).getClass();
 
 

@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SHAKE IT!"
-        android:id="@+id/textView"
+        android:id="@+id/nameToSwap"
         android:textSize="40sp"
         android:textAlignment="center" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewtoSwap"
         android:src="@mipmap/skaker_bottle" />
 </LinearLayout>

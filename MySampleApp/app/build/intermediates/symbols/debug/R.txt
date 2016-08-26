@@ -649,7 +649,6 @@ int id icon 0x7f0c0042
 int id ifRoom 0x7f0c001e
 int id image 0x7f0c003f
 int id imageButton 0x7f0c008e
-int id imageView 0x7f0c00cc
 int id imageView2 0x7f0c00be
 int id imageView3 0x7f0c008c
 int id imageView4 0x7f0c0090
@@ -657,6 +656,7 @@ int id imageView5 0x7f0c0095
 int id imageView6 0x7f0c0097
 int id imageView8 0x7f0c009b
 int id imageView_demoIdentityUserImage 0x7f0c0084
+int id imageViewtoSwap 0x7f0c00cc
 int id info 0x7f0c00ef
 int id ingredientHeader 0x7f0c00f4
 int id ingredients 0x7f0c00d9
@@ -704,6 +704,7 @@ int id mondayTextButton 0x7f0c00fb
 int id multiply 0x7f0c0014
 int id myDayButton 0x7f0c0094
 int id myViewAnimator 0x7f0c009e
+int id nameToSwap 0x7f0c00cb
 int id nav_drawer 0x7f0c006d
 int id nav_drawer_items 0x7f0c0073
 int id never 0x7f0c001f
@@ -794,7 +795,6 @@ int id testListView 0x7f0c0083
 int id text 0x7f0c00ee
 int id text2 0x7f0c00ec
 int id textSpacerNoButtons 0x7f0c004d
-int id textView 0x7f0c00cb
 int id textView11 0x7f0c0096
 int id textView2 0x7f0c00e0
 int id textView3 0x7f0c00ac

@@ -2076,7 +2076,6 @@ containing a value of this type.
         public static final int ifRoom=0x7f0c001e;
         public static final int image=0x7f0c003f;
         public static final int imageButton=0x7f0c008e;
-        public static final int imageView=0x7f0c00cc;
         public static final int imageView2=0x7f0c00be;
         public static final int imageView3=0x7f0c008c;
         public static final int imageView4=0x7f0c0090;
@@ -2084,6 +2083,7 @@ containing a value of this type.
         public static final int imageView6=0x7f0c0097;
         public static final int imageView8=0x7f0c009b;
         public static final int imageView_demoIdentityUserImage=0x7f0c0084;
+        public static final int imageViewtoSwap=0x7f0c00cc;
         public static final int info=0x7f0c00ef;
         public static final int ingredientHeader=0x7f0c00f4;
         public static final int ingredients=0x7f0c00d9;
@@ -2131,6 +2131,7 @@ containing a value of this type.
         public static final int multiply=0x7f0c0014;
         public static final int myDayButton=0x7f0c0094;
         public static final int myViewAnimator=0x7f0c009e;
+        public static final int nameToSwap=0x7f0c00cb;
         public static final int nav_drawer=0x7f0c006d;
         public static final int nav_drawer_items=0x7f0c0073;
         public static final int never=0x7f0c001f;
@@ -2221,7 +2222,6 @@ containing a value of this type.
         public static final int text=0x7f0c00ee;
         public static final int text2=0x7f0c00ec;
         public static final int textSpacerNoButtons=0x7f0c004d;
-        public static final int textView=0x7f0c00cb;
         public static final int textView11=0x7f0c0096;
         public static final int textView2=0x7f0c00e0;
         public static final int textView3=0x7f0c00ac;
