@@ -17,6 +17,7 @@ public class RecipeSet  implements Serializable  {
 
         recipeSet = new ArrayList<MealItem>();
 
+        recipeSetTitle =  jsonObject.getString("recipeSet");
 
         JSONArray setAr = jsonObject.getJSONArray("meals");
 
@@ -67,7 +68,7 @@ public class RecipeSet  implements Serializable  {
 
     String getRecipeSetTitle(){
         //return recipeSetTitle
-                return "need to get actual title";
+                return recipeSetTitle;
     }
 
     String recipeSetTitle;

@@ -1,29 +1,16 @@
 package com.mysampleapp;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -36,43 +23,27 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewAnimator;
-import android.widget.ViewFlipper;
-
-import com.amazonaws.http.HttpResponse;
-import com.mysampleapp.demo.DemoFragmentBase;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
-import static android.view.View.OnKeyListener;
 import static android.view.View.OnTouchListener;
 import static android.view.View.VISIBLE;
 
@@ -336,60 +307,6 @@ public class MealFragment extends Fragment {
         });
 
         purchasePlanTextView1 = (TextView) view.findViewById(R.id.purchasePlanTextView1);
-
-//        purchasePlanTextView1.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switchToPurchaseFragment("My Meal Plan");
-//            }
-//        });
-
-
-        //just used for testing to determine if plan was purchased or not
-        //if(((MainActivity)getActivity()).getPlanInt() == 0){
-
-            //noPlanView.setVisibility(View.VISIBLE);
-
-
-//            final Button candidaPlanButton = (Button) view.findViewById(R.id.mealPlan1Button);
-//            candidaPlanButton.setText("Candida Meal Plan");
-//
-//            Button parasitePlanButton = (Button) view.findViewById(R.id.mealPlan2Button);
-//            parasitePlanButton.setText("Parasite Meal Plan");
-//
-//            final Button metalMealPlanButton = (Button) view.findViewById(R.id.mealPlan3Button);
-//            metalMealPlanButton.setText("Heavy Metal Meal Plan");
-//
-//
-//
-//            candidaPlanButton.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    switchToPurchaseFragment("Candida Meal Plan", candidaInformation);
-//                }
-//            });
-//
-//            parasitePlanButton.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    switchToPurchaseFragment("Parasite Meal Plan", parasiteInformation);
-//                }
-//            });
-//
-//            metalMealPlanButton.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    switchToPurchaseFragment("Heavy Metal Meal Plan", heavyMetalInformation);
-//                }
-//            });
-
-
-
-
-
-
-    //    }
-    //    else {
 
 
         FileOutputStream fos = null;
@@ -683,46 +600,7 @@ public class MealFragment extends Fragment {
             e.printStackTrace();
         }
 
-//        if (test) {
-//            try {
-//                String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
-//                if (!jsonPlan.isEmpty()) {
-//                    ((MainActivity) getActivity()).setPlan(jsonPlan);
-//                    // ((MainActivity) getActivity()).setPlanInt(1);
-//                }
-//
-//            } catch (IOException e) {
-//                System.out.println("error downloading plan");
-//                e.printStackTrace();
-//            }
-//
-//            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
-//
-//            fos = null;
-//            try {
-//
-//                //File file = new File();
-//
-////                File parent = file.getParentFile();
-////                if(!parent.exists() && !parent.mkdirs()){
-////                    throw new IllegalStateException("Couldn't create dir: " + parent);
-////                }
-//
-//                fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
-//                // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
-//                ObjectOutputStream os = new ObjectOutputStream(fos);
-//                os.reset();
-//                os.writeObject(mealPlan);
-//                os.close();
-//                fos.close();
-//                System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
-//
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
 
         return retSet;
     }
@@ -732,10 +610,6 @@ public class MealFragment extends Fragment {
         try {
 
 
-            // File parent = file.getParentFile();
-            //if(!parent.exists() && !parent.mkdirs()){
-            //    throw new IllegalStateException("Couldn't create dir: " + parent);
-            //}
 
             fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId() + "/currentPlan.ser"));
             // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
@@ -772,43 +646,6 @@ public class MealFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-//        mealNameTextField.setOnKeyListener(new OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if (keyCode == KeyEvent.KEYCODE_BACK) {
-//                    mealNameTextField.clearFocus();
-//
-//                }
-//                return false;
-//            }
-//        });
-//
-//
-//
-//
-//        mealNameTextField.clearFocus();
-
-
-
-//        getView().setFocusableInTouchMode(true);
-//        getView().requestFocus();
-//
-//          getView().setOnKeyListener(new OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-//
-//                   //if(recipeBox.getX()==1500) {
-//                     //  recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
-//                    //   return true;
-//                  // }
-//
-//
-//                }
-//                return false;
-//            }
-//        });
 
         final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
 
@@ -969,23 +806,17 @@ public class MealFragment extends Fragment {
         float pressedY;
         boolean stayedWithinClickDistance;
         AlertDialog.Builder builderSingle;
+
         ExpandableListView myList;
         ExpandableListAdapter swapRecipeAdapter;
         AlertDialog alert;
+        AlertDialog alert2;
         ArrayList<MealItem> set1;
-        ArrayList<String> set2;
-        ArrayList<String> set3;
-        ArrayList<String> set4;
-        ArrayList<String> set5;
-        ArrayList<String> set6;
-        ArrayList<String> set7;
-        ArrayList<String> set8;
         List<String> headerTitles;
         List<Object> childTitles;
         int helperPosition;
         ArrayList<ArrayList<MealItem>> recipeSets;
 
-      //  ArrayList<ArrayList<MealItem>> completeList;
 
 
         public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items2) {
@@ -1002,89 +833,17 @@ public class MealFragment extends Fragment {
             recipeSets = new ArrayList<ArrayList<MealItem>>();
 
 
-//            for (int i = 0; i < items.size(); i++) {
-//                set1.add(items.get(i).getTitle());
-//            }
             recipeSets.add(set1);
-
-
-//            set1 = new ArrayList<>();
-//            set1.add("Cheese");
-//            set1.add("Crab Cakes");
-//            set1.add("Fried Chicken");
-//            set1.add("Yogurt");
-//            set1.add("Zucchini");
-//            set2 = new ArrayList<>();
-//            set2.add("Grilled Chicken");
-//            set2.add("Lobster");
-//            set2.add("Meat");
-//            set2.add("Sour Cream and Eggs");
-//            set3 = new ArrayList<>();
-//            set3.add("Cheese");
-//            set3.add("Crab Cakes");
-//            set3.add("Fried Chicken");
-//            set3.add("Yogurt");
-//            set3.add("Cheese");
-//            set3.add("Crab Cakes");
-//            set3.add("Fried Chicken");
-//            set3.add("Yogurt");
-//            set3.add("Cheese");
-//            set3.add("Crab Cakes");
-//            set3.add("Fried Chicken");
-//            set3.add("Yogurt");
-//            set3.add("Cheese");
-//            set3.add("Crab Cakes");
-//            set3.add("Fried Chicken");
-//            set3.add("Yogurt");
-//            set4 = new ArrayList<>();
-//            set4.add("Grilled Chicken");
-//            set4.add("Lobster");
-//            set4.add("Meat");
-//            set4.add("Sour Cream and Eggs");
-//            set5 = new ArrayList<>();
-//            set5.add("Grilled Chicken");
-//            set5.add("Lobster");
-//            set5.add("Meat");
-//            set5.add("Sour Cream and Eggs");
-//            set6 = new ArrayList<>();
-//            set6.add("Grilled Chicken");
-//            set6.add("Lobster");
-//            set6.add("Meat");
-//            set6.add("Sour Cream and Eggs");
-//            set7 = new ArrayList<>();
-//            set7.add("Grilled Chicken");
-//            set7.add("Lobster");
-//            set7.add("Meat");
-//            set7.add("Sour Cream and Eggs");
-//            set8 = new ArrayList<>();
-//            set8.add("Grilled Chicken");
-//            set8.add("Lobster");
-//            set8.add("Meat");
-//            set8.add("Sour Cream and Eggs");
-
 
 
 
             headerTitles = new ArrayList<>();
             headerTitles.add(rs.getRecipeSetTitle());
-//            headerTitles.add("Fancy Meals vol 2");
-//            headerTitles.add("Fancy Meals vol 3");
-//            headerTitles.add("Fancy Meals vol 4");
-//            headerTitles.add("Fancy Meals vol 5");
-//            headerTitles.add("Fancy Meals vol 6");
-//            headerTitles.add("Fancy Meals vol 7");
-//            headerTitles.add("Fancy Meals vol 8");
 
 
             childTitles = new ArrayList<>();
             childTitles.add(set1);
-//            childTitles.add(set2);
-//            childTitles.add(set3);
-//            childTitles.add(set4);
-//            childTitles.add(set5);
-//            childTitles.add(set6);
-//            childTitles.add(set7);
-//            childTitles.add(set8);
+
 
 
 
@@ -1100,66 +859,66 @@ public class MealFragment extends Fragment {
                             public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
 
 
+
                                 String strName = ((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)).getHeader();
 
-                                AlertDialog.Builder builderInner = new AlertDialog.Builder(
-                                        getContext());
-                                //builderInner.setMessage(strName);
-                                builderInner.setTitle("You Have Selected");
 
-                                View myV;
-                                LayoutInflater myVi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                myV = myVi.inflate(R.layout.meal_cell_image_only_layout, null);
-                                TextView text = (TextView) myV.findViewById(R.id.nameToSwap);
-                                text.setText(((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)).getTitle());
-                                ImageView image = (ImageView) myV.findViewById(R.id.imageViewtoSwap);
+                                    AlertDialog.Builder builderInner = new AlertDialog.Builder(
+                                            getContext());
 
-                                builderInner.setView(myV);
+                                    //builderInner.setMessage(strName);
 
+                                    builderInner.setTitle("You Have Selected");
 
+                                    View myV;
+                                    LayoutInflater myVi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    myV = myVi.inflate(R.layout.meal_cell_image_only_layout, null);
+                                    TextView text = (TextView) myV.findViewById(R.id.nameToSwap);
+                                    text.setText(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getTitle());
+                                    ImageView image = (ImageView) myV.findViewById(R.id.imageViewtoSwap);
 
-
-
+                                    builderInner.setView(myV);
 
 
-                                builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
+                                    builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
 
-                                ) {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        //builderSingle.show();
-                                    }
-                                });
-                                builderInner.setPositiveButton(
-                                        "Confirm",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(
-                                                    DialogInterface dialog,
-                                                    int which) {
+                                    ) {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            //builderSingle.show();
+                                        }
+                                    });
+                                    builderInner.setPositiveButton(
+                                            "Confirm",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(
+                                                        DialogInterface dialog,
+                                                        int which) {
 
-                                                //recipeSets.get(groupPosition).get(childPosition).setHeader(mealItemToSwap.getHeader());
-                                                //items.set(helperPosition, recipeSets.get(groupPosition).get(childPosition));
-                                                mealPlan.swapMeal(day, helperPosition, (MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition));
-                                                mealPlan.getListForDay(day).get(helperPosition).setHeader(items.get(helperPosition).getHeader());
-                                                //currentAdapter.notifyDataSetChanged();
-                                                currentAdapter.clear();
-                                                currentAdapter.addAll(mealPlan.getListForDay(day));
-                                                currentAdapter.notifyDataSetChanged();
+                                                    //recipeSets.get(groupPosition).get(childPosition).setHeader(mealItemToSwap.getHeader());
+                                                    //items.set(helperPosition, recipeSets.get(groupPosition).get(childPosition));
+                                                    mealPlan.swapMeal(day, helperPosition, (MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition));
+                                                    mealPlan.getListForDay(day).get(helperPosition).setHeader(items.get(helperPosition).getHeader());
+                                                    //currentAdapter.notifyDataSetChanged();
+                                                    currentAdapter.clear();
+                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                                    currentAdapter.notifyDataSetChanged();
 
-                                                dialog.dismiss();
-                                                alert.dismiss();
-                                                //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
+                                                    dialog.dismiss();
+                                                    alert.dismiss();
+                                                    //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
 
 
+                                                    // saveFile();
+                                                }
+                                            });
 
-                                               // saveFile();
-                                            }
-                                        });
+                                    builderInner.show();
+                                    loadPicassoPicFromFile(image, ((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)));
 
-                                builderInner.show();
-                                loadPicassoPicFromFile(image, ((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)));
+
                                 return false;
                             }
 
@@ -1167,11 +926,11 @@ public class MealFragment extends Fragment {
 
                         builderSingle = new AlertDialog.Builder(getContext());
                         // builderSingle.setIcon(R.drawable.ic_launcher);
+
                         builderSingle.setTitle("Select Recipe to Swap:");
 
-
-
                         builderSingle.setView(myList);
+
 
 
 
@@ -1186,7 +945,27 @@ public class MealFragment extends Fragment {
                                     }
                                 });
 
+            AlertDialog.Builder cantSwapBuilder = new AlertDialog.Builder(
+                    getContext());
+
+
+            cantSwapBuilder.setMessage("You Cannot Swap A Shake");
+
+
+            cantSwapBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener(
+
+            ) {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    //builderSingle.show();
+                }
+            });
+
+
+
             alert = builderSingle.create();
+            alert2 = cantSwapBuilder.create();
 
 
 
@@ -1234,40 +1013,6 @@ public class MealFragment extends Fragment {
 
                     recipeHeader.setText(o.getHeader());
 
-                    //check if meal to be added is completed, if so then it will not need a long click listener and will
-                    //need to set the header to grey
-
-
-                    //if not then set up listener to handle the completion of a meal and set color to blue
-
-
-
-
-
-
-
-//                        //sets up the actions that are connected to meal completion confirmation dialog
-//                        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                switch (which) {
-//                                    case DialogInterface.BUTTON_POSITIVE:
-//                                        mealComplete(currentSelection);
-//
-//                                        mealPlan.setCompleted(day, position);
-//                                        break;
-//
-//                                    case DialogInterface.BUTTON_NEGATIVE:
-//                                        break;
-//                                }//end switch
-//                            }
-//                        };//end listener
-//
-//                        //this sets up a yes/no selection box to make sure users want to complete a meal
-//                        final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-//                        builder.setMessage("Have You Completed This Meal?\n(option cannot be undone)").setPositiveButton("YES", dialogClickListener)
-//                                .setNegativeButton("NO", dialogClickListener);
-                        //sets up the actions that are connected to meal completion confirmation dialog
 
                         final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
@@ -1292,12 +1037,18 @@ public class MealFragment extends Fragment {
 
                                     case DialogInterface.BUTTON_NEGATIVE:
 
-                                        for (int i = 0; i < swapRecipeAdapter.getGroupCount(); i++) {
-                                            myList.collapseGroup(i);
+                                        System.out.println(o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE"));
+
+                                        if(o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")) {
+                                           alert2.show();
                                         }
+                                        else {
+                                            for (int i = 0; i < swapRecipeAdapter.getGroupCount(); i++) {
+                                                myList.collapseGroup(i);
 
-
-                                        alert.show();
+                                                alert.show();
+                                            }
+                                        }
 
                                         break;
 
@@ -1316,17 +1067,6 @@ public class MealFragment extends Fragment {
                         v.setBackgroundColor(Color.parseColor("#AFC6C9"));
                         recipeImageView.setBackgroundColor(Color.parseColor("#AFC6C9"));
 
-
-                        //this listen allows users to expand/collapse a meal
-//                        v.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                System.out.println("show it plz");
-//                                //tempDay = day; //used to see if new day when displaying list, so it will close all open items
-//                                hideAndShowMealItem(o);
-//                                //recipeBox.setVisibility(View.VISIBLE);
-//                            }
-//                        });
 
 
                         //this listener allows users to complete meal
@@ -1418,86 +1158,6 @@ public class MealFragment extends Fragment {
 
                         });
 
-
-
-//                        v.setOnTouchListener(swipeDetector);
-//
-//
-//
-//                        v.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//
-//                                if (swipeDetector.swipeDetected()) {
-//
-//                                    //figure out how to use correct libraries to support all animations
-//
-//
-//                                    switch (swipeDetector.getAction()) {
-//
-//                                        //if right to left swipe then swipe then switch displayed plan to the next day
-//                                        case RL:
-//
-//                                            //check if next day exists, if so proceed displaying next day
-//                                            if (day < daysInPlan - 1) {
-//
-//                                                viewAnimator.setInAnimation(inRight);
-//                                                viewAnimator.setOutAnimation(outLeft);
-//
-//                                                switchListView();
-//
-//                                                day++;
-//                                                currenttv.setText("Day " + (day + 1));
-//                                                currentAdapter.clear();
-//                                                currentAdapter.addAll(mealPlan.getListForDay(day));
-//                                                currentAdapter.notifyDataSetChanged();
-//
-//                                                viewAnimator.showNext();
-//
-//                                            }
-//                                            break;
-//
-//                                        //if left to right swipe then switch displayed plan to previous day
-//                                        case LR:
-//
-//                                            //check if previous day exists, if so proceed displaying previous day
-//                                            if (day > 0) {
-//
-//                                                viewAnimator.setInAnimation(inLeft);
-//                                                viewAnimator.setOutAnimation(outRight);
-//
-//                                                switchListView();
-//
-//                                                day--;
-//
-//                                                currenttv.setText("Day " + (day + 1));
-//                                                currentAdapter.clear();
-//                                                currentAdapter.addAll(mealPlan.getListForDay(day));
-//                                                currentAdapter.notifyDataSetChanged();
-//
-//                                                viewAnimator.showPrevious();
-//
-//                                            }
-//                                            break;
-//                                        case TB:
-//                                            //put in function cuz this is used twice
-//
-//
-//                                            break;
-//                                        default:
-//
-//                                            break;
-//                                    }//end switch
-//                                }//end if swipe detected
-//                                else{
-//                                    //just open recipe
-//                                    hideAndShowMealItem(o);
-//                                }
-//                            }//end on click
-//
-//                        });
-
-
                     }//end else
 
 
@@ -1510,8 +1170,6 @@ public class MealFragment extends Fragment {
 
             return v;
         }
-
-
 
 
 
@@ -1613,99 +1271,7 @@ public class MealFragment extends Fragment {
                     Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
                 }
             }
-        //}
 
-//        void loadPicassoPicFromFile(final ImageView v, final MealItem o){
-//            if(!o.isLoaded()){
-//
-//                Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
-//                    @Override
-//                    public void onSuccess() {
-//
-//
-//                        File file = new File(getContext().getFilesDir(), o.getImageUrl());
-//
-//                        File parent = file.getParentFile();
-//                        if(!parent.exists() && !parent.mkdirs()){
-//                            throw new IllegalStateException("Couldn't create dir: " + parent);
-//                        }
-//
-//                        try {
-//                            file.createNewFile();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                        System.out.println(file.exists() + " does it exists");
-//
-//                        FileOutputStream fos = null;
-//                        try {
-//
-//                            // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
-//                            fos = new FileOutputStream(file);
-//
-//                            Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
-//
-//                            String s = o.getImageUrl();
-//                            //if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
-//                              //  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//                            //}
-//                            //else
-//                            //{
-//                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//                            //}
-//
-//                            o.setLoaded(true);
-//                            Log.i("image", "image saved to >>>" + file.getAbsolutePath());
-//
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        } finally {
-//                            try {
-//                                fos.close();
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onError() {
-//                        System.out.println("failure");
-//                    }
-//                });
-//
-//
-//                // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeImageView);
-//
-//
-//            }//end if not loaded
-//            else {
-//
-//                File file = new File(getContext().getFilesDir(), o.getImageUrl());
-//
-//                if (!file.exists()) {
-//                    System.out.println("file did not exist");
-//                    o.setLoaded(false);
-//
-//                } else {
-//
-//
-////                        Picasso.Builder builder = new Picasso.Builder(getContext());
-////                        builder.listener(new Picasso.Listener()
-////                        {
-////                            @Override
-////                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
-////                            {
-////                                exception.printStackTrace();
-////                            }
-////                        });
-//                    System.out.println("loaded from memory");
-//                    Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
-//                }
-//            }
-//        }
 
 
         void downloadAndSaveImage(){
