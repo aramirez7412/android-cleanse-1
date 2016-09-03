@@ -13,7 +13,7 @@
      http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.amazon.mysampleapp"
+    package="com.amazon.mysamplecleanseapp"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -24,16 +24,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:name="com.mysampleapp.Application"
+        android:name="com.mysamplecleanseapp.Application"
         android:allowBackup="true"
         android:icon="@mipmap/main_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.mysampleapp.SplashActivity"
+            android:name="com.mysamplecleanseapp.SplashActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
@@ -43,12 +44,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mysampleapp.SignInActivity"
+            android:name="com.mysamplecleanseapp.SignInActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_sign_in" >
         </activity>
         <activity
-            android:name="com.mysampleapp.MainActivity"
+            android:name="com.mysamplecleanseapp.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
 
