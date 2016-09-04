@@ -7,7 +7,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout3"
+        android:id="@+id/foodListButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -67,7 +67,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout3"
+        android:layout_below="@+id/foodListButton"
         android:layout_above="@+id/linearLayout2"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
@@ -137,8 +137,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout5"
         android:layout_alignTop="@+id/linearLayout4"
-        android:layout_alignRight="@+id/linearLayout3"
-        android:layout_alignEnd="@+id/linearLayout3">
+        android:layout_alignRight="@+id/foodListButton"
+        android:layout_alignEnd="@+id/foodListButton">
 
         <ImageView
             android:layout_width="65dp"

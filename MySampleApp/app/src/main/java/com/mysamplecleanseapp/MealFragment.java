@@ -1270,8 +1270,10 @@ public class MealFragment extends Fragment {
             } else {
 
                 System.out.println("loaded from memory");
-                Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
-                //Glide.with(getContext()).load("file://" + file.getAbsolutePath()).centerCrop().crossFade().into(v);
+               // Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
+                Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().into(v);
+
+
 
             }
         }

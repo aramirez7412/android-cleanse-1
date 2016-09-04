@@ -14,7 +14,8 @@
         android:clickable="false"
         android:focusableInTouchMode="false"
         android:paddingLeft="20dp"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:typeface="serif" />
 
 
 </LinearLayout>

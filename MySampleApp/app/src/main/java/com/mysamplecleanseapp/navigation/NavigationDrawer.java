@@ -26,6 +26,7 @@ import com.PurchaseFragment;
 import com.amazonaws.mobile.AWSMobileClient;
 import com.amazonaws.mobile.user.IdentityManager;
 import com.amazonaws.mobile.user.IdentityProvider;
+import com.mysamplecleanseapp.FoodListFragment;
 import com.mysamplecleanseapp.HomeFragment;
 import com.mysamplecleanseapp.MealFragment;
 import com.mysamplecleanseapp.QuizFragment;
@@ -114,6 +115,10 @@ public class NavigationDrawer {
                         fragmentName = "Quiz";
                         break;
                     case 4:
+                        fragment = new FoodListFragment();
+                        fragmentName = "Food List";
+                        break;
+                    case 5:
                         fragment = new PurchaseFragment();
                         fragmentName = "Recipe Store";
                         break;

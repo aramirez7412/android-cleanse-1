@@ -29,6 +29,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     View view;
     ViewGroup myDayButton;
+    ViewGroup foodListButton;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -76,6 +78,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).switchToPlanFragment();
+            }
+        });
+
+
+        foodListButton = (ViewGroup) view.findViewById(R.id.foodListButton);
+
+        foodListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).switchToFoodListFragment();
             }
         });
 

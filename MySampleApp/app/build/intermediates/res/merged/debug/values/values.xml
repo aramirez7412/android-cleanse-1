@@ -297,6 +297,7 @@
     <string name="main_fragment_subtitle_user_identity">Keep track of users</string>
     <string name="main_fragment_title_user_identity">User Identity</string>
     <string name="main_nav_menu_default_user_text">\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020</string>
+    <string name="main_nav_menu_food_list_fragment">Food List</string>
     <string name="main_nav_menu_item_home">Home</string>
     <string name="main_nav_menu_item_identity_demo">User Identity</string>
     <string name="main_nav_menu_item_meal_fragment">Meal Tracker</string>

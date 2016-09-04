@@ -331,9 +331,14 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
                 R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
                 new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_quiz_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, QuizFragment.class)));
 
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Food List", R.drawable.question_mark_icon,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
+                R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_food_list_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, FoodListFragment.class)));
+
+
         navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipe Store", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
                 R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, QuizFragment.class)));
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, PurchasePlanFragment.class)));
 
 
         //DemoConfiguration.DemoFeature mealTracker = new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.icon_home, R.string.main_nav_menu_item_meal_fragment,
@@ -667,6 +672,34 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
                 .replace(R.id.main_fragment_container, fragment, fragmentName)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .addToBackStack("previousFragment")
+                .commit();
+
+        // Set the title for the fragment.
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(fragmentName);
+        }
+    }//end switch fragment function
+
+    void switchToFoodListFragment(){
+
+        Fragment fragment;
+        String fragmentName;
+
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Clear back stack when navigating from the Nav Drawer.
+        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragment = new FoodListFragment();
+        fragmentName = "Food List";
+
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment_container, fragment, fragmentName)
+                .addToBackStack("previousFragment")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
 
         // Set the title for the fragment.

@@ -44,7 +44,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        System.out.println("Testing     " + ((ArrayList) childTitles.get(groupPosition)).get(childPosition));
         return ((ArrayList) childTitles.get(groupPosition)).get(childPosition);
        // return childTitles.get(headerTitles.get(groupPosition)).get(0);
         //return childTitles.get(headerTitles.get(groupPosition)).get(childPosition);
