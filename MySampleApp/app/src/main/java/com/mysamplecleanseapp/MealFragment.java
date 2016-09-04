@@ -21,6 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -71,7 +72,6 @@ public class MealFragment extends Fragment {
 
     View view;
 
-    ViewGroup noPlanView;
 
     //used for both displaying one day of plan, all elements marked 2
     //are used to animate swiping through days of plan
@@ -101,7 +101,6 @@ public class MealFragment extends Fragment {
     View recipeBox;
 
     ViewGroup mealCell;
-    ViewGroup topMenu;
     TextView currenttv;
     MealItemAdapter currentAdapter;
     ListView previousList;
@@ -135,9 +134,7 @@ public class MealFragment extends Fragment {
     String parasiteInformation = "The Fast Metabolism Parasite Cleanse is for individuals looking for a program designed to help reduce:\n• Parasites • Symptoms of IBS • Traveler's diarrhea • Skin irritations or unexplained rashes, hives, rosacea or eczema • Teeth grinding throughout the night • Pain or aching in your muscles or joints • Fatigue, exhaustion, depression, or frequent feelings of apathy • Iron-deficiency anemia \nIt also can help enhance performance, mental clarity, and stimulate detoxiﬁcation.";
 
 
-    ViewGroup topMenuPage1;
-    ViewGroup topMenuPage2;
-    Button viewPlansButton;
+
 
 
 
@@ -199,7 +196,6 @@ public class MealFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
-        noPlanView = (ViewGroup) view.findViewById(R.id.noPlanLayoutId);
 
 
         ViewGroup layout1 = (ViewGroup) view.findViewById(R.id.layout1);
@@ -228,92 +224,8 @@ public class MealFragment extends Fragment {
         recipeBoxImageView = (ImageView) recipeBox.findViewById(R.id.recipeBoxImageView);
 
         //setup top menu
-        topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
-        topMenuPage1 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage1);
-        topMenuPage2 = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenuPage2);
-        viewPlansButton = (Button) view.findViewById(R.id.viewOtherPlansButton);
-        takeQuizButton = (Button) view.findViewById(R.id.takeQuizButton);
-
-        topMenu = (ViewGroup) view.findViewById(R.id.mealTrackerTopMenu);
-        menuArrow = (TextView) layout1.findViewById(R.id.menuArrow);
-        menuArrow2 = (TextView) layout2.findViewById(R.id.menuArrow);
-        upArrow = (TextView) view.findViewById(R.id.upMenuButton);
-
-        final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
-
-        final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
-
-        mQuickFadeOut.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-                topMenuPage1.setVisibility(view.GONE);
-                topMenuPage2.startAnimation(mQuickFadeIn);
-                topMenuPage2.setVisibility(view.VISIBLE);
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
 
 
-
-
-
-        viewPlansButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                topMenuPage1.startAnimation(mQuickFadeOut);
-
-            }
-        });
-
-
-        topMenu.setY(-1000);
-        topMenu.setVisibility(INVISIBLE);
-        topMenu.bringToFront();
-
-
-        final View.OnClickListener showTopMenu = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                topMenu.setVisibility(View.VISIBLE);
-                topMenuPage2.setVisibility(View.INVISIBLE);
-                topMenuPage1.setVisibility(View.VISIBLE);
-                topMenu.animate().translationY(0).setDuration(600).start();
-
-            }
-        };
-
-        menuArrow.setOnClickListener(showTopMenu);
-
-        menuArrow2.setOnClickListener(showTopMenu);
-
-        upArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                topMenu.animate().translationY(-1000).setDuration(600).start();
-                topMenu.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        takeQuizButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startQuiz();
-            }
-        });
-
-        purchasePlanTextView1 = (TextView) view.findViewById(R.id.purchasePlanTextView1);
 
 
         FileOutputStream fos = null;
@@ -389,7 +301,6 @@ public class MealFragment extends Fragment {
 
 
 
-            noPlanView.setVisibility(View.GONE);
 
 
 
@@ -657,33 +568,6 @@ public class MealFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        final Animation mQuickFadeOut = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_out);
-
-        final Animation mQuickFadeIn = AnimationUtils.loadAnimation(this.getContext(), R.anim.quick_fade_in);
-
-        mQuickFadeOut.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-                    topMenuPage2.setVisibility(view.INVISIBLE);
-                    topMenuPage1.startAnimation(mQuickFadeIn);
-                    topMenuPage1.setVisibility(view.VISIBLE);
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-
-
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
@@ -695,15 +579,7 @@ public class MealFragment extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 
-                    System.out.println(recipeBox.getX());
-                    if(topMenuPage2.getVisibility() == View.VISIBLE) {
-                        topMenuPage2.startAnimation(mQuickFadeOut);
-                    }
-                    else if(topMenu.getVisibility() == View.VISIBLE){
-                        topMenu.animate().translationY(-1000).setDuration(600).start();
-                        topMenu.setVisibility(View.INVISIBLE);
-                    }
-                    else if(recipeBox.getX() == 0) {
+                    if(recipeBox.getX() == 0) {
                         recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
                     }
                     else{
@@ -1024,6 +900,13 @@ public class MealFragment extends Fragment {
                     recipeHeader.setText(o.getHeader());
 
 
+                    v.findViewById(R.id.completeCheckBox).setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            o.toggleComplete();
+                        }
+                    });
+
                         final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -1073,9 +956,10 @@ public class MealFragment extends Fragment {
                         builder.setMessage("Please Select an Option").setPositiveButton("Complete", dialogClickListener)
                                 .setNegativeButton("Change Meal", dialogClickListener).setNeutralButton("Cancel", dialogClickListener);
 
+                    ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
 
-                        v.setBackgroundColor(Color.parseColor("#AFC6C9"));
-                        recipeImageView.setBackgroundColor(Color.parseColor("#AFC6C9"));
+                        //v.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        //recipeImageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
 
 
@@ -1398,14 +1282,16 @@ public class MealFragment extends Fragment {
         }
 
         void mealComplete(View v) {
-            v.setBackgroundColor(Color.GRAY);
-            v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
+            //v.setBackgroundColor(Color.GRAY);
+            ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(true);
+            //v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
             //v.setOnLongClickListener(null);
         }
-
         void mealUncomplete(View v){
-            v.setBackgroundColor(getResources().getColor(R.color.main_background));
-            v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
+            ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
+
+            // v.setBackgroundColor(getResources().getColor(R.color.main_background));
+            //v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
             //v.setOnLongClickListener(null);
         }
 

@@ -370,48 +370,48 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         //String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx8XiZ9iTtGcmSmYG8JkKd3U37rnxSjhlJYPnBESkMQ4izxSRfV+tNLD0CM+X3ki5D++doyvIh3gmbGrzhQBQCM/qtg5U6pYyPVJQvGmgQFPivWdB/c3dztNAzTqIb/5/iMBG1imQm+z6YYV7yM0xDtDtfA7Hyusuwi2s08FoI72Op8dYKtDX3Xu4bqRw8DAMAaByF+RQH2BWHOEKUatVWKBvjXaYqAl7M7kI36l2ui9KNXhMNeWdSEa+oyD0RODIrGfoeLrEtUOT4VEoVS4+DO3WysontP3HqOH9WQE8g7rH9aH+FwTs931wdK76vlwyD8nOZjoL5uTwA7VxEdMgQwIDAQAB";
         String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj9w0GqYOja+NDy+czZFyoYGCLXY/UeXNECPrIvR56IJDxTJED4o4Vfh5q6X2U+P7bRrnL9EUeRJxBUeXlw71bPZQA8dGYGhMtlgnBKmaQYAUYL5vEmZurSBB/jsyx6Udh6UEDSmnNjmLHvWf6JqIkzI07Y0QjLtEFeMRHoLzjzST1/s6d8CE5jarh+ENl1JJCHcZWo4nmPdd8dA9HUwug3wTdJMUjEOowxC0CYns334FNk2PBjsUrMHHw9OYzztqCYEjIUvT6K7bx9+qxml+W0B+QYvqPyFGxV+fN41Bb0VdVfzt3HRO3WqzEYXLyMAqoFD584cy0niyWWQBPW6NswIDAQAB";
         // compute your public key and store it in base64EncodedPublicKey
-        mHelper = new IabHelper(this, base64EncodedPublicKey);
-
-
-
-       final IabHelper.QueryInventoryFinishedListener mGotInventoryListener
-                = new IabHelper.QueryInventoryFinishedListener() {
-            public void onQueryInventoryFinished(IabResult result,
-                                                 Inventory inventory) {
-
-                if (result.isFailure()) {
-                    // handle error here
-                }
-                else {
-                    // does the user have the premium upgrade?
-                    boolean sampleBool = inventory.hasPurchase("recipetest1");
-                    // update UI accordingly
-                }
-            }
-        };
-
-
-
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                if (!result.isSuccess()) {
-                    // Oh no, there was a problem.
-                    Log.d("Error", "Problem setting up In-app Billing: " + result);
-                }
-                else{
-                    System.out.println("successfully set up billing dawg");
-                }
-                // Hooray, IAB is fully set up!
-                try {
-                    mHelper.queryInventoryAsync(mGotInventoryListener);
-                } catch (IabHelper.IabAsyncInProgressException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-
+//        mHelper = new IabHelper(this, base64EncodedPublicKey);
+//
+//
+//
+//       final IabHelper.QueryInventoryFinishedListener mGotInventoryListener
+//                = new IabHelper.QueryInventoryFinishedListener() {
+//            public void onQueryInventoryFinished(IabResult result,
+//                                                 Inventory inventory) {
+//
+//                if (result.isFailure()) {
+//                    // handle error here
+//                }
+//                else {
+//                    // does the user have the premium upgrade?
+//                    boolean sampleBool = inventory.hasPurchase("recipetest1");
+//                    // update UI accordingly
+//                }
+//            }
+//        };
+//
+//
+//
+//        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+//            public void onIabSetupFinished(IabResult result) {
+//                if (!result.isSuccess()) {
+//                    // Oh no, there was a problem.
+//                    Log.d("Error", "Problem setting up In-app Billing: " + result);
+//                }
+//                else{
+//                    System.out.println("successfully set up billing dawg");
+//                }
+//                // Hooray, IAB is fully set up!
+//                try {
+//                    mHelper.queryInventoryAsync(mGotInventoryListener);
+//                } catch (IabHelper.IabAsyncInProgressException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
+//
+//
 
 
 
@@ -542,12 +542,12 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mHelper != null) try {
-            mHelper.dispose();
-        } catch (IabHelper.IabAsyncInProgressException e) {
-            e.printStackTrace();
-        }
-        mHelper = null;
+//        if (mHelper != null) try {
+//            mHelper.dispose();
+//        } catch (IabHelper.IabAsyncInProgressException e) {
+//            e.printStackTrace();
+//        }
+//        mHelper = null;
     }
 
     @Override

@@ -2,23 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/meal_cell_view"
-    android:background="#AFC6C9">
+    android:id="@+id/meal_cell_view">
 
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:id="@+id/mealCellImageView"
         android:src="@drawable/shaker_bottle"
-        android:background="#AFC6C9"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="30dp"
+        android:scaleType="fitCenter"
         android:layout_centerVertical="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:scaleType="fitCenter"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,23 +22,38 @@
         android:id="@+id/mealHeader"
         android:layout_gravity="center"
         android:textSize="20sp"
-        android:layout_alignTop="@+id/mealCellImageView"
-        android:layout_toRightOf="@+id/mealCellImageView"
-        android:layout_toEndOf="@+id/mealCellImageView"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp" />
+        android:focusableInTouchMode="false"
+        android:typeface="sans"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/mealName"
+        android:layout_alignStart="@+id/mealName"
+        android:layout_marginTop="7dp"
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Shake"
         android:id="@+id/mealName"
         android:layout_gravity="center"
         android:textSize="20sp"
+        android:typeface="serif"
         android:layout_below="@+id/mealHeader"
-        android:layout_alignLeft="@+id/mealHeader"
-        android:layout_alignStart="@+id/mealHeader"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_toRightOf="@+id/mealCellImageView"
+        android:layout_toEndOf="@+id/mealCellImageView"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="10dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/completeCheckBox"
+        android:checked="false"
+        android:layout_alignTop="@+id/mealHeader"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_above="@+id/mealName" />
 
 </RelativeLayout>
