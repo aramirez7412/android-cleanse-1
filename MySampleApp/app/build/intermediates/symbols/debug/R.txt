@@ -720,6 +720,7 @@ int id planDescriptionTextView 0x7f0c00a9
 int id planNameTextView 0x7f0c00a7
 int id plusOunceButton 0x7f0c00ba
 int id prevDayButton 0x7f0c0082
+int id progressWheel 0x7f0c00fc
 int id progress_circular 0x7f0c0005
 int id progress_horizontal 0x7f0c0006
 int id quizEndLayout 0x7f0c00ac
@@ -913,6 +914,7 @@ int layout slide_in_right 0x7f04004a
 int layout slide_out_left 0x7f04004b
 int layout slide_out_right 0x7f04004c
 int layout support_simple_spinner_dropdown_item 0x7f04004d
+int layout wheel_layout 0x7f04004e
 int mipmap button_facebook 0x7f030000
 int mipmap button_facebook_pressed 0x7f030001
 int mipmap ic_launcher 0x7f030002

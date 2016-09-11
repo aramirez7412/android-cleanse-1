@@ -8,7 +8,10 @@
 //
 package com.mysamplecleanseapp;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.amazonaws.mobile.AWSMobileClient;
 import com.amazonaws.mobile.user.IdentityManager;
@@ -32,6 +36,7 @@ import com.mysamplecleanseapp.util.IabHelper;
 import com.mysamplecleanseapp.util.IabResult;
 import com.mysamplecleanseapp.util.Inventory;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,6 +50,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static String BUNDLE_KEY_TOOLBAR_TITLE = "title";
 
     /** The identity manager used to keep track of the current user account. */
-    private IdentityManager identityManager;
+  //  private IdentityManager identityManager;
 
     /** The toolbar view control. */
     private Toolbar toolbar;
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     User currentUser;
     IabHelper mHelper;
-
+    ProgressDialog progress;
 
     /**
      * Initializes the Toolbar for use with the activity.
@@ -185,7 +192,7 @@ String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\"
 //                throw new IllegalStateException("Couldn't create dir: " + parent);
 //            }
 
-            RecipeSet mySet = new RecipeSet(obj);
+            RecipeSet mySet = new RecipeSet(obj, getApplicationContext());
 
             File outputFile = new File(file, "genericSet.ser");
             fos = new FileOutputStream(outputFile);
@@ -212,6 +219,110 @@ String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\"
     }
 
     void CheckAndDownloadPurchasedRecipeSets(){
+
+    }
+
+    class DownloadPlan extends AsyncTask<MyTaskParams, Void, MyTaskParams> {
+
+
+        @Override
+        protected MyTaskParams doInBackground(MyTaskParams... params) {
+
+            try {
+
+                String GET_URL = params[0].jsonURL;
+                Context c = params[0].context;
+                String USER_AGENT = "Mozilla/5.0";
+                // String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
+
+                URL obj = new URL(GET_URL);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", USER_AGENT);
+                int responseCode = con.getResponseCode();
+                System.out.println("GET Response Code :: " + responseCode);
+                if (responseCode == HttpURLConnection.HTTP_OK) { // success
+                    BufferedReader in = new BufferedReader(new InputStreamReader(
+                            con.getInputStream()));
+                    String inputLine;
+                    StringBuffer response = new StringBuffer();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                    // print result
+                    System.out.println(response.toString());
+
+                    return new MyTaskParams(response.toString(), c);
+                    //return response.toString();
+                } else {
+                    System.out.println("GET request not worked");
+                    return null;
+                }
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(MyTaskParams result) {
+
+            Context c = result.context;
+
+
+            FileOutputStream fos = null;
+            Boolean test = false;
+            MealPlan mealPlan = null;
+
+            fos = null;
+            try {
+
+                setPlan(result.jsonURL);
+
+                //initialize the jsonObject
+                JSONArray jsonArray;
+                jsonArray = new JSONArray(getJSONPlan());
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                System.out.println("before the parse");
+                //parse the object and create a meal plan
+                mealPlan = new MealPlan(jsonObject, c, progress);
+
+                File file = new  File(c.getFilesDir() + "/" + getUserId(), "currentPlan.ser");
+
+                File parent = file.getParentFile();
+                if(!parent.exists() && !parent.mkdirs()){
+                    throw new IllegalStateException("Couldn't create dir: " + parent);
+                }
+
+                fos = new FileOutputStream(file);
+                // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+                ObjectOutputStream os = new ObjectOutputStream(fos);
+                os.reset();
+                os.writeObject(mealPlan);
+                os.close();
+                fos.close();
+                System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
 
     }
 
@@ -291,9 +402,9 @@ String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\"
         signInButton = (Button) findViewById(R.id.button_signin);
         signInButton.setOnClickListener(this);
 
-        final boolean isUserSignedIn = identityManager.isUserSignedIn();
-        signOutButton.setVisibility(isUserSignedIn ? View.VISIBLE : View.INVISIBLE);
-        signInButton.setVisibility(!isUserSignedIn ? View.VISIBLE : View.INVISIBLE);
+       // final boolean isUserSignedIn = identityManager.isUserSignedIn();
+        //signOutButton.setVisibility(isUserSignedIn ? View.VISIBLE : View.INVISIBLE);
+       // signInButton.setVisibility(!isUserSignedIn ? View.VISIBLE : View.INVISIBLE);
 
     }
 
@@ -370,6 +481,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        progress = new ProgressDialog(this);
 
         //for final product do not hard code this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx8XiZ9iTtGcmSmYG8JkKd3U37rnxSjhlJYPnBESkMQ4izxSRfV+tNLD0CM+X3ki5D++doyvIh3gmbGrzhQBQCM/qtg5U6pYyPVJQvGmgQFPivWdB/c3dztNAzTqIb/5/iMBG1imQm+z6YYV7yM0xDtDtfA7Hyusuwi2s08FoI72Op8dYKtDX3Xu4bqRw8DAMAaByF+RQH2BWHOEKUatVWKBvjXaYqAl7M7kI36l2ui9KNXhMNeWdSEa+oyD0RODIrGfoeLrEtUOT4VEoVS4+DO3WysontP3HqOH9WQE8g7rH9aH+FwTs931wdK76vlwyD8nOZjoL5uTwA7VxEdMgQwIDAQAB";
@@ -422,19 +534,19 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         // Obtain a reference to the mobile client. It is created in the Application class,
         // but in case a custom Application class is not used, we initialize it here if necessary.
-        AWSMobileClient.initializeMobileClientIfNecessary(this);
+
+       // AWSMobileClient.initializeMobileClientIfNecessary(this);
 
         // Obtain a reference to the mobile client. It is created in the Application class.
-        final AWSMobileClient awsMobileClient = AWSMobileClient.defaultMobileClient();
+       // final AWSMobileClient awsMobileClient = AWSMobileClient.defaultMobileClient();
 
         // Obtain a reference to the identity manager.
-        identityManager = awsMobileClient.getIdentityManager();
+       // identityManager = awsMobileClient.getIdentityManager();
 
         setContentView(R.layout.activity_main);
 
         setupToolbar(savedInstanceState);
 
-        setupNavigationMenu(savedInstanceState);
 
 
         currentUser = new User();
@@ -446,6 +558,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         currentUser = LoadUser(currentUser.getUserId());
 
+
+
         if(currentUser == null){
             currentUser = new User();
             currentUser.setUserId("guestUser");
@@ -453,6 +567,50 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             SaveUser(currentUser);
             CreateTempRecipeSetForTesting();
         }
+
+
+
+
+        FileOutputStream fos = null;
+        Boolean test = false;
+        MealPlan mealPlan = null;
+        try {
+
+            FileInputStream fis = new FileInputStream(new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+            mealPlan = (MealPlan) is.readObject();
+
+
+            //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+            is.close();
+            fis.close();
+
+            System.out.println("successfully loaded mealPlan");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            test = true;
+        } catch (IOException e) {
+            test = true;
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            test = true;
+            e.printStackTrace();
+        }
+
+        if(test) {
+
+            showWheel();
+
+                //String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
+                DownloadPlan dl = new DownloadPlan();
+            MyTaskParams mtp = new MyTaskParams("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans", getApplicationContext());
+                dl.execute(mtp);
+
+        }
+
+        setupNavigationMenu(savedInstanceState);
+
 
 //        //will need to check if online
 //        IdentityManager.IdentityHandler idHandler = new IdentityManager.IdentityHandler() {
@@ -486,16 +644,16 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     @Override
     protected void onResume() {
         super.onResume();
-        if (!AWSMobileClient.defaultMobileClient().getIdentityManager().isUserSignedIn()) {
-            // In the case that the activity is restarted by the OS after the application
-            // is killed we must redirect to the splash activity to handle the sign-in flow.
-          //  Intent intent = new Intent(this, SplashActivity.class);
-          //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          //  startActivity(intent);
-            return;
-        }
-
-        final AWSMobileClient awsMobileClient = AWSMobileClient.defaultMobileClient();
+//        if (!AWSMobileClient.defaultMobileClient().getIdentityManager().isUserSignedIn()) {
+//            // In the case that the activity is restarted by the OS after the application
+//            // is killed we must redirect to the splash activity to handle the sign-in flow.
+//          //  Intent intent = new Intent(this, SplashActivity.class);
+//          //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//          //  startActivity(intent);
+//            return;
+//        }
+//
+//        final AWSMobileClient awsMobileClient = AWSMobileClient.defaultMobileClient();
     }
 
     @Override
@@ -517,24 +675,24 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
     @Override
     public void onClick(final View view) {
-        if (view == signOutButton) {
-            // The user is currently signed in with a provider. Sign out of that provider.
-            identityManager.signOut();
-            // Show the sign-in button and hide the sign-out button.
-            signOutButton.setVisibility(View.INVISIBLE);
-            signInButton.setVisibility(View.VISIBLE);
-
-            // Close the navigation drawer.
-            navigationDrawer.closeDrawer();
-            return;
-        }
-        if (view == signInButton) {
-            // Start the sign-in activity. Do not finish this activity to allow the user to navigate back.
-            startActivity(new Intent(this, SignInActivity.class));
-            // Close the navigation drawer.
-            navigationDrawer.closeDrawer();
-            return;
-        }
+//        if (view == signOutButton) {
+//            // The user is currently signed in with a provider. Sign out of that provider.
+//            //identityManager.signOut();
+//            // Show the sign-in button and hide the sign-out button.
+//            signOutButton.setVisibility(View.INVISIBLE);
+//            signInButton.setVisibility(View.VISIBLE);
+//
+//            // Close the navigation drawer.
+//            navigationDrawer.closeDrawer();
+//            return;
+//        }
+//        if (view == signInButton) {
+//            // Start the sign-in activity. Do not finish this activity to allow the user to navigate back.
+//            startActivity(new Intent(this, SignInActivity.class));
+//            // Close the navigation drawer.
+//            navigationDrawer.closeDrawer();
+//            return;
+//        }
         // ... add any other button handling code here ...
 
     }
@@ -744,6 +902,19 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
     public IabHelper getIabHelper(){
         return mHelper;
+    }
+
+    public void hideWheel(){
+
+        progress.dismiss();
+    }
+
+    public void showWheel(){
+
+        progress.setMessage("INITIALIZING DATA...PlEASE WAIT) ");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setIndeterminate(true);
+        progress.show();
     }
 
 

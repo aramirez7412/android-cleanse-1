@@ -42,7 +42,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.OutputStream;
+import java.io.StreamCorruptedException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -197,7 +199,6 @@ public class MealFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
 
-
         ViewGroup layout1 = (ViewGroup) view.findViewById(R.id.layout1);
         ViewGroup layout2 = (ViewGroup) view.findViewById(R.id.layout2);
 
@@ -226,10 +227,8 @@ public class MealFragment extends Fragment {
         //setup top menu
 
 
-
-
-        FileOutputStream fos = null;
-        Boolean test = false;
+//        FileOutputStream fos = null;
+//        Boolean test = false;
         try {
 
             FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
@@ -238,64 +237,75 @@ public class MealFragment extends Fragment {
             mealPlan = (MealPlan) is.readObject();
 
 
-            //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
-            is.close();
-            fis.close();
-
-            System.out.println("successfully loaded mealPlan");
-        } catch (FileNotFoundException e) {
+        //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+        is.close();
+        fis.close();
+    } catch (FileNotFoundException e) {
             e.printStackTrace();
-            test = true;
+        } catch (OptionalDataException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
         } catch (IOException e) {
-            test = true;
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            test = true;
             e.printStackTrace();
         }
-
-        if(test) {
-            try {
-                String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
-                if (!jsonPlan.isEmpty()) {
-                    ((MainActivity) getActivity()).setPlan(jsonPlan);
-                   // ((MainActivity) getActivity()).setPlanInt(1);
-                }
-
-            } catch (IOException e) {
-                System.out.println("error downloading plan");
-                e.printStackTrace();
-            }
-
-            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
-
-            fos = null;
-            try {
-
-                //File file = new File();
-
-//                File parent = file.getParentFile();
-//                if(!parent.exists() && !parent.mkdirs()){
-//                    throw new IllegalStateException("Couldn't create dir: " + parent);
+//
+//            System.out.println("successfully loaded mealPlan");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            test = true;
+//        } catch (IOException e) {
+//            test = true;
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            test = true;
+//            e.printStackTrace();
+//        }
+//
+//        if(test) {
+//            try {
+//                String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
+//                if (!jsonPlan.isEmpty()) {
+//                    ((MainActivity) getActivity()).setPlan(jsonPlan);
+//                   // ((MainActivity) getActivity()).setPlanInt(1);
 //                }
-
-                fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
-                // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
-                ObjectOutputStream os = new ObjectOutputStream(fos);
-                os.reset();
-                os.writeObject(mealPlan);
-                os.close();
-                fos.close();
-                System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }
+//
+//            } catch (IOException e) {
+//                System.out.println("error downloading plan");
+//                e.printStackTrace();
+//            }
+//
+//            setCurrentPlan(((MainActivity) getActivity()).getJSONPlan());
+//
+//            fos = null;
+//            try {
+//
+//                //File file = new File();
+//
+////                File parent = file.getParentFile();
+////                if(!parent.exists() && !parent.mkdirs()){
+////                    throw new IllegalStateException("Couldn't create dir: " + parent);
+////                }
+//
+//                fos = new FileOutputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId(), "currentPlan.ser"));
+//                // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+//                ObjectOutputStream os = new ObjectOutputStream(fos);
+//                os.reset();
+//                os.writeObject(mealPlan);
+//                os.close();
+//                fos.close();
+//                System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//        }
 
 
 
@@ -618,28 +628,28 @@ public class MealFragment extends Fragment {
 
     }
 
-    void setCurrentPlan(String JSONPlan) {
-
-
-        try {
-
-            //initialize the jsonObject
-            JSONArray jsonArray;
-            System.out.println("please work" + JSONPlan);
-            jsonArray = new JSONArray(JSONPlan);
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-            System.out.println("before the parse");
-            //parse the object and create a meal plan
-            mealPlan = new MealPlan(jsonObject);
-
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    void setCurrentPlan(String JSONPlan) {
+//
+//
+//        try {
+//
+//            //initialize the jsonObject
+//            JSONArray jsonArray;
+//            System.out.println("please work" + JSONPlan);
+//            jsonArray = new JSONArray(JSONPlan);
+//            JSONObject jsonObject = jsonArray.getJSONObject(0);
+//
+//            System.out.println("before the parse");
+//            //parse the object and create a meal plan
+//            mealPlan = new MealPlan(jsonObject, getContext());
+//
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
 
@@ -797,7 +807,7 @@ public class MealFragment extends Fragment {
                                                     //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
 
 
-                                                    // saveFile();
+                                                    saveFile();
                                                 }
                                             });
 
@@ -1288,10 +1298,11 @@ public class MealFragment extends Fragment {
             ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(true);
             //v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
             //v.setOnLongClickListener(null);
+            saveFile();
         }
         void mealUncomplete(View v){
             ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
-
+            saveFile();
             // v.setBackgroundColor(getResources().getColor(R.color.main_background));
             //v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
             //v.setOnLongClickListener(null);

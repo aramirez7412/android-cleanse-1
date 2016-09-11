@@ -1,11 +1,16 @@
 package com.mysamplecleanseapp;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by mattcorrente on 5/30/16.
@@ -30,9 +35,10 @@ public class MealPlan implements Serializable {
     }
 
 
-    MealPlan(JSONObject jsonObject) throws JSONException {
+    MealPlan(JSONObject jsonObject, Context context, ProgressDialog progRef) throws JSONException {
 
 
+        Set<String> imageURLSet = new TreeSet<>();
 
         mealPlan = new ArrayList<ArrayList<MealItem>>();
 
@@ -67,6 +73,8 @@ public class MealPlan implements Serializable {
                     //urlString = mealObject.getString("imgurl");
                     //Picasso.with(context).load(urlString).into(picassoImageTarget(c.getApplicationContext(), "imageDir", mealObject.getString("imgurl")));
                      mealItem.setImageUrl(mealObject.getString("imgurl"));
+                imageURLSet.add(mealObject.getString("imgurl"));
+
                 //------------
                 JSONObject recipeObject = mealObject.getJSONObject("recipe");
 
@@ -108,6 +116,10 @@ public class MealPlan implements Serializable {
 
             mealPlan.add(k, dayPlan);
         }
+
+        MyTaskParams params = new MyTaskParams(imageURLSet, context, progRef);
+        MyAsyncTask myTask = new MyAsyncTask();
+        myTask.execute(params);
 
     }
 
