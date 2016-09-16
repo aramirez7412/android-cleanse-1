@@ -772,8 +772,11 @@ public class MealFragment extends Fragment {
                                     TextView text = (TextView) myV.findViewById(R.id.nameToSwap);
                                     text.setText(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getTitle());
                                     ImageView image = (ImageView) myV.findViewById(R.id.imageViewtoSwap);
+                                     //loadPicassoPicFromFileAsync(recipeImageView, o);
+                                Picasso.with(getContext()).load(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getImageUrl()).into(image);
 
-                                    builderInner.setView(myV);
+
+                                builderInner.setView(myV);
 
 
                                     builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
@@ -812,7 +815,7 @@ public class MealFragment extends Fragment {
                                             });
 
                                     builderInner.show();
-                                    loadPicassoPicFromFileAsync(image, ((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)));
+                               // Picasso.with(getContext()).load(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getImageUrl()).into(image);
 
 
                                 return false;
@@ -964,7 +967,7 @@ public class MealFragment extends Fragment {
                         //this sets up a yes/no selection box to make sure users want to complete a meal
                         final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
                         builder.setMessage("Please Select an Option").setPositiveButton("Complete", dialogClickListener)
-                                .setNegativeButton("Change Meal", dialogClickListener).setNeutralButton("Cancel", dialogClickListener);
+                                .setNegativeButton("Swap Meal", dialogClickListener).setNeutralButton("Cancel", dialogClickListener);
 
                     ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
 
@@ -1005,7 +1008,60 @@ public class MealFragment extends Fragment {
                                         }
                                         break;
                                     }
-                                    case MotionEvent.ACTION_UP: {
+                                    case MotionEvent.ACTION_CANCEL:
+
+                                        System.out.println("outside brodillys");
+
+                                        if (stayedWithinClickDistance) {
+                                            // Click event has occurred
+                                            // open recipe
+                                           // hideAndShowMealItem(o);
+                                        }
+                                            //LR
+                                            if(pressedX < e.getX()){
+                                                //check if previous day exists, if so proceed displaying previous day
+                                                if (day > 0) {
+
+                                                    viewAnimator.setInAnimation(inLeft);
+                                                    viewAnimator.setOutAnimation(outRight);
+
+                                                    switchListView();
+
+                                                    day--;
+
+                                                    currenttv.setText("Day " + (day + 1));
+                                                    currentAdapter.clear();
+                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                                    currentAdapter.notifyDataSetChanged();
+
+                                                    viewAnimator.showPrevious();
+                                                }
+                                            }
+                                            //RL
+                                            else{
+                                                //check if next day exists, if so proceed displaying next day
+                                                if (day < daysInPlan - 1) {
+
+                                                    viewAnimator.setInAnimation(inRight);
+                                                    viewAnimator.setOutAnimation(outLeft);
+
+                                                    switchListView();
+
+                                                    day++;
+                                                    currenttv.setText("Day " + (day + 1));
+                                                    currentAdapter.clear();
+                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
+                                                    currentAdapter.notifyDataSetChanged();
+
+                                                    viewAnimator.showNext();
+
+                                                }//end if
+                                            }//end else
+
+
+                                        break;
+                                    case MotionEvent.ACTION_UP:
+
                                         long pressDuration = System.currentTimeMillis() - pressStartTime;
                                         if (pressDuration < MAX_CLICK_DURATION && stayedWithinClickDistance) {
                                             // Click event has occurred
@@ -1035,7 +1091,6 @@ public class MealFragment extends Fragment {
                                             }
                                             //RL
                                             else{
-
                                                 //check if next day exists, if so proceed displaying next day
                                                 if (day < daysInPlan - 1) {
 
@@ -1055,7 +1110,9 @@ public class MealFragment extends Fragment {
                                                 }//end if
                                             }//end else
                                         }
-                                    }
+
+
+
                                 }
                                 return false;
                             }

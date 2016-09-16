@@ -20,13 +20,17 @@ import java.util.List;
  class ExpandableListAdapterFoodList extends BaseExpandableListAdapter{
 
     private List<String> headerTitles;
+    private List<String> secondaryHeaderTitles;
+
     private List<Object> childTitles;
     private Context context;
 
-    ExpandableListAdapterFoodList(Context context, List<String> headerTitles, List<Object> childTitles){
+    ExpandableListAdapterFoodList(Context context, List<String> headerTitles, List<Object> childTitles, List<String> secondaryHeaderTitles){
         this.context = context;
         this.childTitles = childTitles;
         this.headerTitles  = headerTitles;
+        this.secondaryHeaderTitles  = secondaryHeaderTitles;
+
     }
 
     @Override
@@ -43,6 +47,11 @@ import java.util.List;
     @Override
     public Object getGroup(int groupPosition) {
         return headerTitles.get(groupPosition);
+    }
+
+
+    public Object getSecondaryGroup(int groupPosition) {
+        return secondaryHeaderTitles.get(groupPosition);
     }
 
     @Override
@@ -71,6 +80,8 @@ import java.util.List;
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         String title = (String) getGroup(groupPosition);
+        String title2 = (String) getSecondaryGroup(groupPosition);
+
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.meal_expandable_list_child_header_single, null);
@@ -78,8 +89,11 @@ import java.util.List;
 
         TextView textView = (TextView) convertView.findViewById(R.id.mealListHeaderItem);
         textView.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         textView.setText(title);
+
+        textView = (TextView) convertView.findViewById(R.id.secondaryHeader);
+        textView.setText(title2);
 
         return convertView;
     }
@@ -105,12 +119,11 @@ import java.util.List;
 
 
         TextView textView = (TextView) convertView.findViewById(R.id.mealListChildItem);
-        if(childPosition != 0)
-            textView.setTypeface(Typeface.SERIF);
-        else
-            textView.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
 
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            textView.setTypeface(Typeface.SERIF);
+
+
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         textView.setText(title);
 
         return convertView;

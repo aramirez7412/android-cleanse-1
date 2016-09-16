@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Struct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -32,6 +33,16 @@ import java.util.TreeSet;
  * Created by mattcorrente on 8/20/16.
  */
 public class RecipeSet  implements Serializable  {
+
+    RecipeSet(){
+        recipeSet = new ArrayList<MealItem>();
+    }
+
+    void addRecipe(MealItem m){
+        if(!recipeSet.contains(m))
+            recipeSet.add(m);
+    }
+
 
     RecipeSet(JSONObject jsonObject, Context context)  throws JSONException{
 
@@ -84,10 +95,17 @@ public class RecipeSet  implements Serializable  {
 
         }
 
+        Collections.sort(recipeSet);
+
         MyTaskParams params = new MyTaskParams(imageURLSet, context);
         MyAsyncTask myTask = new MyAsyncTask();
         myTask.execute(params);
         //saveImages(imageURLSet, context);
+
+    }
+
+    void sort(){
+        Collections.sort(recipeSet);
 
     }
 

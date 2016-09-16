@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by mattcorrente on 5/28/16.
  */
-public class MealItem implements Serializable{
+public class MealItem implements Serializable, Comparable<MealItem> {
 
     String type;
     String header;
@@ -89,6 +89,15 @@ public class MealItem implements Serializable{
     }
 
 
+    @Override
+    public boolean equals(Object o)
+    {
+       return this.getTitle().equals(((MealItem) o).getTitle());
+    }
 
+    @Override
+    public int compareTo(MealItem another) {
+        return this.getTitle().compareTo(another.getTitle());
+    }
 }
 

@@ -104,7 +104,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
 
         TextView textView = (TextView) convertView.findViewById(R.id.mealListChildItem);
-        textView.setTypeface(null, Typeface.NORMAL);
+        textView.setTypeface(Typeface.SERIF);
         textView.setText(title);
 
         return convertView;

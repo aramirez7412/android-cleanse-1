@@ -286,6 +286,7 @@
     <string name="feature_sign_in_title">User Sign-in</string>
     <string name="fragment_demo_instruction_description_header">Sample App Features</string>
     <string name="fragment_demo_instruction_overview_header">Overview</string>
+    <string name="guest">Guest</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="identity_demo_dialog_dismiss_text">DISMISS</string>
     <string name="identity_demo_error_dialog_title">Failed Identity Retrieval</string>
@@ -310,7 +311,7 @@
     <string name="title_activity_item_list">Item List</string>
     <string name="title_activity_main">@string/app_name</string>
     <string name="title_activity_sign_in">Sign-in</string>
-    <string name="unknown_user">Guest User</string>
+    <string name="unknown_user">Guest</string>
     <string name="user_id">USER IDENTIFIER</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

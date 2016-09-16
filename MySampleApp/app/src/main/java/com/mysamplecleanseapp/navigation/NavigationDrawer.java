@@ -107,16 +107,17 @@ public class NavigationDrawer {
                         fragmentName = "Meal Tracker";
                         break;
                     case 2:
-                        fragment = new WaterFragment();
-                        fragmentName = "Water Tracker";
+                        fragment = new FoodListFragment();
+                        fragmentName = "Food List";
+
                         break;
                     case 3:
                         fragment = new QuizFragment();
                         fragmentName = "Quiz";
                         break;
                     case 4:
-                        fragment = new FoodListFragment();
-                        fragmentName = "Food List";
+                        fragment = new WaterFragment();
+                        fragmentName = "Water Tracker";
                         break;
                     case 5:
                         fragment = new PurchaseFragment();

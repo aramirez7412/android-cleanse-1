@@ -172,7 +172,7 @@ public class FoodListFragment extends Fragment {
             "      ]\n" +
             "    },\n" +
             "    {\n" +
-            "      \"section\": \"BROTHS, HERBS, SPICES, CONDIMENTS, AND SUPPLEMENTS\",\n" +
+            "      \"section\": \"Broths, Herbs, Spices, Condiments, and Supplements\",\n" +
             "      \"serving-size\": \"as needed\",\n" +
             "      \"foods\": [\n" +
             "        \"Almond milk, unsweetened\",\n" +
@@ -240,7 +240,9 @@ public class FoodListFragment extends Fragment {
 
 
     List<String> headerTitles;
+    List<String> secondaryHeaderTitles;
     List<Object> childTitles;
+
 
     public FoodListFragment() {
         // Required empty public constructor
@@ -273,6 +275,7 @@ public class FoodListFragment extends Fragment {
         }
 
         headerTitles = new ArrayList();
+        secondaryHeaderTitles = new ArrayList();
         childTitles = new ArrayList<>();
 
 
@@ -298,7 +301,7 @@ public class FoodListFragment extends Fragment {
                     System.out.println("Failed");
                 }
 
-                foodSection.add("Daily Serving Size: " + listAr.getJSONObject(k).getString("serving-size"));
+                secondaryHeaderTitles.add("Daily Serving Size: " + listAr.getJSONObject(k).getString("serving-size"));
 
 
                 //loop through every meal per day
@@ -333,7 +336,7 @@ public class FoodListFragment extends Fragment {
 
 
 
-        myAdapter = new ExpandableListAdapterFoodList(getContext(),headerTitles, childTitles);
+        myAdapter = new ExpandableListAdapterFoodList(getContext(),headerTitles, childTitles, secondaryHeaderTitles);
 
         myList = (ExpandableListView) v.findViewById(R.id.expandableListViewFoodList);
 

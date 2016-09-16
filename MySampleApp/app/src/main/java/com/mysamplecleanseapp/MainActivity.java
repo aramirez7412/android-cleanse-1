@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.amazonaws.mobile.AWSMobileClient;
 import com.amazonaws.mobile.user.IdentityManager;
@@ -54,6 +55,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     User currentUser;
     IabHelper mHelper;
     ProgressDialog progress;
+
 
     /**
      * Initializes the Toolbar for use with the activity.
@@ -218,6 +221,61 @@ String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\"
         return true;
     }
 
+
+
+    boolean CreateTempRecipeSetForTestingMethod2(MealPlan mealPlan){
+
+        //String jsonString = sendGET("link to json");
+
+        //fortesting keep like this
+        //String jsonString = "[{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"OVERNIGHT STEEL-CUT OATS WITH PEACHES\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/oatmeal-peachFS.jpg\",\"recipe\":{\"serves\":\"4 to 8\",\"ingredients\":[\"1 cup steel-cut oats\",\"4 cups water\"],\"instructions\":\"Bring the water to a boil in a large saucepan. Add oats and boil 1 minute. Turn oï¬€ the heat, cover the pan and let it stand overnight at room temperature. In the morning, remove the lid and bring the oats to a boil. Reduce heat and simmer, stirring often, until the oats are creamy yet still a little bit chewy, about 7 to 10 minutes. Cooked oats will keep in the fridge for a week. You can just spoon out a serving, add a little water, and reheat in the microwave for a minute or two. Or you can make a huge batch and freeze single servings. For extra flavor add Â½ cup chopped peaches, Â½ teaspoon grated fresh ginger, and Â¼ teaspoon vanilla, or Â½ cup of your favorite fruit (from the food list) as a mix-in.\"}},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/apple-celery.jpg\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"1 Apple\",\"1/2 Cup Minced Celery Stalks\"],\"instructions\":\"Slice and dice!\"}},{\"meal\":\"Turkey or Buffalo Chili\",\"time\":\"Dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\",\"recipe\":{\"serves\":\"6\",\"ingredients\":[\"1 to 1Â½ pounds lean ground turkey or buffalo meat\",\"Â½ cup diced red onion, (or more if desired)\",\"2 tablespoon parsley or cilantro\",\"1 heaping tablespoon chili powder\",\"1 tablespoon minced garlic\",\"Â½ teaspoon crushed red pepper ï¬‚akes\",\"15-ounce can white beans\",\"15-ounce can kidney beans\",\"15-ounce can black beans\",\"15-ounce can pinto beans\",\"15-ounce can lentils or adzuki beans\",\"4 cups chopped zucchini\",\"4 cups (32 ounces) organic bell pepper and tomato soup or plain tomato soup (just be sure it is not milk-based)\",\"1 heaping teaspoon sea salt\"],\"instructions\":\"Brown the turkey in a skillet and drain. Turn a slow cooker to high setting. Add the meat, onion, parsley, chili powder, garlic, and red pepper ï¬‚akes to the slow cooker pot. Stir, cover, and set the slow cooker aside. Open and partially drain all ï¬\u0081ve cans of beans; I leave a little liquid in to make the chili juicier. Add the beans, zucchini, and soup to the cooker. Stir well. Keep the cooker set on high for 4 to 5 hours, or adjust heat to low and simmer for 6 to 8 hours. Stir and taste occasionally, adjusting seasonings and adding salt as needed. A serving is 1Â½ cups.\"}}],\"id\":\"d56a99f257da9bf6\"}]";
+        String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"OVERNIGHT STEEL-CUT OATS WITH PEACHES\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/oatmeal-peachFS.jpg\",\"recipe\":{\"serves\":\"4 to 8\",\"ingredients\":[\"1 cup steel-cut oats\",\"4 cups water\"],\"instructions\":\"Bring the water to a boil in a large saucepan. Add oats and boil 1 minute. Turn oï¬€ the heat, cover the pan and let it stand overnight at room temperature. In the morning, remove the lid and bring the oats to a boil. Reduce heat and simmer, stirring often, until the oats are creamy yet still a little bit chewy, about 7 to 10 minutes. Cooked oats will keep in the fridge for a week. You can just spoon out a serving, add a little water, and reheat in the microwave for a minute or two. Or you can make a huge batch and freeze single servings. For extra flavor add Â½ cup chopped peaches, Â½ teaspoon grated fresh ginger, and Â¼ teaspoon vanilla, or Â½ cup of your favorite fruit (from the food list) as a mix-in.\"}},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/apple-celery.jpg\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"1 Apple\",\"1/2 Cup Minced Celery Stalks\"],\"instructions\":\"Slice and dice!\"}},{\"meal\":\"Turkey or Buffalo Chili\",\"time\":\"Dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\",\"recipe\":{\"serves\":\"6\",\"ingredients\":[\"1 to 1Â½ pounds lean ground turkey or buffalo meat\",\"Â½ cup diced red onion, (or more if desired)\",\"2 tablespoon parsley or cilantro\",\"1 heaping tablespoon chili powder\",\"1 tablespoon minced garlic\",\"Â½ teaspoon crushed red pepper ï¬‚akes\",\"15-ounce can white beans\",\"15-ounce can kidney beans\",\"15-ounce can black beans\",\"15-ounce can pinto beans\",\"15-ounce can lentils or adzuki beans\",\"4 cups chopped zucchini\",\"4 cups (32 ounces) organic bell pepper and tomato soup or plain tomato soup (just be sure it is not milk-based)\",\"1 heaping teaspoon sea salt\"],\"instructions\":\"Brown the turkey in a skillet and drain. Turn a slow cooker to high setting. Add the meat, onion, parsley, chili powder, garlic, and red pepper ï¬‚akes to the slow cooker pot. Stir, cover, and set the slow cooker aside. Open and partially drain all ï¬\u0081ve cans of beans; I leave a little liquid in to make the chili juicier. Add the beans, zucchini, and soup to the cooker. Stir well. Keep the cooker set on high for 4 to 5 hours, or adjust heat to low and simmer for 6 to 8 hours. Stir and taste occasionally, adjusting seasonings and adding salt as needed. A serving is 1Â½ cups.\"}}]}";
+
+        FileOutputStream fos = null;
+        try {
+
+
+            File file = new File(this.getFilesDir() + "/recipeSet/");
+
+            file.mkdirs();
+
+
+            RecipeSet mySet = new RecipeSet();
+
+
+            for (int i = 0; i < mealPlan.getDays(); i++) {
+                for (int j = 0; j < mealPlan.getMealCountForDay(i); j++) {
+                    if(!mealPlan.getMeal(i, j).getTitle().equals("Fast Metabolism Cleanse"))
+                        mySet.addRecipe(mealPlan.getMeal(i, j));
+                }
+            }
+
+            mySet.recipeSetTitle = "Generic Recipe Set";
+
+
+            mySet.sort();
+
+            File outputFile = new File(file, "genericSet.ser");
+            fos = new FileOutputStream(outputFile);
+            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(mySet);
+            os.close();
+            fos.close();
+            System.out.println("successfully saved recipe set to: " + outputFile.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            System.out.println("FAILED TO SAVE SET");
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            System.out.println("FAILED TO SAVE SET");
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
     void CheckAndDownloadPurchasedRecipeSets(){
 
     }
@@ -312,6 +370,11 @@ String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\"
                 os.close();
                 fos.close();
                 System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
+
+
+                System.out.println("grabbing generic recipes");
+                CreateTempRecipeSetForTestingMethod2(mealPlan);
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -425,31 +488,31 @@ String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\"
         // Add navigation drawer menu items.
         // Home isn't a demo, but is fake as a demo.
         DemoConfiguration.DemoFeature home = new DemoConfiguration.DemoFeature();
-        home.iconResId = R.drawable.home_icon;
+        home.iconResId = R.drawable.purp_house;
         home.titleResId = R.string.main_nav_menu_item_home;
         navigationDrawer.addDemoFeatureToMenu(home);
 
-navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tracker", R.drawable.meal_icon,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
+navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tracker", R.drawable.icon_food_list,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
         R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
-        new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.mipmap.icon_home, R.mipmap.icon_home, MealFragment.class)));
+        new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.drawable.icon_food_list, R.drawable.icon_food_list, MealFragment.class)));
 
 
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Water Tracker", R.drawable.water_tracker_icon,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
-                R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_water_fragment, R.mipmap.icon_home, R.mipmap.icon_home, WaterFragment.class)));
+//        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Water Tracker", R.drawable.water_tracker_icon,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
+//                R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
+//                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_water_fragment, R.mipmap.icon_home, R.mipmap.icon_home, WaterFragment.class)));
+//
+//        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Quiz", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
+//                R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
+//                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_quiz_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, QuizFragment.class)));
 
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Quiz", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
-                R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_quiz_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, QuizFragment.class)));
-
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Food List", R.drawable.question_mark_icon,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Food List", R.drawable.icon_checklist,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
                 R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_food_list_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, FoodListFragment.class)));
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_food_list_fragment, R.drawable.icon_checklist, R.drawable.icon_checklist, FoodListFragment.class)));
 
 
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipe Store", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
-                R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, PurchasePlanFragment.class)));
+//        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipe Store", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
+//                R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
+//                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, PurchasePlanFragment.class)));
 
 
         //DemoConfiguration.DemoFeature mealTracker = new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.icon_home, R.string.main_nav_menu_item_meal_fragment,
@@ -471,10 +534,14 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         }
         setupSignInButtons();
 
+        ((TextView) findViewById(R.id.userName)).setText("Guest");
+
+
         if (savedInstanceState == null) {
             // Add the home fragment to be displayed initially.
             navigationDrawer.showHome();
         }
+
     }
 
     @Override
@@ -553,6 +620,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         //will need to pull this from logged in user, guest will be defaulted
         currentUser.setUserId("guestUser");
+        currentUser.setUserName("Guest");
+
 
 
 
@@ -563,9 +632,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         if(currentUser == null){
             currentUser = new User();
             currentUser.setUserId("guestUser");
-            currentUser.setUserName("Tim Allen");
+            currentUser.setUserName("Guest");
             SaveUser(currentUser);
-            CreateTempRecipeSetForTesting();
+            //CreateTempRecipeSetForTesting();
         }
 
 
@@ -610,6 +679,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         }
 
         setupNavigationMenu(savedInstanceState);
+
+
+        ((TextView) findViewById(R.id.userName)).setText(currentUser.getUserName());
+
 
 
 //        //will need to check if online

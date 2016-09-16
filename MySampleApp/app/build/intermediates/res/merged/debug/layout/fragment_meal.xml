@@ -11,6 +11,13 @@
     android:orientation="vertical">
 
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView7"
+        android:scaleType="fitXY"
+        android:alpha=".6" />
+
     <ViewAnimator
         android:id="@+id/myViewAnimator"
         android:layout_width="match_parent"
