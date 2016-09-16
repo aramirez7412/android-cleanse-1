@@ -911,7 +911,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
     public void showWheel(){
 
-        progress.setMessage("INITIALIZING DATA...PlEASE WAIT) ");
+        progress.setMessage("INITIALIZING FIRST TIME LAUNCH DATA...PLEASE WAIT) ");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setIndeterminate(true);
         progress.show();
