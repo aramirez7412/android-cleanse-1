@@ -40,16 +40,32 @@ public class MealPlan implements Serializable {
 
         Set<String> imageURLSet = new TreeSet<>();
 
+        boolean snackBool = false; //used to place snacks into right position
+
         mealPlan = new ArrayList<ArrayList<MealItem>>();
 
+        //add temporary items so we can add days in the right order
+        for(int z = 0; z < 10; z++) {
+            ArrayList<MealItem> tempList = new ArrayList<>();
+            mealPlan.add(z, tempList);
+        }
 
-        JSONArray planAr = jsonObject.getJSONArray("days");
+
+        JSONArray planAr = jsonObject.getJSONArray("dailyPlans");
 
 
         //loop through each day
         for(int k = 0; k < planAr.length(); k++) {
 
             ArrayList<MealItem> dayPlan = new ArrayList<>();
+
+            //initialize list so we can set the elements so that they will be sorted by time of day
+            for(int z = 0; z < 5; z++) {
+                MealItem tempItem = new MealItem();
+                dayPlan.add(tempItem);
+            }
+
+
             JSONArray mealAr = null;
             try {
                 mealAr = planAr.getJSONObject(k).getJSONArray("meals");
@@ -67,16 +83,17 @@ public class MealPlan implements Serializable {
                // mealItem.setType(mealObject.getString("type"));
 
                 mealItem.setHeader(mealObject.getString("time"));
-                mealItem.setTitle(mealObject.getString("meal"));
+
+                JSONObject recipeObject = mealObject.getJSONObject("recipe");
+                mealItem.setTitle(recipeObject.getString("name"));
                 //set images
                 //------------
                     //urlString = mealObject.getString("imgurl");
                     //Picasso.with(context).load(urlString).into(picassoImageTarget(c.getApplicationContext(), "imageDir", mealObject.getString("imgurl")));
-                     mealItem.setImageUrl(mealObject.getString("imgurl"));
-                imageURLSet.add(mealObject.getString("imgurl"));
+                     mealItem.setImageUrl(recipeObject.getString("imgUrl"));
+                imageURLSet.add(recipeObject.getString("imgUrl"));
 
                 //------------
-                JSONObject recipeObject = mealObject.getJSONObject("recipe");
 
                 mealItem.setServings(recipeObject.getString("serves"));
                 //set ingredients
@@ -111,10 +128,39 @@ public class MealPlan implements Serializable {
 //                mealItem.setDirections(tempString);
 //                //---------------------------------------------------
 
-                dayPlan.add(mealItem);
+                switch(mealItem.getHeader().toUpperCase()){
+
+
+
+                    case "BREAKFAST":
+                        dayPlan.set(0, mealItem);
+
+                        break;
+                    case "LUNCH":
+                        dayPlan.set(2, mealItem);
+
+                        break;
+                    case "DINNER":
+                        dayPlan.set(4, mealItem);
+
+                        break;
+                    case "SNACK":
+
+                        if(!snackBool)
+                            dayPlan.set(1, mealItem);
+                        else
+                            dayPlan.set(3, mealItem);
+
+                        snackBool = true;
+
+                        break;
+                }
+
             }
 
-            mealPlan.add(k, dayPlan);
+            snackBool = false;
+
+            mealPlan.set(planAr.getJSONObject(k).getInt("day")-1, dayPlan);
         }
 
         MyTaskParams params = new MyTaskParams(imageURLSet, context, progRef);

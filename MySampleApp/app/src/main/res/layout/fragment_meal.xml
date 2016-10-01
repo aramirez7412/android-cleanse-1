@@ -16,7 +16,8 @@
         android:layout_height="fill_parent"
         android:id="@+id/imageView7"
         android:scaleType="fitXY"
-        android:alpha=".6" />
+        android:alpha=".6"
+        android:visibility="gone" />
 
     <ViewAnimator
         android:id="@+id/myViewAnimator"

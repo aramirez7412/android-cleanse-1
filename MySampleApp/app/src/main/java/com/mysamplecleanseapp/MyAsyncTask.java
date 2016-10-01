@@ -61,7 +61,9 @@ import java.util.Set;
 
                 OutputStream os = new FileOutputStream(file);
 
-                byte[] b = new byte[2048];
+                //byte[] b = new byte[2048];
+                byte[] b = new byte[10000000];
+
                 int length;
 
                 while ((length = is.read(b)) != -1) {
