@@ -3,9 +3,7 @@ package com.mysamplecleanseapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -19,20 +17,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
 
 import com.squareup.picasso.Picasso;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,7 +39,6 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
-import java.io.OutputStream;
 import java.io.StreamCorruptedException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -85,8 +80,8 @@ public class MealFragment extends Fragment {
     TextView menuArrow2;
     ListView dayListView;
     ListView dayListView2;
-    MealItemAdapter adapter;
-    MealItemAdapter adapter2;
+//    MealItemAdapter adapter;
+//    MealItemAdapter adapter2;
 
     ViewGroup addMe;
     MealPlan mealPlan;
@@ -103,12 +98,10 @@ public class MealFragment extends Fragment {
 
     ViewGroup mealCell;
     TextView currenttv;
-    MealItemAdapter currentAdapter;
+   // MealItemAdapter currentAdapter;
     ListView previousList;
 
     ViewAnimator viewAnimator;
-
-
 
 
     TextView recipeTitle;
@@ -123,16 +116,67 @@ public class MealFragment extends Fragment {
     TextView nextDayButton2;
     TextView prevDayButton2;
 
+    LinearLayout dailyMealList;
+    LinearLayout dailyMealList2;
+    LinearLayout currentDailyMealList;
+
+
+
+    //used for detecting swipe vs click
+    final int MAX_CLICK_DURATION = 500;
+    final int MAX_CLICK_DISTANCE = 15;
+    long pressStartTime;
+    float pressedX;
+    float pressedY;
+    boolean stayedWithinClickDistance;
+    AlertDialog.Builder builderSingle;
+
+    ExpandableListView myList;
+    ExpandableListAdapter swapRecipeAdapter;
+    AlertDialog alert;
+    AlertDialog alert2;
+    ArrayList<MealItem> set1;
+    List<String> headerTitles;
+    List<Object> childTitles;
+    int helperPosition;
+    ArrayList<ArrayList<MealItem>> recipeSets;
+
+
+    Button addOunceButton;
+    Button subtractOunceButton;
+    ViewGroup add8Ounces;
+    ViewGroup add16Ounces;
+    ViewGroup add24Ounces;
+    ViewGroup add32Ounces;
+
+    Button addOunceButton2;
+    Button subtractOunceButton2;
+    ViewGroup add8Ounces2;
+    ViewGroup add16Ounces2;
+    ViewGroup add24Ounces2;
+    ViewGroup add32Ounces2;
+
+    ProgressBar progressBar;
+    ProgressBar progressBar2;
+    ProgressBar currentProgress;
+
+    TextView ouncesTextView1;
+    TextView ouncesTextView2;
+    TextView currentOuncesTextView;
+
+
+    private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
+
 
 
     //detects swipes while using this fragment
-    final SwipeDetector swipeDetector = new SwipeDetector();
+    //final SwipeDetector swipeDetector = new SwipeDetector();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+   // private OnFragmentInteractionListener mListener;
 
     public MealFragment() {
         // Required empty public constructor
@@ -191,8 +235,13 @@ public class MealFragment extends Fragment {
         tv = ((TextView) layout1.findViewById(R.id.mealListDayHeader));
         tv2 = ((TextView) layout2.findViewById(R.id.mealListDayHeader));
 
-        dayListView = (ListView) layout1.findViewById(R.id.testListView);
-        dayListView2 = (ListView) layout2.findViewById(R.id.testListView);
+       // dayListView = (ListView) layout1.findViewById(R.id.testListView);
+        //dayListView2 = (ListView) layout2.findViewById(R.id.testListView);
+
+        dailyMealList = (LinearLayout) layout1.findViewById(R.id.mealList);
+        dailyMealList2 = (LinearLayout) layout2.findViewById(R.id.mealList);
+        currentDailyMealList = dailyMealList;
+
 
         viewAnimator = (ViewAnimator) view.findViewById(R.id.myViewAnimator);
 
@@ -209,8 +258,144 @@ public class MealFragment extends Fragment {
         recipeDirectionsContent = (TextView) recipeBox.findViewById(R.id.recipeDirectionsContent);
         recipeBoxImageView = (ImageView) recipeBox.findViewById(R.id.recipeBoxImageView);
 
-        //setup top menu
 
+        //setup water tracker
+
+        ouncesTextView1 = (TextView) layout1.findViewById(R.id.ouncesToGoTextView);
+        ouncesTextView2 = (TextView) layout2.findViewById(R.id.ouncesToGoTextView);
+        //set up water tracker functionality
+        addOunceButton = (Button) layout1.findViewById(R.id.addOunceButton);
+        subtractOunceButton = (Button) layout1.findViewById(R.id.subtractOunceButton);
+        add8Ounces = (ViewGroup) layout1.findViewById(R.id.ounce8);
+        add16Ounces = (ViewGroup) layout1.findViewById(R.id.ounce16);
+        add24Ounces = (ViewGroup) layout1.findViewById(R.id.ounce24);
+        add32Ounces = (ViewGroup) layout1.findViewById(R.id.ounce32);
+        progressBar = (ProgressBar) layout1.findViewById(R.id.progressBar);
+
+
+        addOunceButton2 = (Button) layout2.findViewById(R.id.addOunceButton);
+        subtractOunceButton2 = (Button) layout2.findViewById(R.id.subtractOunceButton);
+        add8Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce8);
+        add16Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce16);
+        add24Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce24);
+        add32Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce32);
+        progressBar2 = (ProgressBar) layout2.findViewById(R.id.progressBar);
+
+        addOunceButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setProgress(progressBar.getProgress()+1);
+                updateWaterProgressTextView();
+            }
+        });
+
+        addOunceButton2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setProgress(progressBar2.getProgress()+1);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        subtractOunceButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setProgress(progressBar.getProgress()-1);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        subtractOunceButton2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setProgress(progressBar2.getProgress()-1);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add8Ounces.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setProgress(progressBar.getProgress()+8);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add8Ounces2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setProgress(progressBar2.getProgress()+8);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add16Ounces.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setProgress(progressBar.getProgress()+16);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add16Ounces2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setProgress(progressBar2.getProgress()+16);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add24Ounces.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setProgress(progressBar.getProgress()+24);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add24Ounces2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setProgress(progressBar2.getProgress()+24);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add32Ounces.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setProgress(progressBar.getProgress()+32);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+        add32Ounces2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setProgress(progressBar2.getProgress()+32);
+                updateWaterProgressTextView();
+
+            }
+        });
+
+
+
+        currentProgress = progressBar;
+        currentOuncesTextView = ouncesTextView1;
+
+
+
+        //end setup water tracker
 
 //        FileOutputStream fos = null;
 //        Boolean test = false;
@@ -299,20 +484,27 @@ public class MealFragment extends Fragment {
 
 
 
+
             daysInPlan = mealPlan.getDays();
             day = 0;
-            System.out.println("post the parse");
+
+            updateWaterProgress();
+
+             System.out.println("post the parse");
+
+
+            getMealViews(dailyMealList);
 
             list = new ArrayList<MealItem>();
 
 
             //setup the first layout to be displayed
             //---------
-            testList = (ListView) layout1.findViewById(R.id.testListView);
+          //  testList = (ListView) layout1.findViewById(R.id.testListView);
             addMe = (ViewGroup) view.findViewById(R.id.recipeItem);
-            adapter = new MealItemAdapter(getContext(), R.layout.meal_tracker_recipe_item, list);
-            testList.setAdapter(adapter);
-            adapter.addAll(mealPlan.getListForDay(day));
+//            adapter = new MealItemAdapter(getContext(), R.layout.meal_tracker_recipe_item, list);
+//            testList.setAdapter(adapter);
+//            adapter.addAll(mealPlan.getListForDay(day));
             //----------
 
 
@@ -320,9 +512,9 @@ public class MealFragment extends Fragment {
             //----------
             list = mealPlan.getListForDay(day);
             list2 = new ArrayList<MealItem>();
-            testList2 = (ListView) layout2.findViewById(R.id.testListView);
-            adapter2 = new MealItemAdapter(getContext(), R.layout.meal_tracker_recipe_item, list2);
-            testList2.setAdapter(adapter2);
+          //  testList2 = (ListView) layout2.findViewById(R.id.testListView);
+           // adapter2 = new MealItemAdapter(getContext(), R.layout.meal_tracker_recipe_item, list2);
+          //  testList2.setAdapter(adapter2);
             //----------
 
 
@@ -338,27 +530,195 @@ public class MealFragment extends Fragment {
 
             //initialize all current- variables to currently displayed views
             previousList = dayListView2;
-            currentAdapter = adapter;
+           // currentAdapter = adapter;
             currenttv = tv;
             listViewNum = 1;
             currenttv.setText("Day " + (day + 1));
 
 
-            ViewGroup rl = (ViewGroup) view.findViewById(R.id.recipeBoxLinear);
 
-            rl.setOnTouchListener(swipeDetector);
 
-            rl.setOnClickListener(new View.OnClickListener() {
+            File file = new File(getActivity().getFilesDir() + "/recipeSet/");
+            File inputFile = new File(file, "genericSet.ser");
+
+            RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
+            //items = rs.getRecipeSet();
+            set1 = rs.getRecipeSet();
+            recipeSets = new ArrayList<ArrayList<MealItem>>();
+
+
+            recipeSets.add(set1);
+
+
+
+            headerTitles = new ArrayList<>();
+            headerTitles.add(rs.getRecipeSetTitle());
+
+
+            childTitles = new ArrayList<>();
+            childTitles.add(set1);
+
+
+
+
+            swapRecipeAdapter = new ExpandableListAdapter(getContext(),headerTitles, childTitles);
+
+                        myList = new ExpandableListView(getContext());
+
+                        myList.setAdapter(swapRecipeAdapter);
+
+
+            myList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                            @Override
+                            public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
+
+
+                                    AlertDialog.Builder builderInner = new AlertDialog.Builder(
+                                            getContext());
+
+                                    //builderInner.setMessage(strName);
+
+                                    builderInner.setTitle("You Have Selected");
+
+                                    View myV;
+                                    LayoutInflater myVi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    myV = myVi.inflate(R.layout.meal_cell_image_only_layout, null);
+                                    TextView text = (TextView) myV.findViewById(R.id.nameToSwap);
+                                    text.setText(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getTitle());
+                                    ImageView image = (ImageView) myV.findViewById(R.id.imageViewtoSwap);
+                                     //loadPicassoPicFromFileAsync(recipeImageView, o);
+                                Picasso.with(getContext()).load(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getImageUrl()).into(image);
+
+
+                                builderInner.setView(myV);
+
+
+                                    builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
+
+                                    ) {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            //builderSingle.show();
+                                        }
+                                    });
+                                    builderInner.setPositiveButton(
+                                            "Confirm",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(
+                                                        DialogInterface dialog,
+                                                        int which) {
+
+                                                    //recipeSets.get(groupPosition).get(childPosition).setHeader(mealItemToSwap.getHeader());
+                                                    //items.set(helperPosition, recipeSets.get(groupPosition).get(childPosition));
+                                                    mealPlan.swapMeal(day, helperPosition, (MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition));
+                                                   // mealPlan.getListForDay(day).get(helperPosition).setHeader(items.get(helperPosition).getHeader());
+
+                                                    mealPlan.getListForDay(day).get(helperPosition).setHeader(((MealItem) swapRecipeAdapter.getChild(groupPosition, helperPosition)).getHeader());
+
+                                                    //currentAdapter.notifyDataSetChanged();
+
+                                                    currentDailyMealList.removeAllViews();
+                                                    getMealViews(currentDailyMealList);
+
+                                                    dialog.dismiss();
+                                                    alert.dismiss();
+                                                    //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
+
+
+                                                    saveFile();
+                                                }
+                                            });
+
+                                    builderInner.show();
+                               // Picasso.with(getContext()).load(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getImageUrl()).into(image);
+
+
+                                return false;
+                            }
+
+                        });
+
+                        builderSingle = new AlertDialog.Builder(getContext());
+                        // builderSingle.setIcon(R.drawable.ic_launcher);
+
+                        builderSingle.setTitle("Select Recipe to Swap:");
+
+                        builderSingle.setView(myList);
+
+
+                    builderSingle.setNeutralButton(
+                                "cancel",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alert.dismiss();
+                                    }
+                                });
+
+            AlertDialog.Builder cantSwapBuilder = new AlertDialog.Builder(
+                    getContext());
+
+
+            cantSwapBuilder.setMessage("You Cannot Swap A Shake");
+
+
+            cantSwapBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener(
+
+            ) {
                 @Override
-                public void onClick(View v) {
-                    if (swipeDetector.swipeDetected()) {
-                        if (swipeDetector.getAction() == SwipeDetector.Action.LR) {
-                            recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
-                        }
-                    }//end if swipe detected
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    //builderSingle.show();
                 }
             });
 
+
+
+            alert = builderSingle.create();
+            alert2 = cantSwapBuilder.create();
+
+
+            ViewGroup rl = (ViewGroup) view.findViewById(R.id.recipeBoxLinear);
+
+
+        rl.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent e) {
+
+                System.out.println("wtf is happening");
+
+                switch (e.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        pressStartTime = System.currentTimeMillis();
+                        pressedX = e.getRawX();
+                        pressedY = e.getRawY();
+                        stayedWithinClickDistance = true;
+                        break;
+                    }
+
+
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+
+                        System.out.println("up tho");
+
+                        long pressDuration = System.currentTimeMillis() - pressStartTime;
+                        if (pressDuration < MAX_CLICK_DURATION) {
+                            //LR
+                            System.out.println("difference " + (pressedY - e.getRawY()));
+
+                            if (pressedX < e.getRawX() && ((pressedY - e.getRawY()) > -20) && ((pressedY - e.getRawY()) < 20)) {
+                                recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
+                            }
+
+                        }
+                }
+                        return true;
+                }
+
+        });
 
 
             nextDayButton = (TextView) layout1.findViewById(R.id.nextDayButton);
@@ -380,9 +740,15 @@ public class MealFragment extends Fragment {
 
                         day++;
                         currenttv.setText("Day " + (day + 1));
-                        currentAdapter.clear();
-                        currentAdapter.addAll(mealPlan.getListForDay(day));
-                        currentAdapter.notifyDataSetChanged();
+//                        currentAdapter.clear();
+//                        currentAdapter.addAll(mealPlan.getListForDay(day));
+//                        currentAdapter.notifyDataSetChanged();
+
+
+                        currentDailyMealList.removeAllViews();
+                        getMealViews(currentDailyMealList);
+
+                        updateWaterProgress();
 
                         viewAnimator.showNext();
 
@@ -409,9 +775,15 @@ public class MealFragment extends Fragment {
                         day--;
 
                         currenttv.setText("Day " + (day + 1));
-                        currentAdapter.clear();
-                        currentAdapter.addAll(mealPlan.getListForDay(day));
-                        currentAdapter.notifyDataSetChanged();
+//                        currentAdapter.clear();
+//                        currentAdapter.addAll(mealPlan.getListForDay(day));
+//                        currentAdapter.notifyDataSetChanged();
+
+                        currentDailyMealList.removeAllViews();
+                        getMealViews(currentDailyMealList);
+
+                        updateWaterProgress();
+
 
                         viewAnimator.showPrevious();
 
@@ -429,16 +801,18 @@ public class MealFragment extends Fragment {
 
 
 
-      //  }
+
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+//    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            //i have no idea why this is here
+//           // mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     //this method is used to switch all current- variables to the other layout (used for animation purposes)
     void switchListView(){
@@ -447,20 +821,39 @@ public class MealFragment extends Fragment {
 
         if(listViewNum == 1){
             listViewNum =2;
-            currentAdapter = adapter2;
+           // currentAdapter = adapter2;
             currenttv = tv2;
+            currentDailyMealList = dailyMealList2;
+            currentOuncesTextView = ouncesTextView2;
+            currentProgress = progressBar2;
+
             previousList = dayListView;
         }
         else{
             listViewNum = 1;
-            currentAdapter = adapter;
+          //  currentAdapter = adapter;
             currenttv = tv;
+
+            currentDailyMealList = dailyMealList;
+            currentOuncesTextView = ouncesTextView1;
+            currentProgress = progressBar;
             previousList = dayListView2;
         }
 
 
-
     }
+
+    void updateWaterProgress(){
+        //need to add method to return progress for that day from meal plan
+        currentProgress.setProgress(mealPlan.getWaterForDay(day));
+        updateWaterProgressTextView();
+    }
+
+    void updateWaterProgressTextView(){
+        mealPlan.saveWaterForDay(day, currentProgress.getProgress());
+        currentOuncesTextView.setText("You have " + (85-currentProgress.getProgress()) + " oz to go");
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -481,7 +874,7 @@ public class MealFragment extends Fragment {
 
         saveFile();
 
-        mListener = null;
+        //mListener = null;
 
 
     }
@@ -671,214 +1064,31 @@ public class MealFragment extends Fragment {
     }
 
 
-    class MealItemAdapter extends ArrayAdapter<MealItem> {
 
-        private ArrayList<MealItem> items;
-//        ArrayAdapter<String> swapRecipeAdapter = new ArrayAdapter<String>(
-//                getContext(),
-//                android.R.layout.select_dialog_singlechoice);
+    public void getMealViews(LinearLayout dailyLayout) {
 
+        //initialize all animation variables
+        final Animation outRight = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_out_right);
+        final Animation inLeft = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_in_left);
+        final Animation inRight = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_in_right_mt);
+        final Animation outLeft = AnimationUtils.loadAnimation(
+                getContext(), R.anim.slide_out_left);
 
-        //used for detecting swipe vs click
-        final int MAX_CLICK_DURATION = 500;
-        final int MAX_CLICK_DISTANCE = 15;
-        long pressStartTime;
-        float pressedX;
-        float pressedY;
-        boolean stayedWithinClickDistance;
-        AlertDialog.Builder builderSingle;
+        View v;
 
-        ExpandableListView myList;
-        ExpandableListAdapter swapRecipeAdapter;
-        AlertDialog alert;
-        AlertDialog alert2;
-        ArrayList<MealItem> set1;
-        List<String> headerTitles;
-        List<Object> childTitles;
-        int helperPosition;
-        ArrayList<ArrayList<MealItem>> recipeSets;
+        LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = vi.inflate(R.layout.meal_cell, null);
 
 
+        for (int i = 0; i < mealPlan.getMealCountForDay(day); i++) {
 
-        public MealItemAdapter(Context context, int textViewResourceId, ArrayList<MealItem> items2) {
-            super(context, textViewResourceId, items2);
+            v = vi.inflate(R.layout.meal_cell, null);
 
 
-
-            File file = new File(getActivity().getFilesDir() + "/recipeSet/");
-            File inputFile = new File(file, "genericSet.ser");
-
-            RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
-            //items = rs.getRecipeSet();
-            set1 = rs.getRecipeSet();
-            recipeSets = new ArrayList<ArrayList<MealItem>>();
-
-
-            recipeSets.add(set1);
-
-
-
-            headerTitles = new ArrayList<>();
-            headerTitles.add(rs.getRecipeSetTitle());
-
-
-            childTitles = new ArrayList<>();
-            childTitles.add(set1);
-
-
-
-
-            swapRecipeAdapter = new ExpandableListAdapter(getContext(),headerTitles, childTitles);
-
-                        myList = new ExpandableListView(getContext());
-
-                        myList.setAdapter(swapRecipeAdapter);
-
-
-            myList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                            @Override
-                            public boolean onChildClick(ExpandableListView parent, View v, final int groupPosition, final int childPosition, long id) {
-
-
-
-                                String strName = ((MealItem) swapRecipeAdapter.getChild(groupPosition,childPosition)).getHeader();
-
-
-                                    AlertDialog.Builder builderInner = new AlertDialog.Builder(
-                                            getContext());
-
-                                    //builderInner.setMessage(strName);
-
-                                    builderInner.setTitle("You Have Selected");
-
-                                    View myV;
-                                    LayoutInflater myVi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    myV = myVi.inflate(R.layout.meal_cell_image_only_layout, null);
-                                    TextView text = (TextView) myV.findViewById(R.id.nameToSwap);
-                                    text.setText(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getTitle());
-                                    ImageView image = (ImageView) myV.findViewById(R.id.imageViewtoSwap);
-                                     //loadPicassoPicFromFileAsync(recipeImageView, o);
-                                Picasso.with(getContext()).load(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getImageUrl()).into(image);
-
-
-                                builderInner.setView(myV);
-
-
-                                    builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener(
-
-                                    ) {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            //builderSingle.show();
-                                        }
-                                    });
-                                    builderInner.setPositiveButton(
-                                            "Confirm",
-                                            new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(
-                                                        DialogInterface dialog,
-                                                        int which) {
-
-                                                    //recipeSets.get(groupPosition).get(childPosition).setHeader(mealItemToSwap.getHeader());
-                                                    //items.set(helperPosition, recipeSets.get(groupPosition).get(childPosition));
-                                                    mealPlan.swapMeal(day, helperPosition, (MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition));
-                                                    mealPlan.getListForDay(day).get(helperPosition).setHeader(items.get(helperPosition).getHeader());
-                                                    //currentAdapter.notifyDataSetChanged();
-                                                    currentAdapter.clear();
-                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                                    currentAdapter.notifyDataSetChanged();
-
-                                                    dialog.dismiss();
-                                                    alert.dismiss();
-                                                    //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
-
-
-                                                    saveFile();
-                                                }
-                                            });
-
-                                    builderInner.show();
-                               // Picasso.with(getContext()).load(((MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition)).getImageUrl()).into(image);
-
-
-                                return false;
-                            }
-
-                        });
-
-                        builderSingle = new AlertDialog.Builder(getContext());
-                        // builderSingle.setIcon(R.drawable.ic_launcher);
-
-                        builderSingle.setTitle("Select Recipe to Swap:");
-
-                        builderSingle.setView(myList);
-
-
-
-
-
-
-                    builderSingle.setNeutralButton(
-                                "cancel",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alert.dismiss();
-                                    }
-                                });
-
-            AlertDialog.Builder cantSwapBuilder = new AlertDialog.Builder(
-                    getContext());
-
-
-            cantSwapBuilder.setMessage("You Cannot Swap A Shake");
-
-
-            cantSwapBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener(
-
-            ) {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    //builderSingle.show();
-                }
-            });
-
-
-
-            alert = builderSingle.create();
-            alert2 = cantSwapBuilder.create();
-
-
-
-            this.items = items2;
-
-        }
-
-
-
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            //initialize all animation variables
-            final Animation outRight = AnimationUtils.loadAnimation(
-                    getContext(), R.anim.slide_out_right);
-            final Animation inLeft = AnimationUtils.loadAnimation(
-                    getContext(), R.anim.slide_in_left);
-            final Animation inRight = AnimationUtils.loadAnimation(
-                    getContext(), R.anim.slide_in_right_mt);
-            final Animation outLeft = AnimationUtils.loadAnimation(
-                    getContext(), R.anim.slide_out_left);
-
-            if (v == null) {
-                LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.meal_cell, null);
-            }
-
-            final MealItem o = items.get(position);
+            final MealItem o = mealPlan.getMeal(day, i);
 
 
             if (o != null) {
@@ -889,7 +1099,6 @@ public class MealFragment extends Fragment {
 
 
                 loadPicassoPicFromFileAsync(recipeImageView, o);
-
 
 
                 if (recipeTitle != null) {
@@ -905,263 +1114,271 @@ public class MealFragment extends Fragment {
                         }
                     });
 
-                        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
+                    final int counter = i;
+                    final View finalView = v;
 
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        mealPlan.toggleCompletion(day, position);
+                    final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
 
-                                        if(mealPlan.isCompleted(day, position)){
-                                            System.out.println("complete");
-                                            mealComplete(currentSelection);
-                                        }
-                                        else{
-                                            mealUncomplete(currentSelection);
-                                            System.out.println("uncomp");
-                                        }
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    mealPlan.toggleCompletion(day, counter);
 
-                                        saveFile();
+                                    if (mealPlan.isCompleted(day, counter)) {
+                                        System.out.println("complete");
+                                        mealComplete(finalView);
+                                    } else {
+                                        mealUncomplete(finalView);
+                                    }
 
-                                        break;
+                                    saveFile();
 
-                                    case DialogInterface.BUTTON_NEGATIVE:
+                                    break;
 
-                                        System.out.println(o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE"));
+                                case DialogInterface.BUTTON_NEGATIVE:
 
-                                        if(o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")) {
-                                           alert2.show();
-                                        }
-                                        else {
-                                            for (int i = 0; i < swapRecipeAdapter.getGroupCount(); i++) {
-                                                myList.collapseGroup(i);
 
-                                                alert.show();
-                                            }
-                                        }
+                                    if (o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")) {
+                                        alert2.show();
+                                    } else {
+                                       // for (int i = 0; i < swapRecipeAdapter.getGroupCount(); i++) {
+                                        //    myList.collapseGroup(i);
 
-                                        break;
+                                            alert.show();
+                                        //}
+                                    }
 
-                                    case DialogInterface.BUTTON_NEUTRAL:
-                                        break;
-                                }//end switch
-                            }
-                        };//end listener
+                                    break;
 
-                        //this sets up a yes/no selection box to make sure users want to complete a meal
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-                        builder.setMessage("Please Select an Option").setPositiveButton("Complete", dialogClickListener)
-                                .setNegativeButton("Swap Meal", dialogClickListener).setNeutralButton("Cancel", dialogClickListener);
+                                case DialogInterface.BUTTON_NEUTRAL:
+                                    break;
+                            }//end switch
+                        }
+                    };//end listener
+
+                    //this sets up a yes/no selection box to make sure users want to complete a meal
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+                    builder.setMessage("Please Select an Option").setPositiveButton("Complete", dialogClickListener)
+                            .setNegativeButton("Swap Meal", dialogClickListener).setNeutralButton("Cancel", dialogClickListener);
 
                     ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
 
-                        //v.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                        //recipeImageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    //v.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    //recipeImageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+
+                    //this listener allows users to complete meal
+                    v.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            currentSelection = v;
+                            builder.show();
+                            helperPosition = counter;
+
+                            return true;
+                        }
+                    });
+
+                    v.setOnTouchListener(new OnTouchListener() {
+
+                        @Override
+                        public boolean onTouch(View v, MotionEvent e) {
 
 
 
-                        //this listener allows users to complete meal
-                        v.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                currentSelection = v;
-                                builder.show();
-                                helperPosition = position;
-
-                                return true;
-                            }
-                        });
-
-                        v.setOnTouchListener(new OnTouchListener() {
-
-                            @Override
-                            public boolean onTouch(View v, MotionEvent e) {
-
-
-                                switch (e.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        pressStartTime = System.currentTimeMillis();
-                                        pressedX = e.getX();
-                                        pressedY = e.getY();
-                                        stayedWithinClickDistance = true;
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_MOVE: {
-                                        if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getX(), e.getY()) > MAX_CLICK_DISTANCE) {
-                                            stayedWithinClickDistance = false;
-                                        }
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_CANCEL:
-
-                                        System.out.println("outside brodillys");
-
-                                        if (stayedWithinClickDistance) {
-                                            // Click event has occurred
-                                            // open recipe
-                                           // hideAndShowMealItem(o);
-                                        }
-                                            //LR
-                                            if(pressedX < e.getX()){
-                                                //check if previous day exists, if so proceed displaying previous day
-                                                if (day > 0) {
-
-                                                    viewAnimator.setInAnimation(inLeft);
-                                                    viewAnimator.setOutAnimation(outRight);
-
-                                                    switchListView();
-
-                                                    day--;
-
-                                                    currenttv.setText("Day " + (day + 1));
-                                                    currentAdapter.clear();
-                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                                    currentAdapter.notifyDataSetChanged();
-
-                                                    viewAnimator.showPrevious();
-                                                }
-                                            }
-                                            //RL
-                                            else{
-                                                //check if next day exists, if so proceed displaying next day
-                                                if (day < daysInPlan - 1) {
-
-                                                    viewAnimator.setInAnimation(inRight);
-                                                    viewAnimator.setOutAnimation(outLeft);
-
-                                                    switchListView();
-
-                                                    day++;
-                                                    currenttv.setText("Day " + (day + 1));
-                                                    currentAdapter.clear();
-                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                                    currentAdapter.notifyDataSetChanged();
-
-                                                    viewAnimator.showNext();
-
-                                                }//end if
-                                            }//end else
-
-
-                                        break;
-                                    case MotionEvent.ACTION_UP:
-
-                                        long pressDuration = System.currentTimeMillis() - pressStartTime;
-                                        if (pressDuration < MAX_CLICK_DURATION && stayedWithinClickDistance) {
-                                            // Click event has occurred
-                                            // open recipe
-                                            hideAndShowMealItem(o);
-                                        }
-                                        else if(pressDuration < MAX_CLICK_DURATION){
-                                            //LR
-                                            if(pressedX < e.getX()){
-                                                //check if previous day exists, if so proceed displaying previous day
-                                                if (day > 0) {
-
-                                                    viewAnimator.setInAnimation(inLeft);
-                                                    viewAnimator.setOutAnimation(outRight);
-
-                                                    switchListView();
-
-                                                    day--;
-
-                                                    currenttv.setText("Day " + (day + 1));
-                                                    currentAdapter.clear();
-                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                                    currentAdapter.notifyDataSetChanged();
-
-                                                    viewAnimator.showPrevious();
-                                                }
-                                            }
-                                            //RL
-                                            else{
-                                                //check if next day exists, if so proceed displaying next day
-                                                if (day < daysInPlan - 1) {
-
-                                                    viewAnimator.setInAnimation(inRight);
-                                                    viewAnimator.setOutAnimation(outLeft);
-
-                                                    switchListView();
-
-                                                    day++;
-                                                    currenttv.setText("Day " + (day + 1));
-                                                    currentAdapter.clear();
-                                                    currentAdapter.addAll(mealPlan.getListForDay(day));
-                                                    currentAdapter.notifyDataSetChanged();
-
-                                                    viewAnimator.showNext();
-
-                                                }//end if
-                                            }//end else
-                                        }
-
-
-
+                            switch (e.getAction()) {
+                                case MotionEvent.ACTION_DOWN: {
+                                    pressStartTime = System.currentTimeMillis();
+                                    pressedX = e.getRawX();
+                                    pressedY = e.getRawY();
+                                    stayedWithinClickDistance = true;
+                                    break;
                                 }
-                                return false;
+                                case MotionEvent.ACTION_MOVE: {
+                                    if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getRawX(), e.getRawY()) > MAX_CLICK_DISTANCE) {
+                                        stayedWithinClickDistance = false;
+                                    }
+                                    break;
+                                }
+                                case MotionEvent.ACTION_CANCEL:
+
+
+                                    if (stayedWithinClickDistance) {
+                                        // Click event has occurred
+                                        // open recipe
+                                        // hideAndShowMealItem(o);
+                                    }
+                                    System.out.println("difference " + (pressedY - e.getRawY()));
+
+                                    //LR
+                                    if (pressedX < e.getRawX() && ((pressedY - e.getRawY()) > -20) && ((pressedY - e.getRawY()) < 20)) {
+                                        //check if previous day exists, if so proceed displaying previous day
+                                        if (day > 0) {
+
+                                            viewAnimator.setInAnimation(inLeft);
+                                            viewAnimator.setOutAnimation(outRight);
+
+                                            switchListView();
+
+                                            day--;
+
+                                            currenttv.setText("Day " + (day + 1));
+//                                            currentAdapter.clear();
+//                                            currentAdapter.addAll(mealPlan.getListForDay(day));
+//                                            currentAdapter.notifyDataSetChanged();
+
+                                            currentDailyMealList.removeAllViews();
+                                            getMealViews(currentDailyMealList);
+
+
+                                            updateWaterProgress();
+
+                                            viewAnimator.showPrevious();
+                                        }
+                                    }
+                                    //RL
+                                    else if(((pressedY - e.getRawY()) > -20) && ((pressedY - e.getRawY()) < 20)) {
+                                        System.out.println("on swappin ");
+
+                                        //check if next day exists, if so proceed displaying next day
+                                        if (day < daysInPlan - 1) {
+
+                                            viewAnimator.setInAnimation(inRight);
+                                            viewAnimator.setOutAnimation(outLeft);
+
+                                            switchListView();
+
+                                            day++;
+                                            currenttv.setText("Day " + (day + 1));
+//                                            currentAdapter.clear();
+//                                            currentAdapter.addAll(mealPlan.getListForDay(day));
+//                                            currentAdapter.notifyDataSetChanged();
+
+
+                                            currentDailyMealList.removeAllViews();
+                                            getMealViews(currentDailyMealList);
+
+                                            updateWaterProgress();
+
+                                            viewAnimator.showNext();
+
+                                        }//end if
+                                    }//end else
+
+
+                                    break;
+                                case MotionEvent.ACTION_UP:
+
+                                    long pressDuration = System.currentTimeMillis() - pressStartTime;
+                                    if (pressDuration < MAX_CLICK_DURATION && stayedWithinClickDistance) {
+                                        // Click event has occurred
+                                        // open recipe
+                                        hideAndShowMealItem(o);
+                                    } else if (pressDuration < MAX_CLICK_DURATION) {
+                                        //LR
+                                        System.out.println("difference " + (pressedY - e.getRawY()));
+
+                                        if (pressedX < e.getRawX() && ((pressedY - e.getRawY()) > -20) && ((pressedY - e.getRawY()) < 20)) {
+
+
+                                                //check if previous day exists, if so proceed displaying previous day
+                                            if (day > 0) {
+
+                                                viewAnimator.setInAnimation(inLeft);
+                                                viewAnimator.setOutAnimation(outRight);
+
+                                                switchListView();
+
+                                                day--;
+
+                                                currenttv.setText("Day " + (day + 1));
+//                                                currentAdapter.clear();
+//                                                currentAdapter.addAll(mealPlan.getListForDay(day));
+//                                                currentAdapter.notifyDataSetChanged();
+
+                                                currentDailyMealList.removeAllViews();
+                                                getMealViews(currentDailyMealList);
+
+                                                updateWaterProgress();
+
+                                                viewAnimator.showPrevious();
+                                            }
+                                        }
+                                        //RL
+                                        else if(((pressedY - e.getRawY()) > -20) && ((pressedY - e.getRawY()) < 20)) {
+                                            //check if next day exists, if so proceed displaying next day
+                                            if (day < daysInPlan - 1) {
+
+                                                viewAnimator.setInAnimation(inRight);
+                                                viewAnimator.setOutAnimation(outLeft);
+
+                                                switchListView();
+
+                                                day++;
+                                                currenttv.setText("Day " + (day + 1));
+//                                                currentAdapter.clear();
+//                                                currentAdapter.addAll(mealPlan.getListForDay(day));
+//                                                currentAdapter.notifyDataSetChanged();
+
+                                                currentDailyMealList.removeAllViews();
+                                                getMealViews(currentDailyMealList);
+                                                updateWaterProgress();
+
+                                                viewAnimator.showNext();
+
+                                            }//end if
+                                        }//end else
+                                    }
+
+
                             }
+                            return false;
+                        }
 
-                        });
+                    });
 
-                    }//end else
+                }//end else
 
 
-                }//if (recipeTitle != null) {
+            }//if (recipeTitle != null) {
 
             //end if (o != null) {
 
-            if (o.isCompleted()) 
+            if (o.isCompleted())
                 mealComplete(v);
 
-            return v;
+
+            dailyLayout.addView(v);
+            System.out.println("added view");
         }
+    }
 
 
-
-         private float distance(float x1, float y1, float x2, float y2) {
-            float dx = x1 - x2;
-            float dy = y1 - y2;
-            float distanceInPx = (float) Math.sqrt(dx * dx + dy * dy);
-            return pxToDp(distanceInPx);
-        }
-
-        private float pxToDp(float px) {
-            return px / getResources().getDisplayMetrics().density;
-        }
-
-        void hideAndShowMealItem(MealItem o) {
-            recipeTitle.setText(o.getTitle());
-            ingredientHeader.setText("Ingredients (Serves " + o.getServings() + ")");
-            recipeIngredientsContent.setText(o.getIngredients());
-            recipeDirectionsContent.setText(o.getDirections());
-
-            if(!o.getImageUrl().isEmpty()) {
-               // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
-                loadPicassoPicFromFileAsync(recipeBoxImageView, o);
-            }
-
-            recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
-        }
-
-        void loadPicassoPicFromFile(final ImageView v, final MealItem o){
+    void loadPicassoPicFromFileAsync(final ImageView v, final MealItem o){
 
 
-                File file = new File(getContext().getFilesDir(), o.getImageUrl());
+        File file = new File(getContext().getFilesDir(), o.getImageUrl());
 
-                if (!file.exists()) {
-                    System.out.println("file did not exist");
-                    //o.setLoaded(false);
+        if (!file.exists()) {
+            System.out.println("file did not exist");
+            //o.setLoaded(false);
 
-                    Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
+            Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
+                @Override
+                public void onSuccess() {
+
+
+                    // The types specified here are the input data type, the progress type, and the result type
+                    class MyAsyncTask extends AsyncTask<Bitmap, Void, Bitmap> {
                         @Override
-                        public void onSuccess() {
-
+                        protected Bitmap doInBackground(Bitmap... params) {
+                            // Some long-running task like downloading an image.
 
                             File file = new File(getContext().getFilesDir(), o.getImageUrl());
 
                             File parent = file.getParentFile();
-                            if(!parent.exists() && !parent.mkdirs()){
+                            if (!parent.exists() && !parent.mkdirs()) {
                                 throw new IllegalStateException("Couldn't create dir: " + parent);
                             }
 
@@ -1179,15 +1396,10 @@ public class MealFragment extends Fragment {
                                 // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
                                 fos = new FileOutputStream(file);
 
-                                Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
+                                //Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
 
-                                String s = o.getImageUrl();
-                                //if(s.substring(s.length() - 3).equalsIgnoreCase("JPG")){
-                                //  bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                                //}
-                                //else
-                                //{
-                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+
+                                params[0].compress(Bitmap.CompressFormat.PNG, 100, fos);
                                 //}
 
                                 o.setLoaded(true);
@@ -1203,271 +1415,105 @@ public class MealFragment extends Fragment {
                                 }
                             }
 
+                            return null;
                         }
 
-                        @Override
-                        public void onError() {
-                            System.out.println("failure");
+                        protected void onPreExecute() {
+                            // Runs on the UI thread before doInBackground
                         }
-                    });
-
-
-
-
-                } else {
-
-                    System.out.println("loaded from memory");
-                    Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
-                    //Glide.with(getContext()).load("file://" + file.getAbsolutePath()).centerCrop().crossFade().into(v);
-
-                }
-            }
-
-
-        void loadPicassoPicFromFileAsync(final ImageView v, final MealItem o){
-
-
-            File file = new File(getContext().getFilesDir(), o.getImageUrl());
-
-            if (!file.exists()) {
-                System.out.println("file did not exist");
-                //o.setLoaded(false);
-
-                Picasso.with(getContext()).load(o.getImageUrl()).into(v, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-
-
-
-                        // The types specified here are the input data type, the progress type, and the result type
-                        class MyAsyncTask extends AsyncTask<Bitmap, Void, Bitmap> {
-                            @Override
-                            protected Bitmap doInBackground(Bitmap... params) {
-                                // Some long-running task like downloading an image.
-
-                                File file = new File(getContext().getFilesDir(), o.getImageUrl());
-
-                                File parent = file.getParentFile();
-                                if(!parent.exists() && !parent.mkdirs()){
-                                    throw new IllegalStateException("Couldn't create dir: " + parent);
-                                }
-
-                                try {
-                                    file.createNewFile();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-                                System.out.println(file.exists() + " does it exists");
-
-                                FileOutputStream fos = null;
-                                try {
-
-                                    // fos = getContext().openFileOutput(file.getName(), Context.MODE_PRIVATE);
-                                    fos = new FileOutputStream(file);
-
-                                    //Bitmap bitmap = ((BitmapDrawable)v.getDrawable()).getBitmap();
-
-
-                                    params[0].compress(Bitmap.CompressFormat.PNG, 100, fos);
-                                    //}
-
-                                    o.setLoaded(true);
-                                    Log.i("image", "image saved to >>>" + file.getAbsolutePath());
-
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                } finally {
-                                    try {
-                                        fos.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                return null;
-                            }
-
-                            protected void onPreExecute() {
-                                // Runs on the UI thread before doInBackground
-                            }
-
 
 
 //                            protected void onProgressUpdate(Progress... values) {
 //                                // Executes whenever publishProgress is called from doInBackground
 //                            }
 
-                            protected void onPostExecute(Bitmap result) {
-                                // This method is executed in the UIThread
-                                // with access to the result of the long running task
-                                //v.setImageBitmap(result);
-                            }
+                        protected void onPostExecute(Bitmap result) {
+                            // This method is executed in the UIThread
+                            // with access to the result of the long running task
+                            //v.setImageBitmap(result);
                         }
-
-
-                        new MyAsyncTask().execute(((BitmapDrawable)v.getDrawable()).getBitmap());
-
                     }
 
-                    @Override
-                    public void onError() {
-                        System.out.println("failure");
-                    }
-                });
+
+                    new MyAsyncTask().execute(((BitmapDrawable) v.getDrawable()).getBitmap());
+
+                }
+
+                @Override
+                public void onError() {
+                    System.out.println("failure");
+                }
+            });
+        } else {
+
+            System.out.println("loaded from memory");
+            // Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
+            Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().into(v);
 
 
-
-
-            } else {
-
-                System.out.println("loaded from memory");
-               // Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
-                Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().into(v);
-
-
-
-            }
-        }
-
-
-        void downloadAndSaveImage(){
 
         }
-
-        void mealComplete(View v) {
-            //v.setBackgroundColor(Color.GRAY);
-            ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(true);
-            //v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
-            //v.setOnLongClickListener(null);
-            saveFile();
-        }
-        void mealUncomplete(View v){
-            ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
-            saveFile();
-            // v.setBackgroundColor(getResources().getColor(R.color.main_background));
-            //v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
-            //v.setOnLongClickListener(null);
-        }
-
-        void swapMeal(){
-
-            currentAdapter.notifyDataSetChanged();
-        }
-
-        private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
-        private int tempDay; //used to check if all items need to be reset to closed
     }
 
 
+    private float distance(float x1, float y1, float x2, float y2) {
+        float dx = x1 - x2;
+        float dy = y1 - y2;
+        float distanceInPx = (float) Math.sqrt(dx * dx + dy * dy);
+        return pxToDp(distanceInPx);
+    }
 
+    private float pxToDp(float px) {
+        return px / getResources().getDisplayMetrics().density;
+    }
 
+    void hideAndShowMealItem(MealItem o) {
+        recipeTitle.setText(o.getTitle());
+        ingredientHeader.setText("Ingredients (Serves " + o.getServings() + ")");
+        recipeIngredientsContent.setText(o.getIngredients());
+        recipeDirectionsContent.setText(o.getDirections());
 
+        if(!o.getImageUrl().isEmpty()) {
+            // Picasso.with(getContext()).load(o.getImageUrl()).into(recipeBoxImageView);
+            loadPicassoPicFromFileAsync(recipeBoxImageView, o);
+        }
 
+        recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
+    }
 
-
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    void mealComplete(View v) {
+        //v.setBackgroundColor(Color.GRAY);
+        ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(true);
+        //v.findViewById(R.id.mealCellImageView).setBackgroundColor(Color.GRAY);
+        //v.setOnLongClickListener(null);
+        saveFile();
+    }
+    void mealUncomplete(View v){
+        ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
+        saveFile();
+        // v.setBackgroundColor(getResources().getColor(R.color.main_background));
+        //v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
+        //v.setOnLongClickListener(null);
     }
 
 
-}
+//
+//    /**
+//     * This interface must be implemented by activities that contain this
+//     * fragment to allow an interaction in this fragment to be communicated
+//     * to the activity and potentially other fragments contained in that
+//     * activity.
+//     * <p/>
+//     * See the Android Training lesson <a href=
+//     * "http://developer.android.com/training/basics/fragments/communicating.html"
+//     * >Communicating with Other Fragments</a> for more information.
+//     */
+//    public interface OnFragmentInteractionListener {
+//        // TODO: Update argument type and name
+//        void onFragmentInteraction(Uri uri);
+//    }
+//
 
-
-
-
-
-
-class SwipeDetector implements OnTouchListener {
-
-    int HORIZONTAL_MIN_DISTANCE = 1;
-    int VERTICAL_MIN_DISTANCE = 1;
-
-   public static enum Action {
-       LR, // Left to Right
-       RL, // Right to Left
-       TB, // Top to bottom
-       BT, // Bottom to Top
-       None // when no action was detected
-   }
-
-   private static final String logTag = "SwipeDetector";
-   private static final int MIN_DISTANCE = 100;
-   private float downX, downY, upX, upY;
-   private Action mSwipeDetected = Action.None;
-
-   public boolean swipeDetected() {
-       return mSwipeDetected != Action.None;
-   }
-
-   public Action getAction() {
-       return mSwipeDetected;
-   }
-
-   @Override
-   public boolean onTouch(View v, MotionEvent event) {
-       switch (event.getAction()) {
-           case MotionEvent.ACTION_DOWN: {
-               downX = event.getX();
-               downY = event.getY();
-               mSwipeDetected = Action.None;
-               return false; // allow other events like Click to be processed
-           }
-           case MotionEvent.ACTION_MOVE: {
-               upX = event.getX();
-               upY = event.getY();
-
-               float deltaX = downX - upX;
-               float deltaY = downY - upY;
-
-               // horizontal swipe detection
-               if (Math.abs(deltaX) > HORIZONTAL_MIN_DISTANCE) {
-                   // left or right
-                   if (deltaX < 0) {
-                       Log.i(logTag, "Swipe Left to Right");
-                       mSwipeDetected = Action.LR;
-                       return true;
-                   }
-                   if (deltaX > 0) {
-                       Log.i(logTag, "Swipe Right to Left");
-                       mSwipeDetected = Action.RL;
-                       return true;
-                   }
-               } else
-
-                   // vertical swipe detection
-                   if (Math.abs(deltaY) > VERTICAL_MIN_DISTANCE) {
-                       // top or down
-                       if (deltaY < 0) {
-                           Log.i(logTag, "Swipe Top to Bottom");
-                           mSwipeDetected = Action.TB;
-                           return false;
-                       }
-                       if (deltaY > 0) {
-                           Log.i(logTag, "Swipe Bottom to Top");
-                           mSwipeDetected = Action.BT;
-                           return false;
-                       }
-                   }
-               return true;
-           }
-       }
-       return false;
-   }
 
 
 

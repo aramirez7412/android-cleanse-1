@@ -31,11 +31,11 @@ public class MealPlan implements Serializable {
             }
         }
 
-
     }
 
 
     MealPlan(JSONObject jsonObject, Context context, ProgressDialog progRef) throws JSONException {
+
 
 
         Set<String> imageURLSet = new TreeSet<>();
@@ -53,6 +53,12 @@ public class MealPlan implements Serializable {
 
         JSONArray planAr = jsonObject.getJSONArray("dailyPlans");
 
+
+        //initialize water progress for each day to 0
+        waterArray = new ArrayList<>();
+        for (int z = 0; z < planAr.length(); z++) {
+            waterArray.add(z, 0);
+        }
 
         //loop through each day
         for(int k = 0; k < planAr.length(); k++) {
@@ -189,6 +195,12 @@ public class MealPlan implements Serializable {
         return mealPlan.get(day).get(meal);
     }
 
+    int getWaterForDay(int day){return waterArray.get(day);}
+
+    void saveWaterForDay(int day, int progress){ waterArray.set(day, progress);}
+
+
+
     ArrayList<MealItem> getListForDay(int day){
       //  ArrayList<MealItem> ar//= mealPlan.elementAt(day)
         return mealPlan.get(day);
@@ -206,8 +218,10 @@ public class MealPlan implements Serializable {
     }
 
 
-
     ArrayList<ArrayList<MealItem>> mealPlan;
+
+    ArrayList<Integer> waterArray;
+
 
 
 
