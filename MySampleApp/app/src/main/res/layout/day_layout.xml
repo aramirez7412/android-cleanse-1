@@ -92,8 +92,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="#caeafb">
+            android:layout_height="160dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/waterTracker">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -112,8 +113,13 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:id="@+id/imageView9"
-                    android:src="@drawable/icon1"
-                    android:layout_gravity="center" />
+                    android:src="@drawable/bottle_8oz_sm"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="5dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -142,8 +148,10 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:id="@+id/imageView10"
-                    android:src="@drawable/icon2"
-                    android:layout_gravity="center" />
+                    android:src="@drawable/bottle_16oz_sm"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -172,8 +180,10 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:id="@+id/imageView11"
-                    android:src="@drawable/icon3"
-                    android:layout_gravity="center" />
+                    android:src="@drawable/bottle_24oz_sm"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    android:padding="5dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -202,7 +212,9 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:id="@+id/imageView12"
-                    android:src="@drawable/icon4" />
+                    android:src="@drawable/bottle_32oz_sm"
+                    android:scaleType="fitCenter"
+                    android:paddingBottom="5dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -224,11 +236,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBar"
                 android:progress="0"
-                android:layout_above="@+id/ounce8"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:indeterminate="false"
-                android:max="85" />
+                android:max="85"
+                android:layout_below="@+id/textView18"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -236,14 +248,12 @@
                 android:layout_height="40dp"
                 android:text="+"
                 android:id="@+id/addOunceButton"
-                android:textSize="25dp"
-                android:backgroundTint="#aebec6"
+                android:textSize="20dp"
+                android:backgroundTint="#548c3f"
                 android:textColor="#ffffff"
-                android:layout_marginRight="23dp"
-                android:layout_marginEnd="23dp"
                 android:layout_above="@+id/subtractOunceButton"
-                android:layout_alignRight="@+id/textView16"
-                android:layout_alignEnd="@+id/textView16" />
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -251,8 +261,8 @@
                 android:layout_height="40dp"
                 android:text="-"
                 android:id="@+id/subtractOunceButton"
-                android:textSize="25dp"
-                android:backgroundTint="#aebec6"
+                android:textSize="20dp"
+                android:backgroundTint="#548c3f"
                 android:textColor="#ffffff"
                 android:layout_above="@+id/textView16"
                 android:layout_alignLeft="@+id/addOunceButton"
@@ -262,15 +272,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Add by single oz"
+                android:text="Add single oz"
                 android:id="@+id/textView16"
                 android:textSize="15dp"
+                android:gravity="center"
+                android:typeface="serif"
                 android:layout_alignBottom="@+id/ounce32"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/ounce32"
-                android:gravity="center"
-                android:typeface="serif" />
+                android:layout_marginRight="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -288,18 +298,17 @@
                 android:layout_height="wrap_content"
                 android:text="GOAL: 85 oz"
                 android:id="@+id/textView18"
-                android:layout_above="@+id/progressBar"
+                android:typeface="serif"
+                android:layout_alignParentTop="true"
                 android:layout_alignRight="@+id/textView16"
-                android:layout_alignEnd="@+id/textView16"
-                android:layout_marginRight="5dp"
-                android:typeface="serif" />
+                android:layout_alignEnd="@+id/textView16" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="You have xxx oz left to go!"
                 android:id="@+id/ouncesToGoTextView"
-                android:layout_above="@+id/progressBar"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 

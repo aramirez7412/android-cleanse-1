@@ -21,9 +21,7 @@ public class MealPlan implements Serializable {
 
     // copy constructor
     MealPlan(MealPlan m) {
-        System.out.println("copy me bro");
         this.mealPlan = new ArrayList<ArrayList<MealItem>>();
-
 
         for (int i = 0; i < m.getDays(); i++) {
             for (int j = 0; j < m.getListForDay(i).size(); j++) {
