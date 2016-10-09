@@ -762,6 +762,8 @@ public class MealFragment extends Fragment {
 //                        currentAdapter.notifyDataSetChanged();
 
 
+                        currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
+
                         currentDailyMealList.removeAllViews();
                         getMealViews(currentDailyMealList);
 
@@ -799,7 +801,12 @@ public class MealFragment extends Fragment {
                         currentDailyMealList.removeAllViews();
                         getMealViews(currentDailyMealList);
 
+
+
                         updateWaterProgress();
+
+                        currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
+
 
 
                         viewAnimator.showPrevious();
