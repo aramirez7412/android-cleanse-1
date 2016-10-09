@@ -334,8 +334,6 @@ public class FoodListFragment extends Fragment {
 
 
 
-
-
         myAdapter = new ExpandableListAdapterFoodList(getContext(),headerTitles, childTitles, secondaryHeaderTitles);
 
         myList = (ExpandableListView) v.findViewById(R.id.expandableListViewFoodList);

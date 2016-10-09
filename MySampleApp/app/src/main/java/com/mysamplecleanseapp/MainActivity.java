@@ -55,6 +55,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -362,6 +363,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     throw new IllegalStateException("Couldn't create dir: " + parent);
                 }
 
+                for (int i = 0; i < mealPlan.getDays(); i++) {
+                    dailyFacts.add(i, mealPlan.getDailyFacts(i));
+                }
+
                 fos = new FileOutputStream(file);
                 // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
                 ObjectOutputStream os = new ObjectOutputStream(fos);
@@ -375,6 +380,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("grabbing generic recipes");
                 CreateTempRecipeSetForTestingMethod2(mealPlan);
 
+
+                //automatically show homescreen after downloading all data
+               // navigationDrawer.showHome();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -539,7 +547,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         if (savedInstanceState == null) {
             // Add the home fragment to be displayed initially.
-            navigationDrawer.showHome();
+          //  navigationDrawer.showTempLoadingScreen();
         }
 
     }
@@ -548,7 +556,11 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        dailyFacts = new ArrayList<>();
         progress = new ProgressDialog(this);
+
+        //must make this dynamic
+        int today = 0;
 
 
         //for final product do not hard code this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -626,6 +638,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
 
 
+
         currentUser = LoadUser(currentUser.getUserId());
 
 
@@ -639,6 +652,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         }
 
 
+        setupNavigationMenu(savedInstanceState);
 
 
         FileOutputStream fos = null;
@@ -651,10 +665,17 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             ObjectInputStream is = new ObjectInputStream(fis);
             mealPlan = (MealPlan) is.readObject();
 
+            for (int i = 0; i < mealPlan.getDays(); i++) {
+                dailyFacts.add(i, mealPlan.getDailyFacts(i));
+            }
 
             //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
             is.close();
             fis.close();
+
+
+            navigationDrawer.showHome();
+
 
             System.out.println("successfully loaded mealPlan");
         } catch (FileNotFoundException e) {
@@ -672,6 +693,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
             showWheel();
 
+            switchToWelcomeFragment();
+
                 //String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
                 DownloadPlan dl = new DownloadPlan();
             MyTaskParams mtp = new MyTaskParams("http://52.52.65.150:8080/mealplan", getApplicationContext());
@@ -679,7 +702,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         }
 
-        setupNavigationMenu(savedInstanceState);
+
+        //navigationDrawer.showTempLoadingScreen();
 
 
         ((TextView) findViewById(R.id.userName)).setText(currentUser.getUserName());
@@ -835,6 +859,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         return jsonPlan1;
     }
 
+    int getDayOfPlan(){
+        return today;
+    }
+
     int getPlanInt(){
         return planInt;
     }
@@ -843,11 +871,45 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         planInt =  num;
     }
 
+    DailyFacts getTodaysFacts(){
+
+        System.out.println("getting fact for " + today);
+         return dailyFacts.get(today);
+    }
+
 
     //need a function to return username from main
     {
 
     }
+
+
+    void switchToWelcomeFragment(){
+
+        Fragment fragment;
+        String fragmentName;
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Clear back stack when navigating from the Nav Drawer.
+        // fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        fragment = new LoadingFragment();
+        fragmentName = "Welcome";
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment_container, fragment, fragmentName)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack("previous fragment")
+                .commit();
+
+        // Set the title for the fragment.
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(fragmentName);
+        }
+    }//end switch fragment function
 
     void switchToQuizFragment(){
 
@@ -983,6 +1045,16 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         progress.dismiss();
     }
 
+    public void setPlanDay(int day){
+        today = day;
+    }
+
+//    public void checkAndIncrementPlanDay(Calendar day){
+//        if(day.compareTo(Calendar.getInstance())){
+//            today
+//        }
+//    }
+
     public void showWheel(){
 
         progress.setMessage("INITIALIZING FIRST TIME LAUNCH DATA...PLEASE WAIT) ");
@@ -990,6 +1062,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         progress.setIndeterminate(true);
         progress.show();
     }
+
+    ArrayList<DailyFacts> dailyFacts;
+    int today;
 
 
 }

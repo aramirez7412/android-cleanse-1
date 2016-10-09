@@ -164,6 +164,11 @@ public class MealFragment extends Fragment {
     TextView ouncesTextView2;
     TextView currentOuncesTextView;
 
+    TextView inspirationalQuote1;
+    TextView inspirationalQuote2;
+    TextView currentInspirationalQuote;
+
+
 
     private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
 
@@ -211,6 +216,7 @@ public class MealFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        day = ((MainActivity) getActivity()).getDayOfPlan();
 
     }
 
@@ -235,7 +241,12 @@ public class MealFragment extends Fragment {
         tv = ((TextView) layout1.findViewById(R.id.mealListDayHeader));
         tv2 = ((TextView) layout2.findViewById(R.id.mealListDayHeader));
 
-       // dayListView = (ListView) layout1.findViewById(R.id.testListView);
+
+        inspirationalQuote1 = ((TextView) layout1.findViewById(R.id.inspirationalQuoteTV));
+        inspirationalQuote2 = ((TextView) layout2.findViewById(R.id.inspirationalQuoteTV));
+        currentInspirationalQuote = inspirationalQuote1;
+
+        // dayListView = (ListView) layout1.findViewById(R.id.testListView);
         //dayListView2 = (ListView) layout2.findViewById(R.id.testListView);
 
         dailyMealList = (LinearLayout) layout1.findViewById(R.id.mealList);
@@ -486,7 +497,6 @@ public class MealFragment extends Fragment {
 
 
             daysInPlan = mealPlan.getDays();
-            day = 0;
 
             updateWaterProgress();
 
@@ -534,11 +544,13 @@ public class MealFragment extends Fragment {
             currenttv = tv;
             listViewNum = 1;
             currenttv.setText("Day " + (day + 1));
+            currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
 
 
 
 
-            File file = new File(getActivity().getFilesDir() + "/recipeSet/");
+
+        File file = new File(getActivity().getFilesDir() + "/recipeSet/");
             File inputFile = new File(file, "genericSet.ser");
 
             RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
@@ -826,6 +838,7 @@ public class MealFragment extends Fragment {
             currentDailyMealList = dailyMealList2;
             currentOuncesTextView = ouncesTextView2;
             currentProgress = progressBar2;
+            currentInspirationalQuote = inspirationalQuote2;
 
             previousList = dayListView;
         }
@@ -836,6 +849,7 @@ public class MealFragment extends Fragment {
 
             currentDailyMealList = dailyMealList;
             currentOuncesTextView = ouncesTextView1;
+            currentInspirationalQuote = inspirationalQuote1;
             currentProgress = progressBar;
             previousList = dayListView2;
         }
@@ -1228,6 +1242,8 @@ public class MealFragment extends Fragment {
 //                                            currentAdapter.addAll(mealPlan.getListForDay(day));
 //                                            currentAdapter.notifyDataSetChanged();
 
+                                            currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
+
                                             currentDailyMealList.removeAllViews();
                                             getMealViews(currentDailyMealList);
 
@@ -1255,6 +1271,8 @@ public class MealFragment extends Fragment {
 //                                            currentAdapter.addAll(mealPlan.getListForDay(day));
 //                                            currentAdapter.notifyDataSetChanged();
 
+
+                                            currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
 
                                             currentDailyMealList.removeAllViews();
                                             getMealViews(currentDailyMealList);
@@ -1300,6 +1318,9 @@ public class MealFragment extends Fragment {
                                                 currentDailyMealList.removeAllViews();
                                                 getMealViews(currentDailyMealList);
 
+                                                currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
+
+
                                                 updateWaterProgress();
 
                                                 viewAnimator.showPrevious();
@@ -1320,6 +1341,9 @@ public class MealFragment extends Fragment {
 //                                                currentAdapter.clear();
 //                                                currentAdapter.addAll(mealPlan.getListForDay(day));
 //                                                currentAdapter.notifyDataSetChanged();
+
+                                                currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
+
 
                                                 currentDailyMealList.removeAllViews();
                                                 getMealViews(currentDailyMealList);

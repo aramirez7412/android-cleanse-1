@@ -8,13 +8,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.sql.Struct;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 import java.util.TreeSet;
 
 /**
  * Created by mattcorrente on 5/30/16.
  */
+
+
+
 public class MealPlan implements Serializable {
 
     String urlString;
@@ -32,6 +38,7 @@ public class MealPlan implements Serializable {
     }
 
 
+
     MealPlan(JSONObject jsonObject, Context context, ProgressDialog progRef) throws JSONException {
 
 
@@ -42,9 +49,15 @@ public class MealPlan implements Serializable {
 
         mealPlan = new ArrayList<ArrayList<MealItem>>();
 
-        //add temporary items so we can add days in the right order
+        dailyFacts = new ArrayList<>();
+
+
+        DailyFacts tempFacts = new DailyFacts();
+
+        //add temporary items so we can add objects in the right order
         for(int z = 0; z < 10; z++) {
             ArrayList<MealItem> tempList = new ArrayList<>();
+            dailyFacts.add(z, tempFacts);
             mealPlan.add(z, tempList);
         }
 
@@ -68,6 +81,12 @@ public class MealPlan implements Serializable {
                 MealItem tempItem = new MealItem();
                 dayPlan.add(tempItem);
             }
+
+            tempFacts = new DailyFacts();
+            tempFacts.atAGlance = planAr.getJSONObject(k).getString("atAGlanceInstruction");
+            tempFacts.tipOfDay = planAr.getJSONObject(k).getString("tipOfTheDay");
+            tempFacts.detoxFact = planAr.getJSONObject(k).getString("detoxFacts");
+            tempFacts.dailyInspiration = planAr.getJSONObject(k).getString("dailyInspiration");
 
 
             JSONArray mealAr = null;
@@ -109,6 +128,9 @@ public class MealPlan implements Serializable {
                 mealItem.setIngredients(tempString);
                 //---------------------------------------------------
                 mealItem.setDirections(recipeObject.getString("instructions"));
+
+
+
 
 
 
@@ -165,7 +187,14 @@ public class MealPlan implements Serializable {
             snackBool = false;
 
             mealPlan.set(planAr.getJSONObject(k).getInt("day")-1, dayPlan);
+
+            dailyFacts.set(planAr.getJSONObject(k).getInt("day")-1, tempFacts);
+
         }
+
+
+        startDate = Calendar.getInstance();
+
 
         MyTaskParams params = new MyTaskParams(imageURLSet, context, progRef);
         MyAsyncTask myTask = new MyAsyncTask();
@@ -195,7 +224,19 @@ public class MealPlan implements Serializable {
 
     int getWaterForDay(int day){return waterArray.get(day);}
 
+    Calendar getStartDate( ){return startDate;}
+    void setStartDate(Calendar date){startDate = date;}
+
+
     void saveWaterForDay(int day, int progress){ waterArray.set(day, progress);}
+
+    DailyFacts getDailyFacts(int day){ return
+
+
+
+            dailyFacts.get(day);
+
+    }
 
 
 
@@ -219,6 +260,13 @@ public class MealPlan implements Serializable {
     ArrayList<ArrayList<MealItem>> mealPlan;
 
     ArrayList<Integer> waterArray;
+
+    ArrayList<DailyFacts> dailyFacts;
+
+    Calendar startDate;
+
+
+
 
 
 

@@ -5,6 +5,7 @@ package com.mysamplecleanseapp.navigation;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +34,7 @@ import com.mysamplecleanseapp.QuizFragment;
 import com.mysamplecleanseapp.R;
 import com.mysamplecleanseapp.WaterFragment;
 import com.mysamplecleanseapp.demo.DemoConfiguration;
+import com.mysamplecleanseapp.LoadingFragment;
 
 import static com.mysamplecleanseapp.R.string.app_name;
 
@@ -90,6 +92,7 @@ public class NavigationDrawer {
                 Fragment fragment;
                 String fragmentName;
 
+
                 final FragmentManager fragmentManager = activity.getSupportFragmentManager();
 
                 // Clear back stack when navigating from the Nav Drawer.
@@ -105,6 +108,8 @@ public class NavigationDrawer {
                     case 1:
                         fragment = new MealFragment();
                         fragmentName = "Meal Tracker";
+
+
                         break;
                     case 2:
                         fragment = new FoodListFragment();
@@ -130,11 +135,13 @@ public class NavigationDrawer {
                 }
 
 
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(fragmentContainerId, fragment, fragmentName)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
+                    activity.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(fragmentContainerId, fragment, fragmentName)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .commit();
+
+
 
                 // Set the title for the fragment.
                 final ActionBar actionBar = activity.getSupportActionBar();
@@ -237,6 +244,23 @@ public class NavigationDrawer {
         containingActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(fragmentContainerId, fragment, "Home Fragment")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+
+        // Set the title for the fragment.
+        final ActionBar actionBar = containingActivity.getSupportActionBar();
+        actionBar.setTitle(R.string.app_name);
+        closeDrawer();
+    }
+
+
+    public void showTempLoadingScreen() {
+
+        final Fragment fragment = new LoadingFragment();
+
+        containingActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(fragmentContainerId, fragment, "Loading Fragment")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
 

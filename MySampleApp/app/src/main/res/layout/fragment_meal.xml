@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Tip of the Day: "
             android:textStyle="bold"
-            android:id="@+id/textView5"
+            android:id="@+id/textviewasdf"
             android:textSize="20dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="Stay hydrated. Make sure you have 1/2 your body weight in ounces of spring water everyday in addition to the Fast Metabolism Cleanse shakes. For example, if you&apos;re 150lbs., that&apos;s 75 ounces of water daily."
             android:id="@+id/textView3"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/textviewasdf"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 

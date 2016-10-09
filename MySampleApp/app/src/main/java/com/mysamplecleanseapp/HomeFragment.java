@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 
 /**
@@ -28,8 +28,12 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     View view;
-    ViewGroup myDayButton;
-    ViewGroup foodListButton;
+
+    TextView atAGlance;
+    TextView dailyTip;
+    TextView dailyDetox;
+
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -72,25 +76,14 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        myDayButton = (ViewGroup) view.findViewById(R.id.myDayButton);
+        atAGlance = (TextView) view.findViewById(R.id.atAGlanceTextView);
+        dailyTip = (TextView) view.findViewById(R.id.dailyTipTextView);
+        dailyDetox = (TextView) view.findViewById(R.id.dailyDetoxTextView);
 
-        myDayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).switchToPlanFragment();
-            }
-        });
-
-
-        foodListButton = (ViewGroup) view.findViewById(R.id.foodListButton);
-
-        foodListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).switchToFoodListFragment();
-            }
-        });
-
+       DailyFacts todaysFacts =  ((MainActivity) getActivity()).getTodaysFacts();
+        atAGlance.setText(todaysFacts.atAGlance);
+        dailyTip.setText(todaysFacts.tipOfDay);
+        dailyDetox.setText(todaysFacts.detoxFact);
 
         return view;
     }
