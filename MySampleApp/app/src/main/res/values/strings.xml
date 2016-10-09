@@ -12,7 +12,7 @@
     <string name="main_nav_menu_item_quiz_fragment">Quiz</string>
     <string name="main_nav_menu_item_water_fragment">Water Tracker</string>
     <string name="main_nav_menu_food_list_fragment">Food List</string>
-    <string name="main_nav_menu_item_purchase_fragment">Recipe Store</string>
+    <string name="main_nav_menu_item_purchase_fragment">Recipes</string>
     <string name="title_activity_item_detail">Item Detail</string>
     <string name="title_activity_item_list">Item List</string>
     <string name="title_activity_main">@string/app_name</string>

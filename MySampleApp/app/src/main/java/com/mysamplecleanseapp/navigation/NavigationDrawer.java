@@ -32,6 +32,7 @@ import com.mysamplecleanseapp.HomeFragment;
 import com.mysamplecleanseapp.MealFragment;
 import com.mysamplecleanseapp.QuizFragment;
 import com.mysamplecleanseapp.R;
+import com.mysamplecleanseapp.RecipeFragment;
 import com.mysamplecleanseapp.WaterFragment;
 import com.mysamplecleanseapp.demo.DemoConfiguration;
 import com.mysamplecleanseapp.LoadingFragment;
@@ -117,12 +118,12 @@ public class NavigationDrawer {
 
                         break;
                     case 3:
-                        fragment = new QuizFragment();
-                        fragmentName = "Quiz";
+                        fragment = new RecipeFragment();
+                        fragmentName = "Recipes";
                         break;
                     case 4:
-                        fragment = new WaterFragment();
-                        fragmentName = "Water Tracker";
+                        fragment = new QuizFragment();
+                        fragmentName = "Quiz";
                         break;
                     case 5:
                         fragment = new PurchaseFragment();

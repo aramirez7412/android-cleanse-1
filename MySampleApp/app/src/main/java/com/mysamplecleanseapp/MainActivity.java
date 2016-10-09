@@ -518,9 +518,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
                 new DemoConfiguration.DemoItem(R.string.main_nav_menu_food_list_fragment, R.drawable.icon_checklist, R.drawable.icon_checklist, FoodListFragment.class)));
 
 
-//        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipe Store", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
-//                R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
-//                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, PurchasePlanFragment.class)));
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipes", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
+                R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, RecipeFragment.class)));
 
 
         //DemoConfiguration.DemoFeature mealTracker = new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.icon_home, R.string.main_nav_menu_item_meal_fragment,

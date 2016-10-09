@@ -168,6 +168,9 @@ public class MealFragment extends Fragment {
     TextView inspirationalQuote2;
     TextView currentInspirationalQuote;
 
+    ViewGroup layout1;
+    ViewGroup layout2;
+
 
 
     private View currentSelection; //this is used to instantaneously change a meal to completed when when "YES" is selected
@@ -234,8 +237,10 @@ public class MealFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_meal, container, false);
 
 
-        ViewGroup layout1 = (ViewGroup) view.findViewById(R.id.layout1);
-        ViewGroup layout2 = (ViewGroup) view.findViewById(R.id.layout2);
+         layout1 = (ViewGroup) view.findViewById(R.id.layout1);
+         layout2 = (ViewGroup) view.findViewById(R.id.layout2);
+
+
 
         //will need to dynamically change with day
         tv = ((TextView) layout1.findViewById(R.id.mealListDayHeader));
@@ -549,26 +554,26 @@ public class MealFragment extends Fragment {
 
 
 
-
         File file = new File(getActivity().getFilesDir() + "/recipeSet/");
-            File inputFile = new File(file, "genericSet.ser");
+        File inputFile = new File(file, "genericSet.ser");
 
-            RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
-            //items = rs.getRecipeSet();
-            set1 = rs.getRecipeSet();
-            recipeSets = new ArrayList<ArrayList<MealItem>>();
-
-
-            recipeSets.add(set1);
+        RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
+        //items = rs.getRecipeSet();
+        set1 = rs.getRecipeSet();
+        recipeSets = new ArrayList<ArrayList<MealItem>>();
 
 
-
-            headerTitles = new ArrayList<>();
-            headerTitles.add(rs.getRecipeSetTitle());
+        recipeSets.add(set1);
 
 
-            childTitles = new ArrayList<>();
-            childTitles.add(set1);
+
+        headerTitles = new ArrayList<>();
+        headerTitles.add(rs.getRecipeSetTitle());
+
+
+        childTitles = new ArrayList<>();
+        childTitles.add(set1);
+
 
 
 
@@ -832,6 +837,9 @@ public class MealFragment extends Fragment {
 
 
         if(listViewNum == 1){
+
+            layout2.scrollTo(0, 0);
+
             listViewNum =2;
            // currentAdapter = adapter2;
             currenttv = tv2;
@@ -841,8 +849,13 @@ public class MealFragment extends Fragment {
             currentInspirationalQuote = inspirationalQuote2;
 
             previousList = dayListView;
+
+
         }
         else{
+
+            layout1.scrollTo(0,0);
+
             listViewNum = 1;
           //  currentAdapter = adapter;
             currenttv = tv;
