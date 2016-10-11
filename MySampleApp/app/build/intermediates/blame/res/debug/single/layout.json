@@ -20,16 +20,16 @@
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/fragment_demo_instruction.xml"
     },
     {
+        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/fragment_recipe.xml",
+        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/fragment_recipe.xml"
+    },
+    {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/activity_login.xml",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/activity_login.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
         "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_media.xml"
-    },
-    {
-        "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/fragment_recipe.xml",
-        "source": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/src/main/res/layout/fragment_recipe.xml"
     },
     {
         "merged": "/Users/mattcorrente/Documents/gitStuff/android-cleanse-1/MySampleApp/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",

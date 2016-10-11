@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //parse the object and create a meal plan
                 mealPlan = new MealPlan(jsonObject, c, progress);
 
-                File file = new  File(c.getFilesDir() + "/" + getUserId(), "currentPlan.ser");
+                File file = new  File(c.getFilesDir(), "defaultPlan.ser");
 
                 File parent = file.getParentFile();
                 if(!parent.exists() && !parent.mkdirs()){
@@ -376,9 +376,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fos.close();
                 System.out.println("successfully saved mealPlan to: somewhere"); //+ file.getAbsolutePath());
 
+                testCreateCurrentPlan();
 
                 System.out.println("grabbing generic recipes");
                 CreateTempRecipeSetForTestingMethod2(mealPlan);
+
+
+
 
 
                 //automatically show homescreen after downloading all data
@@ -637,15 +641,17 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         setupToolbar(savedInstanceState);
 
 
-
         currentUser = new User();
 
-        //will need to pull this from logged in user, guest will be defaulted
+        //will need to pull this from logged in user, in future id rather name name or email will be used for user specific files
+        char[] temp = new char[3];
+         userEmail.getChars(0,3,temp, 0);
+        userEmail = new String(temp);
+
         currentUser.setUserId(userEmail);
-        currentUser.setUserName("Guest");
+        currentUser.setUserName(userEmail);
 
-
-
+        ((TextView) findViewById(R.id.userName)).setText(currentUser.getUserName());
 
 
         currentUser = LoadUser(currentUser.getUserId());
@@ -655,10 +661,12 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         if(currentUser == null){
             currentUser = new User();
             currentUser.setUserId(userEmail);
-            currentUser.setUserName("Guest");
+            currentUser.setUserName(userEmail);
             SaveUser(currentUser);
             //CreateTempRecipeSetForTesting();
         }
+
+
 
 
         setupNavigationMenu(savedInstanceState);
@@ -669,7 +677,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         MealPlan mealPlan = null;
         try {
 
-            FileInputStream fis = new FileInputStream(new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser"));
+            FileInputStream fis = new FileInputStream(new File(this.getFilesDir(), "defaultPlan.ser"));
 
             ObjectInputStream is = new ObjectInputStream(fis);
             mealPlan = (MealPlan) is.readObject();
@@ -720,7 +728,6 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         //navigationDrawer.showTempLoadingScreen();
 
 
-        ((TextView) findViewById(R.id.userName)).setText(currentUser.getUserName());
 
 
 
@@ -748,9 +755,84 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
 
 
+        testCreateCurrentPlan();
+
+
 
         //delete this after testing
         planInt = 0;
+    }
+
+    void testCreateCurrentPlan(){
+        //check to see if user has a plan file
+        Boolean test = false;
+        try {
+
+            FileInputStream fis = new FileInputStream(new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+            MealPlan mealPlan = (MealPlan) is.readObject();
+
+            //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+            is.close();
+            fis.close();
+
+            navigationDrawer.showHome();
+
+
+            System.out.println("successfully loaded currentPlan " + currentUser.getUserId() );
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            test = true;
+        } catch (IOException e) {
+            test = true;
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            test = true;
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            test = true;
+        }
+
+        //if not then create it
+        if(test) {
+
+            File dst = new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser");
+            File src = new File(this.getFilesDir(), "defaultPlan.ser");
+
+
+            File parent = dst.getParentFile();
+            if(!parent.exists() && !parent.mkdirs()){
+                throw new IllegalStateException("Couldn't create dir: " + parent);
+            }
+
+
+            FileInputStream in = null;
+            FileOutputStream out = null;
+            try {
+                in = new FileInputStream(src);
+                out = new FileOutputStream(dst);
+
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+                in.close();
+                out.close();
+
+                System.out.println("save to " + dst.getAbsolutePath());
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override

@@ -196,6 +196,7 @@ public class MealPlan implements Serializable {
         startDate = Calendar.getInstance();
 
 
+
         MyTaskParams params = new MyTaskParams(imageURLSet, context, progRef);
         MyAsyncTask myTask = new MyAsyncTask();
         myTask.execute(params);
