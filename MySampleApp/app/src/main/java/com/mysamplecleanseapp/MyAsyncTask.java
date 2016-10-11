@@ -83,11 +83,25 @@ import java.util.Set;
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
 
-        if(params[0].progRef != null){
-            params[0].progRef.dismiss();
+        try {
+            if(params[0].progRef != null && params[0].progRef.isShowing()){
+                params[0].progRef.dismiss();
+                params[0].progRef = null;
+            }
+        } catch (final IllegalArgumentException e) {
+            // Handle or log or ignore
+        } catch (final Exception e) {
+            // Handle or log or ignore
+        } finally {
+            params[0].progRef = null;
         }
+
+
+
+
 
         return null;
     }

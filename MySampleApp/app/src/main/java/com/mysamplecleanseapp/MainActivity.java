@@ -11,6 +11,7 @@ package com.mysamplecleanseapp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,8 +30,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.amazonaws.mobile.AWSMobileClient;
-import com.amazonaws.mobile.user.IdentityManager;
+
 import com.mysamplecleanseapp.demo.DemoConfiguration;
 import com.mysamplecleanseapp.navigation.NavigationDrawer;
 import com.mysamplecleanseapp.util.IabHelper;
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     User currentUser;
     IabHelper mHelper;
     ProgressDialog progress;
-
+    String userEmail;
 
     /**
      * Initializes the Toolbar for use with the activity.
@@ -556,6 +556,15 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+             userEmail = extras.getString("USER_EMAIL");
+            //The key argument here must match that used in the other activity
+        }
+
         dailyFacts = new ArrayList<>();
         progress = new ProgressDialog(this);
 
@@ -632,7 +641,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         currentUser = new User();
 
         //will need to pull this from logged in user, guest will be defaulted
-        currentUser.setUserId("guestUser");
+        currentUser.setUserId(userEmail);
         currentUser.setUserName("Guest");
 
 
@@ -645,7 +654,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         if(currentUser == null){
             currentUser = new User();
-            currentUser.setUserId("guestUser");
+            currentUser.setUserId(userEmail);
             currentUser.setUserName("Guest");
             SaveUser(currentUser);
             //CreateTempRecipeSetForTesting();
@@ -688,8 +697,13 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             test = true;
             e.printStackTrace();
         }
+        catch(Exception e){
+            test = true;
+        }
 
         if(test) {
+
+            System.out.println("failure to launch");
 
             showWheel();
 
