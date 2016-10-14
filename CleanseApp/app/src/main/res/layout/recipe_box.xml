@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/recipeBox"
+    android:background="#fefefe"
+    android:visibility="visible">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recipeBoxLinear">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipe Title"
+            android:id="@+id/recipeTitle"
+            android:textSize="40sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:src="@drawable/shaker_bottle"
+            android:id="@+id/recipeBoxImageView"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredients Serves (xxx)"
+            android:id="@+id/ingredientHeader"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/recipeTitle"
+            android:layout_alignStart="@+id/recipeTitle"
+            android:textSize="25sp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something\n• 3/2 cup of something"
+            android:id="@+id/recipeIngredientsContent"
+            android:textSize="20sp"
+            android:layout_below="@+id/ingredientHeader"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Directions"
+            android:id="@+id/recipeDirectionsHeader"
+            android:textSize="25sp"
+            android:layout_below="@+id/recipeIngredientsContent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step 1: Make food\nStep 2: Eat Food"
+            android:id="@+id/recipeDirectionsContent"
+            android:textSize="20sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/recipeDirectionsHeader"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="25dp"
+            android:paddingBottom="100dp"
+            android:layout_marginRight="5dp" />
+
+    </LinearLayout>
+
+</ScrollView>

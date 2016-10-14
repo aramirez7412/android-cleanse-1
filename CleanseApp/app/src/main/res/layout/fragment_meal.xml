@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/testId"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView7"
+        android:scaleType="fitXY"
+        android:alpha=".6"
+        android:visibility="gone" />
+
+    <ViewAnimator
+        android:id="@+id/myViewAnimator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+        <include layout="@layout/day_layout"
+            android:id="@+id/layout1" />
+
+        <include layout="@layout/day_layout"
+            android:id="@+id/layout2" />
+
+    </ViewAnimator>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/relativeLayout"
+        android:layout_below="@+id/myViewAnimator"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tip of the Day: "
+            android:textStyle="bold"
+            android:id="@+id/textviewasdf"
+            android:textSize="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stay hydrated. Make sure you have 1/2 your body weight in ounces of spring water everyday in addition to the Fast Metabolism Cleanse shakes. For example, if you&apos;re 150lbs., that&apos;s 75 ounces of water daily."
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textviewasdf"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/recipe_box"
+        android:id="@+id/recipeBoxView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true" />
+
+
+</RelativeLayout>
