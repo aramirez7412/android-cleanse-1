@@ -68,6 +68,7 @@ public class RecipeFragment extends Fragment {
     View recipeBox;
 
     Button viewPurchasesButton;
+    Button goToStoreButton;
 
 
     public RecipeFragment() {
@@ -111,6 +112,15 @@ public class RecipeFragment extends Fragment {
         final ViewGroup vpl = (ViewGroup) v.findViewById(R.id.ViewPurchasesLayout);
 
         viewPurchasesButton = ((Button) v.findViewById(R.id.viewPurchasedButton));
+        goToStoreButton = ((Button) v.findViewById(R.id.enterRecipeStoreButton));
+
+        goToStoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).switchToPurchaseFragment();
+            }
+        });
+
 
         viewPurchasesButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1025,14 +1025,39 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
 
 
-    void switchToPurchaseFragment(String planInfo, String planDesc){
+    void switchToPurchaseFragment(){
 
+        Fragment fragment;
+        String fragmentName;
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Clear back stack when navigating from the Nav Drawer.
+        // fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        fragment = new PurchaseFragment();
+        fragmentName = "Store";
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment_container, fragment, fragmentName)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack("previous fragment")
+                .commit();
+
+        // Set the title for the fragment.
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(fragmentName);
+        }
+    }//end switch fragment function
+
+//    void switchToPurchaseFragment(String planInfo, String planDesc){
+//
 //        Fragment fragment;
 //        String fragmentName;
 //
-//        Bundle bundle = new Bundle();
-//        bundle.putString("planName", planInfo);
-//        bundle.putString("planDesc", planDesc);
+//
 //
 //
 //        final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -1041,6 +1066,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 //        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 //
 //        fragmentName = "Purchase Fragment";
+//        fragment = new PurchaseFragment();
 //        fragment.setArguments(bundle);
 //
 //
@@ -1057,7 +1083,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 //        if (actionBar != null) {
 //            actionBar.setTitle(fragmentName);
 //        }
-    }//end switch fragment function
+//    }//end switch fragment function
 
     void switchToFoodListFragment(){
 

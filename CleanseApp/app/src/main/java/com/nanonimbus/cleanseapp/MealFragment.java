@@ -1030,7 +1030,7 @@ public class MealFragment extends Fragment {
 
     void switchToPurchaseFragment(String planInfo, String planDesc){
 
-        ((MainActivity)getActivity()).switchToPurchaseFragment(planInfo, planDesc);
+        ((MainActivity)getActivity()).switchToPurchaseFragment();
     }
 
     void switchLayout(ViewGroup v1, ViewGroup v2) {

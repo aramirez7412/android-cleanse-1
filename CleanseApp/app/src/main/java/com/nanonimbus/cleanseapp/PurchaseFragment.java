@@ -1,20 +1,20 @@
 package com.nanonimbus.cleanseapp;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.ServiceConnection;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-//import com.android.vending.billing.IInAppBillingService;
-//import com.mysamplecleanseapp.util.IabHelper;
-//import com.mysamplecleanseapp.util.IabResult;
-//import com.mysamplecleanseapp.util.Inventory;
+
+import com.nanonimbus.cleanseapp.util.IabHelper;
+import com.nanonimbus.cleanseapp.util.IabResult;
+import com.nanonimbus.cleanseapp.util.Purchase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,22 +30,7 @@ import java.util.List;
  */
 public class PurchaseFragment extends Fragment {
 
-//    IabHelper mHelper;
-    View view;
-//    IInAppBillingService mService;
-//
-//    ServiceConnection mServiceConn = new ServiceConnection() {
-//        @Override
-//        public void onServiceDisconnected(ComponentName name) {
-//            mService = null;
-//        }
-//
-//        @Override
-//        public void onServiceConnected(ComponentName name,
-//                                       IBinder service) {
-//            mService = IInAppBillingService.Stub.asInterface(service);
-//        }
-//    };
+
 
 
 
@@ -59,6 +44,13 @@ public class PurchaseFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    View view;
+    private static final String TAG = "<your domain>.inappbilling";
+    IabHelper mHelper;
+    static final String ITEM_SKU = "android.test.purchased";
+
+    private Button clickButton;
+    private Button buyButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -92,79 +84,6 @@ public class PurchaseFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-//        Intent serviceIntent =
-//                new Intent("com.android.vending.billing.InAppBillingService.BIND");
-//        serviceIntent.setPackage("com.android.vending");
-//        getContext().bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
-//
-//        ArrayList<String> skuList = new ArrayList<String> ();
-//        skuList.add("recipetest1");
-//        Bundle querySkus = new Bundle();
-//        querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
-//
-//
-//        try {
-//            Bundle skuDetails = mService.getSkuDetails(3, getContext().getPackageName(), "inapp", querySkus);
-//
-//
-//            int response = skuDetails.getInt("RESPONSE_CODE");
-//
-//            if (response == 0) {
-//                ArrayList<String> responseList
-//                        = skuDetails.getStringArrayList("DETAILS_LIST");
-//
-//                for (String thisResponse : responseList) {
-//                    JSONObject object = new JSONObject(thisResponse);
-//                    String sku = object.getString("productId");
-//                    String price = object.getString("price");
-//
-//                    System.out.println("the sku is " + sku + "   and the price " + price);
-//                }
-//            }
-//
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
-     //   mHelper = ((MainActivity) getActivity()).getIabHelper();
-
-
-
-
-        List<String> additionalSkuList = new ArrayList();
-        additionalSkuList.add("recipetest1");
-
-//
-//        IabHelper.QueryInventoryFinishedListener
-//                mQueryFinishedListener = new IabHelper.QueryInventoryFinishedListener() {
-//            public void onQueryInventoryFinished(IabResult result, Inventory inventory)
-//            {
-//                if (result.isFailure()) {
-//                    // handle error
-//                    return;
-//                }
-//
-//                System.out.println(inventory.hasPurchase("recipetest1"));
-//               // String applePrice = inventory.getSkuDetails("recipetest1").getPrice();
-//
-//                // update the UI
-//                //System.out.println("the price is: " + applePrice);
-//            }
-//        };
-//
-//
-//        try {
-//            mHelper.queryInventoryAsync(true, additionalSkuList , null, mQueryFinishedListener);
-//        } catch (IabHelper.IabAsyncInProgressException e) {
-//            e.printStackTrace();
-//        }
-
     }
 
 
@@ -177,7 +96,71 @@ public class PurchaseFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_purchase, container, false);
 
 
+
+       // clickButton.setEnabled(false);
+
+        String base64EncodedPublicKey =
+                "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj+jljp6fTlbdqqtRYj8Y6RblySpilop5Q2dG4aOqQelz6zDdyreN9aEhxW81a32KwuihG026mxhg2jjd7I2SiHFKu35cbLrMfNXnIBS/oGQDED8/iQpD00GcSYGsaWCIb95Zb+zDZqi53W9MeYqeUhuhidLU4QTgo75n9eSD5YGCzuqyKoIj3JEJZH7BHAS0b0mg7fbGPpBsqmxDQEE7osvLZx5bxJBkVdPzI76/yfvFpZa5Jn3FqYr7yLd8RDeWf3PHWG2L6Yk+A+dizCBtP7/fX2s8ZgETE5DdgctqZbOa6LvF6SSRUBxkH3jxJAZPoRbM3w8fqceJOHrBV0XcNwIDAQAB";
+
+        mHelper = new IabHelper(getContext(), base64EncodedPublicKey);
+
+        mHelper.startSetup(new
+                                   IabHelper.OnIabSetupFinishedListener() {
+                                       public void onIabSetupFinished(IabResult result)
+                                       {
+                                           if (!result.isSuccess()) {
+                                               System.out.println("failure");
+                                           } else {
+                                               System.out.println("success");
+                                               buyClick(view);
+                                           }
+                                       }
+                                   });
+
+
         return view;
+    }
+
+    public void buyClick(View view) {
+        mHelper.launchPurchaseFlow(getActivity(), ITEM_SKU, 10001,
+                mPurchaseFinishedListener, "mypurchasetoken");
+    }
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
+            = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result,
+                                          Purchase purchase)
+        {
+            if (result.isFailure()) {
+                // Handle error
+                return;
+            }
+            else if (purchase.getSku().equals(ITEM_SKU)) {
+                System.out.println("twas made");
+                //consumeItem();
+                //buyButton.setEnabled(false);
+            }
+
+        }
+    };
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mHelper != null) mHelper.dispose();
+        mHelper = null;
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data)
+    {
+        if (!mHelper.handleActivityResult(requestCode,
+                resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -235,17 +235,17 @@ public class QuizFragment extends Fragment {
                 getContext(), R.anim.slide_out_left);
 
 
-        recommendQuizTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                ((MainActivity)getActivity()).switchToPurchaseFragment(planName + " Meal Plan", tempDesc);
-                //webView.loadUrl(linkToLoad);
-                //switchLayout(quizEndLayout, detoxPlanWebViewLayout);
-               // counter++;
-            }
-        });
+//        recommendQuizTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                ((MainActivity)getActivity()).switchToPurchaseFragment(planName + " Meal Plan", tempDesc);
+//                //webView.loadUrl(linkToLoad);
+//                //switchLayout(quizEndLayout, detoxPlanWebViewLayout);
+//               // counter++;
+//            }
+//        });
 
 
 
