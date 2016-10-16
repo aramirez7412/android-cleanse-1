@@ -48,6 +48,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -164,52 +165,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //will need to search all json links for each recipe set and check if that file exitsts or not, if it doesnt we will pull
     //the json, parse it, and then serialize the recipe set object to a file ---this fragment does not check it simply is testing
     //one parse every time
-    boolean CreateTempRecipeSetForTesting() throws IOException {
-
-        String jsonString = sendGET("http://52.52.65.150:8080/recipe/set/1");
-
-        //fortesting keep like this
-        //String jsonString = "[{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"OVERNIGHT STEEL-CUT OATS WITH PEACHES\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/oatmeal-peachFS.jpg\",\"recipe\":{\"serves\":\"4 to 8\",\"ingredients\":[\"1 cup steel-cut oats\",\"4 cups water\"],\"instructions\":\"Bring the water to a boil in a large saucepan. Add oats and boil 1 minute. Turn oï¬€ the heat, cover the pan and let it stand overnight at room temperature. In the morning, remove the lid and bring the oats to a boil. Reduce heat and simmer, stirring often, until the oats are creamy yet still a little bit chewy, about 7 to 10 minutes. Cooked oats will keep in the fridge for a week. You can just spoon out a serving, add a little water, and reheat in the microwave for a minute or two. Or you can make a huge batch and freeze single servings. For extra flavor add Â½ cup chopped peaches, Â½ teaspoon grated fresh ginger, and Â¼ teaspoon vanilla, or Â½ cup of your favorite fruit (from the food list) as a mix-in.\"}},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/apple-celery.jpg\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"1 Apple\",\"1/2 Cup Minced Celery Stalks\"],\"instructions\":\"Slice and dice!\"}},{\"meal\":\"Turkey or Buffalo Chili\",\"time\":\"Dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\",\"recipe\":{\"serves\":\"6\",\"ingredients\":[\"1 to 1Â½ pounds lean ground turkey or buffalo meat\",\"Â½ cup diced red onion, (or more if desired)\",\"2 tablespoon parsley or cilantro\",\"1 heaping tablespoon chili powder\",\"1 tablespoon minced garlic\",\"Â½ teaspoon crushed red pepper ï¬‚akes\",\"15-ounce can white beans\",\"15-ounce can kidney beans\",\"15-ounce can black beans\",\"15-ounce can pinto beans\",\"15-ounce can lentils or adzuki beans\",\"4 cups chopped zucchini\",\"4 cups (32 ounces) organic bell pepper and tomato soup or plain tomato soup (just be sure it is not milk-based)\",\"1 heaping teaspoon sea salt\"],\"instructions\":\"Brown the turkey in a skillet and drain. Turn a slow cooker to high setting. Add the meat, onion, parsley, chili powder, garlic, and red pepper ï¬‚akes to the slow cooker pot. Stir, cover, and set the slow cooker aside. Open and partially drain all ï¬\u0081ve cans of beans; I leave a little liquid in to make the chili juicier. Add the beans, zucchini, and soup to the cooker. Stir well. Keep the cooker set on high for 4 to 5 hours, or adjust heat to low and simmer for 6 to 8 hours. Stir and taste occasionally, adjusting seasonings and adding salt as needed. A serving is 1Â½ cups.\"}}],\"id\":\"d56a99f257da9bf6\"}]";
-//String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"OVERNIGHT STEEL-CUT OATS WITH PEACHES\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/oatmeal-peachFS.jpg\",\"recipe\":{\"serves\":\"4 to 8\",\"ingredients\":[\"1 cup steel-cut oats\",\"4 cups water\"],\"instructions\":\"Bring the water to a boil in a large saucepan. Add oats and boil 1 minute. Turn oï¬€ the heat, cover the pan and let it stand overnight at room temperature. In the morning, remove the lid and bring the oats to a boil. Reduce heat and simmer, stirring often, until the oats are creamy yet still a little bit chewy, about 7 to 10 minutes. Cooked oats will keep in the fridge for a week. You can just spoon out a serving, add a little water, and reheat in the microwave for a minute or two. Or you can make a huge batch and freeze single servings. For extra flavor add Â½ cup chopped peaches, Â½ teaspoon grated fresh ginger, and Â¼ teaspoon vanilla, or Â½ cup of your favorite fruit (from the food list) as a mix-in.\"}},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/apple-celery.jpg\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"1 Apple\",\"1/2 Cup Minced Celery Stalks\"],\"instructions\":\"Slice and dice!\"}},{\"meal\":\"Turkey or Buffalo Chili\",\"time\":\"Dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\",\"recipe\":{\"serves\":\"6\",\"ingredients\":[\"1 to 1Â½ pounds lean ground turkey or buffalo meat\",\"Â½ cup diced red onion, (or more if desired)\",\"2 tablespoon parsley or cilantro\",\"1 heaping tablespoon chili powder\",\"1 tablespoon minced garlic\",\"Â½ teaspoon crushed red pepper ï¬‚akes\",\"15-ounce can white beans\",\"15-ounce can kidney beans\",\"15-ounce can black beans\",\"15-ounce can pinto beans\",\"15-ounce can lentils or adzuki beans\",\"4 cups chopped zucchini\",\"4 cups (32 ounces) organic bell pepper and tomato soup or plain tomato soup (just be sure it is not milk-based)\",\"1 heaping teaspoon sea salt\"],\"instructions\":\"Brown the turkey in a skillet and drain. Turn a slow cooker to high setting. Add the meat, onion, parsley, chili powder, garlic, and red pepper ï¬‚akes to the slow cooker pot. Stir, cover, and set the slow cooker aside. Open and partially drain all ï¬\u0081ve cans of beans; I leave a little liquid in to make the chili juicier. Add the beans, zucchini, and soup to the cooker. Stir well. Keep the cooker set on high for 4 to 5 hours, or adjust heat to low and simmer for 6 to 8 hours. Stir and taste occasionally, adjusting seasonings and adding salt as needed. A serving is 1Â½ cups.\"}}]}";
-
-        FileOutputStream fos = null;
-        try {
-
-            JSONObject obj = new JSONObject(jsonString);
-
-            File file = new File(this.getFilesDir() + "/recipeSet/");
-
-            file.mkdirs();
-//            File parent = file.getParentFile();
-//            if(!parent.exists() && !parent.mkdirs()){
-//                throw new IllegalStateException("Couldn't create dir: " + parent);
-//            }
-
-            RecipeSet mySet = new RecipeSet(obj, getApplicationContext());
-
-            File outputFile = new File(file, "genericSet.ser");
-            fos = new FileOutputStream(outputFile);
-            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(mySet);
-            os.close();
-            fos.close();
-            System.out.println("successfully saved recipe set to: " + outputFile.getAbsolutePath());
-        } catch (FileNotFoundException e) {
-            System.out.println("FAILED TO SAVE SET");
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            System.out.println("FAILED TO SAVE SET");
-            e.printStackTrace();
-            return false;
-        } catch (JSONException e) {
-            System.out.println("FAILED TO SAVE SET");
-            e.printStackTrace();
-        }
-
-        return true;
-    }
+//    boolean CreateTempRecipeSetForTesting() throws IOException {
+//
+//        String jsonString = sendGET("http://52.52.65.150:8080/recipe/set/1");
+//
+//        //fortesting keep like this
+//        //String jsonString = "[{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"OVERNIGHT STEEL-CUT OATS WITH PEACHES\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/oatmeal-peachFS.jpg\",\"recipe\":{\"serves\":\"4 to 8\",\"ingredients\":[\"1 cup steel-cut oats\",\"4 cups water\"],\"instructions\":\"Bring the water to a boil in a large saucepan. Add oats and boil 1 minute. Turn oï¬€ the heat, cover the pan and let it stand overnight at room temperature. In the morning, remove the lid and bring the oats to a boil. Reduce heat and simmer, stirring often, until the oats are creamy yet still a little bit chewy, about 7 to 10 minutes. Cooked oats will keep in the fridge for a week. You can just spoon out a serving, add a little water, and reheat in the microwave for a minute or two. Or you can make a huge batch and freeze single servings. For extra flavor add Â½ cup chopped peaches, Â½ teaspoon grated fresh ginger, and Â¼ teaspoon vanilla, or Â½ cup of your favorite fruit (from the food list) as a mix-in.\"}},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/apple-celery.jpg\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"1 Apple\",\"1/2 Cup Minced Celery Stalks\"],\"instructions\":\"Slice and dice!\"}},{\"meal\":\"Turkey or Buffalo Chili\",\"time\":\"Dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\",\"recipe\":{\"serves\":\"6\",\"ingredients\":[\"1 to 1Â½ pounds lean ground turkey or buffalo meat\",\"Â½ cup diced red onion, (or more if desired)\",\"2 tablespoon parsley or cilantro\",\"1 heaping tablespoon chili powder\",\"1 tablespoon minced garlic\",\"Â½ teaspoon crushed red pepper ï¬‚akes\",\"15-ounce can white beans\",\"15-ounce can kidney beans\",\"15-ounce can black beans\",\"15-ounce can pinto beans\",\"15-ounce can lentils or adzuki beans\",\"4 cups chopped zucchini\",\"4 cups (32 ounces) organic bell pepper and tomato soup or plain tomato soup (just be sure it is not milk-based)\",\"1 heaping teaspoon sea salt\"],\"instructions\":\"Brown the turkey in a skillet and drain. Turn a slow cooker to high setting. Add the meat, onion, parsley, chili powder, garlic, and red pepper ï¬‚akes to the slow cooker pot. Stir, cover, and set the slow cooker aside. Open and partially drain all ï¬\u0081ve cans of beans; I leave a little liquid in to make the chili juicier. Add the beans, zucchini, and soup to the cooker. Stir well. Keep the cooker set on high for 4 to 5 hours, or adjust heat to low and simmer for 6 to 8 hours. Stir and taste occasionally, adjusting seasonings and adding salt as needed. A serving is 1Â½ cups.\"}}],\"id\":\"d56a99f257da9bf6\"}]";
+////String jsonString = "{\"recipeSet\":\"Generic Recipe Set\", \"meals\":[{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Breakfast\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"OVERNIGHT STEEL-CUT OATS WITH PEACHES\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/oatmeal-peachFS.jpg\",\"recipe\":{\"serves\":\"4 to 8\",\"ingredients\":[\"1 cup steel-cut oats\",\"4 cups water\"],\"instructions\":\"Bring the water to a boil in a large saucepan. Add oats and boil 1 minute. Turn oï¬€ the heat, cover the pan and let it stand overnight at room temperature. In the morning, remove the lid and bring the oats to a boil. Reduce heat and simmer, stirring often, until the oats are creamy yet still a little bit chewy, about 7 to 10 minutes. Cooked oats will keep in the fridge for a week. You can just spoon out a serving, add a little water, and reheat in the microwave for a minute or two. Or you can make a huge batch and freeze single servings. For extra flavor add Â½ cup chopped peaches, Â½ teaspoon grated fresh ginger, and Â¼ teaspoon vanilla, or Â½ cup of your favorite fruit (from the food list) as a mix-in.\"}},{\"meal\":\"Fast Metabolism Cleanse\",\"time\":\"Lunch\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Shaker+Bottle.png\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"Cleanse Shake\"],\"instructions\":\"Using the scoop provided, mix two scoops of the Fast Metabolism Cleanse whole food powder with 8 to 12 ounces of spring water. You can do your mixing in a blender with ice, or by simply stirring the powder into water. You can add cinnamon, pure stevia, or birch xylitol as sweeteners. The beverage may replace a snack or meal as displayed in the sample menu.\"}},{\"meal\":\"Apple & 1/2 Cup Min. Celery Stalks\",\"time\":\"Snack\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/apple-celery.jpg\",\"recipe\":{\"serves\":\"1\",\"ingredients\":[\"1 Apple\",\"1/2 Cup Minced Celery Stalks\"],\"instructions\":\"Slice and dice!\"}},{\"meal\":\"Turkey or Buffalo Chili\",\"time\":\"Dinner\",\"imgurl\":\"https://s3-us-west-1.amazonaws.com/cleanse-app/Turkey+or+Buffalo+Chili.jpg\",\"recipe\":{\"serves\":\"6\",\"ingredients\":[\"1 to 1Â½ pounds lean ground turkey or buffalo meat\",\"Â½ cup diced red onion, (or more if desired)\",\"2 tablespoon parsley or cilantro\",\"1 heaping tablespoon chili powder\",\"1 tablespoon minced garlic\",\"Â½ teaspoon crushed red pepper ï¬‚akes\",\"15-ounce can white beans\",\"15-ounce can kidney beans\",\"15-ounce can black beans\",\"15-ounce can pinto beans\",\"15-ounce can lentils or adzuki beans\",\"4 cups chopped zucchini\",\"4 cups (32 ounces) organic bell pepper and tomato soup or plain tomato soup (just be sure it is not milk-based)\",\"1 heaping teaspoon sea salt\"],\"instructions\":\"Brown the turkey in a skillet and drain. Turn a slow cooker to high setting. Add the meat, onion, parsley, chili powder, garlic, and red pepper ï¬‚akes to the slow cooker pot. Stir, cover, and set the slow cooker aside. Open and partially drain all ï¬\u0081ve cans of beans; I leave a little liquid in to make the chili juicier. Add the beans, zucchini, and soup to the cooker. Stir well. Keep the cooker set on high for 4 to 5 hours, or adjust heat to low and simmer for 6 to 8 hours. Stir and taste occasionally, adjusting seasonings and adding salt as needed. A serving is 1Â½ cups.\"}}]}";
+//
+//        FileOutputStream fos = null;
+//        try {
+//
+//            JSONObject obj = new JSONObject(jsonString);
+//
+//            File file = new File(this.getFilesDir() + "/recipeSet/");
+//
+//            file.mkdirs();
+////            File parent = file.getParentFile();
+////            if(!parent.exists() && !parent.mkdirs()){
+////                throw new IllegalStateException("Couldn't create dir: " + parent);
+////            }
+//
+//            RecipeSet mySet = new RecipeSet(obj, getApplicationContext());
+//
+//            File outputFile = new File(file, "genericSet.ser");
+//            fos = new FileOutputStream(outputFile);
+//            // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+//            ObjectOutputStream os = new ObjectOutputStream(fos);
+//            os.writeObject(mySet);
+//            os.close();
+//            fos.close();
+//            System.out.println("successfully saved recipe set to: " + outputFile.getAbsolutePath());
+//        } catch (FileNotFoundException e) {
+//            System.out.println("FAILED TO SAVE SET");
+//            e.printStackTrace();
+//            return false;
+//        } catch (IOException e) {
+//            System.out.println("FAILED TO SAVE SET");
+//            e.printStackTrace();
+//            return false;
+//        } catch (JSONException e) {
+//            System.out.println("FAILED TO SAVE SET");
+//            e.printStackTrace();
+//        }
+//
+//        return true;
+//    }
 
 
 
@@ -270,6 +271,120 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    class DownloadSet extends AsyncTask<MyTaskParams, Void, MyTaskParams> {
+
+
+        @Override
+        protected MyTaskParams doInBackground(MyTaskParams... params) {
+
+            try {
+
+                ArrayList<String> recipeSets = params[0].recipeList;
+                ArrayList<String> newJsons = new ArrayList<>();
+
+                // String GET_URL = params[0].jsonURL;
+                Context c = params[0].context;
+                String USER_AGENT = "Mozilla/5.0";
+                // String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
+
+                for (int i = 0; i < recipeSets.size(); i++) {
+
+                    URL obj = new URL(recipeSets.get(i));
+                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    con.setRequestMethod("GET");
+                    con.setRequestProperty("User-Agent", USER_AGENT);
+                    int responseCode = con.getResponseCode();
+                    System.out.println("GET Response Code :: " + responseCode);
+                    if (responseCode == HttpURLConnection.HTTP_OK) { // success
+                        BufferedReader in = new BufferedReader(new InputStreamReader(
+                                con.getInputStream()));
+                        String inputLine;
+                        StringBuffer response = new StringBuffer();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+                        // print result
+                        System.out.println(response.toString());
+
+                        newJsons.add(response.toString());
+
+                    } else {
+                        System.out.println("GET request not worked");
+                        return null;
+                    }
+                }
+
+                return new MyTaskParams(newJsons, c);
+
+
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(MyTaskParams result) {
+
+            Context c = result.context;
+            ArrayList<String> setsJson = result.recipeList;
+
+            FileOutputStream fos = null;
+            try {
+
+                for (int i = 0; i < setsJson.size(); i++) {
+
+                    File file = new File(c.getFilesDir() + "/recipeSet/");
+
+                    file.mkdirs();
+
+
+                    RecipeSet mySet = new RecipeSet(new JSONObject(setsJson.get(i)), c);
+
+
+
+                    mySet.sort();
+
+                    File outputFile = new File(file, "New Set " + i);
+                    fos = new FileOutputStream(outputFile);
+                    // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+                    ObjectOutputStream os = new ObjectOutputStream(fos);
+                    os.writeObject(mySet);
+                    os.close();
+                    fos.close();
+                    System.out.println("successfully saved recipe set to: " + outputFile.getAbsolutePath());
+                    recipeSets.add(outputFile.getAbsolutePath());
+
+                }
+
+
+            } catch (FileNotFoundException e) {
+                System.out.println("FAILED TO SAVE SET");
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("FAILED TO SAVE SET");
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+
+
     class DownloadPlan extends AsyncTask<MyTaskParams, Void, MyTaskParams> {
 
 
@@ -326,7 +441,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Context c = result.context;
 
-
             FileOutputStream fos = null;
             Boolean test = false;
             MealPlan mealPlan = null;
@@ -368,8 +482,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 testCreateCurrentPlan();
 
                 System.out.println("grabbing generic recipes");
-                CreateTempRecipeSetForTestingMethod2(mealPlan);
+               // CreateTempRecipeSetForTestingMethod2(mealPlan);
 
+                DownloadSet ds = new DownloadSet();
+                ArrayList<String> sets = new ArrayList<>();
+                sets.add("http://52.52.65.150:8080/recipe/set/GgYfZrkrpcgtyYS7kDjVZ7Ju");
+                sets.add("http://52.52.65.150:8080/recipe/set/GgYfZrkrpcgtyYS7kDjVZ7Ju");
+                MyTaskParams mtp = new MyTaskParams(sets, getApplicationContext());
+                ds.execute(mtp);
 
 
 
@@ -558,6 +678,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             //The key argument here must match that used in the other activity
         }
 
+        recipeSets = new ArrayList<>();
         dailyFacts = new ArrayList<>();
         progress = new ProgressDialog(this);
 
@@ -1173,7 +1294,22 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         progress.show();
     }
 
+    int getRecipeSetCount(){
+        return recipeSets.size();
+    }
+
+    String getSetURL(int i){
+        return recipeSets.get(i);
+    }
+
+    //try to sort it in this function
+    void addSetURL(String url){
+        recipeSets.add(url);
+    }
+
     ArrayList<DailyFacts> dailyFacts;
+    ArrayList<String> recipeSets;
+
     int today;
 
 

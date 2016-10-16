@@ -41,9 +41,9 @@ public class RecipeSet  implements Serializable  {
 
         recipeSet = new ArrayList<MealItem>();
 
-        recipeSetTitle =  jsonObject.getString("recipeSet");
+        recipeSetTitle =  "temporary";
 
-        JSONArray setAr = jsonObject.getJSONArray("meals");
+        JSONArray setAr = jsonObject.getJSONArray("recipes");
 
 
         //loop through each meal
@@ -56,28 +56,28 @@ public class RecipeSet  implements Serializable  {
 
             // mealItem.setType(mealObject.getString("type"));
 
-            mealItem.setHeader(mealObject.getString("time"));
-            mealItem.setTitle(mealObject.getString("meal"));
+            //mealItem.setHeader(mealObject.getString("time"));
+            mealItem.setTitle(mealObject.getString("name"));
             //set images
             //------------
             //urlString = mealObject.getString("imgurl");
             //Picasso.with(context).load(urlString).into(picassoImageTarget(c.getApplicationContext(), "imageDir", mealObject.getString("imgurl")));
-            mealItem.setImageUrl(mealObject.getString("imgurl"));
+            mealItem.setImageUrl(mealObject.getString("imgUrl"));
 
-            imageURLSet.add(mealObject.getString("imgurl"));
+            imageURLSet.add(mealObject.getString("imgUrl"));
             //------------
-            JSONObject recipeObject = mealObject.getJSONObject("recipe");
+           // JSONObject recipeObject = mealObject.getJSONObject("recipe");
 
-            mealItem.setServings(recipeObject.getString("serves"));
+            mealItem.setServings(mealObject.getString("serves"));
             //set ingredients
             //---------------------------------------------------
-            JSONArray ingredientsArray = recipeObject.getJSONArray("ingredients");
+            JSONArray ingredientsArray = mealObject.getJSONArray("ingredients");
             for (int j = 0; j < ingredientsArray.length(); j++) {
                 tempString += "•" + ingredientsArray.getString(j) + "\n";
             }
             mealItem.setIngredients(tempString);
             //---------------------------------------------------
-            mealItem.setDirections(recipeObject.getString("instructions"));
+            mealItem.setDirections(mealObject.getString("instructions"));
 
 
 

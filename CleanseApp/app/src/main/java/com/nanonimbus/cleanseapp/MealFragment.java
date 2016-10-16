@@ -553,27 +553,30 @@ public class MealFragment extends Fragment {
             currentInspirationalQuote.setText(mealPlan.getDailyFacts(day).dailyInspiration);
 
 
-
-
-        File file = new File(getActivity().getFilesDir() + "/recipeSet/");
-        File inputFile = new File(file, "genericSet.ser");
-
-        RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
-        //items = rs.getRecipeSet();
-        set1 = rs.getRecipeSet();
         recipeSets = new ArrayList<ArrayList<MealItem>>();
-
-
-        recipeSets.add(set1);
-
-
-
         headerTitles = new ArrayList<>();
-        headerTitles.add(rs.getRecipeSetTitle());
-
-
         childTitles = new ArrayList<>();
-        childTitles.add(set1);
+
+
+        for (int i = 0; i < ((MainActivity) getActivity()).getRecipeSetCount(); i++) {
+
+            File file = new File(getActivity().getFilesDir() + "/recipeSet/");
+            File inputFile = new File(((MainActivity) getActivity()).getSetURL(i));
+
+            RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
+            //items = rs.getRecipeSet();
+            set1 = rs.getRecipeSet();
+
+            recipeSets.add(set1);
+
+            headerTitles.add(rs.getRecipeSetTitle());
+
+
+            childTitles.add(set1);
+
+        }
+
+
 
 
 
@@ -922,7 +925,7 @@ public class MealFragment extends Fragment {
         Boolean test = false;
         try {
 
-            FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/recipeSet/", "genericSet.ser"));
+            FileInputStream fis = new FileInputStream(new File(fileName));
 
             ObjectInputStream is = new ObjectInputStream(fis);
             retSet = (RecipeSet) is.readObject();

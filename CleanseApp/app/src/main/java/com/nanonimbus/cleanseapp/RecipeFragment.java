@@ -44,7 +44,7 @@ public class RecipeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     ArrayList<ArrayList<MealItem>> recipeSets;
-    ArrayList<MealItem> set1;
+    ArrayList<MealItem> tempSet;
     List<String> headerTitles;
     List<Object> childTitles;
     ExpandableListAdapter recipeAdapter;
@@ -177,24 +177,29 @@ public class RecipeFragment extends Fragment {
         recipeBoxImageView = (ImageView) recipeBox.findViewById(R.id.recipeBoxImageView);
 
 
-        File file = new File(getActivity().getFilesDir() + "/recipeSet/");
-        File inputFile = new File(file, "genericSet.ser");
 
-        RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
-        //items = rs.getRecipeSet();
-        set1 = rs.getRecipeSet();
+
         recipeSets = new ArrayList<ArrayList<MealItem>>();
-
-
-        recipeSets.add(set1);
-
-
-        headerTitles = new ArrayList<>();
-        headerTitles.add(rs.getRecipeSetTitle());
-
-
         childTitles = new ArrayList<>();
-        childTitles.add(set1);
+        headerTitles = new ArrayList<>();
+
+
+        for (int i = 0; i <  ((MainActivity) getActivity()).getRecipeSetCount(); i++) {
+
+            RecipeSet rs = getSetFromFile(((MainActivity) getActivity()).getSetURL(i));
+            tempSet = rs.getRecipeSet();
+            recipeSets.add(tempSet);
+
+            headerTitles.add(rs.getRecipeSetTitle());
+
+
+            childTitles.add(tempSet);
+        }
+
+
+
+
+
 
 
         recipeAdapter = new ExpandableListAdapter(getContext(), headerTitles, childTitles);
@@ -265,7 +270,7 @@ public class RecipeFragment extends Fragment {
         Boolean test = false;
         try {
 
-            FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/recipeSet/", "genericSet.ser"));
+            FileInputStream fis = new FileInputStream(new File(fileName));
 
             ObjectInputStream is = new ObjectInputStream(fis);
             retSet = (RecipeSet) is.readObject();
