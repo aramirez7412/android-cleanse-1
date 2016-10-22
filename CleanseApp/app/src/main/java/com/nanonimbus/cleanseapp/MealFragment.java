@@ -561,7 +561,7 @@ public class MealFragment extends Fragment {
         for (int i = 0; i < ((MainActivity) getActivity()).getRecipeSetCount(); i++) {
 
             File file = new File(getActivity().getFilesDir() + "/recipeSet/");
-            File inputFile = new File(((MainActivity) getActivity()).getSetURL(i));
+            File inputFile = new File(((MainActivity) getActivity()).getSetPath(i));
 
             RecipeSet rs = getSetFromFile(inputFile.getAbsolutePath());
             //items = rs.getRecipeSet();
@@ -633,10 +633,24 @@ public class MealFragment extends Fragment {
 
                                                     //recipeSets.get(groupPosition).get(childPosition).setHeader(mealItemToSwap.getHeader());
                                                     //items.set(helperPosition, recipeSets.get(groupPosition).get(childPosition));
+
+                                                    String tempHeader =  mealPlan.getListForDay(day).get(helperPosition).getHeader();
+
+                                                    if(mealPlan.getListForDay(day).get(helperPosition).getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")){
+                                                        mealPlan.setShakesSelectedPerDay(day, (mealPlan.getShakesSelectedPerDay(day) - 1));
+                                                    }
+
+
+
                                                     mealPlan.swapMeal(day, helperPosition, (MealItem) swapRecipeAdapter.getChild(groupPosition, childPosition));
                                                    // mealPlan.getListForDay(day).get(helperPosition).setHeader(items.get(helperPosition).getHeader());
 
-                                                    mealPlan.getListForDay(day).get(helperPosition).setHeader(((MealItem) swapRecipeAdapter.getChild(groupPosition, helperPosition)).getHeader());
+
+                                                    mealPlan.getListForDay(day).get(helperPosition).setHeader(tempHeader);
+
+                                                    if(mealPlan.getListForDay(day).get(helperPosition).getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")){
+                                                        mealPlan.setShakesSelectedPerDay(day, (mealPlan.getShakesSelectedPerDay(day) + 1));
+                                                    }
 
                                                     //currentAdapter.notifyDataSetChanged();
 
@@ -645,7 +659,7 @@ public class MealFragment extends Fragment {
 
                                                     dialog.dismiss();
                                                     alert.dismiss();
-                                                    //System.out.println("should have swapped " + recipeSets.get(groupPosition).get(childPosition).getTitle() + " with " + items.get(helperPosition).getTitle());
+
 
 
                                                     saveFile();
@@ -1178,7 +1192,18 @@ public class MealFragment extends Fragment {
 
 
                                     if (o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")) {
-                                        alert2.show();
+
+                                        if (mealPlan.getShakesSelectedPerDay(day) == mealPlan.getShakesNeededPerDay(day)){
+                                            alert2.setMessage(mealPlan.getShakesNeededPerDay(day) + " shakes are needed for this day!\n" +
+                                                    "To change shake day please change another meal for today to a shake and then swap the currently\n" +
+                                                    "selected shake for the desired meal.");
+                                            alert2.show();
+                                        }
+                                        else{
+                                            alert.show();
+                                        }
+
+
                                     } else {
                                        // for (int i = 0; i < swapRecipeAdapter.getGroupCount(); i++) {
                                         //    myList.collapseGroup(i);

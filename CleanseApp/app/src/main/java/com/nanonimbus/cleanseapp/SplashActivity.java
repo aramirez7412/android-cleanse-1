@@ -105,7 +105,10 @@ public class SplashActivity extends Activity {
                     //    provider, new SignInResultsHandler());
                 //} else {
                     // Asyncronously go to the main activity (after the splash delay has expired).
-                    goLogin();
+
+                //  goLogin();
+                goHome();
+
                 //}
 
                 // Wait for the splash timeout.
@@ -155,6 +158,10 @@ public class SplashActivity extends Activity {
     /**
      * Go to the main activity after the splash timeout has expired.
      */
+    protected void goHome() {
+        Log.d(LOG_TAG, "Launching Home...");
+        goAfterSplashTimeout(new Intent(this, MainActivity.class));
+    }
     protected void goLogin() {
         Log.d(LOG_TAG, "Launching Login...");
         goAfterSplashTimeout(new Intent(this, LoginActivity.class));

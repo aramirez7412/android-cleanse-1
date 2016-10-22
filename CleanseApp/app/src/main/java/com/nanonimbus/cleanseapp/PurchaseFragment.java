@@ -150,7 +150,7 @@ public class PurchaseFragment extends Fragment {
             sL.AddRecipeName("Lamb stew In a Jiffy");
             sL.AddRecipeName("Roasted Chicken, Avocado & Grapefruit Salad");
 
-            sL.setTitle("Rip Off Recipe Set 1");
+            sL.setTitle("Recipe Set 1");
 
 
             sampleListings.add(sL);

@@ -39,11 +39,29 @@ public class RecipeSet  implements Serializable  {
 
         Set<String> imageURLSet = new TreeSet<>();
 
+
+
         recipeSet = new ArrayList<MealItem>();
 
+        recipeSetSaveTitle = "";
         recipeSetTitle =  "temporary";
 
+
         JSONArray setAr = jsonObject.getJSONArray("recipes");
+
+        //for testing
+        //******************************************************************************************
+        int setId;
+        setId = setAr.getJSONObject(0).getInt("recipeSetId");
+        if(setId == 1){
+            recipeSetSaveTitle = "genericSet";
+            recipeSetTitle = "Generic Set";
+        }
+        else{
+            recipeSetSaveTitle = "something";
+            recipeSetTitle = "please fix this";
+        }
+        //******************************************************************************************
 
 
         //loop through each meal
@@ -254,7 +272,9 @@ public class RecipeSet  implements Serializable  {
 //        }
 //    }
 
+    String getRecipeSetSaveTitle(){return recipeSetSaveTitle;};
 
+    String recipeSetSaveTitle;
     String recipeSetTitle;
     ArrayList<MealItem> recipeSet;
 }

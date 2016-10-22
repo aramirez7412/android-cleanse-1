@@ -45,7 +45,10 @@ public class MealPlan implements Serializable {
 
         boolean snackBool = false; //used to place snacks into right position
 
-        mealPlan = new ArrayList<ArrayList<MealItem>>();
+        mealPlan = new ArrayList<>();
+        shakesNeededPerDay = new ArrayList<>();
+        shakesSelectedPerDay = new ArrayList<>();
+
 
         dailyFacts = new ArrayList<>();
 
@@ -57,6 +60,8 @@ public class MealPlan implements Serializable {
             ArrayList<MealItem> tempList = new ArrayList<>();
             dailyFacts.add(z, tempFacts);
             mealPlan.add(z, tempList);
+            shakesNeededPerDay.add(0);
+            shakesSelectedPerDay.add(0);
         }
 
 
@@ -69,10 +74,13 @@ public class MealPlan implements Serializable {
             waterArray.add(z, 0);
         }
 
+
+
         //loop through each day
         for(int k = 0; k < planAr.length(); k++) {
 
             ArrayList<MealItem> dayPlan = new ArrayList<>();
+            int shakeCount = 0;
 
             //initialize list so we can set the elements so that they will be sorted by time of day
             for(int z = 0; z < 5; z++) {
@@ -101,12 +109,17 @@ public class MealPlan implements Serializable {
                 String tempString = "";
                 JSONObject mealObject = mealAr.getJSONObject(i);
 
+
                // mealItem.setType(mealObject.getString("type"));
 
                 mealItem.setHeader(mealObject.getString("time"));
 
                 JSONObject recipeObject = mealObject.getJSONObject("recipe");
                 mealItem.setTitle(recipeObject.getString("name"));
+
+                if(mealItem.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")){
+                    shakeCount++;
+                }
                 //set images
                 //------------
                     //urlString = mealObject.getString("imgurl");
@@ -126,11 +139,6 @@ public class MealPlan implements Serializable {
                 mealItem.setIngredients(tempString);
                 //---------------------------------------------------
                 mealItem.setDirections(recipeObject.getString("instructions"));
-
-
-
-
-
 
 
 //                mealItem.setServings(mealObject.getInt("servings"));
@@ -188,6 +196,9 @@ public class MealPlan implements Serializable {
 
             dailyFacts.set(planAr.getJSONObject(k).getInt("day")-1, tempFacts);
 
+
+            setShakesNeededPerDay(k, shakeCount);
+            setShakesSelectedPerDay(k, shakeCount);
         }
 
 
@@ -251,14 +262,34 @@ public class MealPlan implements Serializable {
     void swapMeal(int day, int mealNum, MealItem newMeal){
         mealPlan.get(day).set(mealNum, newMeal);
         System.out.println("setting day " + day + "'s meal " + mealNum + "   to " + mealPlan.get(day).get(mealNum).getTitle());
-
-
     }
 
 
     ArrayList<ArrayList<MealItem>> mealPlan;
 
     ArrayList<Integer> waterArray;
+
+    public int getShakesNeededPerDay(int day) {
+        return shakesNeededPerDay.get(day);
+    }
+
+    public void setShakesNeededPerDay(int day, int count) {
+        shakesNeededPerDay.set(day, count);
+    }
+
+    public int getShakesSelectedPerDay(int day) {
+        return shakesSelectedPerDay.get(day);
+    }
+
+    public void setShakesSelectedPerDay(int day, int count) {
+        shakesSelectedPerDay.set(day, count);
+    }
+
+
+
+    ArrayList<Integer> shakesNeededPerDay;
+    ArrayList<Integer> shakesSelectedPerDay;
+
 
     ArrayList<DailyFacts> dailyFacts;
 

@@ -179,14 +179,14 @@ public class RecipeFragment extends Fragment {
 
 
 
-        recipeSets = new ArrayList<ArrayList<MealItem>>();
+        recipeSets = new ArrayList<>();
         childTitles = new ArrayList<>();
         headerTitles = new ArrayList<>();
 
 
         for (int i = 0; i <  ((MainActivity) getActivity()).getRecipeSetCount(); i++) {
 
-            RecipeSet rs = getSetFromFile(((MainActivity) getActivity()).getSetURL(i));
+            RecipeSet rs = getSetFromFile(((MainActivity) getActivity()).getSetPath(i));
             tempSet = rs.getRecipeSet();
             recipeSets.add(tempSet);
 
