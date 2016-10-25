@@ -197,8 +197,8 @@ public class MealPlan implements Serializable {
             dailyFacts.set(planAr.getJSONObject(k).getInt("day")-1, tempFacts);
 
 
-            setShakesNeededPerDay(k, shakeCount);
-            setShakesSelectedPerDay(k, shakeCount);
+            setShakesNeededPerDay(planAr.getJSONObject(k).getInt("day")-1, shakeCount);
+            setShakesSelectedPerDay(planAr.getJSONObject(k).getInt("day")-1, shakeCount);
         }
 
 

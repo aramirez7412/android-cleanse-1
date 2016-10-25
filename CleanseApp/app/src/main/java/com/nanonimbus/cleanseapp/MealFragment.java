@@ -43,6 +43,7 @@ import java.io.StreamCorruptedException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static android.view.View.INVISIBLE;
@@ -157,9 +158,8 @@ public class MealFragment extends Fragment {
     ViewGroup add24Ounces2;
     ViewGroup add32Ounces2;
 
-    ProgressBar progressBar;
-    ProgressBar progressBar2;
-    ProgressBar currentProgress;
+
+    int currentProgress;
 
     TextView ouncesTextView1;
     TextView ouncesTextView2;
@@ -221,6 +221,8 @@ public class MealFragment extends Fragment {
         }
 
         day = ((MainActivity) getActivity()).getDayOfPlan();
+        if(day == 10)
+            day = 9;
 
     }
 
@@ -287,7 +289,6 @@ public class MealFragment extends Fragment {
         add16Ounces = (ViewGroup) layout1.findViewById(R.id.ounce16);
         add24Ounces = (ViewGroup) layout1.findViewById(R.id.ounce24);
         add32Ounces = (ViewGroup) layout1.findViewById(R.id.ounce32);
-        progressBar = (ProgressBar) layout1.findViewById(R.id.progressBar);
 
 
         addOunceButton2 = (Button) layout2.findViewById(R.id.addOunceButton);
@@ -296,12 +297,11 @@ public class MealFragment extends Fragment {
         add16Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce16);
         add24Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce24);
         add32Ounces2 = (ViewGroup) layout2.findViewById(R.id.ounce32);
-        progressBar2 = (ProgressBar) layout2.findViewById(R.id.progressBar);
 
         addOunceButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setProgress(progressBar.getProgress()+1);
+                addOunces(1);
                 updateWaterProgressTextView();
             }
         });
@@ -309,16 +309,28 @@ public class MealFragment extends Fragment {
         addOunceButton2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar2.setProgress(progressBar2.getProgress()+1);
+                addOunces(1);
                 updateWaterProgressTextView();
 
+            }
+        });
+
+
+
+        subtractOunceButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                currentProgress = 0;
+                updateWaterProgressTextView();
+                return true;
             }
         });
 
         subtractOunceButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setProgress(progressBar.getProgress()-1);
+                if(currentProgress != 0)
+                    currentProgress -= 1;
                 updateWaterProgressTextView();
 
             }
@@ -327,16 +339,26 @@ public class MealFragment extends Fragment {
         subtractOunceButton2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar2.setProgress(progressBar2.getProgress()-1);
+                if(currentProgress != 0)
+                    currentProgress -= 1;
                 updateWaterProgressTextView();
 
+            }
+        });
+
+        subtractOunceButton2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                currentProgress = 0;
+                updateWaterProgressTextView();
+                return true;
             }
         });
 
         add8Ounces.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setProgress(progressBar.getProgress()+8);
+                addOunces(8);
                 updateWaterProgressTextView();
 
             }
@@ -345,7 +367,7 @@ public class MealFragment extends Fragment {
         add8Ounces2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar2.setProgress(progressBar2.getProgress()+8);
+                addOunces(8);
                 updateWaterProgressTextView();
 
             }
@@ -354,7 +376,7 @@ public class MealFragment extends Fragment {
         add16Ounces.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setProgress(progressBar.getProgress()+16);
+                addOunces(16);
                 updateWaterProgressTextView();
 
             }
@@ -363,7 +385,7 @@ public class MealFragment extends Fragment {
         add16Ounces2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar2.setProgress(progressBar2.getProgress()+16);
+                addOunces(16);
                 updateWaterProgressTextView();
 
             }
@@ -372,7 +394,7 @@ public class MealFragment extends Fragment {
         add24Ounces.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setProgress(progressBar.getProgress()+24);
+                addOunces(24);
                 updateWaterProgressTextView();
 
             }
@@ -381,7 +403,7 @@ public class MealFragment extends Fragment {
         add24Ounces2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar2.setProgress(progressBar2.getProgress()+24);
+                addOunces(24);
                 updateWaterProgressTextView();
 
             }
@@ -390,7 +412,7 @@ public class MealFragment extends Fragment {
         add32Ounces.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setProgress(progressBar.getProgress()+32);
+                addOunces(32);
                 updateWaterProgressTextView();
 
             }
@@ -399,7 +421,7 @@ public class MealFragment extends Fragment {
         add32Ounces2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar2.setProgress(progressBar2.getProgress()+32);
+                addOunces(32);
                 updateWaterProgressTextView();
 
             }
@@ -407,8 +429,8 @@ public class MealFragment extends Fragment {
 
 
 
-        currentProgress = progressBar;
-        currentOuncesTextView = ouncesTextView1;
+
+
 
 
 
@@ -499,9 +521,8 @@ public class MealFragment extends Fragment {
 
 
 
-
-
-
+            currentProgress = mealPlan.getWaterForDay(day);
+            currentOuncesTextView = ouncesTextView1;
             daysInPlan = mealPlan.getDays();
 
             updateWaterProgress();
@@ -699,7 +720,7 @@ public class MealFragment extends Fragment {
             cantSwapBuilder.setMessage("You Cannot Swap A Shake");
 
 
-            cantSwapBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener(
+            cantSwapBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener(
 
             ) {
                 @Override
@@ -870,7 +891,6 @@ public class MealFragment extends Fragment {
             currenttv = tv2;
             currentDailyMealList = dailyMealList2;
             currentOuncesTextView = ouncesTextView2;
-            currentProgress = progressBar2;
             currentInspirationalQuote = inspirationalQuote2;
 
             previousList = dayListView;
@@ -888,7 +908,6 @@ public class MealFragment extends Fragment {
             currentDailyMealList = dailyMealList;
             currentOuncesTextView = ouncesTextView1;
             currentInspirationalQuote = inspirationalQuote1;
-            currentProgress = progressBar;
             previousList = dayListView2;
         }
 
@@ -897,13 +916,20 @@ public class MealFragment extends Fragment {
 
     void updateWaterProgress(){
         //need to add method to return progress for that day from meal plan
-        currentProgress.setProgress(mealPlan.getWaterForDay(day));
+        currentProgress = (mealPlan.getWaterForDay(day));
         updateWaterProgressTextView();
     }
 
     void updateWaterProgressTextView(){
-        mealPlan.saveWaterForDay(day, currentProgress.getProgress());
-        currentOuncesTextView.setText("You have " + (85-currentProgress.getProgress()) + " oz to go");
+        mealPlan.saveWaterForDay(day, currentProgress);
+        currentOuncesTextView.setText("Consumed: " + (currentProgress) + " oz");
+    }
+
+    void addOunces(int addMe){
+        if(currentProgress + addMe >= 300)
+            currentProgress = 300;
+        else
+            currentProgress += addMe;
     }
 
 
@@ -1568,6 +1594,9 @@ public class MealFragment extends Fragment {
         //v.findViewById(R.id.mealCellImageView).setBackgroundColor(getResources().getColor(R.color.main_background));
         //v.setOnLongClickListener(null);
     }
+
+
+
 
 
 //

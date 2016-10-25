@@ -92,7 +92,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="120dp"
             android:layout_marginTop="10dp"
             android:id="@+id/waterTracker">
 
@@ -230,18 +230,6 @@
                     android:typeface="serif" />
             </LinearLayout>
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:progress="0"
-                android:indeterminate="false"
-                android:max="85"
-                android:layout_below="@+id/textView18"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="65dp"
@@ -252,8 +240,9 @@
                 android:backgroundTint="#548c3f"
                 android:textColor="#ffffff"
                 android:layout_above="@+id/subtractOunceButton"
-                android:layout_alignLeft="@+id/textView18"
-                android:layout_alignStart="@+id/textView18" />
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginLeft="10dp" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -265,8 +254,9 @@
                 android:backgroundTint="#548c3f"
                 android:textColor="#ffffff"
                 android:layout_above="@+id/textView16"
-                android:layout_alignLeft="@+id/addOunceButton"
-                android:layout_alignStart="@+id/addOunceButton" />
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -288,29 +278,22 @@
                 android:text="Tap bottle size to add"
                 android:id="@+id/textView17"
                 android:typeface="serif"
-                android:textStyle="bold"
-                android:layout_below="@+id/progressBar"
+                android:layout_above="@+id/addOunceButton"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GOAL: 85 oz"
-                android:id="@+id/textView18"
-                android:typeface="serif"
-                android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/textView16"
-                android:layout_alignEnd="@+id/textView16" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="You have xxx oz left to go!"
+                android:text="Consumed 40 oz"
                 android:id="@+id/ouncesToGoTextView"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignTop="@+id/textView17"
+                android:layout_alignRight="@+id/textView16"
+                android:layout_alignEnd="@+id/textView16"
+                android:textStyle="bold"
+                android:typeface="serif"
+                android:layout_marginRight="5dp" />
 
         </RelativeLayout>
 

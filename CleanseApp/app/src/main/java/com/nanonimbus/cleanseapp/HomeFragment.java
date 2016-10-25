@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,9 +31,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     View view;
 
-    TextView atAGlance;
-    TextView dailyTip;
-    TextView dailyDetox;
+
+
 
 
 
@@ -76,14 +77,29 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        atAGlance = (TextView) view.findViewById(R.id.atAGlanceTextView);
-        dailyTip = (TextView) view.findViewById(R.id.dailyTipTextView);
-        dailyDetox = (TextView) view.findViewById(R.id.dailyDetoxTextView);
+        ViewGroup planCompleteLayout = (ViewGroup) view.findViewById(R.id.planCompleteLayout);
+        ViewGroup dayLayout = (ViewGroup) view.findViewById(R.id.displayDayLayout);
+        TextView dayTextView = (TextView) view.findViewById(R.id.dayTextView);
+        TextView atAGlance = (TextView) view.findViewById(R.id.atAGlanceTextView);
+        TextView dailyTip = (TextView) view.findViewById(R.id.dailyTipTextView);
+        TextView dailyDetox = (TextView) view.findViewById(R.id.dailyDetoxTextView);
 
-       DailyFacts todaysFacts =  ((MainActivity) getActivity()).getTodaysFacts();
-        atAGlance.setText(todaysFacts.atAGlance);
-        dailyTip.setText(todaysFacts.tipOfDay);
-        dailyDetox.setText(todaysFacts.detoxFact);
+
+        int dayOfPlan = ((MainActivity)getActivity()).getDayOfPlan();
+
+        if(dayOfPlan == 10){
+            dayLayout.setVisibility(View.GONE);
+            planCompleteLayout.setVisibility(View.VISIBLE);
+        }
+        else {
+            planCompleteLayout.setVisibility(View.GONE);
+            dayLayout.setVisibility(View.VISIBLE);
+            DailyFacts todaysFacts = ((MainActivity) getActivity()).getTodaysFacts();
+            dayTextView.setText("Day " + (((MainActivity) getActivity()).getDayOfPlan() + 1));
+            atAGlance.setText(todaysFacts.atAGlance);
+            dailyTip.setText(todaysFacts.tipOfDay);
+            dailyDetox.setText(todaysFacts.detoxFact);
+        }
 
         return view;
     }

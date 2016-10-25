@@ -48,7 +48,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -683,8 +685,6 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         dailyFacts = new ArrayList<>();
         progress = new ProgressDialog(this);
 
-        //must make this dynamic
-        int today = 0;
 
 
         //for final product do not hard code this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -784,7 +784,12 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             //CreateTempRecipeSetForTesting();
         }
 
-       // getRecipeSetCount()
+        //must make this dynamic
+        checkAndIncrementPlanDay();
+        today = currentUser.getCurrentDayOfPlan();
+
+
+        // getRecipeSetCount()
 
 
         setupNavigationMenu(savedInstanceState);
@@ -1292,11 +1297,27 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         today = day;
     }
 
-//    public void checkAndIncrementPlanDay(Calendar day){
-//        if(day.compareTo(Calendar.getInstance())){
-//            today
-//        }
-//    }
+
+    private static long daysBetween(Calendar startDate, Calendar endDate) {
+        long end = endDate.getTimeInMillis();
+        long start = startDate.getTimeInMillis();
+        return TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
+    }
+
+    public void checkAndIncrementPlanDay(){
+        Calendar checkDay = Calendar.getInstance();
+
+        long daysBet = daysBetween(currentUser.getCurrentCalendarInstance(),checkDay);
+
+        if(daysBet >= 10){
+            currentUser.setCurrentDayOfPlay(10);
+            setPlanDay(10);
+        }
+       else if(daysBet != today){
+            currentUser.setCurrentDayOfPlay((int)daysBet);
+            setPlanDay((int) daysBet);
+        }
+    }
 
     public void showWheel(){
 
