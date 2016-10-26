@@ -6,6 +6,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Set;
 
+
 /**
  * Created by mattcorrente on 9/10/16.
  */
@@ -15,6 +16,15 @@ class MyTaskParams {
     Context context;
     String  jsonURL;
     ProgressDialog progRef;
+    String id;
+    ArrayList<PurchaseHelperClass> purchases;
+
+
+    MyTaskParams(ArrayList<PurchaseHelperClass> h, Context c, boolean t) {
+        purchases = h;
+        context = c;
+
+    }
 
     MyTaskParams(Set<String> s, Context c, ProgressDialog prog) {
         set = s;
@@ -26,6 +36,7 @@ class MyTaskParams {
         set = s;
         context = c;
     }
+
 
     MyTaskParams(ArrayList<String> s, Context c) {
         recipeList = s;

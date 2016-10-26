@@ -612,45 +612,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Add navigation drawer menu items.
         // Home isn't a demo, but is fake as a demo.
         DemoConfiguration.DemoFeature home = new DemoConfiguration.DemoFeature();
-        home.iconResId = R.drawable.purp_house;
+        home.iconResId = R.mipmap.ic_icon_menuhome;
         home.titleResId = R.string.main_nav_menu_item_home;
         navigationDrawer.addDemoFeatureToMenu(home);
 
-navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tracker", R.drawable.icon_food_list,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
+navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.ic_icon_mealplan,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
         R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,  R.string.main_nav_menu_item_meal_fragment,
-        new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.drawable.icon_food_list, R.drawable.icon_food_list, MealFragment.class)));
+        new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.mipmap.ic_icon_mealplan, R.mipmap.ic_icon_mealplan, MealFragment.class)));
 
 
-//        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Water Tracker", R.drawable.water_tracker_icon,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
-//                R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,  R.string.main_nav_menu_item_water_fragment,
-//                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_water_fragment, R.mipmap.icon_home, R.mipmap.icon_home, WaterFragment.class)));
-//
-//        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Quiz", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
-//                R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,  R.string.main_nav_menu_item_quiz_fragment,
-//                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_quiz_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, QuizFragment.class)));
-
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Food List", R.drawable.icon_checklist,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Food List", R.mipmap.ic_icon_foodlist_01,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
                 R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,  R.string.main_nav_menu_food_list_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_food_list_fragment, R.drawable.icon_checklist, R.drawable.icon_checklist, FoodListFragment.class)));
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_food_list_fragment, R.mipmap.ic_icon_foodlist_01, R.mipmap.ic_icon_foodlist_01, FoodListFragment.class)));
 
 
-        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipes", R.drawable.question_mark_icon,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Recipes", R.mipmap.ic_icon_recipelist,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
                 R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,  R.string.main_nav_menu_item_purchase_fragment,
-                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.drawable.question_mark_icon, R.drawable.question_mark_icon, RecipeFragment.class)));
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_purchase_fragment, R.mipmap.ic_icon_recipelist, R.mipmap.ic_icon_recipelist, RecipeFragment.class)));
 
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Store", R.mipmap.ic_icon_purchases,  R.string.main_nav_menu_item_store_fragment,  R.string.main_nav_menu_item_store_fragment,
+                R.string.main_nav_menu_item_store_fragment,  R.string.main_nav_menu_item_store_fragment,  R.string.main_nav_menu_item_store_fragment,
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_store_fragment, R.mipmap.ic_icon_purchases, R.mipmap.ic_icon_purchases, PurchaseFragment.class)));
 
-        //DemoConfiguration.DemoFeature mealTracker = new DemoConfiguration.DemoFeature("Meal Tracker", R.mipmap.icon_home, R.string.main_nav_menu_item_meal_fragment,
-                //R.string.main_nav_menu_item_meal_fragment, R.string.main_nav_menu_item_meal_fragment,
-                //R.string.main_nav_menu_item_meal_fragment, R.string.main_nav_menu_item_meal_fragment,
-               // new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.mipmap.icon_home, R.mipmap.icon_home, MealFragment.class));
-
-                //new DemoConfiguration.DemoFeature();
-        //mealTracker.demos = new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_meal_fragment, R.mipmap.icon_home, R.mipmap.icon_home, MealFragment.class);
-        //mealTracker.iconResId = R.mipmap.icon_home;
-        //mealTracker.titleResId = R.string.main_nav_menu_item_meal_fragment;
-        //mealTracker.poweredByResId
-
-        //navigationDrawer.addDemoFeatureToMenu(mealTracker);
 
         for (DemoConfiguration.DemoFeature demoFeature : DemoConfiguration.getDemoFeatureList()) {
             navigationDrawer.addDemoFeatureToMenu(demoFeature);
@@ -778,8 +761,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         if(currentUser == null){
             currentUser = new User(getApplicationContext());
-            currentUser.setUserId(userEmail);
-            currentUser.setUserName(userEmail);
+            currentUser.setUserId("guest");
+            currentUser.setUserName("guest");
             SaveUser(currentUser);
             //CreateTempRecipeSetForTesting();
         }
@@ -1308,6 +1291,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         Calendar checkDay = Calendar.getInstance();
 
         long daysBet = daysBetween(currentUser.getCurrentCalendarInstance(),checkDay);
+        System.out.println("testing for now " + currentUser.getCurrentCalendarInstance().getTime() + "      " + checkDay.getTime() + "   days bet " + daysBet);
 
         if(daysBet >= 10){
             currentUser.setCurrentDayOfPlay(10);

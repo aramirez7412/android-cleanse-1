@@ -99,12 +99,15 @@ public class NavigationDrawer {
                 switch(position){
                     case 0:
                         // home
-                        showHome();
+                        Fragment f = fragmentManager.findFragmentByTag("Home Fragment");
+                        if(f == null)
+                            showHome();
+                        closeDrawer();
+
                         return;
                     case 1:
                         fragment = new MealFragment();
                         fragmentName = "Meal Tracker";
-
 
                         break;
                     case 2:
@@ -117,19 +120,19 @@ public class NavigationDrawer {
                         fragmentName = "Recipes";
                         break;
                     case 4:
-                        fragment = new QuizFragment();
-                        fragmentName = "Quiz";
-                        break;
-                    case 5:
                         fragment = new PurchaseFragment();
                         fragmentName = "Recipe Store";
                         break;
+
                     default:
 
                    return;
 
                 }
 
+
+                Fragment f = fragmentManager.findFragmentByTag(fragmentName);
+                if(f == null) {
 
                     activity.getSupportFragmentManager()
                             .beginTransaction()
@@ -138,11 +141,11 @@ public class NavigationDrawer {
                             .commit();
 
 
-
-                // Set the title for the fragment.
-                final ActionBar actionBar = activity.getSupportActionBar();
-                if (actionBar != null) {
-                    actionBar.setTitle(fragmentName);
+                    // Set the title for the fragment.
+                    final ActionBar actionBar = activity.getSupportActionBar();
+                    if (actionBar != null) {
+                        actionBar.setTitle(fragmentName);
+                    }
                 }
                 closeDrawer();
             }

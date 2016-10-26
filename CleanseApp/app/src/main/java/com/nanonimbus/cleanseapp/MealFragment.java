@@ -743,7 +743,6 @@ public class MealFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent e) {
 
-                System.out.println("wtf is happening");
 
                 switch (e.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
@@ -758,7 +757,6 @@ public class MealFragment extends Fragment {
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
 
-                        System.out.println("up tho");
 
                         long pressDuration = System.currentTimeMillis() - pressStartTime;
                         if (pressDuration < MAX_CLICK_DURATION) {
@@ -975,7 +973,6 @@ public class MealFragment extends Fragment {
             is.close();
             fis.close();
 
-            System.out.println("successfully loaded recipeSet");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             test = true;
@@ -1005,15 +1002,12 @@ public class MealFragment extends Fragment {
             os.writeObject(mealPlan);
             os.close();
             fos.close();
-            System.out.println(mealPlan.getListForDay(0).get(0).isCompleted() + "da fuq is this shit");
 
-            System.out.println("successfully saved meal plan to: somethin");
 
             FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir() + "/" + ((MainActivity) getActivity()).getUserId() + "/currentPlan.ser"));
 
             ObjectInputStream is = new ObjectInputStream(fis);
 
-            System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
 
             is.close();
             fis.close();
@@ -1022,8 +1016,6 @@ public class MealFragment extends Fragment {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -1449,7 +1441,6 @@ public class MealFragment extends Fragment {
 
 
             dailyLayout.addView(v);
-            System.out.println("added view");
         }
     }
 

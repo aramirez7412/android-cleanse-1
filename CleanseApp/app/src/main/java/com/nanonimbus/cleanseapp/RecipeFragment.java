@@ -67,8 +67,6 @@ public class RecipeFragment extends Fragment {
 
     View recipeBox;
 
-    Button viewPurchasesButton;
-    Button goToStoreButton;
 
 
     public RecipeFragment() {
@@ -108,38 +106,9 @@ public class RecipeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_recipe, container, false);
 
-        final ViewGroup sl = (ViewGroup) v.findViewById(R.id.SelectLayout);
-        final ViewGroup vpl = (ViewGroup) v.findViewById(R.id.ViewPurchasesLayout);
-
-        viewPurchasesButton = ((Button) v.findViewById(R.id.viewPurchasedButton));
-        goToStoreButton = ((Button) v.findViewById(R.id.enterRecipeStoreButton));
-
-        goToStoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).switchToPurchaseFragment();
-            }
-        });
-
-
-        viewPurchasesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view2) {
-
-
-
-                sl.setVisibility(View.GONE);
-                vpl.setVisibility(View.VISIBLE);
-
-            }
-        });
-
-
         recipeBox = v.findViewById(R.id.recipeBoxView);
         recipeBox.setX(1500);
         recipeBox.setAlpha(0);
-
-
 
 
         recipeBox.setOnTouchListener(new View.OnTouchListener() {

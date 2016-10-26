@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,11 +21,28 @@ import android.widget.TextView;
 
 import com.nanonimbus.cleanseapp.util.IabHelper;
 import com.nanonimbus.cleanseapp.util.IabResult;
+import com.nanonimbus.cleanseapp.util.Inventory;
 import com.nanonimbus.cleanseapp.util.Purchase;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -110,6 +128,7 @@ public class PurchaseFragment extends Fragment {
                                                System.out.println("failure");
                                            } else {
                                                isSuccessfull = true;
+                                               setupPurchaseList();
                                                System.out.println("success");
                                               // buyClick(view);
                                            }
@@ -121,7 +140,7 @@ public class PurchaseFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
@@ -131,38 +150,8 @@ public class PurchaseFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_purchase, container, false);
 
 
-            ListView listView = (ListView) view.findViewById(R.id.listingListView);
-
-            ArrayList<StoreListing> sampleListings = new ArrayList<>();
-
-            StoreListing sL = new StoreListing();
 
 
-            sL.AddRecipeName("Avocado Egg Salad");
-            sL.AddRecipeName("Basque_Lamb_Stew.jpg");
-            sL.AddRecipeName("Black Bean Quinoa Veggie Burger");
-            sL.AddRecipeName("Chicken Chili Fajita Bowl");
-            sL.AddRecipeName("Chile Verde (Slow Cooker Pork and Green Chile Stew");
-            sL.AddRecipeName("D-Burn Recipe Italian Wonder");
-            sL.AddRecipeName("H-Burn Recipe Basil Shrimp");
-            sL.AddRecipeName("H-Burn-Crunchy Thai Salad");
-            sL.AddRecipeName("I-Burn Recipe Halibut with Vegetables");
-            sL.AddRecipeName("Lamb stew In a Jiffy");
-            sL.AddRecipeName("Roasted Chicken, Avocado & Grapefruit Salad");
-
-            sL.setTitle("Recipe Set 1");
-
-
-            sampleListings.add(sL);
-            sampleListings.add(sL);
-            sampleListings.add(sL);
-            sampleListings.add(sL);
-
-
-            StoreListAdapter storeListAdapter = new StoreListAdapter(getContext(), sampleListings);
-
-
-            listView.setAdapter(storeListAdapter);
 
 
         }
@@ -183,10 +172,10 @@ public class PurchaseFragment extends Fragment {
         return view;
     }
 
-    public void buyClick(View view) {
+    public void buyClick(View view, String id) {
         if (mHelper != null) mHelper.flagEndAsync();
 
-        mHelper.launchPurchaseFlow(getActivity(), ITEM_SKU, 10001,
+        mHelper.launchPurchaseFlow(getActivity(), id, 10001,
                 mPurchaseFinishedListener, "mypurchasetoken");
     }
 
@@ -264,6 +253,181 @@ public class PurchaseFragment extends Fragment {
 
     }
 
+    class DownloadSetDetails extends AsyncTask<MyTaskParams, Void, MyTaskParams> {
+
+
+        @Override
+        protected MyTaskParams doInBackground(MyTaskParams... params) {
+
+            try {
+
+                ArrayList<PurchaseHelperClass> purchaseList  = params[0].purchases;
+                ArrayList<PurchaseHelperClass> newJsons = new ArrayList<>();
+
+                // String GET_URL = params[0].jsonURL;
+                Context c = params[0].context;
+                String USER_AGENT = "Mozilla/5.0";
+                // String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
+
+                for (int i = 0; i < purchaseList.size(); i++) {
+
+                    URL obj = new URL(purchaseList.get(i).getLink());
+                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    con.setRequestMethod("GET");
+                    con.setRequestProperty("User-Agent", USER_AGENT);
+                    int responseCode = con.getResponseCode();
+                    System.out.println("GET Response Code :: " + responseCode);
+                    if (responseCode == HttpURLConnection.HTTP_OK) { // success
+                        BufferedReader in = new BufferedReader(new InputStreamReader(
+                                con.getInputStream()));
+                        String inputLine;
+                        StringBuffer response = new StringBuffer();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+                        // print result
+                        System.out.println(response.toString());
+
+                        PurchaseHelperClass temp = new PurchaseHelperClass(purchaseList.get(i).getId(),response.toString());
+
+                        newJsons.add(temp);
+
+                    } else {
+                        System.out.println("GET request not worked");
+                        return null;
+                    }
+                }
+
+                return new MyTaskParams(newJsons, c, true);
+
+
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(MyTaskParams result) {
+
+            Context c = result.context;
+            ArrayList<PurchaseHelperClass> setsJson = result.purchases;
+
+            ArrayList<StoreListing> sampleListings = new ArrayList<>();
+
+
+            try {
+
+
+
+                for (int i = 0; i < setsJson.size(); i++) {
+
+
+                    JSONObject setJson = new JSONObject(setsJson.get(i).getLink());
+
+                    JSONArray setAr = setJson.getJSONArray("recipes");
+
+                    StoreListing sL = new StoreListing();
+
+                    sL.setTitle("Recipe Set");
+
+                    //loop through each meal
+                    for(int j = 0; j < setAr.length(); j++) {
+                        JSONObject mealObject = setAr.getJSONObject(j);
+
+                        sL.AddRecipeName(mealObject.getString("name"));
+
+                       // mealItem.setImageUrl(mealObject.getString("imgUrl"));
+
+                    }
+
+                    sL.setId(setsJson.get(i).getId());
+
+                    sampleListings.add(sL);
+
+                }
+
+                ListView listView = (ListView) view.findViewById(R.id.listingListView);
+                StoreListAdapter storeListAdapter = new StoreListAdapter(getContext(), sampleListings);
+                listView.setAdapter(storeListAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+    void setupPurchaseList(){
+
+
+
+        final ArrayList<String> skuList = new ArrayList<String> ();
+        skuList.add("GgYfZrkrpcgtyYS7kDjVZ7Ju");
+        skuList.add("PSGLCwzhmqcnsW8uWwpycSA9");
+        skuList.add("A4sdNWEJ2WbD2jjbjQaWKBVX");
+        skuList.add("c3NTNeL8Pzd2DtV8hjBVRBFS");
+        skuList.add("5NWYXuQ69vkGq4aLYkJq7PVL");
+        skuList.add("JNCgFfPeLvNnF8SLhENTu2A6");
+        skuList.add("eJ4g4hEHv6g3AM4TQmeRYqwB");
+        skuList.add("UrrynqFHYmrT6YFkhnf5WmLM");
+        skuList.add("72APKqPhNyxUMw8UzKAVkvAJ");
+        skuList.add("MtrpLJ5ZNchacH6GFctgSfbY");
+//            Bundle querySkus = new Bundle();
+//            querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
+
+        IabHelper.QueryInventoryFinishedListener
+                queryFinishedListener = new IabHelper.QueryInventoryFinishedListener() {
+            public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+
+                if (result.isFailure()) {
+                    // handle error
+                    System.out.println("failure query");
+                    return;
+                }
+
+
+                String tempAddress = "http://52.52.65.150:8080/recipe/set/";
+                ArrayList<PurchaseHelperClass> available = new ArrayList<>();
+
+
+                for (int i = 0; i < skuList.size(); i++) {
+                    if (inventory.hasDetails(skuList.get(i))) {
+                        PurchaseHelperClass p = new PurchaseHelperClass(skuList.get(i),(tempAddress + skuList.get(i)));
+                        available.add(p);
+                    }
+                }
+
+                if (available.size() == 0) {
+                    PurchaseHelperClass p = new PurchaseHelperClass("android.test.purchased",((tempAddress + "original")));
+                    available.add(p);
+                }
+
+                // update the UI
+                MyTaskParams mtp = new MyTaskParams(available, getContext(), true);
+                DownloadSetDetails task = new DownloadSetDetails();
+                task.execute(mtp);
+            }
+        };
+
+            mHelper.queryInventoryAsync(true,skuList,queryFinishedListener);
+
+        }
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -288,7 +452,7 @@ public class PurchaseFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get the data item for this position
-            StoreListing listing = getItem(position);
+            final StoreListing listing = getItem(position);
 
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
@@ -305,7 +469,7 @@ public class PurchaseFragment extends Fragment {
             listingPurchaseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    buyClick(view);
+                    buyClick(view, listing.getId());
                 }
             });
 
