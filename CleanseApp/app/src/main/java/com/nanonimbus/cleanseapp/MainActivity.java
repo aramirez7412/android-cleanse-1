@@ -655,6 +655,11 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+      //  FontsOverride.setDefaultFont(this, "DEFAULT", "MyFontAsset.ttf");
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/pnbold.otf");
+        FontsOverride.setDefaultFont(this, "SERIF", "fonts/pnreg.otf");
+        FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/pnreg.otf");
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 

@@ -19,15 +19,18 @@
                 android:id="@+id/mealListDayHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:paddingLeft="25dp"
                 android:text="Day 1"
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="22sp"
+                android:typeface="serif"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:id="@+id/menuArrow"
@@ -47,26 +50,28 @@
                 android:layout_height="wrap_content"
                 android:text="Next"
                 android:id="@+id/nextDayButton"
-                android:layout_marginRight="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_centerVertical="true"
+                android:textColor="#ffffff"
+                android:typeface="serif"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_alignBottom="@+id/mealListDayHeader"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:textColor="#ffffff"
-                android:padding="15dp" />
+                android:layout_marginRight="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Prev"
                 android:id="@+id/prevDayButton"
-                android:layout_marginLeft="26dp"
-                android:layout_marginStart="26dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:textColor="#ffffff"
-                android:padding="15dp" />
+                android:typeface="serif"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_alignTop="@+id/nextDayButton"
+                android:layout_toRightOf="@+id/menuArrow"
+                android:layout_toEndOf="@+id/menuArrow"
+                android:layout_marginLeft="25dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -81,7 +86,9 @@
                 android:id="@+id/inspirationalQuoteTV"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:typeface="serif"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -92,7 +99,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:layout_marginTop="10dp"
             android:id="@+id/waterTracker">
 
@@ -128,11 +135,12 @@
                     android:text="8 oz"
                     android:id="@+id/textView12"
                     android:layout_alignParentStart="true"
-                    android:textSize="15dp"
+                    android:textSize="14sp"
                     android:layout_below="@+id/recipeButton"
                     android:layout_alignParentLeft="true"
                     android:gravity="center"
-                    android:typeface="serif" />
+                    android:typeface="serif"
+                    android:layout_marginBottom="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -160,7 +168,7 @@
                     android:text="16 oz"
                     android:id="@+id/textView13"
                     android:layout_alignParentStart="true"
-                    android:textSize="15dp"
+                    android:textSize="14sp"
                     android:layout_below="@+id/recipeButton"
                     android:layout_alignParentLeft="true"
                     android:gravity="center"
@@ -192,7 +200,7 @@
                     android:text="24 oz"
                     android:id="@+id/textView14"
                     android:layout_alignParentStart="true"
-                    android:textSize="15dp"
+                    android:textSize="14sp"
                     android:layout_below="@+id/recipeButton"
                     android:layout_alignParentLeft="true"
                     android:gravity="center"
@@ -206,7 +214,8 @@
                 android:id="@+id/ounce32"
                 android:layout_alignTop="@+id/ounce24"
                 android:layout_toRightOf="@+id/ounce24"
-                android:layout_toEndOf="@+id/ounce24">
+                android:layout_toEndOf="@+id/ounce24"
+                android:layout_marginRight="10dp">
 
                 <ImageView
                     android:layout_width="65dp"
@@ -223,7 +232,7 @@
                     android:text="32 oz"
                     android:id="@+id/textView15"
                     android:layout_alignParentStart="true"
-                    android:textSize="15dp"
+                    android:textSize="14sp"
                     android:layout_below="@+id/recipeButton"
                     android:layout_alignParentLeft="true"
                     android:gravity="center"
@@ -264,13 +273,13 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Add single oz"
                 android:id="@+id/textView16"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:gravity="center"
                 android:typeface="serif"
-                android:layout_alignBottom="@+id/ounce32"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="5dp" />
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/ounce32"
+                android:layout_toEndOf="@+id/ounce32"
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -281,19 +290,21 @@
                 android:layout_above="@+id/addOunceButton"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:textSize="14sp"
+                android:textIsSelectable="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Consumed 40 oz"
                 android:id="@+id/ouncesToGoTextView"
-                android:layout_alignTop="@+id/textView17"
-                android:layout_alignRight="@+id/textView16"
-                android:layout_alignEnd="@+id/textView16"
                 android:textStyle="bold"
                 android:typeface="serif"
-                android:layout_marginRight="5dp" />
+                android:textSize="14sp"
+                android:layout_above="@+id/addOunceButton"
+                android:layout_alignRight="@+id/textView16"
+                android:layout_alignEnd="@+id/textView16" />
 
         </RelativeLayout>
 

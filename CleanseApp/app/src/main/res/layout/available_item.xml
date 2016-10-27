@@ -18,10 +18,15 @@
         android:text="Title"
         android:id="@+id/listingTitleTextView"
         android:paddingLeft="5dp"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/listingImageView"
-        android:layout_toEndOf="@+id/listingImageView" />
+        android:layout_toEndOf="@+id/listingImageView"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:background="#f1e7c7" />
 
     <TextView
         android:layout_width="match_parent"
@@ -31,7 +36,9 @@
         android:layout_below="@+id/listingTitleTextView"
         android:layout_toRightOf="@+id/listingImageView"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="10dp"
+        android:typeface="serif"
+        android:textSize="14sp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

@@ -3,6 +3,7 @@ package com.nanonimbus.cleanseapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -620,7 +621,8 @@ public class MealFragment extends Fragment {
 
                                     //builderInner.setMessage(strName);
 
-                                    builderInner.setTitle("You Have Selected");
+                                    builderInner.setTitle("");
+
 
                                     View myV;
                                     LayoutInflater myVi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -734,6 +736,8 @@ public class MealFragment extends Fragment {
 
             alert = builderSingle.create();
             alert2 = cantSwapBuilder.create();
+
+
 
 
             ViewGroup rl = (ViewGroup) view.findViewById(R.id.recipeBoxLinear);
@@ -1150,8 +1154,6 @@ public class MealFragment extends Fragment {
         View v;
 
         LayoutInflater vi = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = vi.inflate(R.layout.meal_cell, null);
-
 
         for (int i = 0; i < mealPlan.getMealCountForDay(day); i++) {
 
@@ -1212,9 +1214,14 @@ public class MealFragment extends Fragment {
                                     if (o.getTitle().toUpperCase().equals("FAST METABOLISM CLEANSE")) {
 
                                         if (mealPlan.getShakesSelectedPerDay(day) == mealPlan.getShakesNeededPerDay(day)){
-                                            alert2.setMessage(mealPlan.getShakesNeededPerDay(day) + " shakes are needed for this day!\n" +
-                                                    "To change shake day please change another meal for today to a shake and then swap the currently\n" +
-                                                    "selected shake for the desired meal.");
+
+                                            if(mealPlan.getShakesSelectedPerDay(day) == 5){
+                                                alert2.setMessage("Day " + (day + 1) + " of the cleanse consists of only shakes.");
+                                            }
+                                            else {
+                                                alert2.setMessage(mealPlan.getShakesNeededPerDay(day) + " shakes are needed for this day!\n" +
+                                                        "Swap another meal to a shake first.");
+                                            }
                                             alert2.show();
                                         }
                                         else{
@@ -1536,7 +1543,7 @@ public class MealFragment extends Fragment {
             });
         } else {
 
-            System.out.println("loaded from memory");
+            //System.out.println("loaded from memory");
             // Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().centerCrop().into(v);
             Picasso.with(getContext()).load("file://" + file.getAbsolutePath()).fit().into(v);
 

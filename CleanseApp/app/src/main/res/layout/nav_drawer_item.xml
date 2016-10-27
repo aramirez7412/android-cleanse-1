@@ -19,5 +19,6 @@
         android:paddingLeft="12dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
-        android:id="@+id/drawer_item_text" />
+        android:id="@+id/drawer_item_text"
+        android:typeface="serif" />
 </LinearLayout>

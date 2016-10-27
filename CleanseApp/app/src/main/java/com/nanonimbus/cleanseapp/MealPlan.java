@@ -134,7 +134,10 @@ public class MealPlan implements Serializable {
                 //---------------------------------------------------
                 JSONArray ingredientsArray = recipeObject.getJSONArray("ingredients");
                 for (int j = 0; j < ingredientsArray.length(); j++) {
-                    tempString += "•" + ingredientsArray.getString(j) + "\n";
+                    if(j == 0)
+                        tempString += "•" + ingredientsArray.getString(j);
+                    else
+                        tempString += "\n•" + ingredientsArray.getString(j);
                 }
                 mealItem.setIngredients(tempString);
                 //---------------------------------------------------

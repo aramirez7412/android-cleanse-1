@@ -2,6 +2,7 @@ package com.nanonimbus.cleanseapp;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         }
 
         TextView textView = (TextView) convertView.findViewById(R.id.mealListHeadingItem);
-        textView.setTypeface(null, Typeface.BOLD);
+        //textView.setTypeface(null, Typeface.BOLD);
         textView.setText(title);
 
         return convertView;
@@ -104,8 +105,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
 
         TextView textView = (TextView) convertView.findViewById(R.id.mealListChildItem);
-        textView.setTypeface(Typeface.SERIF);
+       // textView.setTypeface(Typeface.SERIF);
         textView.setText(title);
+
 
         return convertView;
     }

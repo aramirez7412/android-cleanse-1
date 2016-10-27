@@ -5,17 +5,28 @@
     android:id="@+id/shake_cell">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You Have Selected:"
+        android:id="@+id/textView11"
+        android:textSize="18sp"
+        android:typeface="serif"
+        android:textColor="@color/abc_input_method_navigation_guard"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SHAKE IT!"
         android:id="@+id/nameToSwap"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:typeface="serif" />
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:typeface="serif"
+        android:layout_marginLeft="10dp" />
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:id="@+id/imageViewtoSwap"
         android:src="@mipmap/skaker_bottle"
         android:layout_gravity="center_horizontal"

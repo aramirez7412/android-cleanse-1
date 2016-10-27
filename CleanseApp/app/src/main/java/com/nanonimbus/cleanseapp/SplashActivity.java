@@ -90,6 +90,13 @@ public class SplashActivity extends Activity {
         Log.d(LOG_TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
+
+        //  FontsOverride.setDefaultFont(this, "DEFAULT", "MyFontAsset.ttf");
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/pnbold.otf");
+        FontsOverride.setDefaultFont(this, "SERIF", "fonts/pnreg.otf");
+        FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/pnreg.otf");
+
+
         setContentView(R.layout.activity_splash);
 
         final Thread thread = new Thread(new Runnable() {

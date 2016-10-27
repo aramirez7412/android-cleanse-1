@@ -132,7 +132,7 @@ public class FoodListFragment extends Fragment {
             "      \"serving-size\": \"1/2 cup cooked\",\n" +
             "      \"foods\": [\n" +
             "        \"Almond flour Dried (or canned)\",\n" +
-            "        \"beans: azuki, chickpeas, garbanzo beans, black, butter, cannellini, kidney,lima, navy, pinto or white\",\n" +
+            "        \"Beans: azuki, chickpeas, garbanzo beans, black, butter, cannellini, kidney,lima, navy, pinto or white\",\n" +
             "        \"Lentils\"\n" +
             "      ]\n" +
             "    },\n" +
@@ -209,22 +209,22 @@ public class FoodListFragment extends Fragment {
             "      \"serving-size\": \"2 to 4 tablespoons\",\n" +
             "      \"foods\": [\n" +
             "        \"Coconut: coconut butter\",\n" +
-            "        \"coconut milk\",\n" +
-            "        \"coconut cream\",\n" +
-            "        \"coconut water\",\n" +
+            "        \"Coconut milk\",\n" +
+            "        \"Coconut cream\",\n" +
+            "        \"Coconut water\",\n" +
             "        \"Hummus\",\n" +
             "        \"Mayonnaise\",\n" +
-            "        \"safflower\",\n" +
+            "        \"Safflower\",\n" +
             "        \"Nuts nut/seed butters and pastes, raw: almonds, cashews, hazelnuts, pecans, pine nuts, pistachios, walnuts\",\n" +
             "        \"Nut flours\",\n" +
             "        \"Oils: coconut\",\n" +
-            "        \"grapeseed, olive, sesame, toasted sesame (Asian) seeds\",\n" +
-            "        \"raw: flax\",\n" +
-            "        \"hemp\",\n" +
-            "        \"pumpkin\",\n" +
-            "        \"sesame\",\n" +
-            "        \"sunflower\",\n" +
-            "        \"tahini\"\n" +
+            "        \"Grapeseed, olive, sesame, toasted sesame (Asian) seeds\",\n" +
+            "        \"Raw: flax\",\n" +
+            "        \"Hemp\",\n" +
+            "        \"Pumpkin\",\n" +
+            "        \"Sesame\",\n" +
+            "        \"Sunflower\",\n" +
+            "        \"Tahini\"\n" +
             "      ]\n" +
             "    },\n" +
             "    {\n" +

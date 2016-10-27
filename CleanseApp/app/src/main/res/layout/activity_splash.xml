@@ -35,7 +35,8 @@
             android:textColor="@color/splash_text"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            android:textSize="36dp" />
+            android:textSize="36dp"
+            android:typeface="serif" />
 
     </LinearLayout>
 
