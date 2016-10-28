@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+
 import com.nanonimbus.cleanseapp.util.IabHelper;
 import com.nanonimbus.cleanseapp.util.IabResult;
 import com.nanonimbus.cleanseapp.util.Inventory;
@@ -39,10 +40,13 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 
 
 /**
@@ -344,6 +348,10 @@ public class PurchaseFragment extends Fragment {
                     for(int j = 0; j < setAr.length(); j++) {
                         JSONObject mealObject = setAr.getJSONObject(j);
 
+                        if(j == 2){
+                            sL.setImageLocation(mealObject.getString("imgUrl"));
+                        }
+
                         sL.AddRecipeName(mealObject.getString("name"));
 
                        // mealItem.setImageUrl(mealObject.getString("imgUrl"));
@@ -413,6 +421,8 @@ public class PurchaseFragment extends Fragment {
                 if (available.size() == 0) {
                     PurchaseHelperClass p = new PurchaseHelperClass("android.test.purchased",((tempAddress + "original")));
                     available.add(p);
+                    available.add(p);
+
                 }
 
                 // update the UI
@@ -461,7 +471,7 @@ public class PurchaseFragment extends Fragment {
             // Lookup view for data population
             TextView listingTitle = (TextView) convertView.findViewById(R.id.listingTitleTextView);
             TextView listingRecipes = (TextView) convertView.findViewById(R.id.listingRecipesTextView);
-            ImageView listingImageView = (ImageView) convertView.findViewById(R.id.listingImageView);
+            final ImageView listingImageView = (ImageView) convertView.findViewById(R.id.listingImageView);
             Button listingPurchaseButton = (Button) convertView.findViewById(R.id.purchaseSetButton);
             // Populate the data into the template view using the data object
             listingTitle.setText(listing.getTitle());
@@ -473,9 +483,13 @@ public class PurchaseFragment extends Fragment {
                 }
             });
 
-            Bitmap bm = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.blue_blur);
-            RoundImage roundedImage = new RoundImage(bm);
-            listingImageView.setImageDrawable(roundedImage);
+
+            //File file = new File(getContext().getFilesDir(), listing.getImageLocation());
+            //Bitmap bmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            //Bitmap bm = BitmapFactory.decodeResource(getContext().getResources(), listing.getImageLocation());
+            //RoundImage roundedImage = new RoundImage(bmap);
+            //listingImageView.setImageDrawable(roundedImage);
+            Picasso.with(getContext()).load(listing.getImageLocation()).transform(new CircleTransform()).into(listingImageView);
 
 
             String tempRecipes = "";
@@ -490,4 +504,10 @@ public class PurchaseFragment extends Fragment {
         }
 
     }
+
 }
+
+
+
+
+

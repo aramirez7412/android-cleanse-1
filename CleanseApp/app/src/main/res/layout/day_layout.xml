@@ -88,7 +88,9 @@
                 android:paddingBottom="15dp"
                 android:gravity="center"
                 android:typeface="serif"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -98,7 +100,7 @@
             android:id="@+id/mealList"></LinearLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="130dp"
             android:layout_marginTop="10dp"
             android:id="@+id/waterTracker">
@@ -126,7 +128,8 @@
                     android:paddingLeft="20dp"
                     android:paddingTop="20dp"
                     android:paddingRight="20dp"
-                    android:paddingBottom="5dp" />
+                    android:paddingBottom="5dp"
+                    android:tint="#628799" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -159,7 +162,8 @@
                     android:src="@drawable/bottle_16oz_sm"
                     android:layout_gravity="center"
                     android:padding="5dp"
-                    android:scaleType="fitCenter" />
+                    android:scaleType="fitCenter"
+                    android:tint="#628799" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -191,7 +195,8 @@
                     android:src="@drawable/bottle_24oz_sm"
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:tint="#628799" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -223,7 +228,8 @@
                     android:id="@+id/imageView12"
                     android:src="@drawable/bottle_32oz_sm"
                     android:scaleType="fitCenter"
-                    android:paddingBottom="5dp" />
+                    android:paddingBottom="5dp"
+                    android:tint="#628799" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -241,31 +247,36 @@
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="65dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
                 android:text="+"
                 android:id="@+id/addOunceButton"
                 android:textSize="20dp"
-                android:backgroundTint="#548c3f"
                 android:textColor="#ffffff"
                 android:layout_above="@+id/subtractOunceButton"
                 android:layout_alignLeft="@+id/textView16"
                 android:layout_alignStart="@+id/textView16"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#628799"
+                android:background="#628799"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="65dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
                 android:text="-"
                 android:id="@+id/subtractOunceButton"
                 android:textSize="20dp"
-                android:backgroundTint="#548c3f"
                 android:textColor="#ffffff"
                 android:layout_above="@+id/textView16"
                 android:layout_alignLeft="@+id/textView16"
                 android:layout_alignStart="@+id/textView16"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#628799"
+                android:background="#628799"
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"

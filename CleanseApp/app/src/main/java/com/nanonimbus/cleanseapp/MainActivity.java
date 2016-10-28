@@ -660,7 +660,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         FontsOverride.setDefaultFont(this, "SERIF", "fonts/pnreg.otf");
         FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/pnreg.otf");
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         Bundle extras = getIntent().getExtras();
