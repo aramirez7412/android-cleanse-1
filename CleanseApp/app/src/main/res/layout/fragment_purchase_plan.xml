@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AFC6C9">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/planNameTextView"
+        android:layout_marginTop="20dp"
+        android:scrollIndicators="top|bottom"
+        android:layout_above="@+id/confirmPurchaseButton">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duis semper ligula neque, eget sagittis ante euismod ut. Vivamus nec volutpat arcu, quis egestas arcu. Ut et elit nibh. Proin fermentum purus ac dictum rutrum.  Donec egestas ante vel justo cursus, sed volutpat elit convallis. Vestibulum ut lacinia augue. Aenean eu volutpat odio, eget tincidunt neque. Donec at commodo risus, vitae ornare nulla. Quisque urna nulla, convallis quis velit nec, mollis euismod felis. Morbi volutpat, ligula et tempor iaculis, felis elit rutrum leo, vel aliquet metus nibh quis nibh. Praesent vitae molestie ligula. Integer sollicitudin rutrum ipsum, at consequat urna dictum sit amet. Praesent vel nunc risus. Morbi eget vulputate sapien. In at eros quis massa sollicitudin aliquam. Donec sollicitudin in ex quis molestie. Donec fringilla ante a ligula fringilla, non imperdiet augue tincidunt. Mauris lorem lorem, pulvinar sed commodo quis, ultricies sed velit. Morbi dictum, magna eleifend tincidunt elementum, sem dolor rhoncus erat, eget vehicula dui eros vel tortor."
+            android:id="@+id/planDescriptionTextView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal" />
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MEAL PLAN"
+        android:id="@+id/planNameTextView"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click To Confirm Purchase"
+        android:id="@+id/confirmPurchaseButton"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+</RelativeLayout>
