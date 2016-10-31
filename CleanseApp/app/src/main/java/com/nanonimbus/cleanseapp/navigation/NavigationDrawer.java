@@ -22,16 +22,14 @@ import android.widget.TextView;
 import com.nanonimbus.cleanseapp.FoodListFragment;
 import com.nanonimbus.cleanseapp.HomeFragment;
 import com.nanonimbus.cleanseapp.LoadingFragment;
-import com.nanonimbus.cleanseapp.MealFragment;
 import com.nanonimbus.cleanseapp.PurchaseFragment;
-import com.nanonimbus.cleanseapp.QuizFragment;
 import com.nanonimbus.cleanseapp.R;
 import com.nanonimbus.cleanseapp.RecipeFragment;
 import com.nanonimbus.cleanseapp.demo.DemoConfiguration;
 
 
 import com.nanonimbus.cleanseapp.R.string;
-import com.nanonimbus.cleanseapp.util.TestMe;
+import com.nanonimbus.cleanseapp.TestMe;
 
 
 public class NavigationDrawer {
@@ -121,7 +119,7 @@ public class NavigationDrawer {
                         break;
                     case 4:
                         fragment = new PurchaseFragment();
-                        fragmentName = "Recipe Store";
+                        fragmentName = "Store";
                         break;
 
                     default:

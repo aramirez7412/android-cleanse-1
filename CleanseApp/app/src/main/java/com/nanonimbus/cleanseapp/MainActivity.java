@@ -9,10 +9,15 @@
 package com.nanonimbus.cleanseapp;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,13 +26,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.android.vending.billing.IInAppBillingService;
 import com.nanonimbus.cleanseapp.demo.DemoConfiguration;
 import com.nanonimbus.cleanseapp.navigation.NavigationDrawer;
 
@@ -49,6 +57,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -84,6 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     User currentUser;
     ProgressDialog progress;
     String userEmail;
+
+    ServiceConnection mServiceConn;
+
+    IInAppBillingService mService;
 
     /**
      * Initializes the Toolbar for use with the activity.
@@ -320,6 +333,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 ArrayList<String> recipeSets = params[0].recipeList;
                 ArrayList<String> newJsons = new ArrayList<>();
+                currentlyDownloading = true;
 
                 // String GET_URL = params[0].jsonURL;
                 Context c = params[0].context;
@@ -402,7 +416,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     os.close();
                     fos.close();
                     System.out.println("successfully saved recipe set to: " + outputFile.getAbsolutePath());
-                   //recipeSets.add(outputFile.getAbsolutePath());
+
+                    //getSupportActionBar().show();
+                    currentlyDownloading = false;
+                    ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
+                    //recipeSets.add(outputFile.getAbsolutePath());
 
                     //currentUser.addRecipeSetPath(outputFile.getAbsolutePath());
                     //need to determine when to add downloaded sets to user profile
@@ -425,6 +444,167 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    void helperDownloadSet(String id){
+        MainActivity.DownloadSetAndAddToUser ds = new DownloadSetAndAddToUser();
+        //ArrayList<String> sets = new ArrayList<>();
+
+       //for testing delete this shit
+       // id = ("original");
+       // System.out.println("http://52.52.65.150:8080/recipe/set/" + id);
+
+
+      //  sets.add("http://52.52.65.150:8080/recipe/set/" + id);
+        //sets.add("http://52.52.65.150:8080/recipe/set/original");
+        MyTaskParams mtp = new MyTaskParams("http://52.52.65.150:8080/recipe/set/" + id, id, this);
+        ds.execute(mtp);
+    }
+
+    class DownloadSetAndAddToUser extends AsyncTask<MyTaskParams, Void, MyTaskParams> {
+
+
+        @Override
+        protected MyTaskParams doInBackground(MyTaskParams... params) {
+
+            try {
+
+                //ArrayList<String> recipeSets = params[0].recipeList;
+                //ArrayList<String> newJsons = new ArrayList<>();
+                String myURL = params[0].getURL();
+
+                currentlyDownloading = true;
+
+
+                // String GET_URL = params[0].jsonURL;
+                Context c = params[0].context;
+                String USER_AGENT = "Mozilla/5.0";
+                // String GET_URL = "http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans";
+
+               // for (int i = 0; i < recipeSets.size(); i++) {
+
+                    URL obj = new URL(myURL);
+                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    con.setRequestMethod("GET");
+                    con.setRequestProperty("User-Agent", USER_AGENT);
+                    int responseCode = con.getResponseCode();
+                    System.out.println("GET Response Code :: " + responseCode);
+                    if (responseCode == HttpURLConnection.HTTP_OK) { // success
+                        BufferedReader in = new BufferedReader(new InputStreamReader(
+                                con.getInputStream()));
+                        String inputLine;
+                        StringBuffer response = new StringBuffer();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+                        // print result
+                        System.out.println("Key: " +  " Value: ");
+                        System.out.println(response.toString());
+
+                       return new MyTaskParams(response.toString(), params[0].getId(), getApplicationContext() );
+
+                    } else {
+                        System.out.println("GET request not worked");
+                        return null;
+                    }
+                //}
+
+
+
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(MyTaskParams result) {
+
+            Context c = result.context;
+            //
+
+            FileOutputStream fos = null;
+            try {
+
+                //for (int i = 0; i < setsJson.size(); i++) {
+
+                    File file = new File(c.getFilesDir() + "/recipeSet/");
+
+                    file.mkdirs();
+
+
+                    RecipeSet mySet = new RecipeSet(new JSONObject(result.getURL()), c);
+
+
+
+                    mySet.sort();
+
+//will need better way to manage and save recipe set file names
+                    File outputFile = new File(file, result.getId());
+                    fos = new FileOutputStream(outputFile);
+                    // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
+                    ObjectOutputStream os = new ObjectOutputStream(fos);
+                    os.writeObject(mySet);
+                    os.close();
+                    fos.close();
+
+
+                if (!currentUser.checkIfSetIsAdded(outputFile.getAbsolutePath())) {
+                    System.out.println("test added after downloading");
+                    currentUser.addRecipeSetPath(outputFile.getAbsolutePath());
+                    SaveUser(currentUser);
+                }
+
+                    //getSupportActionBar().show();
+                    currentlyDownloading = false;
+                    //((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
+                    Toast.makeText(getApplicationContext(),"Download Complete and Set has been added to collection!", Toast.LENGTH_SHORT).show();
+
+                    //recipeSets.add(outputFile.getAbsolutePath());
+
+                    //currentUser.addRecipeSetPath(outputFile.getAbsolutePath());
+                    //need to determine when to add downloaded sets to user profile
+
+                //}
+
+
+            } catch (FileNotFoundException e) {
+                System.out.println("FAILED TO SAVE SET");
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("FAILED TO SAVE SET");
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("onActivityResult(" + requestCode + "," + resultCode + "," + data);
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag("Recipe Store");
+        if (fragment != null)
+        {
+            ((PurchaseFragment)fragment).onActivityResult(requestCode, resultCode,data);
+        }
+    }
+
+
 
 
 
@@ -435,6 +615,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected MyTaskParams doInBackground(MyTaskParams... params) {
 
             try {
+
+                ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
                 String GET_URL = params[0].jsonURL;
                 Context c = params[0].context;
@@ -713,6 +895,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         recipeSets = new ArrayList<>();
         dailyFacts = new ArrayList<>();
         progress = new ProgressDialog(this);
+        currentlyDownloading = false;
+
+
 
 
 
@@ -781,6 +966,9 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         setupToolbar(savedInstanceState);
 
 
+        setupNavigationMenu(savedInstanceState);
+
+
         currentUser = new User(getApplicationContext());
 
         //will need to pull this from logged in user, in future id rather name name or email will be used for user specific files
@@ -813,6 +1001,130 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             //CreateTempRecipeSetForTesting();
         }
 
+
+
+          mServiceConn = new ServiceConnection() {
+
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                mService = null;
+            }
+
+            @Override
+            public void onServiceConnected(ComponentName name,
+                                           IBinder service) {
+                mService = IInAppBillingService.Stub.asInterface(service);
+
+
+                Bundle ownedItems = null;
+                try {
+                    ownedItems = mService.getPurchases(3, getPackageName(), "inapp", null);
+
+                    int response = ownedItems.getInt("RESPONSE_CODE");
+                    if (response == 0) {
+
+                        System.out.println("checking stuff");
+                        ArrayList<String> ownedSkus =
+                                ownedItems.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
+                        ArrayList<String> purchaseDataList =
+                                ownedItems.getStringArrayList("INAPP_PURCHASE_DATA_LIST");
+                        ArrayList<String> signatureList =
+                                ownedItems.getStringArrayList("INAPP_DATA_SIGNATURE_LIST");
+                        String continuationToken =
+                                ownedItems.getString("INAPP_CONTINUATION_TOKEN");
+                    if(!purchaseDataList.isEmpty()){
+                        for (int i = 0; i < purchaseDataList.size(); ++i) {
+                            String purchaseData = purchaseDataList.get(i);
+                            String signature = signatureList.get(i);
+                            String sku = ownedSkus.get(i);
+
+                            // do something with this purchase information
+                            // e.g. display the updated list of products owned by user
+                            System.out.println("user has purchased " + sku);
+                            File file = new File(getFilesDir() + "/recipeSet/", sku);
+
+
+                            //check to see if set exists without error
+                            Boolean test = false;
+                            try {
+
+                                FileInputStream fis = new FileInputStream(file);
+
+                                ObjectInputStream is = new ObjectInputStream(fis);
+                                RecipeSet recipeSet = (RecipeSet) is.readObject();
+
+                                //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+                                is.close();
+                                fis.close();
+
+
+                                System.out.println("successfully loaded recipe set from  " + file.getAbsolutePath());
+
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                                test = true;
+                            } catch (IOException e) {
+                                test = true;
+                                e.printStackTrace();
+                            } catch (ClassNotFoundException e) {
+                                test = true;
+                                e.printStackTrace();
+                            } catch (Exception e) {
+                                test = true;
+                            }
+
+                            //if not then download it and add to user profile
+                            if (test)
+                                helperDownloadSet(sku);
+
+
+                            if (!currentUser.checkIfSetIsAdded(file.getAbsolutePath())) {
+                                System.out.println("test not added");
+                                currentUser.addRecipeSetPath(file.getAbsolutePath());
+                                SaveUser(currentUser);
+                            }
+
+
+                        }//end for loop: purchase data list size
+                    }
+                    else{
+                        currentUser.resetPurchases(getApplicationContext());
+                        SaveUser(currentUser);
+                    }
+
+
+                        System.out.println("made it to the end");
+
+
+                        }else if (response == 3){
+                        System.out.println(response);
+                        currentUser.resetPurchases(getApplicationContext());
+                        SaveUser(currentUser);
+                    }
+
+                        // if continuationToken != null, call getPurchases again
+                        // and pass in the token to retrieve more items
+
+
+                    unbindMe();
+
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        };
+
+
+        Intent serviceIntent =
+                new Intent("com.android.vending.billing.InAppBillingService.BIND");
+        serviceIntent.setPackage("com.android.vending");
+        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
+
+
         //must make this dynamic
         checkAndIncrementPlanDay();
         today = currentUser.getCurrentDayOfPlan();
@@ -821,7 +1133,6 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         // getRecipeSetCount()
 
 
-        setupNavigationMenu(savedInstanceState);
 
         //will need to improve this
         recipeSets = currentUser.recipeSetPaths;
@@ -859,10 +1170,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             ObjectInputStream is = new ObjectInputStream(fis);
             mealPlan = (MealPlan) is.readObject();
 
-            //if it made it this far then plan was previously downloaded so now we can load user's current plan
-            fis = new FileInputStream(new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser"));
-            is = new ObjectInputStream(fis);
-            mealPlan = (MealPlan) is.readObject();
+//            //if it made it this far then plan was previously downloaded so now we can load user's current plan
+//            fis = new FileInputStream(new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser"));
+//            is = new ObjectInputStream(fis);
+//            mealPlan = (MealPlan) is.readObject();
 
 
             for (int i = 0; i < mealPlan.getDays(); i++) {
@@ -895,18 +1206,20 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
             System.out.println("failure to launch");
 
-            showWheel();
+           // showWheel();
 
             switchToWelcomeFragment();
 
                 //String jsonPlan = sendGET("http://ec2-52-52-65-150.us-west-1.compute.amazonaws.com:3000/meal-plans");
-                DownloadPlan dl = new DownloadPlan();
-            MyTaskParams mtp = new MyTaskParams("http://52.52.65.150:8080/mealplan", getApplicationContext());
-                dl.execute(mtp);
+            downloadEverything();
 
         }
         else{
+            //set the main meal plan to current users plan, if they do not have a plan it will be
+            //created from the default plan
             testCreateCurrentPlan();
+            ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
 
         }
 
@@ -1075,6 +1388,14 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 //        final AWSMobileClient awsMobileClient = AWSMobileClient.defaultMobileClient();
     }
 
+    void unbindMe(){
+        if (mService != null) {
+            if(mServiceConn != null)
+                unbindService(mServiceConn);
+            System.out.println("unbound");
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle action bar item clicks here excluding the home button.
@@ -1178,6 +1499,16 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
     String getJSONPlan(){
         return jsonPlan1;
+    }
+
+    void downloadEverything(){
+        DownloadPlan dl = new DownloadPlan();
+        MyTaskParams mtp = new MyTaskParams("http://52.52.65.150:8080/mealplan", getApplicationContext());
+        dl.execute(mtp);
+    }
+
+    void showHome(){
+        navigationDrawer.showHome();
     }
 
     int getDayOfPlan(){
@@ -1437,6 +1768,11 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         progress.show();
     }
 
+
+    Boolean doneDownloading(){
+        return currentlyDownloading;
+    }
+
     int getRecipeSetCount(){
         return recipeSets.size();
     }
@@ -1454,6 +1790,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     ArrayList<String> recipeSets;
 
     int today;
+    Boolean currentlyDownloading;
 
 
 }

@@ -1,6 +1,7 @@
 package com.nanonimbus.cleanseapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import com.nanonimbus.cleanseapp.util.IabHelper;
@@ -58,10 +60,6 @@ import java.util.Set;
  * create an instance of this fragment.
  */
 public class PurchaseFragment extends Fragment {
-
-
-
-
 
 
 
@@ -130,6 +128,8 @@ public class PurchaseFragment extends Fragment {
                                        {
                                            if (!result.isSuccess()) {
                                                System.out.println("failure");
+                                               view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+
                                            } else {
                                                isSuccessfull = true;
                                                setupPurchaseList();
@@ -147,27 +147,11 @@ public class PurchaseFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        if(isSuccessfull){
-
-            // Inflate the layout for this fragment
-            view = inflater.inflate(R.layout.fragment_purchase, container, false);
+        view = inflater.inflate(R.layout.fragment_purchase, container, false);
 
 
-
-
-
-
-        }
-        else{
-
-
-
-
-            // Inflate the layout for this fragment
-             view = inflater.inflate(R.layout.failed_connection, container, false);
-
-
+        if(!isSuccessfull) {
+            view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
         }
 
 
@@ -176,12 +160,7 @@ public class PurchaseFragment extends Fragment {
         return view;
     }
 
-    public void buyClick(View view, String id) {
-        if (mHelper != null) mHelper.flagEndAsync();
 
-        mHelper.launchPurchaseFlow(getActivity(), id, 10001,
-                mPurchaseFinishedListener, "mypurchasetoken");
-    }
 
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
             = new IabHelper.OnIabPurchaseFinishedListener() {
@@ -190,10 +169,31 @@ public class PurchaseFragment extends Fragment {
         {
             if (result.isFailure()) {
                 // Handle error
+                //view.findViewById(R.id.noAvailableLayout).setVisibility(View.VISIBLE);
+                if(result.getResponse() == 7){
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("UNABLE TO BUY ITEM: ")
+                            .setMessage("Item Already Owned")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+                    System.out.println("error");
                 return;
             }
-            else if (purchase.getSku().equals(ITEM_SKU)) {
+            //else if (purchase.getSku().equals(ITEM_SKU)) {
+            else{
                 System.out.println("twas made");
+
+                Toast.makeText(getContext(),"Download Started", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).helperDownloadSet(purchase.getSku());
+
+
+
                 //consumeItem();
                 //buyButton.setEnabled(false);
             }
@@ -201,6 +201,13 @@ public class PurchaseFragment extends Fragment {
         }
     };
 
+    public void buyClick(View view, String id) {
+        if (mHelper != null) mHelper.flagEndAsync();
+
+        System.out.println("purchase id is " + id);
+        mHelper.launchPurchaseFlow(getActivity(), id, 1,
+                mPurchaseFinishedListener, "mypurchasetoken");
+    }
 
     @Override
     public void onDestroy() {
@@ -214,8 +221,10 @@ public class PurchaseFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data)
     {
+        System.out.println("do i get here");
         if (!mHelper.handleActivityResult(requestCode,
                 resultCode, data)) {
+            System.out.println("whu here");
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -242,6 +251,7 @@ public class PurchaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
 
 //        if (mHelper != null) try {
 //            mHelper.dispose();
@@ -323,56 +333,62 @@ public class PurchaseFragment extends Fragment {
         @Override
         protected void onPostExecute(MyTaskParams result) {
 
-            Context c = result.context;
-            ArrayList<PurchaseHelperClass> setsJson = result.purchases;
+            if (result != null) {
 
-            ArrayList<StoreListing> sampleListings = new ArrayList<>();
+                Context c = result.context;
+                ArrayList<PurchaseHelperClass> setsJson = result.purchases;
 
-
-            try {
-
+                ArrayList<StoreListing> sampleListings = new ArrayList<>();
 
 
-                for (int i = 0; i < setsJson.size(); i++) {
+                try {
 
 
-                    JSONObject setJson = new JSONObject(setsJson.get(i).getLink());
+                    for (int i = 0; i < setsJson.size(); i++) {
 
-                    JSONArray setAr = setJson.getJSONArray("recipes");
 
-                    StoreListing sL = new StoreListing();
+                        JSONObject setJson = new JSONObject(setsJson.get(i).getLink());
 
-                    sL.setTitle("Recipe Set");
+                        JSONArray setAr = setJson.getJSONArray("recipes");
 
-                    //loop through each meal
-                    for(int j = 0; j < setAr.length(); j++) {
-                        JSONObject mealObject = setAr.getJSONObject(j);
+                        StoreListing sL = new StoreListing();
 
-                        if(j == 2){
-                            sL.setImageLocation(mealObject.getString("imgUrl"));
+                        sL.setTitle("Recipe Set");
+
+                        //loop through each meal
+                        for (int j = 0; j < setAr.length(); j++) {
+                            JSONObject mealObject = setAr.getJSONObject(j);
+
+                            if (j == 2) {
+                                sL.setImageLocation(mealObject.getString("imgUrl"));
+                            }
+
+                            sL.AddRecipeName(mealObject.getString("name"));
+
+                            // mealItem.setImageUrl(mealObject.getString("imgUrl"));
+
                         }
 
-                        sL.AddRecipeName(mealObject.getString("name"));
+                        sL.setId(setsJson.get(i).getId());
 
-                       // mealItem.setImageUrl(mealObject.getString("imgUrl"));
+                        sampleListings.add(sL);
 
                     }
 
-                    sL.setId(setsJson.get(i).getId());
+                    ListView listView = (ListView) view.findViewById(R.id.listingListView);
+                    StoreListAdapter storeListAdapter = new StoreListAdapter(getContext(), sampleListings);
+                    listView.setAdapter(storeListAdapter);
 
-                    sampleListings.add(sL);
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
-                ListView listView = (ListView) view.findViewById(R.id.listingListView);
-                StoreListAdapter storeListAdapter = new StoreListAdapter(getContext(), sampleListings);
-                listView.setAdapter(storeListAdapter);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-
+            else{
+                view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+            }
         }
+
 
     }
 
@@ -382,17 +398,20 @@ public class PurchaseFragment extends Fragment {
 
 
 
+
+
         final ArrayList<String> skuList = new ArrayList<String> ();
-        skuList.add("GgYfZrkrpcgtyYS7kDjVZ7Ju");
-        skuList.add("PSGLCwzhmqcnsW8uWwpycSA9");
-        skuList.add("A4sdNWEJ2WbD2jjbjQaWKBVX");
-        skuList.add("c3NTNeL8Pzd2DtV8hjBVRBFS");
-        skuList.add("5NWYXuQ69vkGq4aLYkJq7PVL");
-        skuList.add("JNCgFfPeLvNnF8SLhENTu2A6");
-        skuList.add("eJ4g4hEHv6g3AM4TQmeRYqwB");
-        skuList.add("UrrynqFHYmrT6YFkhnf5WmLM");
-        skuList.add("72APKqPhNyxUMw8UzKAVkvAJ");
-        skuList.add("MtrpLJ5ZNchacH6GFctgSfbY");
+
+        skuList.add("b4sxjh1xf9f2etljzcys");
+        skuList.add("ikljk47wes24pd1ommc6");
+        skuList.add("c3g3ch7wv0t0bsmr775j");
+        skuList.add("z1svnijdpvocv1wtdbyk");
+        skuList.add("hxtnyqzr4248x6sukmz4");
+        skuList.add("eqmr76e7338s0pxba32y");
+        skuList.add("j07sthayvow5crpmeezx");
+        skuList.add("9z7bmxvuxxm04dnejxjz");
+        skuList.add("odzuipiofggowx837rua");
+        skuList.add("joc7f37ndcjny6zq07f4");
 //            Bundle querySkus = new Bundle();
 //            querySkus.putStringArrayList("ITEM_ID_LIST", skuList);
 
@@ -400,9 +419,31 @@ public class PurchaseFragment extends Fragment {
                 queryFinishedListener = new IabHelper.QueryInventoryFinishedListener() {
             public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 
+
+
+//                if (inventory.hasPurchase("android.test.purchased")) {
+//                    mHelper.consumeAsync(inventory.getPurchase("android.test.purchased"),null);
+//                    System.out.println("consumin");
+//                }
+
                 if (result.isFailure()) {
                     // handle error
                     System.out.println("failure query");
+                    view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+
+
+//                    ArrayList<PurchaseHelperClass> available = new ArrayList<>();
+//
+//                    PurchaseHelperClass p = new PurchaseHelperClass("android.test.purchased",((tempAddress + "original")));
+//                    available.add(p);
+//                    available.add(p);
+//
+//
+//
+//                // update the UI
+//                MyTaskParams mtp = new MyTaskParams(available, getContext(), true);
+//                DownloadSetDetails task = new DownloadSetDetails();
+//                task.execute(mtp);
                     return;
                 }
 
@@ -419,10 +460,7 @@ public class PurchaseFragment extends Fragment {
                 }
 
                 if (available.size() == 0) {
-                    PurchaseHelperClass p = new PurchaseHelperClass("android.test.purchased",((tempAddress + "original")));
-                    available.add(p);
-                    available.add(p);
-
+                    view.findViewById(R.id.noAvailableLayout);
                 }
 
                 // update the UI

@@ -5,38 +5,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Failed to make connection to the Google Play Store.\nMake sure that you are signed in and connected to the internet.\n\nDo you want to try again?"
+        android:text="ext"
         android:id="@+id/textView10"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="126dp"
         android:gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/cancelConnectionButton"
-        android:layout_marginBottom="66dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RETRY"
-        android:id="@+id/retryConnectionButton"
-        android:layout_alignBottom="@+id/cancelConnectionButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>

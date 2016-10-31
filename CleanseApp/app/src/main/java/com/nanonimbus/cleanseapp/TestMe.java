@@ -1,22 +1,17 @@
-package com.nanonimbus.cleanseapp.util;
+package com.nanonimbus.cleanseapp;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.nanonimbus.cleanseapp.FoodListFragment;
-import com.nanonimbus.cleanseapp.MyPagerAdapter;
-import com.nanonimbus.cleanseapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,7 +77,10 @@ public class TestMe extends Fragment {
         //pagerAdapter.setFragments(getContext());
         mViewPager.setAdapter(pagerAdapter);
 
-        mViewPager.setCurrentItem(0);
+
+        mViewPager.setPageMargin(5);
+        mViewPager.setPageMarginDrawable(new ColorDrawable(getResources().getColor(R.color.black_overlay)));
+        mViewPager.setCurrentItem(((MainActivity) getActivity()).getDayOfPlan());
 
 
 
@@ -130,126 +128,7 @@ public class TestMe extends Fragment {
 }
 
 
-class MyAdapter extends FragmentPagerAdapter {
 
-    // Three simple fragments
-    FoodListFragment frag0;
-    TestMe frag1;
-    TestMe frag2;
-    TestMe frag3;
-    TestMe frag4;
-    TestMe frag5;
-    TestMe frag6;
-    TestMe frag7;
-    TestMe frag8;
-    TestMe frag9;
-
-    public MyAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
-    public void setFragments(Context c){
-
-
-
-        // Set up the simple base fragments
-        Bundle args = new Bundle();
-        args.putInt("day_of_plan", 0);
-        frag0 =  new FoodListFragment();
-        frag0.setArguments(args);
-
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 1);
-//        frag1 =  new TestMe ();
-//        frag1.setArguments(args);
-
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 2);
-//        frag2 =  new TestMe ();
-//        frag2.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 3);
-//        frag3 =  new TestMe ();
-//        frag3.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 4);
-//        frag4 =  new TestMe ();
-//        frag4.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 5);
-//        frag5 =  new TestMe ();
-//        frag5.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 6);
-//        frag6 =  new TestMe ();
-//        frag6.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 7);
-//        frag7 =  new TestMe ();
-//        frag7.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 8);
-//        frag8 =  new TestMe ();
-//        frag8.setArguments(args);
-//
-//        args = new Bundle();
-//        args.putInt("day_of_plan", 9);
-//        frag9 =  new TestMe ();
-//        frag9.setArguments(args);
-
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        // TODO: Make this more efficient, use a list or such, also comment more
-        Fragment frag = null;
-        if(position == 0){
-            frag = frag0;
-        }
-        else if(position == 1){
-            frag = frag1;
-        }
-        else if(position == 2){
-            frag = frag2;
-        }
-        else if(position == 3){
-            frag = frag3;
-        }
-        else if(position == 4){
-            frag = frag4;
-        }
-        else if(position == 5){
-            frag = frag5;
-        }
-        else if(position == 6){
-            frag = frag6;
-
-        }
-        else if(position == 7){
-            frag = frag7;
-        }
-        else if(position == 8){
-            frag = frag8;
-        }
-        else if(position == 9){
-            frag = frag9;
-        }
-
-
-        return frag;
-    }
-
-    @Override
-    public int getCount() {
-        return 10;
-    }
-}
 
 
 

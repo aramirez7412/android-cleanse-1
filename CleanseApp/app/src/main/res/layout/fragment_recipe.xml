@@ -10,7 +10,8 @@
         <ExpandableListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/expandableRecipeList" />
+            android:id="@+id/expandableRecipeList"
+            android:layout_marginTop="1dp" />
 
         <include layout="@layout/recipe_box"
             android:id="@+id/recipeBoxView"

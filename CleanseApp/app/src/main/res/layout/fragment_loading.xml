@@ -1,21 +1,141 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoadingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+            android:id="@+id/page1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="WELCOME!"
-        android:id="@+id/textView7"
-        android:layout_gravity="center" />
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to the cleanse app..."
+            android:id="@+id/textView4"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="55sp" />
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/page2">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How to use part 1..."
+                android:id="@+id/textView5"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="55sp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/page3">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How to use part 2..."
+                android:id="@+id/textView6"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="55sp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/page4">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How to use part 3..."
+                android:id="@+id/textView7"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="55sp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/pagewheel">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please wait while application finishes first run initialization..."
+                android:id="@+id/textView3"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="55sp" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/page5">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Were done here"
+                android:id="@+id/textView8"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="55sp" />
+
+
+        </RelativeLayout>
+
+
+
+        </android.support.v4.view.ViewPager>
+
+
+
+</RelativeLayout>

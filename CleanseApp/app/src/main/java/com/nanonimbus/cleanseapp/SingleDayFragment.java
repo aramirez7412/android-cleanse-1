@@ -518,8 +518,8 @@ public class SingleDayFragment extends Fragment {
 
                                 //currentAdapter.notifyDataSetChanged();
 
-                                currentDailyMealList.removeAllViews();
-                                getMealViews(currentDailyMealList);
+                                dailyMealList.removeAllViews();
+                                getMealViews(dailyMealList);
 
                                 dialog.dismiss();
                                 alert.dismiss();
@@ -542,7 +542,7 @@ public class SingleDayFragment extends Fragment {
         builderSingle = new AlertDialog.Builder(getContext());
         // builderSingle.setIcon(R.drawable.ic_launcher);
 
-        builderSingle.setTitle("Select Recipe to Swap:");
+        builderSingle.setTitle("Select Recipe to Swap In:");
 
         builderSingle.setView(myList);
 
@@ -560,7 +560,7 @@ public class SingleDayFragment extends Fragment {
                 getContext());
 
 
-        cantSwapBuilder.setMessage("You Cannot Swap A Shake");
+        cantSwapBuilder.setMessage("You Cannot Swap A Fast Metabolism Cleanse Shake");
 
 
         cantSwapBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener(
@@ -811,6 +811,8 @@ public class SingleDayFragment extends Fragment {
 
     public void getMealViews(LinearLayout dailyLayout) {
 
+        dailyLayout.removeAllViews();
+
         //initialize all animation variables
 //        final Animation outRight = AnimationUtils.loadAnimation(
 //                getContext(), R.anim.slide_out_right);
@@ -853,14 +855,12 @@ public class SingleDayFragment extends Fragment {
                     recipeHeader.setText(o.getHeader());
 
 
+
                     final int counter = i;
                     final View finalView = v;
 
 
-                    if (((MainActivity) getActivity()).isCompletedMain(day, counter))
-                        ((CheckBox)v.findViewById(R.id.completeCheckBox)).setChecked(true);
-                    else
-                        ((CheckBox)v.findViewById(R.id.completeCheckBox)).setChecked(false);
+
 
                     v.findViewById(R.id.completeCheckBox).setOnClickListener(new OnClickListener() {
                         @Override
@@ -901,11 +901,11 @@ public class SingleDayFragment extends Fragment {
                                         if (((MainActivity) getActivity()).getShakesSelectedPerDayMain(day) == ((MainActivity) getActivity()).getShakesNeededPerDayMain(day)){
 
                                             if(((MainActivity) getActivity()).getShakesSelectedPerDayMain(day) == 5){
-                                                alert2.setMessage("Day " + (day + 1) + " of the cleanse consists of only shakes.");
+                                                alert2.setMessage("Day " + (day + 1) + " of the cleanse consists of only Fast Metabolism Cleanse shakes.");
                                             }
                                             else {
-                                                alert2.setMessage(((MainActivity) getActivity()).getShakesNeededPerDayMain(day) + " shakes are needed for this day!\n" +
-                                                        "Swap another meal to a shake first.");
+                                                alert2.setMessage(((MainActivity) getActivity()).getShakesNeededPerDayMain(day) + " Fast Metabolism Cleanse shakes are needed for this day!\n" +
+                                                        "Swap in a Fast Metabolism Cleanse shake first (located under Basic Set section).");
                                             }
                                             alert2.show();
                                         }
@@ -1005,7 +1005,9 @@ public class SingleDayFragment extends Fragment {
                 }//end else
 
 
-            }//if (recipeTitle != null) {
+
+
+            }//if (recipeTitle != null)
 
             //end if (o != null) {
 
@@ -1013,8 +1015,19 @@ public class SingleDayFragment extends Fragment {
 
 
 
+            if (((MainActivity) getActivity()).isCompletedMain(day, i)){
+                ((CheckBox)v.findViewById(R.id.completeCheckBox)).setChecked(true);
+                System.out.println("its set to fucking true and it is " + ((CheckBox)v.findViewById(R.id.completeCheckBox)).isChecked() + " for num " + i +"  and day " + day);
+            }
+            else {
+                ((CheckBox) v.findViewById(R.id.completeCheckBox)).setChecked(false);
+            }
+
             dailyLayout.addView(v);
+
+
         }
+
     }
 
 

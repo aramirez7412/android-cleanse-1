@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +61,26 @@ public class LoadingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loading, container, false);
+        View v = inflater.inflate(R.layout.fragment_loading, container, false);
+
+        // Set the ViewPager adapter
+        WizardPagerAdapter adapter = new WizardPagerAdapter();
+        ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
+        pager.setOffscreenPageLimit(6);
+        pager.setAdapter(adapter);
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,6 +107,10 @@ public class LoadingFragment extends Fragment {
         mListener = null;
     }
 
+
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -105,4 +125,61 @@ public class LoadingFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
+
+    class WizardPagerAdapter extends PagerAdapter {
+
+        public Object instantiateItem(View collection, int position) {
+
+            int resId = 0;
+            switch (position) {
+                case 0:
+                    resId = R.id.page1;
+                    break;
+                case 1:
+                    resId = R.id.page2;
+                    break;
+                case 2:
+                    resId = R.id.page3;
+                    break;
+                case 3:
+                    resId = R.id.page4;
+                    break;
+                case 4:
+
+                    if(((MainActivity) getActivity()).currentlyDownloading)
+                        resId = R.id.pagewheel;
+                    else{
+                        resId = R.id.page5;
+                    }
+                    break;
+                case 5:
+                        resId = R.id.page5;
+
+
+            }
+            return getActivity().findViewById(resId);
+        }
+
+        @Override
+        public int getCount() {
+            return 6;
+        }
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            return arg0 == ((View) arg1);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup parent, int position, Object object) {
+            //View view = (View) object; parent.removeView(view);
+        }
+    }
+
+
+
+
 }

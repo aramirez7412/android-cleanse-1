@@ -1,12 +1,14 @@
 package com.nanonimbus.cleanseapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -156,13 +158,30 @@ public class RecipeFragment extends Fragment {
         for (int i = 0; i <  ((MainActivity) getActivity()).getRecipeSetCount(); i++) {
 
             RecipeSet rs = getSetFromFile(((MainActivity) getActivity()).getSetPath(i));
-            tempSet = rs.getRecipeSet();
-            recipeSets.add(tempSet);
 
-            headerTitles.add(rs.getRecipeSetTitle());
+            try {
+                tempSet = rs.getRecipeSet();
+                recipeSets.add(tempSet);
 
+                headerTitles.add(rs.getRecipeSetTitle());
+                childTitles.add(tempSet);
+            }
+            catch(NullPointerException ex){
 
-            childTitles.add(tempSet);
+                new AlertDialog.Builder(getContext())
+                        .setTitle("ERROR:")
+                        .setMessage("Attempting to re-download content. Side menu will be availble when download is complete.")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                ((MainActivity)getActivity()).showHome();
+                ((MainActivity)getActivity()).downloadEverything();
+                ex.printStackTrace();
+            }
         }
 
 
@@ -251,7 +270,7 @@ public class RecipeFragment extends Fragment {
 
             System.out.println("successfully loaded recipeSet");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
             test = true;
         } catch (IOException e) {
             test = true;

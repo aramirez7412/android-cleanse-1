@@ -55,11 +55,11 @@ public class RecipeSet  implements Serializable  {
         setId = setAr.getJSONObject(0).getInt("recipeSetId");
         if(setId == 1){
             recipeSetSaveTitle = "genericSet";
-            recipeSetTitle = "Generic Set";
+            recipeSetTitle = "Basic Set";
         }
         else{
             recipeSetSaveTitle = "something";
-            recipeSetTitle = "please fix this";
+            recipeSetTitle = jsonObject.getString("name");
         }
         //******************************************************************************************
 

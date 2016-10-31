@@ -58,5 +58,25 @@ public class User implements Serializable{
     String getRecipeSetPath(int i){return recipeSetPaths.get(i);};
     int getRecipeCount(){return recipeSetPaths.size();};
 
+    Boolean checkIfSetIsAdded(String path){
+
+        for (int i = 0; i < recipeSetPaths.size(); i++) {
+            System.out.println("testing " + recipeSetPaths.get(i) + " with " + path + " is " + recipeSetPaths.get(i).equals(path));
+            if(recipeSetPaths.get(i).equals(path))
+                return true;
+        }
+
+        return false;
+
+    }
+
+    void resetPurchases(Context ctx){
+        System.out.println("resetting purchases");
+        recipeSetPaths = new ArrayList<>();
+        File file = new File(ctx.getFilesDir() + "/recipeSet/", "genericSet");
+        addRecipeSetPath(file.getAbsolutePath());
+    }
+
+
 
 }
