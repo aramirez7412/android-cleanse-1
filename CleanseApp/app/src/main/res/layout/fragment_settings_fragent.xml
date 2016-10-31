@@ -1,0 +1,66 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day: 1"
+        android:id="@+id/dayOfPlanTextView"
+        android:textSize="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/decrementDay"
+        android:layout_toEndOf="@+id/decrementDay"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal|top"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Increment\nday of plan"
+        android:id="@+id/incrementDay"
+        android:layout_alignTop="@+id/decrementDay"
+        android:layout_toRightOf="@+id/dayOfPlanTextView"
+        android:layout_toEndOf="@+id/dayOfPlanTextView"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="40dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decrement\nDay of Plan"
+        android:id="@+id/decrementDay"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="left|top" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restart Plan"
+        android:id="@+id/restartPlan"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Re-download\nResources"
+        android:id="@+id/redownloadEverything"
+        android:layout_marginTop="86dp"
+        android:layout_below="@+id/restartPlan"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone" />
+</FrameLayout>

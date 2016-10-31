@@ -25,6 +25,7 @@ import com.nanonimbus.cleanseapp.LoadingFragment;
 import com.nanonimbus.cleanseapp.PurchaseFragment;
 import com.nanonimbus.cleanseapp.R;
 import com.nanonimbus.cleanseapp.RecipeFragment;
+import com.nanonimbus.cleanseapp.SettingsFragment;
 import com.nanonimbus.cleanseapp.demo.DemoConfiguration;
 
 
@@ -120,6 +121,10 @@ public class NavigationDrawer {
                     case 4:
                         fragment = new PurchaseFragment();
                         fragmentName = "Store";
+                        break;
+                    case 5:
+                        fragment = new SettingsFragment();
+                        fragmentName = "Settings";
                         break;
 
                     default:

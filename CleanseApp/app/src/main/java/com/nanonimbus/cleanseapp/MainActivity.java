@@ -13,7 +13,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -26,7 +25,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -57,8 +56,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -180,11 +177,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    void restartMealPlan(){
+        File dst = new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser");
+        File src = new File(this.getFilesDir(), "defaultPlan.ser");
+
+
+        File parent = dst.getParentFile();
+        if(!parent.exists() && !parent.mkdirs()){
+            throw new IllegalStateException("Couldn't create dir: " + parent);
+        }
+
+
+        FileInputStream in = null;
+        FileOutputStream out = null;
+        try {
+            in = new FileInputStream(src);
+            out = new FileOutputStream(dst);
+
+            // Transfer bytes from in to out
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+
+            System.out.println("save to " + dst.getAbsolutePath());
+
+            FileInputStream fis = new FileInputStream(new File(this.getFilesDir() + "/" + getUserId(), "currentPlan.ser"));
+
+            ObjectInputStream is = new ObjectInputStream(fis);
+            mealPlan = (MealPlan) is.readObject();
+
+            //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+            is.close();
+            fis.close();
+
+
+            currentUser.resetCalInstance();
+            checkAndIncrementPlanDay();
+            SaveUser(currentUser);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     void saveMealPlan(){
         FileOutputStream fos = null;
         try {
-
-
 
             fos = new FileOutputStream(new File(this.getFilesDir() + "/" + (getUserId() + "/currentPlan.ser")));
             // fos = new FileOutputStream(file, Context.MODE_PRIVATE);
@@ -420,6 +467,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //getSupportActionBar().show();
                     currentlyDownloading = false;
                     ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                    Toast.makeText(getApplicationContext(),"Download Complete!", Toast.LENGTH_SHORT).show();
 
                     //recipeSets.add(outputFile.getAbsolutePath());
 
@@ -566,7 +614,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     currentlyDownloading = false;
                     //((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 
-                    Toast.makeText(getApplicationContext(),"Download Complete and Set has been added to collection!", Toast.LENGTH_SHORT).show();
 
                     //recipeSets.add(outputFile.getAbsolutePath());
 
@@ -806,7 +853,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void setupSignInButtons() {
 
-        signOutButton = (Button) findViewById(R.id.button_signout);
         signOutButton.setOnClickListener(this);
 
         signInButton = (Button) findViewById(R.id.button_signin);
@@ -857,12 +903,17 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
                 R.string.main_nav_menu_item_store_fragment,  R.string.main_nav_menu_item_store_fragment,  R.string.main_nav_menu_item_store_fragment,
                 new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_store_fragment, R.mipmap.ic_icon_purchases, R.mipmap.ic_icon_purchases, PurchaseFragment.class)));
 
+        navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Settings", R.mipmap.ic_icon_options,  R.string.main_nav_menu_item_settings_fragment,  R.string.main_nav_menu_item_store_fragment,
+                R.string.main_nav_menu_item_settings_fragment,  R.string.main_nav_menu_item_settings_fragment,  R.string.main_nav_menu_item_settings_fragment,
+                new DemoConfiguration.DemoItem(R.string.main_nav_menu_item_settings_fragment, R.mipmap.ic_icon_options, R.mipmap.ic_icon_options, SettingsFragment.class)));
+
+
 
         for (DemoConfiguration.DemoFeature demoFeature : DemoConfiguration.getDemoFeatureList()) {
             navigationDrawer.addDemoFeatureToMenu(demoFeature);
 
         }
-        setupSignInButtons();
+      //  setupSignInButtons();
 
         ((TextView) findViewById(R.id.userName)).setText("Guest");
 
@@ -903,9 +954,11 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
         //for final product do not hard code this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx8XiZ9iTtGcmSmYG8JkKd3U37rnxSjhlJYPnBESkMQ4izxSRfV+tNLD0CM+X3ki5D++doyvIh3gmbGrzhQBQCM/qtg5U6pYyPVJQvGmgQFPivWdB/c3dztNAzTqIb/5/iMBG1imQm+z6YYV7yM0xDtDtfA7Hyusuwi2s08FoI72Op8dYKtDX3Xu4bqRw8DAMAaByF+RQH2BWHOEKUatVWKBvjXaYqAl7M7kI36l2ui9KNXhMNeWdSEa+oyD0RODIrGfoeLrEtUOT4VEoVS4+DO3WysontP3HqOH9WQE8g7rH9aH+FwTs931wdK76vlwyD8nOZjoL5uTwA7VxEdMgQwIDAQAB";
-        String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj9w0GqYOja+NDy+czZFyoYGCLXY/UeXNECPrIvR56IJDxTJED4o4Vfh5q6X2U+P7bRrnL9EUeRJxBUeXlw71bPZQA8dGYGhMtlgnBKmaQYAUYL5vEmZurSBB/jsyx6Udh6UEDSmnNjmLHvWf6JqIkzI07Y0QjLtEFeMRHoLzjzST1/s6d8CE5jarh+ENl1JJCHcZWo4nmPdd8dA9HUwug3wTdJMUjEOowxC0CYns334FNk2PBjsUrMHHw9OYzztqCYEjIUvT6K7bx9+qxml+W0B+QYvqPyFGxV+fN41Bb0VdVfzt3HRO3WqzEYXLyMAqoFD584cy0niyWWQBPW6NswIDAQAB";
+       // String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj9w0GqYOja+NDy+czZFyoYGCLXY/UeXNECPrIvR56IJDxTJED4o4Vfh5q6X2U+P7bRrnL9EUeRJxBUeXlw71bPZQA8dGYGhMtlgnBKmaQYAUYL5vEmZurSBB/jsyx6Udh6UEDSmnNjmLHvWf6JqIkzI07Y0QjLtEFeMRHoLzjzST1/s6d8CE5jarh+ENl1JJCHcZWo4nmPdd8dA9HUwug3wTdJMUjEOowxC0CYns334FNk2PBjsUrMHHw9OYzztqCYEjIUvT6K7bx9+qxml+W0B+QYvqPyFGxV+fN41Bb0VdVfzt3HRO3WqzEYXLyMAqoFD584cy0niyWWQBPW6NswIDAQAB";
         // compute your public key and store it in base64EncodedPublicKey
 //        mHelper = new IabHelper(this, base64EncodedPublicKey);
+
+        whatIsThis = putThisOut(getResources().getString(R.string.wave_string),(getResources().getString(R.string.hold_string) + getResources().getString(R.string.breath_string)+getResources().getString(R.string.this_string)+getResources().getString(R.string.crash_string)));
 //
 //
 //
@@ -1373,6 +1426,11 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         }
     }
 
+
+    String getThis(){
+        return whatIsThis;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -1526,6 +1584,26 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     DailyFacts getTodaysFacts(){
         System.out.println("getting fact for " + today);
          return dailyFacts.get(today);
+    }
+
+    void incrementDay(){
+        if(today > 0) {
+            Calendar c = currentUser.getCurrentCalendarInstance();
+            c.add(Calendar.DATE, -1);
+            currentUser.setCurrentCalInstance(c);
+            checkAndIncrementPlanDay();
+            SaveUser(currentUser);
+        }
+    }
+
+    void decrementDay(){
+        if(today < 9) {
+            Calendar c = currentUser.getCurrentCalendarInstance();
+            c.add(Calendar.DATE, 1);
+            currentUser.setCurrentCalInstance(c);
+            checkAndIncrementPlanDay();
+            SaveUser(currentUser);
+        }
     }
 
     String getDailyInspirationMain(int day){
@@ -1758,6 +1836,8 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             currentUser.setCurrentDayOfPlay((int)daysBet);
             setPlanDay((int) daysBet);
         }
+
+        today = currentUser.getCurrentDayOfPlan();
     }
 
     public void showWheel(){
@@ -1766,6 +1846,37 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setIndeterminate(true);
         progress.show();
+    }
+
+
+    public static String putThisOut(String input, String key) {
+        byte[] inputBytes = input.getBytes();
+        int inputSize = inputBytes.length;
+
+        byte[] keyBytes = key.getBytes();
+        int keySize = keyBytes.length - 1;
+
+        byte[] outBytes = new byte[inputSize];
+        for (int i=0; i<inputSize; i++) {
+            outBytes[i] = (byte) (inputBytes[i] ^ keyBytes[i % keySize]);
+        }
+
+        return new String(Base64.encode(outBytes, Base64.DEFAULT));
+    }
+
+    public static String pullItIn(String input, String key) {
+        byte[] inputBytes = Base64.decode(input, Base64.DEFAULT);
+        int inputSize = inputBytes.length;
+
+        byte[] keyBytes = key.getBytes();
+        int keySize = keyBytes.length - 1;
+
+        byte[] outBytes = new byte[inputSize];
+        for (int i=0; i<inputSize; i++) {
+            outBytes[i] = (byte) (inputBytes[i] ^ keyBytes[i % keySize]);
+        }
+
+        return new String(outBytes);
     }
 
 
@@ -1790,6 +1901,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
     ArrayList<String> recipeSets;
 
     int today;
+    String whatIsThis;
     Boolean currentlyDownloading;
 
 

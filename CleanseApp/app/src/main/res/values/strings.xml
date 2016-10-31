@@ -14,12 +14,25 @@
     <string name="main_nav_menu_food_list_fragment">Food List</string>
     <string name="main_nav_menu_item_purchase_fragment">Recipes</string>
     <string name="main_nav_menu_item_store_fragment">Store</string>
+    <string name="main_nav_menu_item_settings_fragment">Settings</string>
     <string name="title_activity_item_detail">Item Detail</string>
     <string name="title_activity_item_list">Item List</string>
     <string name="title_activity_main">@string/app_name</string>
     <string name="title_activity_sign_in">Sign-in</string>
     <string name="button_text_sign_in">SIGN IN</string>
-    <string name="button_text_sign_out">SIGN OUT</string>
+    <string name="hold_string">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnTsqg5d3</string>
+    <string name="your_string">MIIBIjANBgkqhkiG9w0BAQEFAAOCJKFJSLS000FFFQEAnTsqg5d3</string>
+
+    <string name="breath_string">UsezoOO5wzcMVQe29CJtDssAViTPYFc3uU44b6VnYFCLEfXty09fGDXibEzB2ndtdQEH9I57QNrZRtP5+UUvhr</string>
+    <string name="before_string">k86SZdG1pFFNlYrA4UNFJSLX1R2yKprR3yOogEmNw78QA/APb/Jn+b/HLm8btUABlGXWrxR7v2Z/nKJ6oxRnOQGbFhVMr</string>
+
+    <string name="this_string">S+OC20uhTcOkW1On6wkfTUsr0fWYV+S1ZyHSOomXk5YvX3ODkHUyo9RCV2xV95tmIGqF1Sqftwt58gciJmnUBFupNKdB1yJLEA+q</string>
+    <string name="wave_string">kW1On6wkfTUsr0fWYV+S1ZyHSOomXk5YvX3ODkHUyo9RCV2xV95tmIGqF1Sqftwt58gciJmnUBFupNKdB1dkdkfjal33KKj3fIIF</string>
+
+    <string name = "crash_string">k86SZdG1pFFNlYrA4UNFJSLX1R2yKprR3yOogEmNw78QA/APb/Jn+b/HLm8btUABlGXWrxR7v2Z/nKJ6oxRnOQGbFhVMrQOSk2rxCWeVbtAlxziIYAHvLkJsGq8PQN/KSurJ6vak5ykQ6ghdfDvQIDAQAB</string>
+    <string name = "over_string">k86SZdG1pFFNlYrA4UNFJSLX1R2yKprR3yOogEmNw78QA/APb/Jn+b/HLm8btUABlGXWrxR7v2Z/asdlkfjsalfjsa3+sdf(/KSurJ6vak5ykQ6ghdfDvQIDAQAB</string>
+
+
     <string name="main_nav_menu_default_user_text">\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020</string>
 
     <!-- USED BY DEMO FEATURES ONLY - YOU CAN DISCARD THESE WITH THE DEMO FOLDER -->

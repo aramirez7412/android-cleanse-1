@@ -148,16 +148,7 @@ public class LoadingFragment extends Fragment {
                     resId = R.id.page4;
                     break;
                 case 4:
-
-                    if(((MainActivity) getActivity()).currentlyDownloading)
-                        resId = R.id.pagewheel;
-                    else{
-                        resId = R.id.page5;
-                    }
-                    break;
-                case 5:
-                        resId = R.id.page5;
-
+                    resId = R.id.page5;
 
             }
             return getActivity().findViewById(resId);
@@ -165,7 +156,7 @@ public class LoadingFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 6;
+            return 5;
         }
 
         @Override

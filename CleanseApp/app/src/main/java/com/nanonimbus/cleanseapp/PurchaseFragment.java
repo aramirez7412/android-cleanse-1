@@ -73,12 +73,7 @@ public class PurchaseFragment extends Fragment {
     private String mParam2;
     boolean isSuccessfull;
     View view;
-    private static final String TAG = "<your domain>.inappbilling";
     IabHelper mHelper;
-    static final String ITEM_SKU = "android.test.purchased";
-
-    private Button clickButton;
-    private Button buyButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -119,6 +114,9 @@ public class PurchaseFragment extends Fragment {
         String base64EncodedPublicKey =
         "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnTsqg5d3UsezoOO5wzcMVQe29CJtDssAViTPYFc3uU44b6VnYFCLEfXty09fGDXibEzB2ndtdQEH9I57QNrZRtP5+UUvhrS+OC20uhTcOkW1On6wkfTUsr0fWYV+S1ZyHSOomXk5YvX3ODkHUyo9RCV2xV95tmIGqF1Sqftwt58gciJmnUBFupNKdB1yJLEA+qk86SZdG1pFFNlYrA4UNFJSLX1R2yKprR3yOogEmNw78QA/APb/Jn+b/HLm8btUABlGXWrxR7v2Z/nKJ6oxRnOQGbFhVMrQOSk2rxCWeVbtAlxziIYAHvLkJsGq8PQN/KSurJ6vak5ykQ6ghdfDvQIDAQAB";
 
+
+       // mHelper = new IabHelper(getContext(), MainActivity.pullItIn(getResources().getString(R.string.wave_string),((MainActivity)getActivity()).getThis()));
+
         mHelper = new IabHelper(getContext(), base64EncodedPublicKey);
 
         mHelper.startSetup(new
@@ -150,8 +148,21 @@ public class PurchaseFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_purchase, container, false);
 
 
+        Button button;
+        button = (Button) view.findViewById(R.id.buttonToCleanseStore);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("https://hayliepomroy.com/product/the-fast-metabolism-cleanse-10-day-protocol-with-free-22-page-program-guide/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
+
         if(!isSuccessfull) {
             view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+
         }
 
 
@@ -353,7 +364,7 @@ public class PurchaseFragment extends Fragment {
 
                         StoreListing sL = new StoreListing();
 
-                        sL.setTitle("Recipe Set");
+                        sL.setTitle(setJson.getString("name"));
 
                         //loop through each meal
                         for (int j = 0; j < setAr.length(); j++) {

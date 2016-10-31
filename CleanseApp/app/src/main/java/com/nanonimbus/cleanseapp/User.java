@@ -49,6 +49,14 @@ public class User implements Serializable{
     String getUserId(){return id;};
     void addRecipeSetPath(String temp){recipeSetPaths.add(temp);};
 
+    void resetCalInstance(){
+        calInstance = Calendar.getInstance();
+        calInstance.set(Calendar.HOUR_OF_DAY, 0);
+        calInstance.set(Calendar.MINUTE, 0);
+        calInstance.set(Calendar.SECOND, 0);
+        calInstance.set(Calendar.MILLISECOND, 0);
+    }
+
     void setCurrentCalInstance(Calendar i){calInstance = i;};
     Calendar getCurrentCalendarInstance(){return calInstance;};
     int getCurrentDayOfPlan(){return day;};
