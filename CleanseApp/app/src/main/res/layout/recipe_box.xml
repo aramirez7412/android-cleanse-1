@@ -3,14 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/recipeBox"
-    android:background="#fefefe">
+    android:background="#fefefe"
+    android:clickable="true"
+    android:focusable="true">
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recipeBoxLinear">
+        android:id="@+id/recipeBoxLinear"
+        android:nestedScrollingEnabled="false">
 
         <TextView
             android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.nanonimbus.cleanseapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +76,9 @@ public class PurchaseFragment extends Fragment {
     boolean isSuccessfull;
     View view;
     IabHelper mHelper;
+    LinearLayout myLayout;
+    ProgressDialog progress;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -111,6 +116,8 @@ public class PurchaseFragment extends Fragment {
         //set to true for testing
         isSuccessfull = true;
 
+
+
         String base64EncodedPublicKey =
         "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnTsqg5d3UsezoOO5wzcMVQe29CJtDssAViTPYFc3uU44b6VnYFCLEfXty09fGDXibEzB2ndtdQEH9I57QNrZRtP5+UUvhrS+OC20uhTcOkW1On6wkfTUsr0fWYV+S1ZyHSOomXk5YvX3ODkHUyo9RCV2xV95tmIGqF1Sqftwt58gciJmnUBFupNKdB1yJLEA+qk86SZdG1pFFNlYrA4UNFJSLX1R2yKprR3yOogEmNw78QA/APb/Jn+b/HLm8btUABlGXWrxR7v2Z/nKJ6oxRnOQGbFhVMrQOSk2rxCWeVbtAlxziIYAHvLkJsGq8PQN/KSurJ6vak5ykQ6ghdfDvQIDAQAB";
 
@@ -127,6 +134,7 @@ public class PurchaseFragment extends Fragment {
                                            if (!result.isSuccess()) {
                                                System.out.println("failure");
                                                view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+                                               hideWheel();
 
                                            } else {
                                                isSuccessfull = true;
@@ -147,9 +155,13 @@ public class PurchaseFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_purchase, container, false);
 
+        progress = new ProgressDialog(getContext());
+        showWheel();
+
 
         Button button;
         button = (Button) view.findViewById(R.id.buttonToCleanseStore);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,8 +174,11 @@ public class PurchaseFragment extends Fragment {
 
         if(!isSuccessfull) {
             view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
-
+            view.findViewById(R.id.noIssuesLayout).setVisibility(View.GONE);
+            hideWheel();
         }
+
+        myLayout = (LinearLayout) view.findViewById(R.id.StoreLinearLayout);
 
 
 
@@ -384,11 +399,18 @@ public class PurchaseFragment extends Fragment {
 
                         sampleListings.add(sL);
 
+                        hideWheel();
+
                     }
 
-                    ListView listView = (ListView) view.findViewById(R.id.listingListView);
+                   //ListView listView = (ListView) view.findViewById(R.id.listingListView);
                     StoreListAdapter storeListAdapter = new StoreListAdapter(getContext(), sampleListings);
-                    listView.setAdapter(storeListAdapter);
+                   // listView.setAdapter(storeListAdapter);
+
+                    for (int i = 0; i < storeListAdapter.getCount() ; i++) {
+                        myLayout.addView(storeListAdapter.getView(i,null,myLayout));
+                    }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -397,6 +419,8 @@ public class PurchaseFragment extends Fragment {
             }
             else{
                 view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.noIssuesLayout).setVisibility(View.GONE);
+                hideWheel();
             }
         }
 
@@ -441,6 +465,8 @@ public class PurchaseFragment extends Fragment {
                     // handle error
                     System.out.println("failure query");
                     view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.noIssuesLayout).setVisibility(View.GONE);
+                    hideWheel();
 
 
 //                    ArrayList<PurchaseHelperClass> available = new ArrayList<>();
@@ -552,6 +578,18 @@ public class PurchaseFragment extends Fragment {
             return convertView;
         }
 
+    }
+
+    public void hideWheel(){
+        progress.dismiss();
+    }
+
+    public void showWheel(){
+
+        progress.setMessage("LOADING AVAILABLE RECIPE SETS...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setIndeterminate(true);
+        progress.show();
     }
 
 }

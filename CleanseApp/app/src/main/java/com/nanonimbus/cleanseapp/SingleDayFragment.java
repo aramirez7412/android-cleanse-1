@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,9 +20,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.support.v4.view.ViewPager;
+
 
 import android.widget.TextView;
 
@@ -81,7 +85,7 @@ public class SingleDayFragment extends Fragment {
     int daysInPlan;
 
     int listViewNum;
-
+    ViewPager vp;
 
     View recipeBox;
 
@@ -236,7 +240,51 @@ public class SingleDayFragment extends Fragment {
 
         mealCell = (ViewGroup) layout1.findViewById(R.id.meal_cell_view);
 
+        vp =(ViewPager) getActivity().findViewById(R.id.pager);
+
+
         recipeBox = view.findViewById(R.id.recipeBoxView);
+        recipeBox.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent e) {
+
+                vp.requestDisallowInterceptTouchEvent(true);
+
+
+                switch (e.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        pressedX = e.getRawX();
+                        pressedY = e.getRawY();
+                        break;
+                    }
+
+
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+
+
+                        if (pressedX < e.getRawX() && ((pressedY - e.getRawY()) > -40) && ((pressedY - e.getRawY()) < 40)) {
+                            recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
+                        }
+
+
+                }
+                return false;
+            }
+
+        });
+//        recipeBox.setOnTouchListener(new OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                vp.requestDisallowInterceptTouchEvent(true);
+//
+//
+//                recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
+//
+//                return false;
+//            }
+//        });
         recipeBox.setX(1500);
         recipeBox.setAlpha(0);
 
@@ -377,8 +425,10 @@ public class SingleDayFragment extends Fragment {
 
 
         getMealViews(dailyMealList);
+        System.out.println("finished initialized fuck");
 
         list = new ArrayList<MealItem>();
+
 
 
         //setup the first layout to be displayed
@@ -621,9 +671,6 @@ public class SingleDayFragment extends Fragment {
 
 
 
-
-
-
         return view;
     }
 
@@ -860,13 +907,23 @@ public class SingleDayFragment extends Fragment {
                     final View finalView = v;
 
 
+                    final CheckBox cb = (CheckBox) v.findViewById(R.id.completeCheckBox);
 
 
-                    v.findViewById(R.id.completeCheckBox).setOnClickListener(new OnClickListener() {
+                    cb.findViewById(R.id.completeCheckBox).setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             ((MainActivity) getActivity()).toggleCompletionMain(day, counter);
                             //o.toggleComplete();
+                        }
+                    });
+
+                    cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if(((MainActivity) getActivity()).checkCompletedMain(day, counter))
+                                cb.setChecked(true);
                         }
                     });
 
@@ -958,8 +1015,6 @@ public class SingleDayFragment extends Fragment {
 
                         @Override
                         public boolean onTouch(View v, MotionEvent e) {
-
-
 
                             switch (e.getAction()) {
                                 case MotionEvent.ACTION_DOWN: {
@@ -1144,6 +1199,9 @@ public class SingleDayFragment extends Fragment {
     }
 
     void hideAndShowMealItem(MealItem o) {
+
+        vp.requestDisallowInterceptTouchEvent(false);
+
         recipeTitle.setText(o.getTitle());
         ingredientHeader.setText("Ingredients (Serves " + o.getServings() + ")");
         recipeIngredientsContent.setText(o.getIngredients());
@@ -1154,7 +1212,11 @@ public class SingleDayFragment extends Fragment {
             loadPicassoPicFromFileAsync(recipeBoxImageView, o);
         }
 
+        System.out.println("hiding show");
+
         recipeBox.animate().translationX(0).alpha(1).setDuration(600).start();
+
+
     }
 
     void mealComplete(View v) {

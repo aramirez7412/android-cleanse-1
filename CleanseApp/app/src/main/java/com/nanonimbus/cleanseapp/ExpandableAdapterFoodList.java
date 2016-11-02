@@ -107,6 +107,7 @@ import java.util.List;
         LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         convertView = layoutInflater.inflate(R.layout.meal_expandable_list_child_single, null);
+
 //        if(title == "meal")
 //            convertView = layoutInflater.inflate(R.layout.recipe_box, null);
 //        else

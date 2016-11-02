@@ -1,6 +1,7 @@
 package com.nanonimbus.cleanseapp;
 
 import android.content.Context;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -339,6 +340,7 @@ public class FoodListFragment extends Fragment {
         myList = (ExpandableListView) v.findViewById(R.id.expandableListViewFoodList);
 
         myList.setAdapter(myAdapter);
+
 
         return v;
     }

@@ -129,7 +129,7 @@ public class RecipeFragment extends Fragment {
                     case MotionEvent.ACTION_UP:
 
 
-                            if (pressedX < e.getRawX() && ((pressedY - e.getRawY()) > -20) && ((pressedY - e.getRawY()) < 20)) {
+                            if (pressedX < e.getRawX() && ((pressedY - e.getRawY()) > -40) && ((pressedY - e.getRawY()) < 40)) {
                                 recipeBox.animate().translationX(1500).alpha(0).setDuration(600).start();
                             }
 

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+    android:id="@+id/scrollMe">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
-    >
+    android:id="@+id/StoreLinearLayout">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,18 +51,43 @@
             android:paddingRight="10dp" />
     </RelativeLayout>
 
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Click Here to Find Out More About The 10-Day Fast Metabolism Cleanse"
-        android:id="@+id/buttonToCleanseStore"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="14sp" />
+        android:layout_height="match_parent"
+        android:id="@+id/noIssuesLayout">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listingListView" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click Here to Find Out More About The 10-Day Fast Metabolism Cleanse"
+            android:id="@+id/buttonToCleanseStore"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*Note that purchased recipe sets will not be incorporated into Cleanse App until you restart the application.  All meals included from purchased recipe sets will be available to view under Recipe section in application as well as be available for swapping in Meal Tracker."
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14sp"
+            android:typeface="serif"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_below="@+id/buttonToCleanseStore"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listingListView"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
 </LinearLayout>
+
+</ScrollView>

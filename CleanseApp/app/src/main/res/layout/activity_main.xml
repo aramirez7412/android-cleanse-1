@@ -37,8 +37,8 @@
         android:layout_gravity="start"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/nav_drawer_background"
-        android:clickable="true">
+        android:clickable="true"
+        android:background="#ffffff">
 
         <RelativeLayout
             android:orientation="vertical"
@@ -104,5 +104,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@mipmap/main_logo"
+            android:visibility="gone" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

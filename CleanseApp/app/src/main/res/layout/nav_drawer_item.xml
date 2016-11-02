@@ -20,5 +20,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/drawer_item_text"
-        android:typeface="serif" />
+        android:typeface="serif"
+        android:textColor="#929292" />
 </LinearLayout>

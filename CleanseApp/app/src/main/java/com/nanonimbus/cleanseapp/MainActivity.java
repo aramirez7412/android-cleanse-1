@@ -644,7 +644,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag("Recipe Store");
+        Fragment fragment = fragmentManager.findFragmentByTag("Store");
         if (fragment != null)
         {
             ((PurchaseFragment)fragment).onActivityResult(requestCode, resultCode,data);
@@ -1331,6 +1331,11 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
 
     public void setShakesSelectedPerDayMain(int day, int count) {
         mealPlan.setShakesSelectedPerDay(day, count);
+    }
+
+
+    public boolean checkCompletedMain(int day, int count) {
+        return mealPlan.isCompleted(day, count);
     }
 
     void swapMealMain(int day, int mealNum, MealItem newMeal){
