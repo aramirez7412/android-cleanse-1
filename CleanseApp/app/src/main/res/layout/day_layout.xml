@@ -63,7 +63,8 @@
             android:layout_width="fill_parent"
             android:layout_height="130dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/waterTracker">
+            android:id="@+id/waterTracker"
+            android:scrollIndicators="left">
 
             <LinearLayout
                 android:orientation="vertical"

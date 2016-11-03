@@ -11,6 +11,7 @@ package com.nanonimbus.cleanseapp;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     User currentUser;
     ProgressDialog progress;
     String userEmail;
-
+    ProgressDialog downloadingAlert;
     ServiceConnection mServiceConn;
 
     IInAppBillingService mService;
@@ -416,6 +418,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
 
+                System.out.println("before return");
+
                 return new MyTaskParams(newJsons, c);
 
 
@@ -468,6 +472,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     currentlyDownloading = false;
                     ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                     Toast.makeText(getApplicationContext(),"Download Complete!", Toast.LENGTH_SHORT).show();
+
+                    if(downloadingAlert != null){
+                        downloadingAlert.dismiss();
+                        //downloadingAlert = null;
+                    }
 
                     //recipeSets.add(outputFile.getAbsolutePath());
 
@@ -663,7 +672,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
 
-                ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+              //  ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
                 String GET_URL = params[0].jsonURL;
                 Context c = params[0].context;
@@ -711,7 +720,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(MyTaskParams result) {
 
-            Context c = result.context;
+
+            Context c = getApplicationContext();
 
             FileOutputStream fos = null;
             Boolean test = false;
@@ -947,6 +957,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         dailyFacts = new ArrayList<>();
         progress = new ProgressDialog(this);
         currentlyDownloading = false;
+        downloadingAlert = new ProgressDialog(this);
 
 
 
@@ -1036,7 +1047,7 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         currentUser.setUserName("guest");
 
 
-        ((TextView) findViewById(R.id.userName)).setText(currentUser.getUserName());
+        //((TextView) findViewById(R.id.userName)).setText(currentUser.getUserName());
 
 
         currentUser = LoadUser(currentUser.getUserId());
@@ -1273,11 +1284,10 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             testCreateCurrentPlan();
             ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 
-
         }
 
 
-
+        testRecipeSets();
 
 
 
@@ -1319,6 +1329,46 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         //  ArrayList<MealItem> ar//= mealPlan.elementAt(day)
         return mealPlan.getListForDay(day);
     }
+
+
+    void testRecipeSets() {
+
+        RecipeSet retSet = null;
+
+        FileOutputStream fos = null;
+        Boolean test = false;
+        try {
+
+            for (int i = 0; i < currentUser.getRecipeCount(); i++) {
+
+
+                FileInputStream fis = new FileInputStream(new File(currentUser.getRecipeSetPath(i)));
+
+                ObjectInputStream is = new ObjectInputStream(fis);
+                retSet = (RecipeSet) is.readObject();
+
+                //System.out.println(((MealPlan) is.readObject()).getListForDay(0).get(0).isCompleted() + " better be right");
+                is.close();
+                fis.close();
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            test = true;
+        } catch (IOException e) {
+            test = true;
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            test = true;
+            e.printStackTrace();
+        }
+
+        if(test){
+            downloadEverything();
+        }
+    }
+
 
     public int getShakesNeededPerDayMain(int day) {
         return mealPlan.getShakesNeededPerDay(day);
@@ -1564,12 +1614,34 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
         return jsonPlan1;
     }
 
-    void downloadEverything(){
-        DownloadPlan dl = new DownloadPlan();
-        MyTaskParams mtp = new MyTaskParams("http://52.52.65.150:8080/mealplan", getApplicationContext());
-        dl.execute(mtp);
-    }
+    void downloadEverything() {
 
+        if (!currentlyDownloading) {
+            setDownloading(true);
+
+           // downloadingAlert = new ProgressDialog(getApplicationContext());
+            downloadingAlert.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            downloadingAlert.setMessage("Please wait while application downloads first time launch data.");
+            downloadingAlert.setIndeterminate(true);
+
+//
+//            downloadingAlert = new AlertDialog.Builder(this)
+//                    .setTitle("WELCOME!")
+//                    .setMessage("Please wait as application downloads data. Side menu will be available when download is complete.")
+//                    .setIcon(android.R.drawable.ic_dialog_info)
+//                    .create();
+            downloadingAlert.setCancelable(false);
+
+            downloadingAlert.setCanceledOnTouchOutside(false);
+            downloadingAlert.show();
+
+
+
+            DownloadPlan dl = new DownloadPlan();
+            MyTaskParams mtp = new MyTaskParams("http://52.52.65.150:8080/mealplan", getApplicationContext());
+            dl.execute(mtp);
+        }
+    }
     void showHome(){
         navigationDrawer.showHome();
     }
@@ -1609,6 +1681,14 @@ navigationDrawer.addDemoFeatureToMenu(new DemoConfiguration.DemoFeature("Meal Tr
             checkAndIncrementPlanDay();
             SaveUser(currentUser);
         }
+    }
+
+    boolean isDownloading(){
+        return currentlyDownloading;
+    }
+
+    void setDownloading(boolean t){
+        currentlyDownloading = t;
     }
 
     String getDailyInspirationMain(int day){

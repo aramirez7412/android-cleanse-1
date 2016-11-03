@@ -178,8 +178,8 @@ public class RecipeFragment extends Fragment {
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-                ((MainActivity)getActivity()).showHome();
                 ((MainActivity)getActivity()).downloadEverything();
+                ((MainActivity)getActivity()).showHome();
                 ex.printStackTrace();
             }
         }

@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.support.v4.view.ViewPager;
 
 
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -87,7 +88,7 @@ public class SingleDayFragment extends Fragment {
     int listViewNum;
     ViewPager vp;
 
-    View recipeBox;
+    ScrollView recipeBox;
 
     ViewGroup mealCell;
     TextView currenttv;
@@ -243,7 +244,8 @@ public class SingleDayFragment extends Fragment {
         vp =(ViewPager) getActivity().findViewById(R.id.pager);
 
 
-        recipeBox = view.findViewById(R.id.recipeBoxView);
+        recipeBox = (ScrollView) view.findViewById(R.id.recipeBoxView);
+         
         recipeBox.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent e) {
@@ -472,7 +474,7 @@ public class SingleDayFragment extends Fragment {
         childTitles = new ArrayList<>();
 
 
-
+try{
 
         for (int i = 0; i < ((MainActivity) getActivity()).getRecipeSetCount(); i++) {
 
@@ -491,6 +493,8 @@ public class SingleDayFragment extends Fragment {
             childTitles.add(set1);
 
         }
+
+
 
 
 
@@ -669,7 +673,15 @@ public class SingleDayFragment extends Fragment {
 //
 //        });
 
+}
+catch(NullPointerException ex){
 
+
+    ((TestMe) getParentFragment()).redownload();
+
+
+    ex.printStackTrace();
+}
 
         return view;
     }

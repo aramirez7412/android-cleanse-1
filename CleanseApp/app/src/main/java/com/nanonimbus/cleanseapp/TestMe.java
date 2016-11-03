@@ -1,6 +1,7 @@
 package com.nanonimbus.cleanseapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +87,29 @@ public class TestMe extends Fragment {
 
 
         return v;
+    }
+
+
+    void redownload(){
+
+//        if(!((MainActivity)getActivity()).isDownloading()) {
+//            ((MainActivity)getActivity()).setDownloading(true);
+//            new AlertDialog.Builder(getContext())
+//                    .setTitle("ERROR:")
+//                    .setMessage("Attempting to re-download content. Side menu will be available when download is complete.")
+//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            // continue with delete
+//                        }
+//                    })
+//                    .setIcon(android.R.drawable.ic_dialog_alert)
+//                    .show();
+//
+//            ((MainActivity) getActivity()).downloadEverything();
+//        }
+        ((MainActivity) getActivity()).showHome();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

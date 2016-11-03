@@ -592,9 +592,11 @@ public class MealFragment extends Fragment {
             recipeSets.add(set1);
 
             headerTitles.add(rs.getRecipeSetTitle());
-
-
             childTitles.add(set1);
+
+
+
+
 
         }
 

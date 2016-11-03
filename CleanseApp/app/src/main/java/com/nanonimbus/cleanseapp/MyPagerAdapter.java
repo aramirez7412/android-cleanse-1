@@ -2,6 +2,8 @@ package com.nanonimbus.cleanseapp;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.ViewGroup;
 
 // Extend from SmartFragmentStatePagerAdapter now instead for more dynamic ViewPager items
     public class MyPagerAdapter extends SmartFragmentStatePagerAdapter {
@@ -52,6 +54,8 @@ import android.support.v4.app.FragmentManager;
         public CharSequence getPageTitle(int position) {
         	return "Page " + position;
         }
+
+
         
     }
 

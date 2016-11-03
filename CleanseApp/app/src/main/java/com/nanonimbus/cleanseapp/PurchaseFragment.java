@@ -134,6 +134,8 @@ public class PurchaseFragment extends Fragment {
                                            if (!result.isSuccess()) {
                                                System.out.println("failure");
                                                view.findViewById(R.id.errorLayout).setVisibility(View.VISIBLE);
+                                               view.findViewById(R.id.noIssuesLayout).setVisibility(View.GONE);
+
                                                hideWheel();
 
                                            } else {
